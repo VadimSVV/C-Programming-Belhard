@@ -1,3 +1,3 @@
 Материалы по курсу программирования на языках C, C++
 
-Проект: C-Programming-Belhard/База Си/Ruletka/Debug
+Проект "Рулетка Казино": C-Programming-Belhard/База Си/Ruletka/Debug
