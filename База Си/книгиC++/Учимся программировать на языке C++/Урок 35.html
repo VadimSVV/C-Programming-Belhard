@@ -1,0 +1,315 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 35</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Встроенные функции 
+  и ассемблерные коды</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Начиная 
+  с урока 8, ваши программы интенсивно использовали функции. Как вы уже знаете, 
+  единственное неудобство при использовании функций состоит в том, что они увеличивают 
+  издержки (увеличивают время выполнения), помещая параметры в стек при каждом 
+  вызове. Из данного урока вы узнаете, что для коротких функций можно использовать 
+  метод, называемый <I>встроенным кодом,</I> который помещает операторы функции 
+  для каждого ее вызова прямо в программу, избегая таким образом издержек на вызов 
+  функции. Используя встроенные</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(inline)</I> 
+  функции, ваши программы будут выполняться немного быстрее. К концу этого урока 
+  вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для улучшения производительности 
+    за счет уменьшения издержек на вызов функции вы можете заставить компилятор 
+    C++ встроить в программу код функции, подобно тому, как это делается при замещении 
+    макрокоманд.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя <I>встроенные 
+    (inline) функции,</I> ваши программы остаются удобными для чтения (читающий 
+    программу видит вызов функции), но вы избегаете издержек на вызов функции, 
+    которые вызваны помещением параметров в стек и их последующим извлечением 
+    из стека, а также переходом к телу функции и последующим возвратом из нее.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от требований, 
+    предъявляемых к вашей программе, иногда вам потребуется использовать язык 
+    ассемблера для решения определенной задачи.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для упрощения применения 
+    программирования на языке ассемблера C++ позволяет определить функции на встроенном 
+    языке ассемблера внутри ваших программ на C++.</FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ВСТРОЕННЫЕ 
+  ФУНКЦИИ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  определяете в своей программе функцию, компилятор C++ переводит код функции 
+  в машинный язык, сохраняя только одну копию инструкций функции внутри вашей 
+  программы. Каждый раз, когда ваша программа вызывает функцию, компилятор C++ 
+  помещает в программу специальные инструкции, которые заносят параметры функции 
+  в стек и затем выполняют переход к инструкциям этой функции. Когда операторы 
+  функции завершаются, выполнение программы продолжается с первого оператора, 
+  который следует за вызовом функции. Помещение аргументов в стек и переход в 
+  функцию и из нее вносит издержки, из-за которых ваша программа выполняется немного 
+  медленнее, чем если бы она размещала те же операторы прямо внутри программы 
+  при каждой ссылке на функцию. Например, предположим, что следующая программа 
+  CALLBEEP.CPP вызывает функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_message,</I> 
+  которая указанное число раз выдает сигнал на динамик компьютера и затем выводит 
+  сообщение на дисплей:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.b&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void show_message(int 
+    count, char *message)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; count; i++) cout &lt;&lt; '\a';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; message &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_message(3, 
+    "Учимся программировать на языке C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_mes 
+    sage(2, "Урок 35");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа NO_CALL.CPP не вызывает функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_message.</I> 
+  Вместо этого она помещает внутри себя те же операторы функции при каждой ссылке 
+  на функцию:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 3; i++) cout &lt;&lt; '\a';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; " Учимся программировать на языке C++" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 2; i++) cout &lt;&lt; '\a';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Урок 35" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обе программы 
+  выполняют одно и то же. Поскольку программа NO_CALL не вызывает функцию</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_message,</I> она 
+  выполняется немного быстрее, чем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">программа 
+  CALLBEEP. В данном случае разницу во времени выполнения определить невозможно, 
+  но, если в обычной ситуации функция будет вызываться 1000 раз, вы, вероятно, 
+  заметите небольшое увеличение производительности. Однако программа NO_CALL более 
+  запутана, чем ее двойник CALL_BEEP, следовательно, более тяжела для восприятия.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании 
+  программ вы всегда должны попытаться определить, когда лучше использовать обычные 
+  функции, а когда лучше воспользоваться встроенными функциями. Для более простых 
+  программ предпочтительно использовать обычные функции. Однако, если вы создаете 
+  программу, для которой производительность имеет первостепенное значение, вам 
+  следовало бы уменьшить количество вызовов функций. Один из способов уменьшения 
+  количества вызовов функций состоит в том, чтобы поместить соответствующие операторы 
+  прямо в программу, как только что было сделано в программе NO_CALL. Однако, 
+  как вы могли убедиться, замена только одной функции внесла значительную путаницу 
+  в программу. К счастью, C++ предоставляет ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline,</I> 
+  которое обеспечивает лучший способ.</FONT></P>
+<H3 ALIGN="JUSTIFY"> <FONT FACE="Arial, Helvetica, sans-serif">Использование ключевого 
+  слова <I>inline</I></FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При объявлении 
+  функции внутри программы C++ позволяет вам предварить имя функции ключевым словом</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline.</I> Если компилятор 
+  C++ встречает ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline,</I> 
+  он помещает в выполнимый файл (машинный язык) операторы этой функции в месте 
+  каждого ее вызова. Таким образом, можно улучшить читаемость ваших программ на 
+  C++, используя функции, и в то же время увеличить производительность, избегая 
+  издержек на вызов функций. Следующая программа INLINE.CPP определяет функции 
+  <I>тах</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>min</I> 
+  как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">inline int max(int a, 
+    int b) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (a &gt; b) return(a);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">return(b) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">inline int min(int a, 
+    int b) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (a &lt; b) return(a);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">return(b);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Минимум из 1001 и 2002 равен</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; min(1001, 2002) &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Максимум из 1001 и 2002 равен</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; max(1001, 2002) &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае компилятор C++ заменит каждый вызов функции на соответствующие операторы 
+  функции. Производительность программы увеличивается без ее усложнения.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">О 
+    встроенных функциях</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если компилятор 
+    C++ перед определением функции встречает ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">inline, 
+    он будет заменять обращения к этой функции (вызовы) на последовательность 
+    операторов, эквивалентную выполнению функции. Таким образом ваши программы 
+    улучшают производительность, избавляясь от издержек на вызов функции и в то 
+    же время выигрывая в стиле программы, благодаря использованию функций.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ВСТРОЕННЫЕ 
+  ФУНКЦИИ И КЛАССЫ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, при определении класса вы определяете функции этого класса внутри 
+  или вне класса. Например, класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>employee</I> 
+  определяет свои функции внутри самого класса:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *name, char *position, float salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strcpy(employee::position, 
+    position);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Имя:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Должность:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; position &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад: $" &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    position[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Размещая 
+  подобным образом функции внутри класса, вы тем самым объявляете их встроенными</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>{inline).</I> Если вы 
+  создаете встроенные функции класса этим способом, C++ дублирует функцию для 
+  каждого создаваемого объекта этого класса, помещая встроенный код при каждой 
+  ссылке на метод (функцию) класса. Преимущество такого встроенного кода состоит 
+  в увеличении производительности. Недостатком является очень быстрое увеличение 
+  объема самого определения класса. Кроме того, включение кода функции в определение 
+  класса может существенно запугать класс, делая его элементы трудными для восприятия.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Для улучшения 
+  читаемости определений ваших классов вы можете вынести функции из определения 
+  класса, как вы обычно и делаете, и разместить ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline</I> 
+  перед определением функции. Например, следующее определение заставляет компилятор 
+  использовать встроенные операторы для функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_employee:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">inline void employee::show_employee(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; <I>"Имя: " &lt;&lt;</I> name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Должность:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; position &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад: $" &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ОПЕРАТОРОВ 
+  ЯЗЫКА АССЕМБЛЕРА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  знаете из урока 1, программисты могут создавать программы, используя широкий 
+  спектр языков программирования. Затем компилятор преобразует операторы программы 
+  в машинный код (нули и единицы), который понимает компьютер. Каждый тип компьютеров 
+  поддерживает промежуточный язык, называемый <I>языком ассемблера,</I> который 
+  попадает в категорию между машинным языком и языком программирования, таким 
+  как C++.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Язык ассемблера 
+  использует другие символы для представления инструкций машинного языка. В зависимости 
+  от назначения ваших программ, возможно, вам потребуется выполнить операции низкого 
+  уровня, для которых необходимо использовать операторы языка ассемблера. В таких 
+  случаях вы можете использовать оператор C++ <I>asm для</I> встраивания операторов 
+  языка ассемблера в программу. Большинство создаваемых вами программ не потребуют 
+  операторов языка ассемблера. Следующая программа USE_ASM.CPP использует оператор</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>asm,</I> чтобы вставить 
+  операторы языка ассемблера, необходимые для озвучивания динамика компьютера 
+  в среде MS-DOS:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Сейчас будет звонить!"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;asm 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MOV 
+    AH,2<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MOV 
+    DL,7<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INT 
+    21H <BR>
+    &nbsp;&nbsp;&nbsp;}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Есть!"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  используя оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>asm,</I> 
+  программа комбинирует C++ и операторы языка ассемблера.</FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Встроенные 
+  функции улучшают производительность ваших программ, уменьшая издержки на вызов 
+  функций. Из этого урока вы узнали, как и где использовать встроенные функции 
+  в своих программах. Вы также узнали, что иногда вашим программам необходимо 
+  использовать язык ассемблера для решения определенных задач. Из урока 36 вы 
+  узнаете, как ваши программы могут обратиться к аргументам командной строки, 
+  которые пользователь вводит при запуске программы. Однако, прежде чем перейти 
+  к уроку 36, убедитесь, что вы освоили следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Помещение 
+      параметров в стек и переход к функции и из нее вносит издержки, из-за которых 
+      ваша программа выполняется немного медленнее.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ключевое слово</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>inline</I> заставляет 
+      компилятор C++ заменять вызов функции эквивалентной последовательностью 
+      операторов, которые бы выполняла эта функция. Поскольку встроенные операторы 
+      избавляют от издержек на вызов функции, программа будет выполняться быстрее.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      вы используете встроенные функции внутри класса, каждый создаваемый вами 
+      объект использует свои собственные встроенные операторы. Обычно все объекты 
+      одного и того же класса совместно используют один и тот же код функции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ключевое слово</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>asm</I> позволяет 
+      вам встраивать операторы языка ассемблера в программы на C++.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 34.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 36.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

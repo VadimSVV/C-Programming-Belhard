@@ -1,0 +1,476 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+</HEAD>
+<BODY BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 39</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Использование исключительных 
+  ситуаций C++ для обработки ошибок</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">После 
+  того как вы создали и отладили (удалили ошибки) несколько программ, вы уже способны 
+  предвидеть ошибки, которые могут встретиться в программе. Например, если ваша 
+  программа читает информацию из файла, ей необходимо проверить, существует ли 
+  файл и может ли программа его открыть. Аналогично, если ваша программа использует 
+  оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new для 
+  выделения памяти, ей необходимо проверить и отреагировать на возможное отсутствие 
+  памяти. По мере увеличения размера и сложности ваших программ вы обнаружите, 
+  что необходимо включить много таких проверок по всей программе. Из этого урока 
+  вы узнаете, как использовать исключительные ситуации C++ для упрощения проверки 
+  и обработки ошибок. К концу данного урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Исключительная ситуация 
+    (exception) представляет собой неожиданное событие — ошибку — в программе.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В ваших программах вы 
+    определяете исключительные ситуации как классы.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы заставить ваши 
+    программы следить за исключительными ситуациями, необходимо использовать оператор 
+    C++ try.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для обнаружения определенной 
+    исключительной ситуации ваши программы используют оператор C++ catch.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для генерации исключительной 
+    ситуации при возникновении ошибки ваши программы используют оператор C++ throw.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа 
+    обнаруживает исключительную ситуацию, она вызывает специальную (характерную 
+    для данной исключительной ситуации) функцию, которая называется обработчиком 
+    исключительной ситуации.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Некоторые (старые) компиляторы 
+    не поддерживают исключительные ситуации C++.</FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">C++ ПРЕДСТАВЛЯЕТ 
+  ИСКЛЮЧИТЕЛЬНЫЕ СИТУАЦИИ КАК КЛАССЫ</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваша цель 
+  при использовании исключительных ситуаций C++ состоит в упрощении обнаружения 
+  и обработки ошибок в программах. В идеале, если ваши программы обнаруживают 
+  неожиданную ошибку (исключительную ситуацию), им следует разумным образом ее 
+  обработать вместо того, чтобы просто прекратить выполнение.</FONT></P>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В программах 
+  вы определяете каждую исключительную ситуацию как класс. Например, следующие 
+  ситуации определяют три исключительные ситуации для работы с файлами:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class file_open_error 
+    {};<BR>
+    class file_read_error {};<BR>
+    class file_write_error {};</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Позже в 
+  этом уроке вы создадите исключительные ситуации, которые используют переменные 
+  и функции-элементы класса. А пока просто поверьте, что каждая исключительная 
+  ситуация соответствует классу.</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">КАК ЗАСТАВИТЬ C++ 
+  ПРОВЕРЯТЬ ИСКЛЮЧИТЕЛЬНЫЕ СИТУАЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Прежде 
+  чем ваши программы могут обнаружить и отреагировать на исключительную ситуацию, 
+  вам следует использовать оператор C++ try для разрешения обнаружения исключительной 
+  ситуации. Например, следующий оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try 
+  разрешает обнаружение исключительной ситуации для вызова функции file_соpy:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">try </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;file_copy("SOURCE.ТХТ", "TARGET.ТХТ") ;</FONT> <BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Сразу же 
+  за оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try 
+  ваша программа должна разместить один или несколько операторов</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch, 
+  чтобы определить, какая исключительная ситуация имела место (если она вообще 
+  была):</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">try </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;file_copy("SOURCE.ТХТ", 
+    "TARGET.ТХТ") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">catch (file_open_error) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Ошибка открытия исходного или целевого файла" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;exit(1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">catch (file_read_error) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Ошибка чтения исходного файла"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;exit(1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">catch (file_write_error) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Ошибка записи целевого файла"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;exit(1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  приведенный код проверяет возникновение исключительных ситуаций работы с файлами, 
+  определенных ранее. В данном случае независимо от типа ошибки код просто выводит 
+  сообщение и завершает программу. В идеале ваш код мог бы отреагировать и не 
+  так — возможно, попытаться исключить причину ошибки и повторить операцию. Если 
+  вызов функции прошел успешно и исключительная ситуация не выявлена, C++ просто 
+  игнорирует операторы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ОПЕРАТОРА 
+  throw ДЛЯ ГЕНЕРАЦИИ ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Сам C++ 
+  не генерирует исключительные ситуации. Их генерируют ваши программы, используя 
+  оператор C++ throw. Например, внутри функции file_copy программа может проверить 
+  условие возникновения ошибки и сгенерировать исключительную ситуацию:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void file_copy(char *source, 
+    char *target) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    line[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file(source);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ofstream 
+    output_file(target);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (input_file.fail()) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw(file_open_error);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (output_file.fail()) throw(file_open_error);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ((! input_file.eof()) &amp;&amp; 
+    (! input_file.fail()))</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_file.getline(line, 
+    sizeof(line)) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (! input_file.fail()) output_file &lt;&lt; line &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+    throw(file_read_error);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (output_file.fail()) throw (file_write_error) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа использует оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">throw 
+  для генерации определенных исключительных ситуаций.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Как 
+    работают исключительные ситуации</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы используете 
+    исключительные ситуации, ваша программа проверяет условие возникновения ошибки 
+    и, если необходимо, генерирует исключительную ситуацию, используя оператор</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">throw. Когда C++ встречает 
+    оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">throw, 
+    он активизирует соответствующий обработчик исключительной ситуации (функцию, 
+    чьи операторы вы определили в классе исключительной ситуации). После завершения 
+    функции обработки исключительной ситуации C++ возвращает управление первому 
+    оператору, который следует за оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try, 
+    разрешившим обнаружение исключительной ситуации. Далее, используя операторы</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch, ваша программа 
+    может определить, какая именно исключительная ситуация возникла, и отреагировать 
+    соответствующим образом.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПРЕДЕЛЕНИЕ ОБРАБОТЧИКА 
+  ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваша 
+  программа генерирует исключительную ситуацию, C++ запускает обработчик исключительной 
+  ситуации (функцию), чьи операторы вы определили в классе исключительной ситуации. 
+  Например, следующий класс исключительной ситуации</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown 
+  определяет операторы обработчика исключительной ситуации в функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class nuke_meltdown </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;nuke_meltdown(void)</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ 
+    cerr &lt;&lt; "\а\а\аРаботаю! Работаю! Работаю!"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае, когда программа сгенерирует исключительную ситуацию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown, 
+  C++ запустит операторы функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown, 
+  прежде чем возвратит управление первому оператору, следующему за оператором 
+  try, разрешающему обнаружение исключительной ситуации. Следующая программа MELTDOWN.CPP 
+  иллюстрирует использование функции nuke_meltdown. Эта программа использует оператор 
+  try для разрешения обнаружения исключительной ситуации. Далее программа вызывает 
+  функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">add_u232 
+  c параметром</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">amount. 
+  Если значение этого параметра меньше 255, функция выполняется успешно. Если 
+  же значение параметра превышает 255, функция генерирует исключительную ситуацию</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class nuke_meltdown </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;nuke_meltdown(void)</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ 
+    cerr &lt;&lt; "\а\а\аРаботаю! Работаю! Работаю!"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void add_u232(int amount) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (amount &lt; 255) cout &lt;&lt; "Параметр add_u232 в порядке"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    throw nuke_meltdown();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;try 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add_u232(255);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;catch 
+    (nuke_meltdown) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Программа устойчива"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; MELTDOWN &lt;ENTER&gt; 
+    </B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Работаю! Работаю! 
+    Работаю! </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программа устойчива</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  проследите исходный код, который генерирует каждое из сообщений, то сможете 
+  убедиться, что поток управления при возникновении исключительной ситуации проходит 
+  в обработчик исключительной ситуации и обратно к оператору</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch. 
+  Так, первая строка вывода генерируется обработчиком исключительной ситуации, 
+  т.е. функцией</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuke_meltdown. 
+  Вторая строка вывода генерируется в операторе</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch, 
+  который обнаружил исключительную ситуацию.</FONT></P>
+<BLOCKQUOTE>
+  <P><B><I><FONT FACE="Arial, Helvetica, sans-serif">Определение обработчика исключительной 
+    ситуации</FONT></I></B></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда C++ обнаруживает 
+    в программе исключительную ситуацию, он запускает специальную функцию, которая 
+    называется обработчиком исключительной ситуации. Для определения обработчика 
+    исключительной ситуации вы просто создаете функцию в классе исключительной 
+    ситуации, которая имеет такое же имя, как и сама исключительная ситуация (подобно 
+    конструктору). Когда ваша программа в дальнейшем сгенерирует исключительную 
+    ситуацию, C++ автоматически вызовет соответствующий обработчик. В идеале обработчик 
+    исключительной ситуации должен выполнить операции, которые бы исправили ошибку, 
+    чтобы ваша программа могла повторить операцию, ставшую причиной ошибки. После 
+    завершения обработки исключительной ситуации выполнение вашей программы продолжается 
+    с первого оператора, следующего за оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try, 
+    разрешившего обнаружение исключительной ситуации.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ЭЛЕМЕНТОВ 
+  ДАННЫХ ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В предыдущих 
+  примерах ваши программы, используя оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch, 
+  могли определить, какая именно исключительная ситуация имела место, и отреагировать 
+  соответствующим образом. В идеале, чем больше информации об исключительной ситуации 
+  могут получить ваши программы, тем лучше они смогут отреагировать на ошибку. 
+  Например, в случае с исключительной ситуацией file_open_error вашей программе 
+  необходимо знать имя файла, который вызвал ошибку. Аналогично, для файловых 
+  исключительных ситуаций file_read_error или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">file_write_error 
+  программа, возможно, захочет узнать расположение байта, на котором произошла 
+  ошибка. Чтобы сохранить подобную информацию об исключительной ситуации, ваши 
+  программы могут просто добавить элементы данных в класс исключительной ситуации. 
+  Если в дальнейшем ваша программа сгенерирует исключительную ситуацию, она передаст 
+  эту информацию функции обработки исключительной ситуации в качестве параметра, 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">throw file_open_error(source);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">throw file_read_error(344);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В обработчике 
+  исключительной ситуации эти параметры могут быть присвоены соответствующим переменным 
+  класса (очень похоже на конструктор). Например, следующие операторы изменяют 
+  исключительную ситуацию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">file_open_error, 
+  чтобы присвоить имя файла, который вызвал ошибку, соответствующей переменной 
+  класса:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class file_open_error 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;file_open_error(char 
+    *filename) { </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">strcpy(file_open_error::filename, 
+    filename); }<BR>
+    &nbsp;&nbsp;&nbsp;char filename[255] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОБРАБОТКА НЕОЖИДАННЫХ 
+  ИСКЛЮЧИТЕЛЬНЫХ СИТУАЦИЙ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  11 вы узнали, что компиляторы C++ предоставляют функции библиотеки этапа выполнения, 
+  которые вы можете использовать в своих программах. Если вы читали документацию 
+  по этим функциям, то могли обратить внимание на функции, которые генерируют 
+  определенные исключительные ситуации. В таких случаях ваши программы должны 
+  проверять соответствующие исключительные ситуации. По умолчанию если ваша программа 
+  генерирует исключительную ситуацию, которая не улавливается (программа не имеет 
+  соответствующего обработчика исключительной ситуации), то запустится стандартный 
+  обработчик, предоставляемый языком C++. В большинстве случаев стандартный обработчик 
+  завершит вашу программу. Следующая программа UNCAUGHT.CPP иллюстрирует, как 
+  стандартный обработчик исключительной ситуации завершает выполнение вашей программы:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class some_exception 
+    { };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Перед генерацией исключительной ситуации"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;throw 
+    some_exception();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Исключительная ситуация сгенерирована"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае, когда программа генерирует исключительную ситуацию (которая не улавливается 
+  программой), C++ вызывает стандартный обработчик исключительной ситуации, который 
+  завершает программу. Поэтому последний оператор программы, который выводит сообщение 
+  о генерации исключительной ситуации, никогда не выполняется. Вместо использования 
+  стандартного обработчика исключительной ситуации C++ ваши программы могут определить 
+  свой собственный стандартный обработчик (обработчик по умолчанию). Чтобы сообщить 
+  компилятору C++ о своем стандартном обработчике, ваши программы должны использовать 
+  функцию библиотеки этапа выполнения</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">set_unexpected. 
+  Прототип функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">set_unexpected 
+  определен в заголовочном файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">except.h.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОБЪЯВЛЕНИЕ ГЕНЕРИРУЕМЫХ 
+  ФУНКЦИЕЙ ИСКЛЮЧИТЕЛЬНЫХ СИТУАЦИЙ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, прототип функции позволяет вам определить тип возвращаемого функцией 
+  значения и типы ее параметров. Если ваши программы используют исключительные 
+  ситуации, вы также можете использовать прототип функции, чтобы указать генерируемые 
+  данной функцией исключительные ситуации. Например, следующий прототип функции 
+  сообщает компилятору, что функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">power_plant 
+  может генерировать исключительные ситуации</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">melt_down 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">radiation_leak:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void power_plant(long 
+    power_needed) throw (melt_down, radiation_leak);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Включая 
+  подобным образом возможные исключительные ситуации в прототип функции, вы можете 
+  легко сообщить другому программисту, который будет читать ваш код, какие исключительные 
+  ситуации ему необходимо проверять при использовании данной функции.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСКЛЮЧИТЕЛЬНЫЕ СИТУАЦИИ 
+  И КЛАССЫ</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании класса вы, 
+  возможно, захотите определить исключительные ситуации, характерные для данного 
+  класса. Чтобы создать исключительную ситуацию, характерную для конкретного класса, 
+  просто включите эту исключительную ситуацию в качестве одного из общих</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">(public) элементов класса. 
+  Например, следующее описание класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">string 
+  определяет две исключительные ситуации:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *str);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    fill_string(*str);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    string_length(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;class 
+    string_empty { } ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;class 
+    string_overflow {};<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    length;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    string[255];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  этот класс определяет исключительные ситуации</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">string_empty 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">string_overflow. 
+  В своей программе вы можете проверить наличие исключительной ситуации, используя 
+  оператор глобального разрешения и имя класса, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">try </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;some_string.fill_string(some_long_string);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">catch (string::string_overflow) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Превышена длина строки, символы отброшены" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Исключительные 
+  ситуации предназначены для упрощения и усовершенствования обнаружения и обработки 
+  ошибочных ситуаций в ваших программах. Для проверки и обнаружения исключительных 
+  ситуаций ваши программы должны использовать операторы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try, 
+  catch и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">throw. Ваши 
+  знания исключительных ситуаций зависят от опыта программирования на C++. Прежде 
+  чем продолжить программировать на C++, убедитесь, что вы освоили следующие основные 
+  концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Исключительная 
+      ситуация представляет собой неожиданную ошибку в вашей программе.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваши 
+      программы должны обнаруживать и обрабатывать (реагировать на) исключительные 
+      ситуации.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+      программах вы определяете исключительную ситуацию как класс.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы должны использовать 
+      оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try, 
+      чтобы заставить компилятор C++ разрешить обнаружение исключительных ситуаций.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы должны разместить 
+      оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">catch 
+      сразу же после оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">try, 
+      чтобы определить, какая именно исключительная ситуация имела место (если 
+      она вообще была).</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ сам не генерирует 
+      исключительные ситуации. Ваши программы генерируют исключительные ситуации 
+      с помощью оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">throw.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      ваша программа обнаруживает исключительную ситуацию, она вызывает специальную 
+      функцию, которая называется обработчиком исключительной ситуации.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      ваши программы используют исключительные ситуации, вы можете указать в прототипе 
+      функции, что эта функция способна генерировать исключительную ситуацию.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+      чтении документации по библиотеке этапа выполнения обращайте внимание на 
+      то, что некоторые функции способны генерировать исключительные ситуации.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа 
+      генерирует, но не улавливает (и не обрабатывает) исключительную ситуацию, 
+      C++ будет вызывать стандартный обработчик исключительной ситуации.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В заголовочном файле</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3">except.h определены 
+      прототипы функций, которые ваши программы могут использовать для указания 
+      своих собственных стандартных обработчиков не улавливаемых исключительных 
+      ситуаций.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 38.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A> 
+</CENTER>
+</BODY>
+</HTML>

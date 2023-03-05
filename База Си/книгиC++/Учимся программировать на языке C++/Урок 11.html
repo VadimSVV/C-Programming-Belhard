@@ -1,0 +1,206 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+</HEAD>
+<BODY BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 11 </FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Преимущества использования 
+  библиотеки этапа выполнения</FONT></H2>
+<DIR></DIR>
+<P ALIGN="Justify"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  9 вы узнали, как разделить ваши программы на небольшие легко управляемые части, 
+  называемые функциями и выполняющие определенную задачу. Одно из преимуществ 
+  использования функций заключается в том, что вы можете часто применяемую функцию, 
+  созданную для одной программы, использовать в другой программе. Как вы узнаете 
+  из этого урока, большинство компиляторов C++ обеспечивают широкий набор функций, 
+  использующихся в программах и называющихся</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>библиотекой 
+  этапа выполнения.</I> Применение этих функций сокращает объем программирования, 
+  который вы должны выполнить самостоятельно. Вместо этого ваша программа просто 
+  вызывает функции библиотеки этапа выполнения. В зависимости от компилятора библиотека 
+  этапа выполнения может состоять из тысяч функций. В данном уроке описывается 
+  использование таких функций в ваших программах. К тому времени, когда вы закончите 
+  этот урок, вы освоите следующие основные концепции:</FONT></P>
+<DIR><FONT FACE="Times New Roman">
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Библиотека 
+    этапа выполнения представляет собой набор функций, обеспечиваемых вашим компилятором, 
+    которые вы можете легко использовать в программах.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Для 
+    использования функций библиотеки этапа выполнения вы должны включить соответствующие 
+    заголовочные файлы, содержащие прототипы функций.</FONT></P>
+  </FONT> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Некоторые 
+    компиляторы обращаются к библиотеке этапа выполнения как к интерфейсу прикладных 
+    программ или API.</FONT></P>
+</DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Большинство 
+  библиотек этапа выполнения содержат сотни прикладных функций, которые помогут 
+  вам сохранить огромное количество времени и быстро разработать сложные программы. 
+  Вы узнаете, что очень легко использовать функции библиотеки этапа выполнения!</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ФУНКЦИЙ 
+  БИБЛИОТЕКИ ЭТАПА ВЫПОЛНЕНИЯ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  9 вы узнали, что до того, как ваши программы смогут вызвать функцию, компилятор 
+  C++ должен узнать определение или прототип функции. Поскольку функции библиотеки 
+  этапа выполнения не определены в вашей программе, вы должны указать прототип 
+  для каждой библиотечной функции, которую намерены использовать. Для упрощения 
+  использования библиотечных функций компилятор C++ предоставляет заголовочные 
+  файлы, содержащие корректные прототипы. Таким образом, вашим программам необходимо 
+  просто включить требуемый заголовочный файл с помощью оператора #<I>include,</I> 
+  а затем вызвать необходимую функцию. Например, следующая программа SHOWTIME.CPP 
+  будет использовать функции библиотеки этапа выполнения t<I>ime</I> и <I>ctime 
+  для</I> вывода текущей системной даты и времени. Прототипы этих двух функций 
+  библиотеки этапа выполнения содержатся в заголовочном файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time.h:</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;<BR>
+    #include &lt;time.h&gt; // Для функций библиотеки этапа выполнения</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;time_t system_time;<BR>
+    &nbsp;&nbsp;&nbsp;system_time = time(NULL);<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Текущее системное время " &lt;&lt; ctime(&amp;system_time) 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  откомпилируете и запустите эту программу, на вашем экране появятся текущие системные 
+  дата и время:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; SHOWTIME &lt;ENTER&gt; 
+    </B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Текущее системное 
+    время Mon Jan 01 16:13:51 1996</B></FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа использует функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ctime.</I> В 
+  случае функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ctime</I> 
+  программа передает адрес переменной</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>system_time,</I> 
+  используя оператор адреса, описанный в уроке 10. Для использования этих функций 
+  вам просто следует включить заголовочный файл</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time.h</I> 
+  в начало вашего исходного файла.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Подобным 
+  образом следующая программа SQRT.CPP использует функцию sqrt для возврата квадратного 
+  корня нескольких значений. Прототип функции <I>sqrt</I> находится в заголовочном 
+  файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>math.h:</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;<BR>
+    #include &lt;math.h&gt; // Содержит прототип sqrt</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "квадратный корень 100.0 равен " &lt;&lt; sqrt(100.0) &lt;&lt; endl;</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Квадратный корень 10.0 равен " &lt;&lt; sqrt 
+    (10.0) &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "квадратный корень 5.0 равен " &lt;&lt; sqrt(5.0) 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наконец, 
+  программа SYSCALL.CPP использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>system,</I> 
+  прототип которой определяется в заголовочном файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>stdlib.h.</I> 
+  Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>system 
+  </I>обеспечивает легкий способ выполнения вашей программой команды операционной 
+  системы, такой как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">"DIR", 
+  или другой программы:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;stdlib.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;system("DIR");<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В этом 
+  случае программа использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>system</I> 
+  для вызова команды MS-DOS DIR. Выберите время для эксперимента с этой программой, 
+  запуская другие команды или даже одну из программ, созданных вами ранее при 
+  изучении этой книги.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">ИЗУЧЕНИЕ 
+  ФУНКЦИЙ БИБЛИОТЕКИ ЭТАПА ВЫПОЛНЕНИЯ</FONT></B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваш компилятор 
+  C++ обеспечивает сотни функций библиотеки этапа выполнения. Документация, поставляемая 
+  с вашим компилятором, должна содержать полное описание всех функций библиотеки 
+  этапа выполнения. Если вы просмотрите эту документацию, то найдете, что функции 
+  обычно используют простые прототипы. Например, для функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>sqrt 
+  вы</I> могли бы найти следующий прототип:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">double 
+    sqrt(double);</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае прототип функции сообщает вам, что функция возвращает значение типа</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>double</I> и ожидает 
+  параметр тоже типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>double.</I> 
+  Аналогично этому можно найти следующий прототип для функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time:</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">time_t 
+    time (time_t *);</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">И опять 
+  прототип сообщает вам, что функция возвращает значение типа <I>time_t</I> (этот 
+  тип определен в заголовочном файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time.h).</I> 
+  Функция ожидает, что ее параметр должен быть указателем на переменную типа</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>time_t.</I> По мере чтения 
+  документации о функциях библиотеки этапа выполнения вы очень много узнаете о 
+  самих функциях и о C++ , при этом обращайте внимание на прототипы функций.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Другой 
+  путь изучения библиотечных функций вашего компилятора состоит в просмотре заголовочных 
+  файлов, содержащихся в подкаталоге INCLUDE. Выделите время, например, для того, 
+  чтобы сейчас распечатать заголовочные файлы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>math.h, 
+  time.h</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>stdlib.h,</I> 
+  которые вы использовали в программах этого урока.</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>Использование 
+    функций API</B></I></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>В 
+    дополнение к стандартной библиотеке этапа выполнения многие компиляторы обеспечивают 
+    функции API или интерфейс прикладных программ. Например, если вы программируете 
+    в среде Windows, то вам потребуются функции графического API, телефонного 
+    API (TAPI), API для мультимедиа и т. д. Прежде чем создавать свои собственные 
+    функции, убедитесь, что вы не нашли таких функций в API, предоставляемом вашим 
+    компилятором.</B></I></FONT></P>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Библиотека 
+  этапа выполнения C++ предоставляет мощный набор функций, которые вы можете использовать 
+  в ваших программах. Не жалейте времени, чтобы изучить документацию по библиотеке 
+  этапа выполнения, поставляемой с вашим компилятором. Выясните смысл функций, 
+  имеющихся в библиотеке этапа выполнения. Преимущество этих функций состоит в 
+  том, что вы избавляетесь от значительного объема программирования. В уроке 12 
+  вы научитесь обращаться с локальными переменными и областью видимости (участок 
+  вашей программы, где известно имя переменной). Прежде чем перейти к уроку 12, 
+  убедитесь, что вы освоили следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Библиотека этапа выполнения 
+      представляет собой набор функций, обеспечиваемых компилятором для ваших 
+      программ.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для использования 
+      функции из библиотеки этапа выполнения вы должны указать ее прототип.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Большинство компиляторов 
+      C++ предоставляют заголовочные файлы, которые содержат корректные прототипы 
+      для каждой библиотечной функции.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В дополнение к библиотеке 
+      этапа выполнения многие компиляторы C++ предоставляют функции API (интерфейс 
+      прикладных программ) для выполнения определенных задач, например программирования 
+      графики или мультимедиа.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 10.html">Предыдущий 
+  урок</A> | <A HREF="Урок 12.html">Следующий урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

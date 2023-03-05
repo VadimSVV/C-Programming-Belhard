@@ -1,0 +1,300 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Урок 
+  14 </FONT></B></FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"><B>Использование 
+  ссылок в C++</B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  10 вы узнали, как изменять параметры внутри функции с помощью указателей. Для 
+  использования указателей вы должны предварять имена переменных-указателей звездочкой. 
+  Использование указателей досталось в "наследство" от языка С. Чтобы упростить 
+  процесс изменения параметров, С++ вводит такое понятие как <I>ссылка.</I> Как 
+  вы узнаете из этого урока, ссылка представляет собой псевдоним (или второе имя), 
+  который ваши программы могут использовать для обращения к переменной. К концу 
+  данного урока вы освоите следующие основные концепции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">• Для 
+    объявления и инициализации ссылки внутри программы объявите переменную, размещая 
+    амперсанд (&amp;) сразу же после типа переменной, и затем используйте оператор 
+    присваивания для назначения псевдонима, например</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>int&amp; 
+    alias_name = variable',.</I></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>•</I> 
+    Ваши программы могут передавать ссылки в функцию в качестве параметров, а 
+    функция, в свою очередь, может изменять соответствующее значение параметра, 
+    не используя указателей.</FONT></P>
+  <FONT FACE="Times New Roman"> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Внутри 
+    функции вам следует объявить параметр как ссылку, размещая амперсанд (&amp;) 
+    после типа параметра, затем можно изменять значение параметра внутри функции 
+    без помощи указателей.</FONT></P>
+  </FONT></DIR>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  узнаете, использование указателей очень упрощает изменение значений параметров 
+  внутри функции.</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ССЫЛКА ЯВЛЯЕТСЯ ПСЕВДОНИМОМ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Ссылка</I> 
+  C++ позволяет создать псевдоним (или второе имя) для переменных в вашей программе. 
+  Для объявления ссылки внутри программы укажите знак амперсанда (&amp;) непосредственно 
+  после типа параметра. Объявляя ссылку, вы должны сразу же присвоить ей переменную, 
+  для которой эта ссылка будет псевдонимом, как показано ниже:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> <U>int&amp;</U> 
+    alias_name = variable; <B><I>//---&gt; Объявление ссылки</I></B></FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">После объявления 
+  ссылки ваша программа может использовать или переменную<I>,</I> или ссылку:</FONT></P>
+<DIR > 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">alias_name 
+    = 1001;<BR>
+    variable = 1001;</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа SHOW_REF.CPP создает ссылку с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>alias_name 
+  </I>и присваивает псевдониму переменную</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number.</I> 
+  Далее программа использует как ссылку, так и переменную:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Courier New, Courier, mono" SIZE="3"> <FONT FACE="Times New Roman, Times, serif"> 
+    &nbsp;&nbsp;&nbsp;int number = 501;<BR>
+    &nbsp;&nbsp;&nbsp;int&amp; alias_name = number; // Создать ссылку<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Переменная number содержит <I>" &lt;&lt;</I> 
+    number &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Псевдоним для number содержит " &lt;&lt; 
+    alias_name &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;alias_name = alias_name + 500;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Переменная number содержит " &lt;&lt; number 
+    &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Псевдоним для number содержит " &lt;&lt; 
+    alias_name &lt;&lt; endl;<BR>
+    }</FONT></FONT> 
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа прибавляет 500 к ссылке</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>alias_name.</I> 
+  В итоге программа прибавляет 500 также и к соответствующей переменной</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number,</I> для которой 
+  ссылка служит псевдонимом или вторым именем. Когда вы откомпилируете и запустите 
+  эту программу, на вашем экране появится следующий вывод:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">С:\&gt; 
+    SHOW_REF &lt;ENTER&gt; </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Переменная 
+    number содержит 501 </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Псевдоним 
+    для number содержит 501 </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Переменная 
+    number содержит 1001 </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Псевдоним 
+    для number содержит 1001</FONT></B></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В общем 
+  случае использование ссылки таким образом, как только что было показано, создает 
+  трудности для понимания. Однако вы увидите, что использование ссылок значительно 
+  упрощает процесс изменения параметров внутри функции.</FONT></P>
+<B> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>Объявление 
+    ссылки</B></FONT></I></FONT></P>
+  <FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Ссылка C++ представляет 
+  собой псевдоним (второе имя), которое ваши программы могут использовать для 
+  обращения к переменной. Для объявления ссылки поставьте амперсанд (&amp;) сразу 
+  же после типа переменной, а затем укажите имя ссылки, за которым следует знак 
+  равенства и имя переменной, для которой ссылка является псевдонимом:</FONT> 
+  </B> </I> </FONT> 
+  <BLOCKQUOTE> 
+    <P><FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">float&amp; 
+      salary_alias = salary;</FONT> </B></I></FONT></P>
+  </BLOCKQUOTE>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ССЫЛОК 
+  В КАЧЕСТВЕ ПАРАМЕТРОВ</FONT></H2>
+</B>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Основное 
+  назначение ссылки заключается в упрощении процесса изменения параметров внутри 
+  функции. Следующая программа REFERENC.CPP присваивает ссылку с именем</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number_alias</I> переменной</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number. </I>Программа 
+  передает ссылку на переменную в функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>change_value,</I> 
+  которая присваивает переменной значение 1001:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    change_value(int &amp;alias)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;alias = 1001;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int number;<BR>
+    &nbsp;&nbsp;&nbsp;int&amp; number_alias = number;<BR>
+    &nbsp;&nbsp;&nbsp;change_value(number_alias);<BR>
+    &nbsp;&nbsp;&nbsp;out &lt;&lt; "Переменная number содержит " &lt;&lt; number 
+    &lt;&lt; endl;<BR>
+    }</FONT> 
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  видите, программа передает ссылку в функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>change_value.</I> 
+  Если вы рассмотрите объявление функции, вы обнаружите, что</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>change_value</I> 
+  объявляет параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>alias</I> 
+  как ссылку на значение типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>int.</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    change_value(int&amp; alias)</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Внутри 
+  функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>change_value</I> 
+  можете изменять значение параметра без помощи указателя. В результате звездочка 
+  (*) не используется и операция внутри функции становится легче для понимания.</FONT></P>
+<B> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>Использование 
+    комментариев для объяснения ссылок внутри ваших программ</B></FONT></I></FONT></P>
+  <FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Большинство 
+  программистов C++ знакомы с языком программирования С, и они привыкли использовать 
+  указатели внутри функции, если необходимо изменить значение параметра. В результате, 
+  если такие программисты не видят указатели внутри функций, которые используют 
+  ссылки, они могут предположить, что значения параметров не изменяются. Для предотвращения 
+  подобных промахов не забывайте размещать несколько комментариев до и внутри 
+  функций, которые изменяют параметры с помощью ссылок. В таком случае программисты 
+  С лучше поймут работу ваших функций.</FONT></B></I></FONT></DIR>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif">Рассмотрим второй 
+  пример&#9;</FONT></H3>
+</B><FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В уроке 
+  10 вы использовали следующую функцию для перестановки двух значений с плавающей 
+  точкой: </FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    swap_values(float *a, float *b)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {<BR>
+    &nbsp;&nbsp;&nbsp;float temp;<BR>
+    &nbsp;&nbsp;&nbsp;temp = *a;<BR>
+    &nbsp;&nbsp;&nbsp;*a = *b;<BR>
+    &nbsp;&nbsp;&nbsp;*b = temp;<BR>
+    }</FONT> 
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  функция комбинирует переменные-указатели с переменными-неуказателями. Следующая 
+  программа SWAP_REF.CPP использует ссылки на значения с плавающей точкой для 
+  упрощения функции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    swap_values(float&amp; a, float&amp; b)<BR>
+    {</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    temp;<BR>
+    &nbsp;&nbsp;&nbsp;temp = a;<BR>
+    &nbsp;&nbsp;&nbsp;a = b;<BR>
+    &nbsp;&nbsp;&nbsp;b = temp;<BR>
+    }</FONT> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    big = 10000.0;<BR>
+    &nbsp;&nbsp;&nbsp;float small = 0.00001;<BR>
+    &nbsp;&nbsp;&nbsp;float&amp; big_alias = big;<BR>
+    &nbsp;&nbsp;&nbsp;float&amp; small_alias = small;<BR>
+    &nbsp;&nbsp;&nbsp;swap_values(big_alias, small_alias);<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Big содержит " &lt;&lt; big &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Small содержит " &lt;&lt; small &lt;&lt;&#9;endl;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">swap_values 
+  сейчас легче понять, однако ваша программа имеет теперь два дополнительных имени 
+  (ссылки big_alias и small_alias), за которыми вы должны следить.</FONT></P>
+<B> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРАВИЛА РАБОТЫ СО 
+  ССЫЛКАМИ</FONT> </H2>
+</B>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ссылка 
+  не является переменной. Один раз присвоив значение ссылке, вы уже не можете 
+  ее изменить. Кроме того в отличие от указателей вы не можете выполнить</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">следующие операции над ссылками:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">• Вы 
+    не можете получить адрес ссылки, используя оператор адреса C++.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Вы 
+    не можете присвоить ссылке указатель. </FONT></P>
+  <FONT FACE="Times New Roman">
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Вы 
+    не можете сравнить значения ссылок, используя операторы сравнения C++.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Вы 
+    не можете выполнить арифметические операции над ссылкой, например добавить 
+    смещение.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">•Вы не 
+    можете изменить ссылку.</FONT></P>
+  </FONT></DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере 
+  использования объектно-ориентированного программирования на C++ вы вернетесь 
+  к ссылкам.</FONT></P>
+</FONT> <B> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>Использование 
+    ссылок для изменения параметров функции</B></FONT></I></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Из 
+    урока 10 вы узнали, что ваши программы с помощью указателей могут изменять 
+    значение параметров внутри функции. Для изменения параметра вы должны передать 
+    его адрес в функцию. Чтобы получить адрес параметра, используйте оператор 
+    адреса C++ (&amp;). В свою очередь функция использует переменные-указатели 
+    (которые хранят адрес памяти). Для объявления переменной-указателя внутри 
+    функции предваряйте имя параметра звездочкой (*). Чтобы изменить или использовать 
+    значение параметра внутри функции, предваряйте каждое обращение к имени этого 
+    параметра оператором разыменования C++ (*). К сожалению, многие операции внутри 
+    функции комбинируют переменные-указатели и переменные-неуказатели.<BR>
+    Ссылки C++ упрощают процесс изменения параметров функции, избавляя от операторов, 
+    которые смешивают переменные-указатели и переменные-неуказатели.</FONT></B></I></FONT></P>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТ0 ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+</B><FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, как использовать ссылки C++ для создания псевдонима или второго 
+  имени переменной. Использование ссылок может упростить функции, изменяющие значения 
+  параметров. Из урока 15 вы узнаете, что C++ позволяет вам задавать значения 
+  по умолчанию для параметров функции. При вызове функции программа может опускать 
+  значения одного или нескольких параметров и функция будет использовать значения 
+  по умолчанию. До изучения урока 15 убедитесь, что вы освоили следующие основные 
+  концепции:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ссылка C++ является 
+      псевдонимом (или вторым именем) переменной.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      объявления ссылки поместите знак амперсанда (&amp;) непосредственно после 
+      типа переменной, а затем укажите имя ссылки, за которым следует знак равенства 
+      и имя переменной, для которой ссылка является псевдонимом. </FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      вы однажды присвоили ссылке значение, вы не можете его изменить. </FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вам 
+      следует помещать несколько комментариев до и внутри функций, которые используют 
+      ссылки для изменения значений параметра, чтобы другие программисты, читающие 
+      ваш код, сразу обратили, на это внимание.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чрезмерное 
+      использование ссылок может привести к слишком трудному для понимания программному 
+      коду.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 13.html">Предыдущий 
+  урок</A> | <A HREF="Урок 15.html">Следующий урок</A> </FONT>
+</CENTER> 
+</BODY>
+</HTML>

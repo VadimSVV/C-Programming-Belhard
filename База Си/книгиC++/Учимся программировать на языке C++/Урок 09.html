@@ -1,0 +1,724 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Урок 9 Знакомство с функциями</TITLE>
+</HEAD>
+<BODY BACKGROUND="bgrwhite.gif">
+<FONT FACE="Times New Roman"> </FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 9</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Знакомство с функциями</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman" SIZE="3">По мере увеличения размера 
+  и сложности ваших программ вам следует разделить их на небольшие легко управляемые 
+  части, называемые <I>функциями.</I> Каждая функция в вашей программе должна 
+  выполнять определенную задачу. Например, если вы пишете программу платежей, 
+  можете создать одну функцию, определяющую количество часов, отработанных служащим, 
+  вторую функцию, определяющую сверхурочную оплату, третью функцию, выводящую 
+  на печать и т. д. Если программе необходимо выполнить определенную задачу, то 
+  она <I>вызывает</I> соответствующую функцию, обеспечивая эту функцию информацией, 
+  которая ей понадобится в процессе обработки. Из этого урока вы узнаете, как 
+  создавать и использовать функции в ваших программах на C++. К концу данного 
+  урока вы освоите следующие основные концепции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">• Функции 
+    группируют связанные операторы для выполнения определенной задачи.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">• Ваша 
+    программа вызывает функцию, обращаясь к ее имени, за которым следуют круглые 
+    скобки, например <I>bеер</I> <I>().</I></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT SIZE="3" FACE="Times New Roman, Times, serif"><I>•</I> 
+    После завершения обработки большинство функций возвращают значение определенного 
+    типа, например <I>int</I> или <I>float,</I> которое программа может проверить 
+    или присвоить переменной.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">• Ваши 
+    программы передают параметры (информацию) функциям, например имя, возраст 
+    или оклад служащего, заключая параметры в круглые скобки, которые следуют 
+    за именем функции.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">• C++ 
+    использует <I>прототипы</I> функций для определения типа возвращаемого функцией 
+    значения, а также количества и типов параметров, передаваемых функции.</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">По мере 
+  увеличения ваших программ использование функций становится их неотъемлемой необходимостью. 
+  Однако, как вы увидите, создавать и использовать функции в C++ очень легко.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОЗДАНИЕ И ИСПОЛЬЗОВАНИЕ 
+  ВАШИХ ПЕРВЫХ ФУНКЦИЙ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">При создании 
+  программ вам следует спроектировать каждую функцию для выполнения определенной 
+  задачи. Если вы обнаружите, что функция выполняет несколько задач, вам следует 
+  разделить ее на две или более функций. Каждая создаваемая в программах функция 
+  должна иметь уникальное имя.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как в случае 
+  с именами переменных, имена функций, которые вы выбираете те, должны соответствовать 
+  операции, выполняемой функцией. Например глядя на имена функций, перечисленные 
+  в табл. 9, вы получите хорошее представление о назначении каждой функции.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><I><B>Таблица 
+  9.</B></I> Примеры смысловых имен функций.</FONT></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <B><FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Имя функции 
+      </FONT></B></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <B><FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Назначение функции 
+      </FONT></B></TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Print_test_scores 
+      </FONT></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Печатать тестовые очки класса 
+      </FONT></TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Accounts_payable 
+      </FONT></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Обработать счета компании 
+      </FONT></TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Get_user_name 
+      </FONT></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Запрос имени пользователя 
+      </FONT></TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Print_document 
+      </FONT></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Напечатать указанный документ 
+      </FONT></TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Calculate_income_tax 
+      </FONT></TD>
+    <TD WIDTH="50%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Определить подоходный налог пользователя 
+      </FONT></TD>
+  </TR>
+</TABLE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Функция 
+  C++ по структуре подобна программе <I>main,</I> которую вы использовали во всех 
+  предыдущих программах. Другими словами, имя функции предваряется ее типом, а 
+  за ним следует список параметров, описание которых появляется в скобках. Вы 
+  группируете операторы функций внутри левой и правой фигурных скобок, как показано 
+  ниже:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">тип_возврата 
+    имя_функции (список_параметров) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{</FONT> 
+  <DIR><FONT SIZE="3" FACE="Times New Roman, Times, serif">объявления_переменных;</FONT><BR>
+    <FONT SIZE="3" FACE="Times New Roman, Times, serif">операторы;</FONT><BR>
+  </DIR>
+  <FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT> </DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Рассмотрите, 
+  например, как структура этой функции соответствует следующей программе <I>main:</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void) <I><B>//-----------&gt; </B></I></FONT><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">тип 
+    имя (список_параметров) </FONT></FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{ </FONT><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><BR>
+    &nbsp;&nbsp;&nbsp;int count;</FONT></FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif"> 
+    //<I><B>---------------------------&gt;</B></I>объявления_переменных; <BR>
+    &nbsp;&nbsp;&nbsp;for (count = 0; count &lt; 10; count++) cout &lt;&lt; count<B> 
+    &lt;&lt; ' '; //<I>-----&gt; </I></B>Оператор<B><I><BR>
+    </I></B>}</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Следующие 
+  операторы определяют функцию с именем <I>show_message,</I> которая выводит сообщение 
+  на экран, используя <I>cout.</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_message (void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Привет, учусь программировать на C++" &lt;&lt; 
+    endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как вы, 
+  возможно, помните из урока 2, слово <I>void,</I> предшествующее имени функции, 
+  указывает функции не возвращать значение. Подобно этому, слово <I>void,</I> 
+  содержащееся внутри круглых скобок, указывает (компилятору C++ и программистам, 
+  читающим ваш код), что функция не использует <I>параметры</I> (информацию, которую 
+  программа передает функции). Следующая программа SHOW_ MSG.CPP использует функцию 
+  <I>show_message</I> для вывода сообщения на экран:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_message (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Привет, учусь программировать на C++" &lt;&lt; 
+    endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Перед вызовом функции"&#9;&lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;show_message ();<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вернулись<B> из</B> функции" &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Вы уже 
+  знаете, что выполнение программы всегда начинается внутри <I>main.</I> Внутри 
+  <I>main</I> следующий оператор <I>(вызов функции)</I> вызывает функцию <I>show_message:</I></FONT></P>
+</FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">show_message 
+    ();</FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Круглые 
+  скобки после имени функции сообщают компилятору C++, что ваша программа использует 
+  функцию. Позже вы узнаете, что внутри этих скобок программа может передавать 
+  в функции информацию (параметры). Если вы откомпилируете и запустите эту программу, 
+  на вашем экране появится следующий вывод:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>С: 
+    \&gt;SHOW_MSG &lt;ENTER&gt; </B></FONT></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Перед 
+    вызовом функции </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Привет, 
+    учусь программировать на C++ </FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Вернулись 
+    из функции</FONT></B></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если программа 
+  встречает вызов функции, она начинает выполнять операторы, находящиеся внутри 
+  функции. После того как программа выполнит все операторы, которые содержит функция 
+  (другими словами, функция завершится); выполнение программы продолжается с оператора, 
+  следующего непосредственно за вызовом функции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_message (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"> {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Привет, учусь программировать на&#9;C++" 
+    &lt;&lt;&#9;endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"> {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Перед вызовом функции" &lt;&lt;&#9;endl;<BR>
+    &nbsp;&nbsp;&nbsp;show_message ();<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вернулись из функции" &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В данном 
+  случае программа выполняет первый оператор в <I>main,</I> которой выводит сообщение 
+  для пользователя, что программа собирается вызвать функцию. Далее программа 
+  встречает вызов функции и запускает выполнение операторов в <I>show_messsage.</I> 
+  После того как программа выполнит единственный оператор функции, она возвращается 
+  обратно в <I>main</I> и продолжает свое выполнение с оператора, непосредственно 
+  следующего за вызовом функции. В этом случае программа выводит сообщение, извещая 
+  пользователя о том, что она возвратилась из функции, и после этого заканчивает 
+  свою работу. Следующая программа TWO__MSGS.CPP использует две функции -<I>show_title</I> 
+  и <I>show_lesson</I> для вывода информации об этой книге:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_title (void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Книга: Учимся программировать на C++" &lt;&lt; 
+    endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_lesson (void)<BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Урок: Знакомство с функциями"&#9;&lt;&lt;&#9;endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void)<BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;show_title ();<BR>
+    &nbsp;&nbsp;&nbsp;show_lesson ();<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Когда программа 
+  начинает выполнение, она сначала вызывает функцию <I>show_title,</I> которая 
+  выводит сообщение с помощью <I>cout.</I> После завершения <I>show_title</I> 
+  программа вызывает функцию <I>show_lesson,</I> также выводящую сообщение. После 
+  завершения <I>show_lesson</I> программа завершается, поскольку в <I>main</I> 
+  больше нет операторов.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Функции, 
+  представленные в этом уроке, выполняли очень простые задачи. В каждом случае 
+  ваша программа могла бы легко выполнить ту же самую обработку без использования 
+  функции просто включением тех же операторов в <I>main.</I> Однако назначение 
+  функций заключалось в том, чтобы показать вам, как программа определяет и затем 
+  вызывает функцию. По мере усложнения ваших программ вы будете использовать функции, 
+  чтобы упростить большие задачи, разбивая программу на небольшие легко управляемые 
+  части. При создании функций вы обнаружите, что, поскольку они содержат меньше 
+  строк кода, чем одна большая программа, их легче понять и изменить. В дополнение 
+  к этому в большинстве случаев функцию, созданную для одной программы, вы можете 
+  использовать без изменений в другой программе. Создавая библиотеку функций, 
+  вы тем самым снижаете количество времени, израсходованного на кодирование и 
+  тестирование подобных функций в будущем.</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif"><I>Вызов 
+    функции</I></FONT></B></P>
+  <P ALIGN="JUSTIFY"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Функция 
+    Представляет собой набор связанных операторов, которые Выполняют определенную 
+    задачу. Создавая функции внутри программы, вы можете делить большие задачи 
+    на небольшие легко управляемые части.<BR>
+    Ваши программы выполняют операторы функций посредством вызова функции. Для 
+    вызова функции программы просто обращаются к имени функции, за которым следуют 
+    круглые скобки, как показано ниже:</FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">function_name();</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P ALIGN="JUSTIFY"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если 
+    программа передает информацию (параметры) в функцию, она размещает эту информацию 
+    внутри круглых скобок, разделяя ее запятыми:</FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">payroll(employee_name, 
+      employee_id, salary);</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P ALIGN="JUSTIFY"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">После 
+    того как последний оператор функции завершен, выполнение программы продолжается 
+    с первого оператора следующего за вызовом функции.</FONT></B></I></P>
+</DIR>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРОГРАММА МОЖЕТ ПЕРЕДАВАТЬ 
+  ИНФОРМАЦИЮ В ФУНКЦИИ</FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Для увеличения 
+  потенциальных возможностей ваших функций C++ позволяет программам передавать 
+  информацию (параметры) в функции. Если функция использует параметры, вы должны 
+  сообщить C++ тип каждого параметра, например <I>int, float, char и</I> т.д. 
+  Следующая функция <I>show_number</I> использует параметр типа <I>int.</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_number (int value) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Значение параметра равно " &lt;&lt; value 
+    &lt;&lt; endl;<BR>
+    </FONT>} </P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если ваша 
+  программа вызывает функцию <I>show_number,</I> она должна передать ей значение, 
+  как показано ниже:</FONT></P>
+</FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">show_number 
+    (<U>1001</U>)<B>; <I>//----------------&gt; </I></B>Значение, передаваемое 
+    в функцию</FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">C++ будет 
+  подставлять переданное число вместо каждого имени параметра value внутри функции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">show_number 
+    <U>(1001)</U></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_number (int <U>value</U>) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Значение параметра равно " &lt;&lt; value 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_number (1001) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Значение параметра равно "&#9;&lt;&lt; 1001&#9;&lt;&lt; 
+    endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как видите, 
+  поскольку C++ замещает значение параметра, функция <I>show_number</I> выводит 
+  число 1001, переданное ей главной программой.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Следующая 
+  программа USEPARAM.CPP использует функцию <I>show_number </I>несколько раз, 
+  каждый раз передавая разные числа:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_number (int value)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Значение параметра равно " &lt;&lt; value 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;show_number (1);<BR>
+    &nbsp;&nbsp;&nbsp;show_number (1001);<BR>
+    &nbsp;&nbsp;&nbsp;show_number (-532);<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если вы 
+  откомпилируете и запустите эту программу, на вашем экране будет отображено следующее:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>С:</B> 
+    <B>\&gt;USEPARAM &lt;ENTER&gt; </B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Значение 
+    параметра равно 1 </B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Значение 
+    параметра равно 1001 </B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Значение 
+    параметра равно -532</B></FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как видите, 
+  каждый раз, когда программа вызывает функцию, C++ присваивает передаваемое число 
+  переменной <I>value.</I> Найдите время для эксперимента с этой программой, изменяя 
+  значения, которые <I>main</I> передает в функцию, и обращая внимание на результат.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Каждый 
+  параметр функции имеет определенный тип. В случае функции <I>show_number</I> 
+  параметр <I>value</I> должен быть типа <I>int.</I> Если вы попытаетесь передать 
+  в функцию значение другого типа, например с плавающей точкой, компилятор будет 
+  сообщать об ошибке. В большинстве случаев ваши программы будут передавать несколько 
+  значений в функцию. Для каждого передаваемого параметра функция должна указать 
+  имя и тип. Например, следующая программа BIGSMALL.CPP использует функцию <I>show_big_and_little</I> 
+  для вывода самого большого и самого маленького из трех полученных целочисленных 
+  значений:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt; </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_big_and_little (int a, int b, int c)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;int small = a;<BR>
+    &nbsp;&nbsp;&nbsp;int big = a;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (b &gt; big)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;big = b;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (b &lt; small)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;small = b;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (c &gt; big)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;big = c;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (c &lt; small)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;small = c;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Самое большое значение равно&#9;"&#9;&lt;&lt; big&#9;&lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Самое маленькое значение равно&#9;" &lt;&lt; 
+    small &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;show_big_and_little (1, 2,&#9;3);<BR>
+    &nbsp;&nbsp;&nbsp;show_big_and_little (500, 0, -500);<BR>
+    &nbsp;&nbsp;&nbsp;show_big_and_little (1001, 1001, 1001);<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если вы 
+  откомпилируете и запустите эту программу, на вашем экране появится следующий 
+  вывод:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>С: 
+    \&gt; BIGSMALL &lt;ENTER&gt;</B></FONT></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif"> Самое 
+    большое значение равно 3</FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif"> Самое 
+    маленькое значение равно 1</FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif"> Самое 
+    большое значение равно 500</FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif"> Самое 
+    маленькое значение равно -500</FONT></B></P>
+  <P ALIGN="JUSTIFY"> <B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Самое 
+    большое значение равно 1001</FONT></B></P>
+  <P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Самое 
+    маленькое значение равно 1001</FONT></B></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Наконец, 
+  следующая программа SHOW_EMP.CPP использует функцию <I>show_employee</I> для 
+  вывода возраста (тип <I>int)</I> и оклада (тип <I>float)</I> служащего:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#Include 
+    &lt;iostream.h&gt; </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    show_employee (int age, float salary)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Возраст служащего " &lt;&lt; age &lt;&lt; 
+    " года (лет)" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Служащий получает $" &lt;&lt; salary &lt;&lt; 
+    endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;show_employee (32, 25000.00);<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как видите, 
+  функция <I>show_employee</I> определяет параметры типа <I>int и float</I></FONT></P>
+</FONT> 
+<DIR>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman"><B><FONT SIZE="3"><I>Передача 
+    параметров в функцию</I></FONT></B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman"><I><B><FONT SIZE="3">Если ваша 
+    функция использует параметры, она должна указать уникальное имя и тип для 
+    каждого параметра. Когда программа вызывает функцию, C++ присваивает значения 
+    параметров именам параметров функции слева направо. Каждый параметр функции 
+    имеет определенный тип, например int, float или char. Значения, которые ваша 
+    программа передает в функцию, используя параметры, должны соответствовать 
+    типу параметров.</FONT></B></I></FONT></P>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ФУНКЦИИ МОГУТ ВОЗВРАЩАТЬ 
+  РЕЗУЛЬТАТ ВЫЗВАВШЕЙ ФУНКЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Функция должна выполнять 
+  определенную задачу для вашей программы. В большинстве случаев функции будут 
+  выполнять некоторые типы вычислений. Затем функция возвратит свой результат 
+  вызвавшей функции. Когда функция возвращает значение, вы должны сообщить C++ 
+  тип значения, например <I>int, float, char</I> т. д. Чтобы информировать C++ 
+  о типе возвращаемого функцией значения, просто поставьте перед именем функции 
+  соответствующий тип. Например, следующая функция <I>add_values</I> складывает 
+  два своих целочисленных параметра и возвращает результат типа int вызвавшей 
+  программе:</FONT></P>
+<FONT FACE="Times New Roman"> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">int add_values 
+    (int а, int b) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;int result;<BR>
+    <I>&nbsp;&nbsp;&nbsp;result=</I>а+b;</FONT><BR>
+    <FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;return 
+    (result);</FONT><BR>
+    } </P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В данном 
+  случае слово <I>int,</I> появляющееся перед именем функции, указывает <I>тип 
+  возвращаемого значения</I> функции. Функции используют оператор <I>return</I> 
+  для возврата значения вызвавшей функции. Когда ваша программа встречает оператор 
+  <I>return,</I> она возвращает заданное значение и завершает <I>выполнение</I> 
+  функции, возвращая управление вызвавшей программе. В программе вы можете использовать 
+  возвращаемое значение, как показано ниже:</FONT></P>
+</FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><FONT SIZE="3" FACE="Times New Roman, Times, serif">result=add_values 
+    (1, 2);</FONT></I></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В данном 
+  случае программа присваивает возвращаемое функцией значение переменной <I>result.</I> 
+  Ваша программа может также сразу же напечатать возвращаемое функцией значение 
+  с помощью <I>cout,</I> как показано ниже:</FONT></P>
+</FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><FONT SIZE="3" FACE="Times New Roman, Times, serif">cout 
+    &lt;&lt; "Сумма значений равна " &lt;&lt; add_values (500, 501) &lt;&lt; endl;</FONT></I></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Предыдущая 
+  реализация функции <I>add_values</I> использовала три оператора, чтобы было 
+  легче понять смысл функции. Однако вы можете сократить функцию до единственного 
+  оператора <I>return,</I> как показано ниже:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">int add_values 
+    (int a, int b)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;return (a+ b);</FONT><BR>
+    <FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Следующая 
+  программа<B> ADDVALUE.CPP</B> использует функцию <I>add_values </I>для сложения 
+  нескольких значений:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">int add_values 
+    (int<B> a,</B> int b) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;return (a+ b);<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">void 
+    main (void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; " 100 + 200 = " &lt;&lt; add_values(100, 200) 
+    &lt;&lt;&#9;endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; " 500 + 501 = " &lt;&lt; add_values(500, 501)<B> 
+    &lt;&lt;&#9;</B>endl<B>;<BR>
+    </B>&nbsp;&nbsp;&nbsp;cout &lt;&lt; "-1 + 1 = " &lt;&lt; add_values(-1, 1) 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Выберите 
+  время для эксперимента с этой программой, изменяя значения, которые программа 
+  передает в функцию. Вы могли бы попытаться передать в функцию большие значения, 
+  например 20000 и 30000. Как и можно предложить, выполнение функции, возвращающей 
+  значение типа <I>int,</I> приведет к ошибке переполнения.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Не все 
+  функции возвращают значение типа <I>int.</I> Следующая функция average_<I>value</I> 
+  возвращает среднее двух целочисленных значений, которое может быть дробным, 
+  например 3.5:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">float 
+    average_value(int a, int b) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    &nbsp;&nbsp;&nbsp;return( (a + b) / 2.0);<BR>
+    </FONT>} </P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В этом 
+  случае <I>слово float,</I> которое предшествует имени функции, указывает тип 
+  возвращаемого функцией значения.</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ФУНКЦИИ, КОТОРЫЕ 
+  НЕ ВОЗВРАЩАЮТ ЗНАЧЕНИЕ</FONT></H2>
+<CENTER>
+  <FONT FACE="Times New Roman"> </FONT>
+</CENTER>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если функция 
+  не возвращает значение, вам необходимо предварить имя функции типом <I>void.</I> 
+  В противном случае вы должны предварять имя функции типом возвращаемого функцией 
+  значения, например, <I>int, float, char </I>и т. д. Чтобы возвратить значение 
+  вызвавшей функции, функция использует оператор <I>return.</I> Когда ваша программа 
+  встречает оператор <I>return,</I> выполнение функции завершается и указанное 
+  значение возвращается вызвавшей функции. Возможны ситуации, когда вы встретите 
+  оператор <I>return</I> в функции, которая не возвращает значение:</FONT></P>
+</FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">return;</FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В этом 
+  случае функция имеет тип <I>void</I> (не возвращает значение) и оператор <I>return</I> 
+  просто завершает выполнение функции.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B><I>Замечание:</I></B><I> 
+  Если операторы появляются в функции после оператора return они не будут выполняться. 
+  Как уже обсуждалось выше, если ваша программа встречает оператор return в функции, 
+  то возвращается соответствующее значение, функция заканчивается и выполнение 
+  программы продолжается с первого оператора, следующего за вызовом функции.</I></FONT></P>
+<B> </B></FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ 
+  ВОЗВРАЩАЕМОГО ФУНКЦИЕЙ ЗНАЧЕНИЯ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Когда функция возвращает 
+  значение, вызвавшая программа может присвоить возвращенное значение переменной, 
+  используя оператор присваивания, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><I><FONT SIZE="3" FACE="Times New Roman">payroll_amount = payroll (employee, 
+    hours, salary);</FONT></I></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">В дополнение к этому 
+  вызвавшая программа просто может обращаться к функции. Например, следующий оператор 
+  выводит возвращаемое функцией значение, используя <I>cout.</I></FONT></P>
+<BLOCKQUOTE>
+  <P><I><FONT SIZE="3" FACE="Times New Roman">cout &lt;&lt; "Служащий получил" 
+    &lt;&lt; payroll(employee, hours, salary) &lt; &lt; endl;</FONT></I></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Вызвавшая функция может 
+  также использовать возвращаемое значение в условии, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><I><FONT SIZE="3" FACE="Times New Roman">if (payroll(employee, hours, salary) 
+    &lt; 500.00)<BR>
+    </FONT></I><I><FONT SIZE="3" FACE="Times New Roman">cout &lt;&lt; "Этот служащий 
+    нуждается в повышении" &lt;&lt; endl;</FONT></I></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Как видите, программа 
+  может использовать возвращаемое функцией значение различными способами.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРЕДСТАВЛЕНИЕ О ПРОТОТИПАХ 
+  ФУНКЦИЙ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Прежде чем ваша программа 
+  сможет вызвать функцию, C++ должен знать тип воозвращаемого значения, а также 
+  количество и тип параметров, используемых функцией. В каждой из программ, представленных 
+  в этом уроке, определение функции, вызываемой программой, всегда предшествует 
+  вызову функции в исходном файле. Однако в большинстве случаев функции появляются 
+  в вашем исходном файле и, как правило, одна функция вызывает другую. Чтобы гарантировать, 
+  что C++ знает особенности каждой функции, используемой в программе, вы можете 
+  поместить <I>прототипы функций</I> в начало исходного файла. В общем случае 
+  прототип функции обеспечивает информацию о типе возвращаемого функцией значения 
+  и ее параметрах. Следующий оператор иллюстрирует прототипы функций для нескольких 
+  функций, используемых в данном уроке:</FONT></P>
+<DIR><P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">void show_message(void);</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">void show_number(int);</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">void show_employee(int, 
+  float);</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">int add_values(int, int);</FONT></P>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">float average_value(int, 
+  int);</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Как видите, прототип 
+  функции указывает тип возвращаемого значения, а также количество и тип каждого 
+  параметра. Обратите внимание на точку с запятой в конце каждого прототипа.</FONT></P>
+<BLOCKQUOTE>
+  <P><I><FONT SIZE="3" FACE="Times New Roman"><U>float</U> average_value (<U>int, int)</U><B>; 
+    </B></FONT></I></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Если ваша программа вызывает 
+  функцию, для которой компилятор C++ не нашел определения или прототипа, компилятор 
+  сообщает о синтаксической ошибке. При исследовании заголовочных файлов C++ или 
+  других программ вы будете постоянно сталкиваться с прототипами функций. Следующая 
+  программа PROTO.CPP иллюстрирует использование прототипа Функции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">float average_value(int, 
+    int); // Прототип функции</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">void main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">{<BR>
+    &nbsp;&nbsp;&nbsp; cout &lt;&lt; "Среднее значение 2000 и 2 равно " &lt;&lt; 
+    average_value(2000, 2) &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">float average_value 
+    (int a, int b)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman"> {<BR>
+    &nbsp;&nbsp;&nbsp;return((a + b) / 2.0);<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">В этом случае программа 
+  вызывает функцию <I>average_value</I> до того, как функция определена. Таким 
+  образом, программа использует прототип функции, который предваряет определение 
+  <I>main.</I> Если вы удалите прототип функции и откомпилируете эту программу, 
+  компилятор C++ будет сообщать о синтаксических ошибках.</FONT></P>
+<DIR><P ALIGN="JUSTIFY"><B><FONT SIZE="3" FACE="Times New Roman"><I>Использование прототипов 
+  функций</I></FONT></B></P>
+<P ALIGN="JUSTIFY"><I><B><FONT SIZE="3" FACE="Times New Roman">Прототип функции 
+  сообщает компилятору C++ тип возвращаемого значения, а также количество и тип 
+  параметров функции. Когда вы компилируете вашу программу, компилятор C++ использует 
+  прототип каждой функции, чтобы убедиться, что вы не перепутали тип возвращаемого 
+  функцией значения (например, не присваиваете возвращаемое значение типа float 
+  переменной типа int) и что вы не передаете в качестве параметра значение неверного 
+  типа. Раньше многие компиляторы C++ не выполняли подобную проверку. В результате 
+  программисты часто тратили часы, пытаясь найти ошибки, возникающие из-за того, 
+  что вместо ожидаемого значения типа float в функцию передавалось значение типа 
+  int. Если вы встречаете синтаксическую ошибку, которая возникает из-за противоречия 
+  с прототипом функции, будьте благодарны. В прошлом компилятор не определял подобную 
+  ошибку, и ваша программа просто не работала.</FONT></B></I></P>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman">Из этого урока вы узнали, 
+  как использовать функции в программах на C++. Данный урок охватил целый ряд 
+  основных понятий, таких как параметры, типы возвращаемых значений и прототипы 
+  функций. Сейчас вы можете потратить несколько больше времени на эксперименты 
+  с простыми программами. Из урока 10 вы узнаете, как изменять значения параметров 
+  внутри функций. Однако до изучения урока 10 убедитесь, что вы освоили следующие 
+  основные концепции:</FONT></P>
+<DIR> 
+  <OL>
+    <LI><FONT SIZE="3" FACE="Times New Roman">По мере усложнения ваших программ 
+      вам следует делить их на небольшие легко управляемые части, называемые функциями. 
+      Каждая функция должна иметь уникальное имя. Присваивайте вашим функциям 
+      имена, выражающие смысл задач, которые выполняют функции.</FONT></LI>
+    <LI><FONT SIZE="3" FACE="Times New Roman"> Функции могут возвращать значение 
+      вызвавшей функции. При этом вы должны указать тип возвращаемого функцией 
+      значения <I>(int, char и </I>т. д.) до имени функции, в противном случае 
+      вы должны предварять имя функции словом <I>void.</I></FONT></LI>
+    <LI><FONT SIZE="3" FACE="Times New Roman"> Программы передают информацию в 
+      функции с помощью параметров. Если функция получает параметры, вы должны 
+      указать уникальное имя и тип каждого параметра. Если функция не получает 
+      параметры, вы должны поместить ключевое слово <I>void</I> внутри круглых 
+      скобок, следующих за именем функции.</FONT></LI>
+    <LI><FONT SIZE="3" FACE="Times New Roman"> C++ должен знать тип возвращаемого 
+      значения и количество и тип параметров, которые получает функция. Если определение 
+      функции следует за использованием функции, вы должны поместить прототип 
+      функции в начале исходного файла.</FONT></LI>
+  </OL>
+</DIR>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 08.html">Предыдущий 
+  урок</A> | <A HREF="Урок 10.html">Следующий урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

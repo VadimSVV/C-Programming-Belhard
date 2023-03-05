@@ -1,0 +1,427 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<FONT FACE="Times New Roman"> </FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 22</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Частные и общие 
+  данные</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">В уроке 
+  21 вы создали свои первые классы в C++. При этом вы включали метку</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">public 
+  в определение класса, чтобы обеспечить программе доступ к каждому элементу класса. 
+  Из данного урока вы узнаете, как атрибуты</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">public 
+  и private управляют доступом к элементам класса со стороны программы. Вы узнаете, 
+  что ваши программы могут обратиться к общим (public) элементам из любой функции. 
+  С другой стороны, ваша программа может обращаться к частным (private) элементам 
+  только в функциях данного класса. Этот урок подробно исследует частные и общие 
+  элементы. К концу данного урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы управлять тем, 
+    как ваши программы обращаются к элементам класса, C++ позволяет вам определять 
+    элементы как частные или общие.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Частные элементы дают 
+    возможность классу скрыть информацию, которую программе не требуется знать.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Класс, использующий 
+    частные элементы, обеспечивает интерфейсные функции, которые обращаются к 
+    частным элементам класса.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как уже вкратце обсуждалось 
+  в уроке 21, вы должны поместить в определение класса столько информации об объекте, 
+  сколько считаете необходимым. При этом объекты становятся самообеспеченными, 
+  что может повысить возможность их повторного использования несколькими программами.</FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОКРЫТИЕ ИНФОРМАЦИИ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, класс содержит данные и методы (функции). Для использования класса 
+  программы просто должны знать информацию, которую хранит класс (его элементы 
+  данных) и методы, которые манипулируют данными (функции). Вашим программам не 
+  требуется знать, как работают методы. Более того, программы должны знать только, 
+  какую задачу выполняют методы. Например, предположим, что у вас есть класс file. 
+  В идеале ваши программы должны знать только то, что этот класс обеспечивает 
+  методы file.print, который печатает отформатированную копию текущего файла, 
+  или file.delete, который удаляет файл. Вашей программе не требуется знать, как 
+  эти два метода работают. Другими словами, программа должна рассматривать класс 
+  как "черный ящик". Программа знает, какие методы необходимо вызвать и какие 
+  параметры им передать, но программа ничего не знает о рельной работе, выполняющейся 
+  внутри класса (в "черном ящике").</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Сокрытие 
+  информации представляет собой процесс, в результате которого программе предоставляется 
+  только минимальная информация, необходимая для использования класса. Частные 
+  и общие элементы класса помогают вам получить информацию, скрытую внутри вашей 
+  программы. В уроке 21 каждый из созданных вами классов использовал метку public 
+  для объявления всех элементов класса общими, т.е. видимыми для всей программы. 
+  Таким образом, программа могла бы непосредственно обратиться к любому элементу 
+  класса, используя оператор точку:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании класса вы 
+  могли бы иметь элементы, чьи значения используются только внутри класса, но 
+  обращаться к которым самой программе нет необходимости. Такие элементы являются 
+  частными (private), и их следует скрывать от программы. Если вы не используете 
+  метку public, то по умолчанию C++ подразумевает, что все элементы класса являются 
+  частными. Ваши программы не могут обращаться к частным элементам класса, используя 
+  оператор точку. К частным элементам класса могут обращаться только элементы 
+  самого класса. При создании класса вам следует разделить элементы на частные 
+  и общие, как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class some_class </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    &nbsp;&nbsp;&nbsp;int some_variable;<BR>
+    &nbsp;&nbsp;&nbsp;void initialize_private(int, float); <B><I>//———&gt; Общие 
+    элементы<BR>
+    </I></B>&nbsp;&nbsp;&nbsp;void show_data(void);<BR>
+    private:<BR>
+    &nbsp;&nbsp;&nbsp;int key_value; <I><B>//—————————————&gt; Частные элементы<BR>
+    </B></I><B> </B> &nbsp;&nbsp;&nbsp;float key_number;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, метки</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">public и private легко позволяют 
+  определять, какие элементы являются частными, а какие общими. В данном случае 
+  программа может использовать оператор точку для обращения к общим элементам, 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3">some_class object; // 
+    Создать объект <BR>
+    object.some_variable = 1001;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">object.initialize_private(2002, 
+    1.2345);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">object.show_data()</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа пытается 
+  обратиться к частным элементам</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">key_value 
+  или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">key_number, используя 
+  точку, компилятор сообщает о синтаксических ошибках.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Как правило, 
+  вы будете защищать элементы класса от прямого доступа к ним делая их частными. 
+  При этом программы не могут непосредственно присваивать значения таким элементам, 
+  используя оператор точку. Вместо того чтобы присвоить значение, программа должна 
+  вызвать метод класса. Предотвращая прямой доступ к элементам данных, вы, таким 
+  образом, можете гарантировать, что им всегда будут присваиваться допустимые 
+  значения. Например, предположим что объект</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">nuclear_reactor 
+  вашей программы использует переменную с именем melt_down, которая всегда должна 
+  содержать значение в диапазоне от 1 до 5. Если элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">melt_down 
+  является общим, программа может непосредственно обратиться к элементу, изменяя 
+  его значение произвольным образом:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">nuclear_reactor.melt_down 
+    = 101</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вместо 
+  этого вы делаете переменную частной, то можете использовать метод класса, например</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">assign_meltdown, чтобы присвоить 
+  значение этой переменной. Как показано ниже, функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">assign_meltdown 
+  может проверять присваиваемое значение, чтобы убедиться, что оно является допустимым:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int nuke::assign_meltdown(int 
+    value) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    ((value &gt; 0) &amp;&amp; (value &lt;= 5)) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;melt_down 
+    = value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0); 
+    // Успешное присваивание <BR>
+    &nbsp;&nbsp;&nbsp;} else</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;return(-1); 
+    // Недопустимое значение <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Методы 
+  класса, которые управляют доступом к элементам данных, представляют собой интерфейсные 
+  функции. При создании классов вы будете использовать интерфейсные функции для 
+  защиты данных своих классов.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Общие 
+    и частные элементы</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Классы C++ содержат 
+    данные и элементы. Чтобы указать, к каким элементам классов ваши программы 
+    могут обращаться напрямую, используя оператор точку, C++ позволяет вам определять 
+    элементы класса как общие</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">{public) 
+    и частные</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">(private). 
+    Таким образом, ваши программы могут непосредственно обращаться к любым общим 
+    элементам класса, используя оператор точку. С другой стороны, к частным элементам 
+    можно обратиться только через методы класса. Как правило, вы должны защищать 
+    большинство элементов данных класса, объявляя их частными. Следовательно, 
+    единственным способом, с помошью которого ваши программы могут присвоить значение 
+    элементам данных, является использование функций</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">класса, 
+    которые способны проверить и скорректировать присваиваемые значения.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ 
+  ОБЩИХ И ЧАСТНЫХ ЭЛЕМЕНТОВ КЛАССА</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа INFOHIDE.CPP иллюстрирует использование общих и частных элементов 
+  класса. Программа определяет объект типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    assign_values(char *, long, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, класс защищает 
+  все свои элементы данных, объявляя их частными. Для доступа к элементам данных 
+  программа должна использовать интерфейсные функции. Ниже приведена реализация 
+  программы INFOHIDE.CPP:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    assign_values(char *, long, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int employee::assign_values(char 
+    *emp_name, </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">long 
+    emp_id, float emp_salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(name, 
+    emp_name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee_id 
+    = emp_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (emp_salary &lt; 50000.0) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;salary 
+    = emp_salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0); 
+    // Успешно <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp; else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">return(-1); // 
+    Недопустимый оклад }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащий:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int employee::change_salary(float 
+    new_salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (new_salary &lt; 50000.0) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;salary 
+    = new_salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0); 
+    // Успешно } else </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">return(-1); 
+    // Недопустимый оклад }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">long employee::get_id(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(employee_id) 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (worker.assign_values("Happy Jamsa", 101, 10101.0) == 0) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащему назначены следующие значения"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (worker.change_salary(35000.00) == 0)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Назначен новый оклад"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+    <BR>
+    &nbsp;&nbsp;&nbsp;} <BR>
+    &nbsp;&nbsp;&nbsp;else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Указан недопустимый оклад"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Выберите 
+  время, чтобы исследовать операторы программы более подробно. Несмотря на то 
+  что программа достаточно длинна, ее функции на самом деле очень просты. Метод</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">assign_values инициализирует 
+  частные данные класса. Метод использует оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">if, 
+  чтобы убедиться, что присваивается допустимый оклад. Метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">show_employee 
+  в данном случае выводит частные элементы данных. Методы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">change_salary 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">get_id представляют 
+  собой интерфейсные функции, обеспечивающие программе доступ к</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">частным 
+  данным. После успешной компиляции и запуска этой программы отредактируйте ее 
+  и попытайтесь обратиться напрямую к частным элементам данных, используя оператор 
+  точку внутри</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">main. 
+  Так как вы не можете напрямую обратиться к частным элементам, компилятор сообщит 
+  о синтаксических ошибках.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><I><B><FONT FACE="Arial, Helvetica, sans-serif">Что 
+    такое интерфейсные функции</FONT></B></I></FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><B><I><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    снижения количества возможных ошибок ограничивайте доступ программ к данным 
+    класса, определяя элементы данных класса как частные. Таким образом, программа 
+    не сможет обратиться к элементам данных класса, используя оператор точку. 
+    Вместо этого класс должен определять интерфейсные функции, с помощью которых 
+    программа может присваивать значения частным элементам. Интерфейсные функции 
+    в свою очередь, могут исследовать и скорректировать значения, которые программа 
+    пытается присвоить.</FONT></I></B></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ОПЕРАТОРА 
+  ГЛОБАЛЬНОГО РАЗРЕШЕНИЯ ДЛЯ ЭЛЕМЕНТОВ КЛАССА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  рассмотрите функции в программе INFOHIDE.CPP, вы обнаружите, что имена параметров 
+  функции часто предваряются символами етр_, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int employee::assign_values(char 
+    *emp_name, long emp_id, float emp_salary)</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Символы 
+  етр_ использовались, чтобы избежать конфликта между именами параметров и именами 
+  элементов класса. Если подобный конфликт имен всe же происходит, вы можете разрешить 
+  его, предваряя имена элементов класса именем класса и оператором глобального 
+  разрешения (::). Следующая функция использует оператор глобального разрешения 
+  и имя класса перед именем элементов класса. Исходя из этого, любой читающий 
+  эти операторы поймет, какие имена соответствуют классу</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int employee::assign_values(char 
+    *name, </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">long employee_id, 
+    float salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(0); 
+    // Успешно } else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(-1); 
+    // Недопустимый оклад <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+  создании функций, работающих с элементами класса, вам следует использовать имя 
+  класса и оператор глобального разрешения, чтобы таким образом избежать конфликта 
+  имен.</FONT></FONT></P>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Использование 
+  оператора глобального разрешения для указания элементов класса</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании 
+  функций-элементов класса возможны ситуации, когда имя локальной переменной, 
+  которое вы используете внутри функции, конфликтует с именем элемента класса. 
+  По умолчанию имя локальной переменной будет переопределять имя элемента класса. 
+  Когда происходит подобный конфликт имен, функция может использовать имя класса 
+  и оператор глобального разрешения для доступа к элементам класса, как показано 
+  ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class_naine: :member_name 
+    = some_value;</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧАСТНЫЕ ЭЛЕМЕНТЫ 
+  КЛАССА НЕ ВСЕГДА ЯВЛЯЮТСЯ ДАННЫМИ</FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В примере, 
+  представленном в этом уроке, частные элементы были всегда элементами данных. 
+  По мере того как определение класса становится более сложным, вы, возможно, 
+  захотите создать функции, используемые другими методами класса, но для оставшейся 
+  части программы доступ к таким функциям должен быть закрыт. В подобных случаях 
+  вы просто объявляете такие методы частными элементами. Если функция класса не 
+  объявлена как общая, программа не может вызвать такую функцию, используя оператор 
+  точку.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Управляя 
+  доступом программы к элементам класса, вы снижаете возможность ошибок, которые 
+  происходят в результате злоупотребления этими элементами. Чтобы управлять доступом 
+  к элементам класса, можно использовать частные элементы. Большинство определений 
+  классов C++, которые вы встретите, будут использовать сочетание частных и общих 
+  элементов. Одна из наиболее широко используемых операций, которую ваши программы 
+  выполняют при создании объекта, представляет собой инициализацию элементов данных 
+  объекта. Из урока 23 вы узнаете, что C++ позволяет вам определять специальную 
+  функцию, называемую конструктором, которая автоматически вызывается каждый раз 
+  при создании объекта. Используя конструктор, ваша программа легко может инициализировать 
+  элементы класса. До изучения урока 23 убедитесь, что освоили следующие основные 
+  концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Элементы класса могут быть общими или частными. Программы могут напрямую 
+      обращаться к общим элементам, используя оператор точку. С другой стороны, 
+      к частным элементам можно обращаться, используя только методы класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если это не оговорено 
+      явно, C++ считает все элементы частными.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Программы присваивают значения и обращаются к частным элементам, используя 
+      интерфейсные функции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> При создании программы, 
+      манипулирующей элементами класса, вы можете предварять имя каждого элемента 
+      именем класса и оператором глобального разрешения (::), например</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3">employее::name, для 
+      избежания возможных конфликтов имен.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 21.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 23.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

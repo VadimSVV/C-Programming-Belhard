@@ -1,0 +1,421 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<font face="Times New Roman"> </font> 
+<h2 align="center"><font face="Times New Roman"><b><FONT FACE="Arial, Helvetica, sans-serif">Урок 
+  17</FONT></b></font></h2>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">Символьные строки</FONT></h2>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Символьные 
+  строки хранят такую информацию, как имена файлов, названия книг, имена служащих 
+  и другие символьные сочетания. Большинство программ на C++ широко используют 
+  символьные строки. Далее вы узнаете, что в C++ символьные строки хранятся в 
+  массиве типа</font> <font size="3" face="Times New Roman, Times, serif"><i>char,</i> 
+  который заканчивается символом NULL (или ASCII 0). В данном уроке символьные 
+  строки рассматриваются более подробно. Вы узнаете, как хранить и обрабатывать 
+  символьные строки, а также как использовать функции библиотеки этапа выполнения, 
+  которые манипулируют символьными строками. К концу этого урока вы освоите следующие 
+  основные концепции:</font></p>
+<ul>
+  <li><font size="3" face="Times New Roman, Times, serif">Чтобы объявить символьную 
+    строку, вы должны объявить массив типа <i>char,</i></font></li>
+  <li> <font size="3" face="Times New Roman, Times, serif">Чтобы присвоить символы 
+    символьной строке, ваши программы просто присваивают символы элементам массива 
+    символьных строк.</font></li>
+  <li><font size="3" face="Times New Roman, Times, serif">Программы C++ используют 
+    символ NULL (ASCII 0), чтобы отметить последний символ строки.</font></li>
+  <li><font size="3" face="Times New Roman, Times, serif">C++ позволяет вашим 
+    программам инициализировать символьные строки при их объявлении.</font></li>
+  <li><font size="3" face="Times New Roman, Times, serif">Программы могут передавать 
+    символьные строки в функцию, как и любой массив.</font></li>
+  <li><font size="3" face="Times New Roman, Times, serif">Большинство библиотек 
+    этапа выполнения C++ обеспечивают набор функций, которые управляют символьными 
+    строками.</font></li>
+</ul>
+<p><font face="Times New Roman, Times, serif" size="3">Программы на C++ хранят 
+  символьные строки как массив типа</font> <font size="3" face="Times New Roman, Times, serif"><i>char. 
+  </i>Большинство программ широко используют символьные строки. Экспериментируйте 
+  с каждой программой, представленной в этом уроке, чтобы освоиться с символьными 
+  строками. Вы обнаружите, что работа с символьными строками подобна работе с 
+  массивами, описанной в уроке 16.</font></p>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ОБЪЯВЛЕНИЕ СИМВОЛЬНЫХ 
+  СТРОК В ПРОГРАММАХ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Программисты 
+  на C++ широко используют символьные строки для хранения имен пользователей, 
+  имен файлов и другой символьной информации.</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Для объявления 
+  символьной строки внутри программы просто объявите массив типа</font> <font size="3" face="Times New Roman, Times, serif"><i>char</i> 
+  с количеством элементов, достаточным для хранения требуемых символов. Например, 
+  следующее объявление создает переменную символьной строки с <i>именем filename,</i> 
+  способную хранить 64 символа (не забывайте, что символ NULL является одним из 
+  этих 64 символов):</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">char filename[64];</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как видно 
+  из рис. 17.1, это объявление создает массив с элементами, индексируемыми от</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>filename[0]</i> до</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>filename[63].</i></font></p>
+<p align="JUSTIFY"><img src="p17_1.gif" width="250" height="297"></p>
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif"><b>Рис. 
+  17.1.</b> C++ трактует символьную строку как массив типа</font> <font size="3" face="Times New Roman, Times, serif"><i>char.</i></font></p>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Главное 
+  различие между символьными строками и другими типами массивов заключается в 
+  том, как C++ указывает последний элемент массива, Как вы уже знаете, программы 
+  на C++ представляют конец символьной строки с помощью символа NULL, который 
+  в C++ изображается как специальный символ '\0'. Когда вы присваиваете символы 
+  символьной строке, вы должны поместить символ NULL ('\0') после последнего символа 
+  в строке. Например, следующая программа ALPHABET. CPP присваивает буквы от А 
+  до Я переменной</font> <font size="3" face="Times New Roman, Times, serif"><i>alphabet,</i> 
+  используя цикл</font> <font size="3" face="Times New Roman, Times, serif"><i>for.</i> 
+  Затем программа добавляет символ NULL в эту переменную и выводит ее с помощью</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>cout.</i></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    alphabet [34]; // 33 буквы плюс NULL char letter;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    index;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;for 
+    (letter = 'A', index = 0; letter &lt;= <i>'Я';<br>
+    </i></font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;letter++, 
+    index++) alphabet[index] = letter;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;alphabet[index] 
+    = NULL;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Буквы</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; alphabet;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+  </blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как видите, 
+  программа присваивает строке символ NULL, чтобы указать последний символ строки:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">alphabet[index] = NULL;</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Когда выходной 
+  поток</font> <font size="3" face="Times New Roman, Times, serif"><i>cout</i> 
+  выводит символьную строку, он по одному выводит символы строки, пока не встретит 
+  символ NULL. Короче говоря, cимвол NULL указывает программе последний символ 
+  в строке.</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Обратите 
+  внимание на цикл</font> <font size="3" face="Times New Roman, Times, serif"><i>for,</i> 
+  который появляется в предыдущей программе. Как видите, цикл инициализирует и 
+  увеличивает две переменные</font> <font size="3" face="Times New Roman, Times, serif"><i>(letter 
+  </i>и</font> <font size="3" face="Times New Roman, Times, serif"><i>index).</i> 
+  Когда цикл</font> <font size="3" face="Times New Roman, Times, serif"><i>for</i> 
+  инициализирует или увеличивает несколько переменных, разделяйте операции запятой 
+  (запятая тоже является оператором C++):</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">for (letter = 'A', index 
+    = 0; letter &lt;= 'Я'; letter++, index++)</font></p>
+  </blockquote>
+<h3><b><font face="Arial, Helvetica, sans-serif">C++ автоматически добавляет NULL 
+  к строковым константам</font></b></h3>
+<font face="Times New Roman"> 
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif">Все созданные 
+  вами программы использовали символьные строковые константы, заключенные внутри 
+  двойных кавычек, как показано ниже:</font></p>
+</font>
+<blockquote>
+  <p><font face="Times New Roman"><font size="3" face="Times New Roman, Times, serif">"Это 
+    строковая константа"</font></font></p>
+</blockquote> 
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">При создании 
+  символьной строковой константы компилятор C++ автоматически добавляет символ 
+  NULL, как показано на рис. 17.2.</font></p>
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif"><img src="p17_2.gif" width="455" height="101"></font></p>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3"><b>Рис.</b> 
+  17.2. Компилятор C++ автоматически добавляет символ NULL к строковым константам.</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Когда 
+  ваши программы выводят символьные строковые константы с помощью выходного потока</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>cout, cout</i> использует 
+  символ NULL (который компилятор добавляет к строке) для определения последнего 
+  символа вывода.</font></p>
+<BLOCKQUOTE> 
+  <P><font face="Times New Roman"><b><i><font face="Arial, Helvetica, sans-serif">Использование 
+    символа NULL</font></i></b></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Символьная строка 
+    представляет собой массив символов, за которыми следует символ NULL ('\0'). 
+    При объявлении символьной строки вы объявляете массив типа</font> <font size="3" face="Times New Roman, Times, serif">char. 
+    Когда программа позднее присваивает символы строке, она отвечает за добавление 
+    символа NULL, который представляет конец строки.</font></B></I></P>
+  <P> <I><B><font face="Times New Roman, Times, serif" size="3">Если вы используете 
+    строковые константы, заключенные в двойные кавычки, компилятор C++ автоматически 
+    добавляет символ NULL. Большинство функций C++ используют символ NULL для 
+    определения последнего символа строки. </font></B></I></P>
+</BLOCKQUOTE>
+<P><font face="Times New Roman, Times, serif" size="3">Следующая программа LOOPNULL.CPP 
+  слегка изменяет предыдущую программу, используя цикл</font> <font size="3" face="Times New Roman, Times, serif"><i>for</i> 
+  для вывода содержимого строки:</font></P>
+<BLOCKQUOTE>
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    alphabet[34]; //33 символа плюс NULL char letter;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    index;<br>
+    &nbsp;&nbsp;&nbsp;for (letter = 'A', index = 0; letter &lt;= 'Я'; letter++,</font><font size="3" face="Times New Roman, Times, serif">index++) 
+    alphabet[index] = letter;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;alphabet[index] 
+    = NULL;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;for 
+    (index = 0; alphabet[index] 1= NULL; index++) cout &lt;&lt; alphabet[index];<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+</BLOCKQUOTE>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, цикл</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>for</i> по одному исследует 
+  символы строки. Если символ не NULL (не последний символ строки), цикл выводит 
+  символ, увеличивает индекс, и процесс продолжается.</font></p>
+<h3 align="JUSTIFY"><font face="Times New Roman">Как 'А' отличается от "А"</font></h3>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">При рассмотрении 
+  программ на C++ вы можете встретить символы, заключенные в одинарные кавычки 
+  (например, 'А') и символы, заключенные в</font></p>
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif"><img src="p17_3.gif" width="455" height="269"></font></p>
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif"><b>Рис. 
+  17.3.</b> Как компилятор C++ хранит символьную константу 'А' и строковую константу 
+  "А".</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">двойные 
+  кавычки ("А"). Символ внутри одинарных кавычек представляет собой <i>символьную 
+  константу.</i> Компилятор C++ выделяет только один байт памяти для хранения 
+  символьной константы. Однако символ в двойных кавычках представляет собой <i>строковую 
+  константу —</i> указанный символ и символ NULL (добавляемый компилятором). Таким 
+  образом, компилятор будет выделять два байта для символьной строки. Рисунок 
+  17.3 иллюстрирует, как компилятор C++ хранит символьную константу 'А' и строковую 
+  константу "А".</font></p>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ИНИЦИАЛИЗАЦИЯ СИМВОЛЬНОЙ 
+  СТРОКИ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете из урока 16, C++ позволяет вам инициализировать массивы при объявлении. 
+  Символьные строки C++ не являются исключением. Для инициализации символьной 
+  строки при объявлении укажите требуемую строку внутри двойных кавычек, как показано 
+  ниже:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">char title[64] = "Учимся 
+    программировать на языке C++";</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Если количество 
+  символов, присваиваемое строке, меньше размера массива, большинство компиляторов 
+  C++ будут присваивать символы NULL остающимся элементам строкового массива. 
+  Как и в случае с массивами других типов, если вы не указываете размер массива, 
+  который инициализируете при объявлении, компилятор C++ распределит достаточно 
+  памяти для размещения указанных букв и символа NULL:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">char title[] = "Учимся 
+    программировать на языке C++";</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Следующая 
+  программа INIT_STR.CPP инициализирует символьную строку при объявлении:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[64] = "Учимся программировать на языке C++";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    lesson[64] = "Символьные строки";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Книга: " &lt;&lt; title &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Урок:</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; lesson &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+  </blockquote>
+<p><font face="Times New Roman"><font size="3" face="Times New Roman, Times, serif">Некоторые 
+  программы, представленные в оставшейся части книги, будут инициализировать символьные 
+  строки подобным способом. Найдите время для эксперимента с этой программой, 
+  изменяя символы, присваиваемые каждой строке.</font></font></p>
+<font face="Times New Roman"><b> </b></font>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ПЕРЕДАЧА СТРОК В 
+  ФУНКЦИИ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Передача 
+  символьной строки в функцию подобна передаче любого массива в качестве параметра. 
+  Внутри функции вам нужно просто указать тип массива <i>(char)</i> и левую и 
+  правую скобки массива. Вам не надо указывать размер строки. Например, следующая 
+  программа SHOW_STR.CPP использует функцию show_<i>string</i> для вывода символьной 
+  строки на экран:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void show_string(char 
+    string[]) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; string &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;show_string("Привет, 
+    C++!");<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;show_string("Учусь 
+    программировать<b> на</b> C++");<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, функция</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>show_string</i> трактует 
+  параметр символьной строки как массив:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">void show_string(char 
+    string[])</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Так как 
+  символ NULL указывает конец строки, функция не требует параметр, который задает 
+  количество элементов в массиве. Вместо этого функция может определить последний 
+  элемент, просто найдя в массиве символ NULL.</font></p>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете, функции C++ часто используют символ NULL для определения конца строки. 
+  Следующая программа STR_LEN.CPP создает функцию с именем</font> <font size="3" face="Times New Roman, Times, serif"><i>string_length,</i> 
+  которая ищет символ NULL в строке для определения количества символов, содержащихся 
+  в строке. Далее функция использует оператор</font> <font size="3" face="Times New Roman, Times, serif"><i>return</i> 
+  для возврата длины строки вызвавшей функции. Программа передает несколько различных 
+  символьных строк в функцию, отображая длину каждой из них на экране:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">int string_length(char 
+    string[]) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int<b> </b>i;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; string[] != '\0'; i++); // Ничего не делать, но перейти к <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    следующему символу </font><font face="Times New Roman, Times, serif" size="3">return(i); 
+    Длина строки <br>
+    }</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[] = "Учимся программировать<b> на</b> языке C++";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    lesson[] = "Символьные строки";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Строка</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; title &lt;&lt; " содержит</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; string_length(title) &lt;&lt; " символов"<b> &lt;&lt; endl;<br>
+    </b></font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Строка</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; lesson &lt;&lt; " содержит</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; string_length(lesson) &lt;&lt; " символов"</font> <font size="3" face="Times New Roman, Times, serif">&lt;&lt; 
+    endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+  </blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как видите, 
+  функция запускается с первого символа строки (элемент 0) и затем исследует каждый 
+  элемент до тех пор, пока не встретит NULL. Рассматривая программы на C++, вы 
+  встретите целый ряд функций, которые подобным образом просматривают символьные 
+  строки в поисках символа <b>NULL.</b></font></p>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ПРЕИМУЩЕСТВА ТОГО, 
+  ЧТО NULL ПРЕДСТАВЛЯЕТ СОБОЙ ASCII 0</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете, символ NULL представляет собой символ ASCII 0. В уроке 7 вы изучали, 
+  что C++ использует значение 0, чтобы представлять ложь. Таким образом, поскольку 
+  символ NULL равен 0, ваши программы могут упростить многие операции цикла. Например, 
+  многие функции просматривают символьные строки символ за символом в поиске NULL. 
+  Следующий цикл</font> <font size="3" face="Times New Roman, Times, serif"><i>for</i> 
+  иллюстрирует, как программа может искать NULL в строке:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">for (index = 0; string[index] 
+    != NULL; index++)</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Поскольку 
+  символ NULL равен 0, многие программы упрощают циклы, которые ищут NULL, как 
+  показано ниже:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">for (index = 0; string[index]; 
+    index++);</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">В данном 
+  случае пока символ, содержащийся в</font> <font size="3" face="Times New Roman, Times, serif"><i>string[index]</i> 
+  не NULL (0 или ложь), цикл продолжается.</font></p>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ СТРОКОВЫХ 
+  ФУНКЦИЙ БИБЛИОТЕКИ ЭТАПА ВЫПОЛНЕНИЯ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Из урока 
+  11 вы узнали, что большинство компиляторов C++ обеспечивает обширный набор функций, 
+  называемых библиотекой этапа выполнения. Рассматривая библиотеку этапа выполнения, 
+  вы обнаружите, что она содержат</font> <font face="Times New Roman, Times, serif" size="3">много 
+  разных функций, манипулирующих строками. Например, функция strupr преобразует 
+  символьную строку в строку верхнего регистра. Подобно этому, функция</font> 
+  <font size="3" face="Times New Roman, Times, serif"><i>strlen</i> возвращает 
+  количество символов в строке. Большинство библиотек этапа выполнения обеспечивают 
+  даже функции, которые позволяют вам просматривать строки в поисках определенного 
+  символа. Например, следующая программа STRUPR.CPP иллюстрирует использование 
+  функций</font> <font size="3" face="Times New Roman, Times, serif"><i>strupr 
+  и strlwr</i> библиотеки этапа выполнения:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;string.h&gt; 
+    // Содержит прототипы<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    функций strupr и strlwr</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) <br>
+    {<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[] = "Учимся программировать на языке C++";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    lesson[] = "Символьные строки";<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Верхний регистр:</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; strupr(title) &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Нижний регистр:</font> <font size="3" face="Times New Roman, Times, serif">" 
+    &lt;&lt; strlwr(lesson) &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+  </blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Использование библиотечных 
+  функций, манипулирующих строками может сохранить вам время, требуемое для программирования. 
+  Выберите время напечатать копию заголовочного файла STRING.H для определения 
+  функций манипулирования строками, которые поддерживаются библиотекой вашего 
+  компилятора.</font></p>
+<BLOCKQUOTE>
+  <P><font face="Times New Roman"><B><I>Вы должны играть по правилам</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Как вы уже знаете, 
+    большинство функций, которые манипулируют строками, полагаются на символ NULL 
+    как на конец строки. Если ваши программы присваивают строки символам, то следует 
+    убедиться, что они добавляют символ NULL в качестве последнего символа строки. 
+    Если ваши программы не используют NULL соответствующим образом, то функции, 
+    которые полагаются на символ NULL, будут сбиваться.</font></B></I></P>
+</BLOCKQUOTE>
+<BLOCKQUOTE> 
+  <h2 align="center"><I><B><font face="Arial, Helvetica, sans-serif"></font></B></I><font face="Arial, Helvetica, sans-serif">ЧТО 
+    ВАМ НЕОБХОДИМО ЗНАТЬ</font></h2>
+</BLOCKQUOTE>
+<P><font face="Times New Roman, Times, serif" size="3">Большинство программ на 
+  C++ широко использует символьные строки. Из этого урока вы узнали, как работать 
+  со строками. Из урока 18 вы узнаете, как сохранять связанную информацию различных 
+  типов в переменных, представляющих структуры C++. Используя структуру, вы можете 
+  хранить всю информацию о служащем, например его фамилию, возраст, оклад и номер 
+  телефона, в одной переменной. Однако, прежде чем приступить к уроку 18, убедитесь, 
+  что освоили следующие основные концепции:</font></P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><font face="Times New Roman, Times, serif" size="3">Символьная строка 
+      представляет собой массив символов, завершающийся 0 (символом NULL).</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Вы создаете символьную 
+      строку, объявляя массив типа</font> <font size="3" face="Times New Roman, Times, serif"><i>char.</i></font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Ваша программа ответственна 
+      за размещение символа NULL за последним символом строки.</font></LI>
+    <LI><font face="Times New Roman"><font size="3" face="Times New Roman, Times, serif"> 
+      Если программа использует строковые константы, заключенные в</font></font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3">двойные кавычки, компилятор 
+      C++ автоматически добавляет символ NULL.</font></LI>
+    <LI><font size="3" face="Times New Roman, Times, serif"> C++ позволяет вам 
+      инициализировать строки при объявлении, указывая требуемые символы внутри 
+      двойных кавычек.</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Большинство компиляторов 
+      C++ в своих библиотеках этапа выполнения обеспечивают широкий набор функций 
+      для манипулирования строками.<b></b></font></LI>
+  </OL>
+  <CENTER>
+    <A HREF="Урок 16.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+    урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 18.html">Следующий 
+    урок</A> </FONT> 
+  </CENTER>
+</BLOCKQUOTE>
+</body>
+</html>

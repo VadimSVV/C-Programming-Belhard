@@ -1,0 +1,456 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 33</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Дополнительные возможности 
+  <I>cin</I> и cout</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">На 
+  всем протяжении этой книги вы использовали выходной поток</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  для вывода информации на экран дисплея. Аналогично, многие из ваших программ 
+  использовали входной поток</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  для чтения информации с клавиатуры. Оказывается,</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> представляют 
+  собой классовые объекты, определяемые и создаваемые с помощью заголовочного 
+  файла</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h.</I> 
+  Как объекты</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> поддерживают 
+  различные операторы и операции. Из данного урока вы узнаете, как расширить возможности 
+  ввода и вывода, используя функции, встроенные в классы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.</I> К 
+  концу этого урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Заголовочный файл</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h</I> содержит 
+    определения классов, которые вы можете проанализировать, чтобы лучше понять 
+    потоковый ввод/вывод.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя метод</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.width,</I> ваши 
+    программы могут управлять шириной вывода.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя метод</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.fill,</I> ваши 
+    программы могут заменить пустые выходные символы (табуляцию и пробелы) некоторым 
+    определенным символом.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для управления количеством 
+    цифр, выводимых выходным потоком <I>cout для</I> значений с плавающей точкой, 
+    ваши программы могут использовать метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.setprecision.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Для вывода и ввода 
+    по одному символу за один раз ваши программы могут использовать потоковые 
+    методы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put</I> 
+    и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя метод</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline,</I> ваши 
+    программы могут вводить целую строку за один раз.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Почти любая создаваемая 
+  вами на C++ программа будет использовать <I>cout или cin</I> для выполнения 
+  операций В/В (ввода/вывода). Выберите время для экспериментов с программами 
+  из этого урока.</FONT></P>
+<H2 ALIGN="CENTER"> <FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВНУТРИ</FONT> 
+  <FONT FACE="Arial, Helvetica, sans-serif"><I>iostream.h</I></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Начиная 
+  с урока 1, каждая написанная вами на C++ программа включала заголовочный файл</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h.</I> Этот 
+  файл содержит определения, позволяющие вашим программам использовать</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> для выполнения 
+  вывода и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  для выполнения ввода. Более точно, этот файл определяет классы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>istream</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ostream</I> 
+  (входной поток и выходной поток), a <I>cin</I> и соut являются переменными (объектами) 
+  этих классов. Выберите время, чтобы напечатать файл</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h.</I> 
+  Он находится в подкаталоге INCLUDE. Определения в этом файле достаточно сложны. 
+  Однако если вы пройдете по файлу медленно, то обнаружите, что большинство определений 
+  являются просто определениями классов и констант. Внутри файла вы найдете объявления 
+  переменных</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.</I></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ</FONT> 
+  <FONT FACE="Arial, Helvetica, sans-serif"><I>cout</I></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете,</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  представляет собой класс, который содержит несколько разных методов. Следующие 
+  программы иллюстрируют использование некоторых методов, которые ваши программы 
+  могут применять для форматирования вывода. Из урока 3 вы узнали, что манипулятор</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setw</I> позволяет вашим 
+  программам указать минимальное количество символов, которое может занять следующее 
+  выходное значение:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iomanip.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Мое любимое число"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw(3) &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Мое любимое число"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw (4) &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Мое любимое число"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw (5) &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Мое любимое число"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw(6) &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Подобным 
+  образом метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.width</I> 
+  позволяет вам указать минимальное количество символов, которое будет использовать 
+  сои/для вывода следующего значения. Следующая программа COUTWIDT.CPP использует 
+  функцию <I>cout.width</I> для выполнения работы, аналогичной той, которую выполняет 
+  <I>setw,</I> что и показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iomanip.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 3; i &lt; 7; i++) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Мое любимое число";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout. 
+    width (i);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите вашу программу, на экране дисплея </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">появится 
+  следующий вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; COUTWIDT &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Мое любимое число1001 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Мое любимое число 
+    1001 </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Мое любимое число 
+    1001 </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Мое любимое число 
+    1001</FONT></B></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Подобно манипулятору</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setw,</I> ширина, выбираемая 
+  с помощью функции <I>cout.width,</I> действует только для следующего выходного 
+  значения.</FONT></P>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman">Использование символа-заполнителя</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  используете манипулятор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setw</I> 
+  или функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.width 
+  для</I> управления шириной вывода, cout будет помещать пробелы до (или после 
+  для выровненных влево) значений, как это и требуется. В зависимости от назначения 
+  вашей программы вы, возможно, захотите использовать символ, отличный от пробела. 
+  Предположим, например, что ваша</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">программа 
+  создает такую таблицу:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Таблица 
+    информации<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Профиль компании................................................ 
+    10</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">Доходы и убытки компании...................................11<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Члены правления 
+    компании..................................13</FONT> </FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном случае вывод предваряет 
+  номера страниц точками. Функция <I>cout.fill</I> позволяет вам указать символ, 
+  который</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  будет использовать для заполнения пустого пространства. Следующая программа 
+  COUTFILL.CPP создает таблицу, подобную приведенной выше:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iomanip.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Таблица информации"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout.fill 
+    (' . ');<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Профиль компании"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw(20) &lt;&lt; 10 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Доходы и убытки компании"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw(12) &lt;&lt; 11 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Члены правления компании"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    setw(14) &lt;&lt; 13 &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы однажды выбрали 
+  символ-заполнитель с помощью</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.fill,</I> 
+  он будет оставаться действительным, пока вы не измените его повторным вызовом</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.fill.</I></FONT></P>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman">Управление цифрами значений с 
+  плавающей точкой</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  используете</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout 
+  для</I> вывода значения с плавающей точкой, то обычно не можете сделать каких-либо 
+  предположений о том, сколько цифр будет выводить</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout 
+  no</I> умолчанию. Однако, используя манипулятор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setprecision,</I> 
+  вы можете указать количество требуемых цифр- Следующая программа SETPREC.CPP 
+  использует манипулятор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setprecision</I> 
+  для управления количеством цифр, которые появятся справа от десятичной точки:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> #include &lt;iomanip.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    value = 1.23456;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 1; i &lt; 6; i++) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; setprecision(i) &lt;&lt; value &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt;SETPREC &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">1.2</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">1.23</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">1.235</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">1.2346</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">1.23456</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  используете манипулятор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setprecision</I> 
+  для изменения точности, ваша установка действует до тех пор, пока программа 
+  повторно не использует</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setprecision.</I></FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ВЫВОД И ВВОД ОДНОГО 
+  СИМВОЛА ЗА ОДИН РАЗ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости 
+  от назначения вашей программы вам, возможно, потребуется выводить символы на 
+  дисплей или читать с клавиатуры по одному символу за один раз. Для вывода одного 
+  символа за один раз ваши программы могут использовать функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put.</I> 
+  Следующая программа COUTPUT.CPP использует эту функцию для вывода на экран сообщения 
+  <I>Учимся программировать на языке C++!</I> по одному символу за раз:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    string[] = "Учимся программировать на языке C++!";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; string[i]; i++) cout.put(string[i]) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Библиотека этапа выполнения 
+  предоставляет функцию с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>toupper, 
+  </I>которая возвращает заглавный эквивалент строчной буквы. Следующая программа 
+  COUTUPPR.CPP использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>toupper</I> 
+  для преобразования символа в верхний регистр, а затем выводит эту букву с помощью</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put.</I></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;ctype.h&gt; 
+    // прототип toupper</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    string[] = "C++ language";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; string[i]; i++) cout.put(toupper(string[i]));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl &lt;&lt; "Результирующая строка: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    string &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+  вы откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод*:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; COUTUPPR &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ LANGUAGE</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Результирующая строка: 
+    C++ language</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>* К 
+  сожалению, функция toupper применима только к английским буквам. Прим. перев.</I></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТЕНИЕ 
+  ВВОДА С КЛАВИАТУРЫ ПО ОДНОМУ СИМВОЛУ ЗА РАЗ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Точно так 
+  же, как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  предоставляет функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put 
+  для</I> вывода символа, <I>cin</I> предоставляет функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get,</I> 
+  которая позволяет вам читать один символ данных. Чтобы воспользоваться функцией</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get,</I> вы просто 
+  присваиваете переменной возвращаемый этой функцией символ, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">letter = cin.get();</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа CIN_GET.CPP выводит сообщение, в ответ на которое вам необходимо ввести 
+  Y или N. Затем она повторяет в цикле вызов cin.get для чтения символов, пока 
+  не получит Y или N:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;ctype.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Хотите продолжать? (Y/N): ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;do 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letter 
+    = cin.get();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    Преобразовать к верхнему регистру<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letter 
+    = toupper(letter);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    while ((letter != 'Y') &amp;&amp; (letter != 'N'));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl &lt;&lt; "Вы ввели "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    letter &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТЕНИЕ 
+  С КЛАВИАТУРЫ ЦЕЛОЙ СТРОКИ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, при использовании</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  для выполнения ввода с клавиатуры,</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  использует пустые символы, такие как пробел, табуляция или возврат каретки, 
+  для определения, где заканчивается одно значение и начинается другое. Во многих 
+  случаях вы захотите, чтобы ваши программы считывали целую строку данных в символьную 
+  строку. Для этого программы могут использовать функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline.</I> 
+  Для использования</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline</I> 
+  вам необходимо указать символьную строку, в которую будут помещаться символы, 
+  а также размер строки, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">cin.getline(string, 64);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get</I> читает символы 
+  с клавиатуры, она не будет читать символов больше, чем может вместить строка. 
+  Удобным способом определить размер массива является использование оператора 
+  C++ <I>sizeof,</I> как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3">сin.getline(string, 
+    sizeof(string));</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если позже 
+  вы измените размер массива, то вам не нужно будет искать и изменять каждый оператор 
+  с</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get,</I> 
+  встречающийся в вашей программе. Вместо этого оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>sizeof</I>' 
+  будет использовать корректный размер массива. Следующая программа GETLINE.CPP 
+  использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline</I> 
+  для чтения с клавиатуры строки текста:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    string[128];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите строку текста и нажмите Enter" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin.getline(string, 
+    sizeof(string));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы ввели: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    string &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы читаете символы 
+  с клавиатуры, то, возможно, вам понадобится читать символы вплоть до и включая 
+  определенный символ. Когда такой символ будет прочитан, возможно, вы захотите 
+  завершить операцию ввода. Для выполнения подобной операции ваша программа может 
+  передать искомый символ в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline.</I> 
+  Например, следующий вызов заставляет функцию <I>cin.getline</I> читать строку 
+  текста, пока не встретится возврат каретки, или пока не будут прочитаны 64 символа, 
+  или пока не встретится буква Я:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">cin.getline(string, 64, 
+    'Я');</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа UNTIL_Z.CPP использует</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline</I> 
+  для чтения строки текста или символов вплоть до появления буквы Я (включая и 
+  эту букву):</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    string[128];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите строку текста и нажмите Enter" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin.getline(string, 
+    sizeof(string), <I>'Я');<BR>
+    </I></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы ввели: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    string &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Откомпилируйте 
+  и запустите эту программу. Экспериментируйте с различными строками текста. Некоторые 
+  из них начинайте с буквы Я, некоторые заканчивайте буквой Я, а некоторые пусть 
+  вообще не содержат букву Я.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Каждая 
+  созданная вами на C++ программа будет, вероятно, использовать</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin 
+  </I>или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout для</I> 
+  выполнения операций ввода и вывода. Этот урок посвящен некоторым манипуляторам 
+  В/В и функциям, которые вы можете использовать с потоками</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.</I> По 
+  мере усложнения ваших программ они часто будут сохранять информацию в файлах. 
+  Из урока 34 вы узнаете, как в C++ выполнять операции файлового ввода и вывода. 
+  Прежде чем приступить к изучению урока 34, убедитесь, что вы освоили следующие 
+  основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin</I> и</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> являются 
+      объектами (переменными) классов i<I>stream</I> и <I>ostream,</I> которые 
+      определены в заголовочном файле</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h.</I> 
+      А если так, они предоставляют функции, которые ваши программы могут вызывать 
+      для решения определенных задач.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.width</I> 
+      позволяет вашим программам указать минимальное количество символов, которые 
+      будет использовать следующее выходное значение.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout. 
+      fill</I> позволяет вашим программам указать символ, который</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+      будет использовать для заполнения пустого пространства устанавливаемого 
+      с помощью</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.width</I> 
+      или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setw.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Манипулятор</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>setprecision</I> 
+      позволяет вашим программам управлять количеством цифр, выводимых справа 
+      от десятичной точки для значений с плавающей точкой.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.get</I> 
+      и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put</I> 
+      позволяют вашим программам вводить или выводить один символ.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline</I> 
+      позволяет вашим программам читать строку текста с клавиатуры.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 32.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 34.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

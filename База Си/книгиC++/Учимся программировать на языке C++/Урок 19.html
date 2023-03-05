@@ -1,0 +1,256 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">Урок 19</font></h2>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif"> Объединения</font></h2>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Из урока 
+  18 вы узнали, как группировать связанную информацию в одной переменной с помощью 
+  структур C++. По мере усложнения вашим программам могут потребоваться разные 
+  способы просмотра части информации. Кроме того, программе может потребоваться 
+  работать с двумя или несколькими значениями, используя при этом только одно 
+  значение в каждый момент времени. В таких случаях для хранения данных ваши программы 
+  могут использовать <i>объединения.</i> В данном уроке вы изучите, как создавать 
+  и использовать объединения для хранения информации. Как вы узнаете, объединения 
+  очень похожи на структуры, описанные в уроке 18. Прежде чем вы закончите этот 
+  урок, вы освоите следующие основные концепции:</font></p>
+<ul>
+  <li><font face="Times New Roman, Times, serif" size="3">Объединения C++ очень 
+    похожи на структуры, за исключением того, как C++ хранит их в памяти; кроме 
+    того, объединение может хранить значение только для одного элемента в каждый 
+    момент времени.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Объединение представляет 
+    собой структуру данных, подобную структуре C++, и состоит из частей, называемых 
+    элементами.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Объединение определяет 
+    шаблон, с помощью которого программы далее объявляют переменные.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Для обращения к определенному 
+    элементу объединения ваши программы используют оператор C++ точку.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Чтобы изменить значения 
+    элемента объединения внутри функции, ваша программа должна передать переменную 
+    объединения в функцию с помощью адреса.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Анонимное объединение 
+    представляет собой объединение, у которого нет имени (тэга).</font></li>
+</ul>
+<p><font face="Times New Roman, Times, serif" size="3">Как вы узнаете, объединения 
+  очень похожи на структуры C++, однако способ, с помощью которого C++ хранит 
+  объединения, отличается от способа, с помощью которого C++ хранит структуры.</font></p>
+<h2 align="center"> <font face="Arial, Helvetica, sans-serif">КАК C++ ХРАНИТ ОБЪЕДИНЕНИЯ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Внутри 
+  ваших программ объединения C++ очень похожи на структуры. Например, следующая 
+  структура определяет объединение с именем</font> <font face="Times New Roman, Times, serif" size="3"><i>distance,</i> 
+  содержащее два элемента:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">union distance </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;int 
+    miles;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;long 
+    meters;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">};</font></p>
+</blockquote>
+<b></b> 
+<p><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Как 
+  и в случае со структурой, описание объединения не распределяет память. Вместо 
+  этого описание предоставляет шаблон для будущего объявления переменных. Чтобы 
+  объявить переменную объединения, вы можете использовать любой из следующих форматов:</font></font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">union distance </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{ <br>
+    &nbsp;&nbsp;&nbsp;union distance </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+    miles; int miles;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long 
+    meters; long meters;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;} 
+    japan, germany, franee; <br>
+    };<br>
+    </font><font face="Times New Roman, Times, serif" size="3">distance japan, 
+    germany, franee;</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, данное объединение 
+  содержит два элемента:</font> <font face="Times New Roman, Times, serif" size="3"><i>miles</i> 
+  и</font> <font face="Times New Roman, Times, serif" size="3"><i>meters. </i>Эти 
+  объявления создают переменные, которые позволяют вам хранить расстояния до указанных 
+  стран. Как и для структуры, ваша программа может присвоить значение любому элементу. 
+  Однако в отличие от структуры значение может быть присвоено только одному элементу 
+  в каждый</font> <font face="Times New Roman, Times, serif" size="3">момент времени. 
+  Когда вы объявляете объединение, компилятор C++ распределяет память для хранения 
+  самого большого элемента объединения. В случае объединения</font> <font face="Times New Roman, Times, serif" size="3"><i>distance</i> 
+  компилятор распределяет достаточно памяти для хранения значения типа</font> 
+  <font face="Times New Roman, Times, serif" size="3"><i>long,</i> как показано 
+  на рис. 19.</font></p>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3"><img src="p19.gif" width="455" height="234"></font></p>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3"><b>Рис. 
+  19.</b> C++ распределяет память, достаточную для хранения только самого большого 
+  элемента объединения.</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Предположим, 
+  что ваша программа присваивает значение элементу</font> <font face="Times New Roman, Times, serif" size="3"><i>miles, 
+  </i>как показано ниже:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">japan.miles = 12123;</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Если далее 
+  ваша программа присваивает значение элементу</font> <font face="Times New Roman, Times, serif" size="3"><i>meters,</i> 
+  значение, присвоенное элементу</font> <font face="Times New Roman, Times, serif" size="3"><i>miles,</i> 
+  теряется.</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Следующая 
+  программа USEUNION.CPP иллюстрирует использование объединения</font> <font face="Times New Roman, Times, serif" size="3"><i>distance.</i> 
+  Сначала программа присваивает значение элементу</font></p>
+<p align="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">miles 
+  и выводит это значение. Затем программа присваивает значение элементу</font> 
+  <font face="Times New Roman, Times, serif" size="3"><i>meters.</i> При этом 
+  значение элемента</font> <font face="Times New Roman, Times, serif" size="3"><i>miles</i> 
+  теряется:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;union distance</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int miles;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long meters;<br>
+    &nbsp;&nbsp;&nbsp;} walk;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;walk.miles 
+    = 5;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Пройденное расстояние в милях</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; walk.miles &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;walk.meters = 10000;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Пройденное расстояние в метрах</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; walk.meters &lt;&lt; endl;<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, программа обращается 
+  к элементам объединения с помощью точки, аналогичная запись использовалась при 
+  обращении к элементам структуры в уроке 18.</font></p>
+<BLOCKQUOTE>
+  <P><font face="Times New Roman"><B><I>Объединение хранит значение только одного 
+    элемента в каждый момент времени</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Объединение представляет 
+    собой структуру данных, которая, подобно структуре C++, позволяет вашим программам 
+    хранить связанные части информации внутри одной переменной. Однако в отличие 
+    от структуры объединение хранит значение только одного элемента в каждый момент 
+    времени. Другими словами, когда вы присваиваете значение элементу объединения, 
+    вы перезаписываете любое предыдущее присваивание.</font></B></I></P>
+  <P> <I><B><font face="Times New Roman, Times, serif" size="3">Объединение определяет 
+    шаблон, с помощью которого ваши программы могут позднее объявлять переменные. 
+    Когда компилятор C++ встречает определение объединения, он распределяет количество 
+    памяти, достаточное для хранения только самого большого элемента объединения.</font></B></I></P>
+</BLOCKQUOTE>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">ПРЕДСТАВЛЕНИЕ ОБ 
+  АНОНИМНЫХ ОБЪЕДИНЕНИЯХ C++</FONT></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Анонимное 
+  объединение представляет собой объединение, у которого нет имени. C++ предоставляет 
+  анонимные объединения, чтобы упростить использование элементов объединений, 
+  предназначенных для экономии памяти или создания псевдонимов для определенного 
+  значения. Например, предположим, что вашей программе требуются две переменные</font> 
+  <font face="Times New Roman, Times, serif" size="3"><i>miles</i> и</font> <font face="Times New Roman, Times, serif" size="3"><i>meters. 
+  </i>Кроме того, предположим, что программа использует только одну из них каждый 
+  данный момент времени. В этом случае программа могла бы использовать элементы 
+  объединения, подобного уже обсуждавшемуся объединению</font> <font face="Times New Roman, Times, serif" size="3"><i>distance, 
+  а</i> именно</font> <font face="Times New Roman, Times, serif" size="3"><i>name.miles</i> 
+  и</font> <font face="Times New Roman, Times, serif" size="3"><i>name.meters.</i> 
+  Следующий оператор создает анонимное (безымянное) объединение:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">union </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;int 
+    miles;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;long 
+    meters;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">};</font></p>
+  </blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, объявление 
+  не использует имя объединения и не объявляет переменную объединения. Программа, 
+  в свою очередь, может обращаться к элементам с именами</font> <font face="Times New Roman, Times, serif" size="3"><i>miles</i> 
+  и</font> <font face="Times New Roman, Times, serif" size="3"><i>meters</i> без 
+  помощи точки. Следующая программа ANONYM.CPP создает анонимное объединение, 
+  которое содержит элементы</font> <font face="Times New Roman, Times, serif" size="3"><i>miles</i> 
+  и</font> <font face="Times New Roman, Times, serif" size="3"><i>meters.</i> 
+  Обратите внимание, что программа трактует элементы как обычные переменные. Однако 
+  различие между элементами и обычными переменными заключается в том, что, когда 
+  вы присваиваете значение любому из этих элементов, значение другого элемента 
+  теряется:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;union 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+    miles;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long 
+    meters;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;};</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;miles 
+    = 10000;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Значение в милях</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; miles &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;meters 
+    = 150000;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Значение в метрах</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; meters &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+</blockquote>
+<p><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Как 
+  видите, с помощью анонимного объединения, программа может сэкономить память, 
+  не используя имя объединения и точку для обращения к значениям элементов.</font></font></p>
+<BLOCKQUOTE>
+  <P><font face="Arial, Helvetica, sans-serif"><B><I>Анонимные объединения позволяют 
+    вашим программам экономить пространство</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Анонимное объединение 
+    представляет собой безымянное объединение. Анонимные объединения обеспечивают 
+    вашим программам способ экономии памяти, и при этом можно не использовать 
+    имя объединения и точку. Следующие олераторы определяют анонимное объединение, 
+    способное хранить две символьные строки:</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">union </font></B></I></P>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">{<br>
+      &nbsp;&nbsp;&nbsp;char short_name[13];<br>
+      &nbsp;&nbsp;&nbsp;char long_name[255];<br>
+      };</font></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<h2 align="center"><font face="Times New Roman"><font face="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</font></font></h2>
+<P><font face="Times New Roman, Times, serif" size="3">Из этого урока вы узнали, 
+  как создать объединение внутри вашей программы. Вы уже поняли, что формат объединения 
+  подобен формату структуры. Однако способ, с помощью которого C++ хранит объединения, 
+  очень отличается от способа хранения структуры. Из урока 10 вы впервые узнали, 
+  что для того, чтобы функция изменила параметр, вашей программе следует передать 
+  этот параметр в функцию с помощью указателя (или адреса памяти). Начиная с десятого 
+  урока, ваши программы использовали указатели для массивов и символьных строк. 
+  В уроке 20 вы рассмотрите операции с указателями C++ с другой стороны. До изучения 
+  урока 20 убедитесь, что вы освоили следующее:</font></P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><font face="Times New Roman, Times, serif" size="3">Когда вы объявляете 
+      объединение, компилятор C++ распределяет память, достаточную для хранения 
+      только самого большого элемента объединения.</font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Описание 
+      объединения не распределяет память, вместо этого оно обеспечивает шаблон, 
+      с помощью которого программы могут позднее объявлять переменные.</font></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Программы 
+      обращаются к элементам объединения, используя точку. Когда ваша программа 
+      присваивает значение элементу объединения, то значение, присвоенное, возможно, 
+      ранее другому элементу, теряется.</font></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Анонимное 
+      объединение представляет собой объединение, у которого нет имени. Когда 
+      программа объявляет анонимное объединение, она может использовать элементы 
+      такого объединения подобно любым другим переменным без точки.</font></font></LI>
+  </OL>
+  <CENTER>
+    <A HREF="Урок 18.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+    урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 20.html">Следующий 
+    урок</A> </FONT> 
+  </CENTER>
+</BLOCKQUOTE>
+</body>
+</html>

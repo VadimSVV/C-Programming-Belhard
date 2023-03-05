@@ -1,0 +1,459 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MICROSOFT OFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 30</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Использование шаблонов 
+  классов</FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  29 вы узнали, как в C++ использовать шаблоны функций для создания общих, или 
+  типонезависимых, функций. Определяя шаблоны функций вы заставляете компилятор 
+  C++ создавать в случае необходимости функции, которые отличаются типом возвращаемого 
+  значения или типами параметров. Если возникает необходимость создавать подобные 
+  функции, отличающиеся только используемыми типами, то может возникнуть необходимость 
+  и создания общих классов. А если так, то ваши программы могут определять шаблоны 
+  классов. В этом уроке рассмотрены действия вашей программы, необходимые для 
+  объявления и дальнейшего использования шаблонов классов. К концу данного урока 
+  вы освоите следующие основные концепции:</FONT></P>
+</FONT> 
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя 
+    ключевое слово template и символы типов (например, Т, T1 и Т2) ваши программы 
+    могут создать шаблон класса — определение шаблона класса может использовать 
+    эти символы для объявления элементов данных, указания типов параметров и возвращаемого 
+    значения функций-элементов и т.д.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    создания объектов класса с использованием шаблонов ваши программы просто ссылаются 
+    на имя класса, за которым внутри угловых скобок следуют типы (например, &lt;int, 
+    float&gt;), каждому из которых компилятор назначает символы типов и имя переменной.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+    у класса есть конструктор, с помощью которого вы инициализируете элементы 
+    данных, вы можете вызвать этот конструктор при создании объекта с использованием 
+    шаблона, например class_name&lt;int,float&gt;values(200);.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+    компилятор C++ встречает объявление объекта, он создает класс из шаблона, 
+    используя соответствующие типы.</FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  и в случае с шаблонами функций, шаблоны классов на первый взгляд могут показаться 
+  достаточно сложными, однако если вы хоть раз создали и использовали пару шаблонов 
+  классов, то обнаружили, что дело это вполне простое.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОЗДАНИЕ ШАБЛОНА 
+  КЛАССА</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предположим, 
+  к примеру, вы создаете класс массива, в котором есть методы для вычисления суммы 
+  и среднего значения хранимых в массиве чисел. Предположим, что вы работаете 
+  с массивом типа int, и ваш класс мог бы выглядеть так:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class array </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array(int 
+    size);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    sum(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    average_value(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_array(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    add_value(int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    *data;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа I_ARRAY.CPP использует класс array ддя работы со значениями типа int.</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;stdlib.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class array </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array(int 
+    size);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    sum(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    average_value(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_array(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    add_value(int) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    *data;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">array::array(int size) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;data 
+    = new int [size];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (data == NULL) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Недостаточно памяти - программа завершается " &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(l);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array:: 
+    size = size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array::index 
+    = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">long array::sum(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    sum = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) sum += data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(sum);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int array::average_value(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    sum = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) sum += data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return 
+    (sum / index);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void array::show_array(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) cout &lt;&lt; data[i] &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int array::add_value(int 
+    value) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (index == size) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">return(-1); 
+    // массив полон <BR>
+    &nbsp;&nbsp;&nbsp;else</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[index] 
+    = value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index++;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0); 
+    // успешно <BR>
+    &nbsp;&nbsp;&nbsp;} <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"></FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array 
+    numbers (100); // массив из 100 эл-тов <BR>
+    &nbsp;&nbsp;&nbsp;int i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 50; i++) numbers.add_value(i);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;numbers.show_array();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Сумма чисел равна " &lt;&lt; numbers.sum () &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Среднее значение равно " &lt;&lt; numbers.average_value() &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, программа распределяет 100 элементов массива, а затем заносит в массив 
+  50 значений с помощью метода add_value. В классе array переменная index отслеживает 
+  количество элементов, хранимых в данный момент в массиве. Если пользователь 
+  пытается добавить больше элементов, чем может вместить массив, функция add_value 
+  возвращает ошибку. Как видите, функция average_value использует переменную index 
+  для определения среднего значения массива. Программа запрашивает память для 
+  массива, используя оператор new, который подробно рассматривается в уроке 31.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Шаблоны 
+    классов</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере того как 
+    количество создаваемых вами классов растет, вы обнаруживаете, что некоторый 
+    класс, созданный для одной программы (или, возможно, для этой), очень похож 
+    на требующийся вам сейчас. Во многих случаях классы могут отличаться только 
+    типами. Другими словами, один класс работает с целочисленными значениями, 
+    в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">то время как 
+    требующийся вам сейчас должен работать со значениями типа. float. Чтобы увеличить 
+    вероятность повторного использования существующего кода, C++ позволяет вашим 
+    программам определять шаблоны классов. Если сформулировать кратко, то шаблон 
+    класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">определяет 
+    типонезависимый класс, который в дальнейшем служит для создания объектов требуемых 
+    типов. Если компилятор C++ встречает объявление объекта, основанное на шаблоне 
+    класса, то для построения класса требуемого типа он будет использовать типы, 
+    указанные при объявлении. Позволяя быстро создавать классы, отличающиеся только 
+    типом, шаблоны классов сокращают объем программирования, что, в свою очередь, 
+    экономит ваше время.</FONT></B></I></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Пойдем 
+  дальше. Теперь предположим, что вашей программе необходимо работать с массивом 
+  значений с плавающей точкой, кроме того, что она работает с целочисленным массивом. 
+  Один из способов обеспечить поддержку массивов различных типов состоит в создании 
+  разных классов. С другой стороны, используя шаблоны классов, вы можете избавиться 
+  от необходимости дублировать классы. Ниже представлен шаблон класса, который 
+  создает общий класс array:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; class array </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array(int 
+    size);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 
+    sum (void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T 
+    average_value(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_array(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    add_value(T);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T 
+    *data;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Этот 
+  шаблон определяет символы типов T и T1. В случае массива целочисленных значений 
+  Т будет соответствовать int, а T1 — long. Аналогичным образом для массива значений 
+  с плавающей точкой значения Т и Т1 равны float. Теперь потратьте время, чтобы 
+  убедиться, что вы поняли, как компилятор С++ будет подставлять указанные вами 
+  типы вместо символов Т и Т1.</FONT></FONT></P>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее, 
+  перед каждой функцией класса вы должны указать такую же запись со словом template. 
+  Кроме того, сразу же после имени класса вы должны указать типы класса, например 
+  array &lt;T, T1&gt;::average_value. Следующий оператор иллюстрирует определение 
+  функции average_value для этого класса:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class 
+    Т, class T1&gt; Т array&lt;T, T1&gt;::average_value(void) </FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 sum 
+    = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;</FONT> <BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; index; i++) sum += data[i] ;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return 
+    (sum / index);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT><FONT FACE="Times New Roman"> 
+    </FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">После 
+  создания шаблона вы можете создавать класс требуемого типа, указывая имя класса, 
+  а за ним в угловых скобках необходимые типы, как показано ниже:</FONT></FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>Имя 
+  шаблона //----&gt;</I></B> <U>array</U> <S>&lt;int, long&gt;</S> numbers (100); 
+  <I> <B>&lt;------//Типы шаблона</B></I><BR>
+  </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>array</U> 
+  <S>&lt;float, float&gt;</S> values(200); </FONT></P>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программа 
+  GENARRAY.CPP использует шаблон класса array для создания двух классов, один 
+  из которых работает со значениями типа int, а второй — со значениями типа float.</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;stdlib.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; class array </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array(int 
+    size);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 
+    sum(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T 
+    average_value(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_array(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    add_value(T);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T 
+    *data;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">array&lt;T, 
+    t1&gt;::array(int size) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;data 
+    = new T[size];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (data == NULL)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cerr &lt;&lt; "Недостаточно памяти - программа 
+    завершается" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(l);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array::size 
+    = size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;array::index 
+    = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; Tl array&lt;T, Tl&gt;::sum(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 
+    sum = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) sum += data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(sum);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; T array&lt;T, T1&gt;::average_value(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;Tl 
+    sum =0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) sum += data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return 
+    (sum / index);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; void array&lt;T, T1&gt;::show_array(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 0; i &lt; index; i++) cout &lt;&lt; data[i] &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T, 
+    class T1&gt; int array&lt;T, T1&gt;::add_value(T value)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (index == size)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(-1); 
+    // Массив полон <BR>
+    &nbsp;&nbsp;&nbsp;else </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[index] 
+    = value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index++;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0); 
+    // Успешно <BR>
+    &nbsp;&nbsp;&nbsp;} <BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;// 
+    Массив из 100 элементов <BR>
+    &nbsp;&nbsp;&nbsp;array&lt;int, long&gt; numbers(100)7 <BR>
+    &nbsp;&nbsp;&nbsp;// Массив из 200 элементов <BR>
+    &nbsp;&nbsp;&nbsp;array&lt;float, float&gt; values(200);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 50; i++) numbers.add_value(i);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;numbers.show_array();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Сумма чисел равна " &lt;&lt; numbers.sum () &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Среднее значение равно " &lt;&lt; numbers.average_value() &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 100; i++) values.add_value(i * 100);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;values.show_array();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Сумма чисел равна." &lt;&lt; values.sum() &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Среднее значение равно</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; values.average_value() &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Лучшим 
+  способом понять шаблоны классов будет напечатать две копии этой программы. В 
+  первой копии замените все символы T и Т1 на int и long. A во второй замените 
+  Т и Т1 на float.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Объявление 
+    объектов, основанных на шаблоне класса</FONT></I></B></FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    создания объектов с использованием шаблона класса вы просто должны указать 
+    имя шаблона класса, за которым между левой и правой угловыми скобками укажите 
+    типы, которыми компилятор заменит символы Т, T1, T2 и т. д. Затем ваша программа 
+    должна указать имя объекта (переменной) со значениями параметров, которые 
+    вы хотите передать конструктору класса, как показано ниже:</FONT></B></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">template_class_name&lt;typel, 
+    type2&gt; object_name( parameter1, parameter2);</FONT></B></I></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+    компилятор C++ встречает такое объявление, он создает класс, основанный на 
+    указанных типах. Например, следующий оператор использует шаблон класса array 
+    для создания массива типа char, в котором хранится 100 элементов:</FONT></B></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">array&lt;char, 
+    int&gt; small_numbers(100) ;</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, что шаблоны классов помогут вам избавиться от дублирования 
+  кода программы, если вам необходимы объекты похожих классов, которые отличаются 
+  только типом. Поскольку шаблоны классов могут быть сложными, они могут вас смутить. 
+  Когда вы определяете ваш класс, начните с определения, как будто бы вы создаете 
+  класс для конкретного типа. После того как вы полностью опишете класс, определите 
+  какие элементы необходимо изменить, чтобы работать с объектами различных типов. 
+  Теперь замените типы этих элементов такими символами, как, например, Т, Т1, 
+  Т2 и т.д.</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы, 
+      представленные в данном уроке, использовали оператор C++ new для динамического 
+      (во время выполнения программы) распределения памяти для массива. В уроке 
+      31 вы подробно ознакомитесь с оператором new. Прежде чем перейти к уроку 
+      31, убедитесь, что вы изучили следующее:</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблоны 
+      классов позволяют избавиться от дублирования кода для таких классов, чьи 
+      объекты отличаются только типом их элементов.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      создания шаблона класса предварите определение класса ключевым словом template 
+      и символами типов, например Т и T1.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее 
+      вы должны предварить определение каждой функции класса таким же оператором 
+      с ключевым словом template. Кроме того, укажите типы шаблона между левой 
+      и правой угловыми скобками, а выражение в угловых скобках поместите между 
+      именем класса и оператором разрешения области видимости, например class_name&lt;T,T1&gt;::function_name.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      создания класса с использованием шаблона укажите имя класса и замещающие 
+      значения для типов между левой и правой угловыми скобками, например class_name&lt;int, 
+      long&gt; object.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 29.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 31.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

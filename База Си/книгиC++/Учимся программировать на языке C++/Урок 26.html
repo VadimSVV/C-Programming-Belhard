@@ -1,0 +1,538 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<FONT FACE="Times New Roman"> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 26</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Наследование</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Цель объектно-ориентированного 
+  программирования состоит в повторном использовании созданных вами классов, что 
+  экономит ваше время и силы. Если вы уже создали некоторый класс, то возможны 
+  ситуации, что новому классу нужны многие или даже все особенности уже существующего 
+  класса, и необходимо добавить один или несколько элементов данных или функций. 
+  В таких случаях C++ позволяет вам строить новый объект, используя характеристики 
+  уже существующего объекта. Другими словами, новый объект будет наследовать элементы 
+  существующего класса (называемого базовым классом). Когда вы строите новый класс 
+  из существующего, этот новый класс часто называется производным классом. В этом 
+  уроке впервые вводится наследование классов в C++ . К концу данного урока вы 
+  изучите следующие основные концепции:</FONT></P>
+</FONT> 
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ели 
+    ваши программы используют наследование, то для порождения нового класса необходим 
+    базовый класс, т.е. новый класс наследует элементы базового класса.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    инициализации элементов производного класса ваша программа должна вызвать 
+    конструкторы базового и производного классов.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя 
+    оператор точку, программы могут легко обращаться к элементам базового и производного 
+    классов.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+    дополнение к общим (public) (доступным всем) и частным (private) (доступным 
+    методам класса) элементам C++ предоставляет защищенные (protected) элементы, 
+    которые доступны базовому и производному классам.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    разрешения конфликта имен между элементами базового и производного классов 
+    ваша программа может использовать оператор глобального разрешения, указывая 
+    перед ним имя базового или производного класса.</FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наследование 
+  является фундаментальной концепцией объектно-ориентированного программирования. 
+  Выберите время для экспериментов с программами, представленными в этом уроке. 
+  И вы обнаружите, что реально наследование реализуется очень просто и может сохранить 
+  огромные усилия, затрачиваемые на программирование.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРОСТОЕ НАСЛЕДОВАНИЕ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наследование 
+  представляет собой способность производного класса наследовать характеристики 
+  существующего базового класса. Например, предположим, что у вас есть базовый 
+  класс employee:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, char *, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    position[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее 
+  предположим, что вашей программе требуется класс manager, который добавляет 
+  следующие элементы данных в класс employee:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">float annual_bonus;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">char company_car[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">int stock_options;</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае ваша программа может выбрать два варианта: во-первых, программа может 
+  создать новый класс manager, который дублирует многие элементы класса employee, 
+  или программа может породить класс типа manager из базового класса employee. 
+  Порождая класс manager из существующего класса employee, вы снижаете объем требуемого 
+  программирования и исключаете дублирование кода внутри вашей программы.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для определения 
+  этого класса вы должны указать ключевое слово class, имя manager, следующее 
+  за ним двоеточие и имя employee, как показано ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>Производный класс 
+    //-----&gt; </I></B><U>class manager </U>: <U>public employee {</U> <I><B>&lt;-------// 
+    Базовый класс </B></I></FONT></P>
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3">// Здесь определяются 
+    элементы<BR>
+    };</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ключевое 
+  слово public, которое предваряет имя класса employee, указывает, что общие (public) 
+  элементы класса employee также являются общими и в классе manager. Например, 
+  следующие операторы порождают класс manager.</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class manager : public 
+    employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager(char 
+    *, char *, char *, float, float, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_manager(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    annual_bonus;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    company_car[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    stock_options;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+  вы порождаете класс из базового класса, частные элементы базового класса доступны 
+  производному классу только через интерфейсные функции базового класса. Таким 
+  образом, производный класс не может напрямую обратиться к частным элементам 
+  базового класса, используя оператор точку.</FONT></FONT></P>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа MGR_EMP.CPP иллюстрирует использование </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">наследования 
+  в C++ , создавая класс manager из базового класса employee:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, char *, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [ 64 ];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    position[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, char *position,float salary)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::position, 
+    position);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Имя: " &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Должность: " &lt;&lt; position &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад: $" &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class manager : public 
+    employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager(char 
+    *, char *, char *, float, float, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_manager(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    annual_bonus;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    company_car[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    stock_options;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">manager::manager(char 
+    *name, char *position, char *company_car, float salary, float bonus, int stock_options) 
+    : </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee(name, 
+    position, salary)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(manager::company_car, 
+    company_car) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager::annual_bonus 
+    = bonus ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager::stock_options 
+    = stock_options;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void manager::show_manager(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Машина фирмы: " &lt;&lt; company_car &lt;&lt; endl;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Ежегодная премия: $" &lt;&lt; annual_bonus &lt;&lt; endl;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Фондовый опцион: " &lt;&lt; stock_options &lt;&lt; endl;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker("Джон Дой", "Программист", 35000);<BR>
+    </FONT></FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager 
+    boss("Джейн Дой", "Вице-президент ", "Lexus", 50000.0, 5000, 1000);<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.show_employee() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;boss.show_manager();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, программа определяет базовый класс employee, а затем определяет производный 
+  класс manager. Обратите внимание на конструктор manager. Когда вы порождаете 
+  класс из базового класса, конструктор производного класса должен вызвать конструктор 
+  базового класса. Чтобы вызвать конструктор базового класса, поместите двоеточие 
+  сразу же после конструктора производного класса, а затем укажите имя конструктора 
+  базового класса с требуемыми параметрами:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">manager::manager(char 
+    *name, char *position, char *company_car, float salary, float bonus, int stock_options) 
+    : <BR>
+    </FONT><U><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee(name, 
+    position, salary) </FONT></U><FONT FACE="Times New Roman" SIZE="3">//————————————— 
+    Конструктор базового класса</FONT></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">strcpy(manager::company_car, 
+    company_car);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">manager::annual_bonus 
+    = bonus;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">manager::stock_options 
+    = stock_options;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT><FONT FACE="Times New Roman"> 
+    </FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Также 
+  обратите внимание, что функция show_manager вызывает функцию show_employee, 
+  которая является элементом класса employee. Поскольку класс manager является 
+  производным класса employee, класс manager может обращаться к общим элементам 
+  класса employee, как если бы все эти элементы были определены внутри класса 
+  manager,</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><B>Представление о наследовании</B></I></FONT></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наследование 
+    представляет собой способность производного класса наследовать характеристики 
+    существующего базового класса. Простыми словами это означает, что, если у 
+    вас есть класс, чьи элементы данных или функции-элементы могут быть использованы 
+    новым классом, вы можете построить этот новый класс в терминах существующего 
+    (или базового) класса. Новый класс в свою очередь будет наследовать элементы 
+    (характеристики) существующего класса. Использование наследования для построения 
+    новых классов сэкономит вам значительное время и силы на программирование. 
+    Объектно-ориентированное программирование широко использует наследование, 
+    позволяя вашей программе строить сложные объекты из небольших легко управляемых 
+    объектов.</FONT></B></I></FONT></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Times New Roman">Второй пример</FONT></H3>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предположим, 
+  например, что вы используете следующий базовый класс book внутри существующей 
+  программы:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class book </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book 
+    (char *, char *, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    title[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    author[б 4];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    pages;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее 
+  предположим, что программе требуется создать класс library_card, который будет 
+  добавлять следующие элементы данных в класс book:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char catalog[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">int checked_out; 
+    // 1, если проверена, иначе О</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваша 
+  программа может использовать наследование, чтобы породить класс library _card 
+  из класса book, как показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class library_card : 
+    public book </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;library_card(char 
+    *, char *, int, char *, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_card(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    catalog[64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    checked_out;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа BOOKCARD.CPP порождает класс library_card из клacca book:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class book </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book(char 
+    *, char *, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    title [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    pages;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">book::book(char •title, 
+    char *author, int pages) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(book::title, 
+    title);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(book::author, 
+    author);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book::pages 
+    = pages;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void book::show_book(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Название: " &lt;&lt; title &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Автор: " &lt;&lt; author &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Страниц: " &lt;&lt; pages &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class library_card : 
+    public book </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;library_card(char 
+    *, char *, int, char *, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_card(void) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    catalog[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    checked_out;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">library_card::library_card(char 
+    *title, char *author, int pages, char *catalog, int checked_out) : </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">book(title, 
+    author, pages) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(library_card::catalog, 
+    catalog) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;library_card::checked_out 
+    = checked_out;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 1ibrary_card::show_card(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_book() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Каталог: " &lt;&lt; catalog &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (checked_out) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Статус: проверена" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Статус: 
+    свободна" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;library_card 
+    card( "Учимся программировать на языке C++", "Jamsa", 272, "101СРР", 1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;card.show_card();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  и ранее, обратите внимание, что конструктор library _card вызывает конструктор 
+  класса book для инициализации элементов класса book. Кроме того, обратите внимание 
+  на использование функции-элемента show_book класса book внутри функции show_card. 
+  Поскольку класс library_card наследует методы класса book, функция show_card 
+  может вызвать этот метод (show_book) без помощи оператора точки, как если бы 
+  этот метод был методом класса library _card.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ТАКОЕ ЗАЩИЩЕННЫЕ 
+  ЭЛЕМЕНТЫ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При изучении 
+  определений базовых классов вы можете встретить элементы, объявленные как public, 
+  private и protected (общие, частные и защищенные). Как вы знаете, производный 
+  класс может обращаться к общим элементам базового класса, как будто они определены 
+  в производном классе. С другой стороны, производный класс не может обращаться 
+  к частным элементам базового класса напрямую. Вместо этого для обращения к таким 
+  элементам производный класс должен использовать интерфейсные функции. Защищенные 
+  элементы базового класса занимают промежуточное положение между частными и общими. 
+  Если элемент является защищенным, объекты производного класса могут обращаться 
+  к нему, как будто он является общим. Для оставшейся части вашей программы защищенные 
+  элементы являются как бы частными. Единственный способ, с помощью которого ваши 
+  программы могут обращаться к защищенным элементам, состоит в использовании интерфейсных 
+  функций. Следующее определение класса book использует метку protected, чтобы 
+  позволить классам, производным от класса book, обращаться к элементам title, 
+  author и pages напрямую, используя оператор точку:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class book </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book(char 
+    *, char *, int) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_book(void) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">protected:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    title [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    pages;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+  вы предполагаете, что через некоторое время вам придется породить новые классы 
+  из создаваемого сейчас класса, установите, должны ли будущие производные классы 
+  напрямую обращаться к определенным элементам создаваемого класса, и объявите 
+  такие элементы защищенными, а не частными.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Защищенные 
+    элементы обеспечивают доступ и защиту</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+    вы уже знаете, программа не может обратиться напрямую к частным элементам 
+    класса. Для обращения к частным элементам программа должна использовать интерфейсные 
+    функции, которые управляют доступом к этим элементам. Как вы, вероятно, заметили, 
+    наследование упрощает программирование в том случае, если производные классы 
+    могут обращаться к элементам базового класса с помощью оператора точки. В 
+    таких случаях ваши программы могут использовать защищенные элементы класса. 
+    Производный класс может обращаться к защищенным элементам базового класса 
+    напрямую, используя оператор точку. Однако оставшаяся часть вашей программы 
+    может обращаться к защищенным элементам только с помощью интерфейсных функций 
+    этого класса. Таким образом, защищенные элементы класса находятся между общими 
+    (доступными всей программе) и частными (доступными только самому классу) элементами.</FONT></FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">РАЗРЕШЕНИЕ 
+  КОНФЛИКТА ИМЕН</FONT></FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  порождаете один класс из другого, возможны ситуации, когда имя элемента класса 
+  в производном классе является таким же, как имя элемента в базовом классе. Если 
+  возник такой конфликт, C++ всегда использует элементы производного класса внутри 
+  функций производного класса. Например, предположим, что классы book и library_card 
+  используют элемент price. В случае класса book элемент price соответствует продажной 
+  цене книги, например $22.95. В случае класса library'_card price может включать 
+  библиотечную скидку, например $18.50. Если в вашем исходном тексте не указано 
+  явно (с помощью оператора глобального разрешения), функции класса library_card 
+  будут использовать элементы производного класса {library_card). Если же функциям 
+  класса library_card необходимо обращаться к элементу price базового класса {book), 
+  они должны использовать имя класса book и оператор разрешения, например book::price. 
+  Предположим, что функции show_card необходимо вывести обе цены. Тогда она должна 
+  использовать следующие операторы:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Библиотечная 
+    цена: $" &lt;&lt; price &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Продажная 
+    цена: $" &lt;&lt; book::price &lt;&lt; endl;</FONT></P>
+  </BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, что наследование в C++ позволяет вам строить /порождать) новый 
+  класс из существующего класса. Строя таким способом один класс из другого, вы 
+  уменьшаете объем программирования, что, в свою очередь, экономит ваше время. 
+  Из урока 27 вы узнаете, что C++ позволяет вам порождать класс из двух или нескольких 
+  базовых классов. Использование нескольких базовых классов для порождения класса 
+  представляет собой множественное наследование. До изучения урока 27 убедитесь, 
+  что освоили следующие основные концепции:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наследование 
+      представляет собой способность производить новый класс из существующего 
+      базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Производный 
+      класс — это новый класс, а базовый класс — существующий класс.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+      вы порождаете один класс из другого (базового класса), производный класс 
+      наследует элементы базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      порождения класса из базового начинайте определение производного класса 
+      ключевым словом class, за которым следует имя класса, двоеточие и имя базового 
+      класса, например class dalmatian: dog.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+      вы порождаете класс из базового класса, производный класс может обращаться 
+      к общим элементам базового класса, как будто эти элементы определены внутри 
+      самого производного класса. Для доступа к частным данным базового класса 
+      производный класс должен использовать интерфейсные функции базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Внутри 
+      конструктора производного класса ваша программа должна вызвать конструктор 
+      базового класса, указывая двоеточие, имя конструктора базового класса и 
+      соответствующие параметры сразу же после заголовка конструктора производного 
+      класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы 
+      обеспечить производным классам прямой доступ к определенным элементам базового 
+      класса, в то же время защищая эти элементы от оставшейся части программы, 
+      C++ обеспечивает защищенные {protected) элементы класса. Производный класс 
+      может обращаться к защищенным элементам базового класса, как будто они являются 
+      общими. Однако для оставшейся части программы защищенные элементы эквивалентны 
+      частным.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      в производном и базовом классе есть элементы с одинаковым именем, то внутри 
+      функций производного класса C++ будет использовать элементы производного 
+      класса. Если функциям производного класса необходимо обратиться к элементу 
+      базового класса, вы должны использовать оператор глобального разрешения, 
+      например base class:: member.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 25.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 27.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

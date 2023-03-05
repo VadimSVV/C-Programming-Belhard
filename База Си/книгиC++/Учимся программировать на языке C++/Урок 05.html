@@ -1,0 +1,914 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">Урок 5</FONT></H2>
+<H2 align="center"><FONT FACE="Arial, Helvetica, sans-serif"> Выполнение простых 
+  операций</FONT></H2>
+<div align="center"><b><font face="Times New Roman, Times, serif"  size=4></font></b> </div>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Из урока 4 
+  вы узнали, как объявлять и использовать переменные в своих программах. По мере 
+  усложнения программ вы будете выполнять арифметические операции, такие как сложение, 
+  вычитание, умножение и деление, над значениями, содержащимися в переменных. 
+  Данный урок описывает, как использовать арифметические операторы C++ для выполнения 
+  этих операций. К тому времени, когда вы закончите изучение данного урока, вы 
+  освоите следующие основные концепции:</font></p>
+<ul>
+  <li><font SIZE="3" face="Times New Roman"> <font size="3">Для выполнения математических 
+    операций используйте в своих программах арифметические операторы C++.</font></font></li>
+  <li><font size="3" face="Times New Roman"> Чтобы гарантировать последовательность 
+    операций, C++ назначает приоритет каждому оператору.</font></li>
+  <li><font size="3" face="Times New Roman"> Используя круглые скобки в арифметических 
+    выражениях, вы можете управлять порядком, в котором C++ выполняет операции.</font></li>
+  <li><font size="3" face="Times New Roman"> Многие программы на C++ прибавляют 
+    или вычитают единицу, используя операции увеличения (++) или уменьшения (--).</font></li>
+</ul>
+<p><font size="3" face="Times New Roman">После того как вы научитесь распознавать 
+  разные арифметические операторы C++, вы поймете, что выполнять математические 
+  операции очень легко!</font></p>
+<h2 align="center"><font face="Times New Roman, Times, serif" >ОСНОВНЫЕ МАТЕМАТИЧЕСКИЕ ОПЕРАЦИИ</font></h2>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Независимо 
+  от назначения большинство ваших программ на C++ будут складывать, вычитать, 
+  умножать или делить. Вы узнаете, что ваши программы могут выполнять арифметические 
+  операции с константами (например, 3*5) или с переменными (например, <i>payment 
+  — total).</i> Таблица 5.1 перечисляет основные математические операции C++:</font> 
+</p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3"><i><b>Таблица</b> 
+  5.<b>1.</b></i> Основные математические операции С++</font> </p>
+<div align="left">
+  <table border=0>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" size=2>Операция</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Назначение</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Пример</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">+</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Сложение</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><FONT SIZE="3" FACE="Times New Roman, Times, serif">total = cost + 
+          tax;</FONT> 
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">-</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Вычитание</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><FONT SIZE="3" FACE="Times New Roman, Times, serif">change = payment 
+          - total;</FONT> 
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><i><font SIZE="3">*.</font></i> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Умножение</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><FONT SIZE="3" FACE="Times New Roman, Times, serif">tax = cost * tax_rate;</FONT> 
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>/ 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Деление</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><FONT SIZE="3" FACE="Times New Roman, Times, serif">average = total 
+          / count;</FONT> 
+      </td>
+    </tr>
+  </table>
+</div>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Следующая 
+  программа SHOWMATH.CPP использует <i>cout</i> для вывода реультата нескольких 
+  простых арифметических операций:</font> </p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font> 
+  </p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void)</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "5 + 7 = " &lt;&lt; 5 + 7 &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "12 - 7 = " &lt;&lt; 12 - 7 &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "1.2345 <i>* 2 = " &lt;&lt;</i> 1.23.45 * 2 &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "15 / 3 = " &lt;&lt; 15 / 3 &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">}</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Посмотрите внимательно 
+  на операторы программы. Обратите внимание, что каждое выражение сначала появляется 
+  в кавычках, которые обеспечивают вывод символов (например, 5 + 7 =) на экран. 
+  Затем программа выводит результат операции и символ новой строки. Когда вы откомпилируете 
+  и запустите эту программу, на вашем экране появится следующий вывод:</font> 
+</p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif"><b>С:\&gt; SHOWMATH &lt;ENTER&gt;</b></font></p>
+  <p><b><font size="3" face="Times New Roman, Times, serif">5 + 7 = 12</font></b></p>
+  <p><b><font size="3" face="Times New Roman, Times, serif">12 - 7 = 5</font></b></p>
+  <p><b><font size="3" face="Times New Roman, Times, serif">1.2345 * 2 = 2.469</font></b></p>
+  <p><b><font size="3" face="Times New Roman, Times, serif">15 / 3 = 5</font></b></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">В данном случае программа выполняла арифметические 
+  операции, используя только постоянные значения. Следующая программа MATHVARS.CPP 
+  выполняет арифметические операции, используя переменные:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font> 
+  </p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;float cost =15.50; // Стоимость покупки <br>
+    &nbsp;&nbsp;&nbsp;float sales_tax = 0.06; // Налог на продажу <i>6% </i><br>
+    &nbsp;&nbsp;&nbsp;float amount_paid = 20.00; // Деньги покупателя <br>
+    &nbsp;&nbsp;&nbsp;float tax, change, total; // Налог на продажу, сдача покупателю 
+    и общий счет<br>
+    &nbsp;&nbsp;&nbsp;tax = cost * sales_tax;<br>
+    &nbsp;&nbsp;&nbsp;total = cost + tax;<br>
+    &nbsp;&nbsp;&nbsp;change = amount_paid - total;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Стоимость покупки: $" &lt;&lt; cost &lt;&lt; 
+    "\tHaлor: $" &lt;&lt; tax &lt;&lt; "\tОбщий счет: $" &lt;&lt; total &lt;&lt; 
+    endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Сдача покупателю: $" &lt;&lt; change &lt;&lt; 
+    endl;<br>
+    }</font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">В данном случае программа использует 
+  только переменные с плавающей точкой. Как видите, программа присваивает значения 
+  переменным при объявлении. Далее программа выполняет арифметические операции 
+  над переменными для определения налога на продажу, общего счета и сдачи покупателю. 
+  Когда вы откомпилируете и запустите эту программу, на вашем экране появится 
+  следующий вывод:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif"><b>С:\&gt; MATHVARS &lt;ENTER&gt;</b></font></p>
+  <p><b><font size="3" face="Times New Roman, Times, serif">Стоимость покупки: 
+    $15.5 Налог: $0.93 Общий счет: $16.43</font></b></p>
+  <p><b><font face="Times New Roman, Times, serif" size="3">Сдача покупателю: 
+    $3.57</font> </b></p>
+</blockquote>
+<h2 align="center"><b><FONT FACE="Arial, Helvetica, sans-serif">УВЕЛИЧЕНИЕ ЗНАЧЕНИЯ 
+  ПЕРЕМЕННОЙ НА 1</FONT></b></h2>
+<p align="left"><font face="Times New Roman, Times, serif"></font><font face="Times New Roman, Times, serif" size="3">Обычной 
+  операцией, которую вы будете выполнять при программировании, является прибавление 
+  1 к значению целой переменной. Например, предположим, что ваша программа использует 
+  переменную с именем <i>count,</i> чтобы сохранить данные о количестве напечатанных 
+  файлов. Каждый раз, когда программа печатает файл, 1 будет добавляться к текущему 
+  значению <i>count. </i>Используя оператор присваивания C++, ваша программа может 
+  увеличивать значение <i>count,</i> как показано ниже:</font> </p>
+<blockquote>
+  <p><font SIZE="3" face="Times New Roman, Times, serif">count = count + 1;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">В данном случае 
+  программа сначала выбирает значение <i>count,</i> а затем добавляет к нему единицу. 
+  Далее программа записывает результат сложения обратно в переменную <i>count.</i> 
+  Следующая программа INTCOUNT.CPP использует оператор присваивания для увеличения 
+  переменной <i>count</i> (которая первоначально содержит значение 1000) на единицу 
+  (присваивая переменной результат 1001):</font> </p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font> 
+  </p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int count = 1000;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "начальное значение count равно" &lt;&lt; 
+    count &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;count = count + 1;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "конечное значение count равно" &lt;&lt; count 
+    &lt;&lt; endl;<br>
+    }</font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman"><b>С:\&gt; INCCOUNT &lt;ENTER&gt;</b></font></p>
+  <p><b><font size="3" face="Times New Roman">начальное значение count равно 1000</font></b></p>
+  <p><b><font size="3" face="Times New Roman">конечное значение count равно 1001</font></b></p>
+</blockquote>
+<p><font size="3" face="Times New Roman, Times, serif">Так как увеличение значения 
+  переменной представляет собой обычную операцию в программах, в C++ есть <i>операция 
+  увеличения —</i> двойной знак плюс (++). Операция <i>увеличения</i> обеспечивает 
+  быстрый способ прибавления единицы к значению переменной. Следующие операторы, 
+  например, увеличивают значение переменной <i>count на</i> 1: </font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">count = count + 1; count++;</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Следующая программа INC_OP.CPP 
+  использует операцию увеличения для наращивания значения переменной <i>count</i> 
+  на 1: </font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void)</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int count = 1000;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "начальное значение count равно " &lt;&lt; 
+    count &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;count++;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "конечное значение count равно " &lt;&lt; 
+    count &lt;&lt; endl;<br>
+    } </font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Эта программа работает так же, как INCCOUNT.CPP, 
+  которая использовала оператор присваивания для увеличения значения переменной. 
+  Когда C++ встречает операцию увеличения, он сначала выбирает значение переменной, 
+  добавляет к этому значению единицу, а затем записывает результат обратно в переменную. 
+  </font></p>
+<h3 align="center"><font face="Times New Roman, Times, serif" >Представление о префиксной (до) и постфиксной 
+  (после) операциях увеличения</font></h3>
+<p align="left"><font size="3" face="Times New Roman">При использовании операций 
+  увеличения ваши программы могут размещать оператор увеличения до или после переменной, 
+  как показано ниже: </font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">++variable; variable++;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Так как первый 
+  оператор появляется до переменной, он называется <i>префиксным оператором увеличения.</i></font> 
+  <font face="Times New Roman, Times, serif" size="3">Аналогично этому, второй 
+  оператор появляется после переменной и называется <i>постфиксным оператором 
+  увеличения. </i>Вам необходимо знать, что C++ трактует эти два оператора по-разному. 
+  Например, рассмотрим следующий оператор присваивания: </font></p>
+<BLOCKQUOTE>
+  <P><font size="3" face="Times New Roman, Times, serif">current_count = count++;</font></P>
+</BLOCKQUOTE>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Этот оператор 
+  присваивания указывает C++ присвоить текущее значение <i>count</i> переменной 
+  <i>current_count.</i> В дополнение к этому постфиксный оператор увеличения заставляет 
+  C++ увеличить текущее значение <i>count.</i> Использование постфиксного оператора 
+  в этом случае делает показанный выше оператор эквивалентным следующим двум операторам: 
+  </font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">current_count = count;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">count = count + 1;</font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman, Times, serif">Теперь рассмотрим следующий 
+  оператор присваивания, который использует префиксный оператор увеличения:</font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">current_count = ++count;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">В этом случае 
+  оператор присваивания указывает C++ сначала увеличить значение <i>count,</i> 
+  а затем присвоить результат переменной <i>current_count.</i> Использование префиксного 
+  оператора увеличения делает показанный выше оператор эквивалентным следующим 
+  двум операторам: </font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">count = count + 1;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">current_count = count;</font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Важно освоить префиксную и постфиксную 
+  операции увеличения, так, как они будут встречаться вам в большинстве программ 
+  на C++. Следующая программа PRE_POST.CPP иллюстрирует использование префиксной 
+  и постфиксной операций увеличения: </font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    small_count = 0;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    big_count = 1000;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "small_count равно " &lt;&lt; small_count &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "small_count++ производит " &lt;&lt; small_count++ &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "конечное значение small_count равно " &lt;&lt; sniall_count &lt;&lt; 
+    endl;</font> <br>
+    <font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "big_count равно " &lt;&lt; big_count &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "++big_count производит " &lt;&lt; ++big_count &lt;&lt; endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "конечное значение big_count равно " &lt;&lt; big_count &lt;&lt; 
+    endl;<br>
+    </font><font size="3" face="Times New Roman, Times, serif">} </font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод:</font></p>
+<blockquote> 
+  <p><font SIZE="3" face="Times New Roman"><b><font size="3" face="Times New Roman, Times, serif">С:\&gt; 
+    PRE_POST &lt;ENTER&gt;</font></b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>small_count равно 
+    0</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>small_count++ производит 
+    0</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>конечное значение 
+    small_count равно 1</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>big_count равно 1000</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>++big_count производит 
+    1001</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>конечное значение 
+    big_count равно 1001</b></font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">С переменной <i>small_count</i> 
+  программа использует постфиксную операцию увеличения. В результате программа 
+  выводит текущее значение переменной (0), а затем увеличивает его на 1. С переменной 
+  <i>big_count</i> программа использует префиксную операцию увеличения. В результате 
+  программа сначала увеличивает значение переменной (1000 + 1), а затем выводит 
+  результат</font> <font size="3" face="Times New Roman">(1001). Найдите время, 
+  чтобы отредактировать эту программу, и сначала измените постфиксную операцию 
+  на префиксную, а затем префиксную на постфиксную. Откомпилируйте и запустите 
+  программу, обращая внимание на то, как изменение операции изменяет вывод. </font></p>
+<h3 align="center"><b><font face="Times New Roman, Times, serif" >С++ обеспечивает также операции уменьшения</font></b></h3>
+<p align="left"><font size="3" face="Times New Roman">Как вы уже знаете, двойной 
+  знак плюс (++) представляет собой оператор увеличения C++. Подобным образом 
+  двойной знак минус (--) соответствует <i>оператору уменьшения</i> C++, который 
+  уменьшает значение переменной на 1. Как и в случае с операцией увеличения, C++ 
+  поддерживает префиксный и постфиксный операторы уменьшения. Следующая программа 
+  DECCOUNT.CPP иллюстрирует использование оператора уменьшения </font><font SIZE="3" face="Arial">C++:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int small_count = 0;<br>
+    &nbsp;&nbsp;&nbsp;int big_count = 1000;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "small_count равно " &lt;&lt; small_count 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "small_count-- производит " &lt;&lt; small_count-- 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "конечное значение small_count равно " “ small_count 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "big_count равно " &lt;&lt; big_count &lt;&lt; 
+    endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "--big_count производит " &lt;&lt; --big_count 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "конечное значение big_count равно " &lt;&lt; 
+    big_count &lt;&lt; endl;<br>
+    } </font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод: </font></p>
+<blockquote> 
+  <p><font SIZE="3" face="Times New Roman"><b><font size="3" face="Times New Roman, Times, serif">С:\&gt; 
+    DECCOUNT &lt;ENTER”</font></b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>small_count равно 
+    0</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>small_count-- производит 
+    0</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>конечное значение 
+    small_count равно -1</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>big_count равно 1000</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>—big_count производит 
+    999</b></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><b>конечное значение 
+    big_count равно 999 </b></font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Как видите, префиксный и постфиксный 
+  операторы уменьшения C++ работают так же, как и соответствующие операторы увеличения, 
+  с той лишь разницей, что они уменьшают значение переменной на 1.</font></p>
+<p align="left"> 
+<p align="left"></p>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">ДРУГИЕ ОПЕРАТОРЫ 
+  С++</FONT></h2>
+<p align="left"><font size="3" face="Times New Roman">В этом уроке описаны обычные 
+  арифметические операции C++, а также операции увеличения и уменьшения. В программах 
+  на C++ вы можете встретить одну или несколько операций, перечисленных в табл. 
+  5.2: </font></p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3"><i><b>Таблица 
+  5.2.</b></i> Операции C++, которые вы можете встретить в программах.</font> 
+</p>
+<div align="left">
+  <table border=1 >
+    <tr> 
+      <td> 
+        <p><font face="Times New Roman" SIZE="3">Операция</font> 
+      </td>
+      <td> 
+        <p><font face="Times New Roman" SIZE="3">Функция</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p>%</p>
+      </td>
+      <td> 
+        <p><font face="Times New Roman" SIZE="3">Взятие по модулю или остаток; 
+          возвращает остаток целочисленного деления</font></p>
+        </td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE">~</td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Дополнение; инвертирует 
+        биты значений</font></td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE"><font SIZE="3">&amp;</font></td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Побитовое И</font></td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE">|</td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Побитовое включающее 
+        ИЛИ</font></td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE">^ </td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Побитовое исключающее 
+        ИЛИ</font></td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE"><font size="3">&lt;&lt;</font></td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Сдвиг влево; сдвигает 
+        биты значения влево на указанное количество разрядов</font></td>
+    </tr>
+    <tr>
+      <td valign="MIDDLE"><font size="3">&gt;&gt;</font> </td>
+      <td valign="MIDDLE"><font face="Times New Roman" SIZE="3">Сдвиг вправо; 
+        сдвигает биты значения вправо на указанное количество разрядов</font> 
+      </td>
+    </tr>
+  </table>
+</div>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">СТАРШИНСТВО ОПЕРАЦИЙ</FONT></h2>
+<p align="left"><font size="3" face="Times New Roman">При выполнении арифметических 
+  операций в C++ необходимо знать, что C++ выполняет операции в определенном порядке, 
+  основанном на старшинстве операций. Например, операция умножения выполняется 
+  до сложения. Чтобы лучше понять старшинство операций, рассмотрите следующие 
+  выражения: </font></p>
+<blockquote>
+  <p><font SIZE="3" face="Arial">result =5+2*3;</font></p>
+</blockquote>
+<p align="left"><font size="3" face="Times New Roman">В зависимости от порядка, 
+  в котором C++ выполняет умножение и сложение, результат будет разным: </font></p>
+<BLOCKQUOTE> 
+  <P><font SIZE="3" face="Arial">result =5+2*3;<br>
+    =7*3; <br>
+    </font><font SIZE="3" face="Times New Roman">= 21; <br>
+    </font><font SIZE="3" face="Arial">result =5+2*3;<br>
+    </font><font SIZE="3" face="Arial"> =5+6;<br>
+    </font><font SIZE="3" face="Times New Roman"> = 11; </font></P>
+</BLOCKQUOTE>
+<P><font size="3" face="Times New Roman">Чтобы избежать путаницы, C++ присваивает 
+  каждой операции приоритет, который определяет порядок выполнения операций. Так 
+  как C++ выполняет операции в определенном порядке, то и ваши программы будут 
+  проводить арифметические вычисления соответствующим образом.</font></P>
+<p align="left"><font size="3" face="Times New Roman">Таблица 5.3 перечисляет 
+  старшинство операций C++. Операции, находящиеся в верхней части, имеют более 
+  высокий приоритет. Операции внутри каждой части имеют одинаковый приоритет. 
+  Если вы рассмотрите таблицу, то увидите, что в C++ умножение имеет более высокий 
+  приоритет, чем сложение. Вы не знакомы со многими операциями, представленными 
+  в таблице. В настоящее время не думайте об этих операциях. К концу изучения 
+  этой книги вы сможете использовать (и понять) каждую из них! </font></p>
+<p align="left"><font size="3" face="Times New Roman"><i><b>Таблица 5.3.</b></i> 
+  Старшинство операций в C++.</font></p>
+<div align="left"> 
+  <table border=0 >
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" size=2>Операция</font> 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Имя</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Пример</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE" colspan=3> 
+        <p><font face="Times New Roman" SIZE="3">:: Разрешение области видимости 
+          classname::classmember_name</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>:: 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Глобальное разрешение</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">::variable_name</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>. 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Выбор элемента</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">object.member_name</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">-&gt;</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Выбор элемента</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">pointer-&gt;membername</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">[]</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Индексация</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">pointer[element]</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>() 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Вызов функции</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression(parameters)</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>() 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Построение значения</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">type(parameters)</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">sizeof</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Размер объекта</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">sizeof expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">sizeof</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Размер типа</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">sizeof(type)</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">++</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Приращение после</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">variable++</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">++</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Приращение до</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">++variable</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>-- 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Уменьшение после</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">variable--</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">--</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Уменьшение до</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">-- variable</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">&amp;</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Адрес объекта</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">&amp;variable</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>* 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Разыменование</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">*pointer</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">new</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Создание (размещение)</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">new type</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">delete</font>
+      </td>
+      <td valign="MIDDLE" colspan=2> 
+        <p><font face="Times New Roman" SIZE="3">Уничтожение (освобождение) delete 
+          pointer</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">delete[]</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Уничтожение массива</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">delete pointer</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>~ 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Дополнение</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">~expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>! 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Логическое НЕ</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">! expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">+</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Унарный плюс</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">+1</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>- 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Унарный минус</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">-1</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>() 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Приведение</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">(type) expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">.*</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Выбор элемента</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">object.*pointer</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">-&gt;</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Выбор элемента</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">object-&gt;*pointer</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">*</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Умножение</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression * expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">/</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Деление</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression / expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">%</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Взятие по модулю</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression % expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">+</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Сложение (плюс)</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression + expression</font>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="MIDDLE"> 
+        <p>- 
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font face="Times New Roman" SIZE="3">Вычитание (минус)</font>
+      </td>
+      <td valign="MIDDLE"> 
+        <p><font SIZE="3">expression expression</font>
+      </td>
+    </tr>
+  </table>
+</div>
+<p align="left">
+<h3 align="left"></h3>
+<h3 align="left"><font face="Times New Roman, Times, serif" >Управление порядком, в котором C++ выполняет 
+  операции</font></h3>
+<p align="left"><font size="3" face="Times New Roman">Как вы уже знаете, C++ назначает 
+  операциям различный приоритет, который и управляет порядком выполнения операций. 
+  К сожалению, иногда порядок, в котором C++ выполняет арифметические операции, 
+  не соответствует порядку, в котором вам необходимо их выполнить. Например, предположим, 
+  что вашей программе необходимо сложить две стоимости и затем умножить результат 
+  на налоговую ставку:</font></p>
+<blockquote>
+  <p><font SIZE="3" face="Arial">cost = price_a + price_b * 1.06;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">К сожалению, 
+  в этом случае C++ сначала выполнит умножение (price_b * 1.06), а затем прибавит 
+  значение <i>price_a.</i> </font></p>
+<p align="left"><font size="3" face="Times New Roman">Если ваши программы должны 
+  выполнять арифметические операции в определенном порядке, вы можете заключить 
+  выражение в круглые скобки. Когда C++ оценивает выражение, он сначала всегда 
+  выполняет операции, сгруппированные в круглых скобках. Например, рассмотрим 
+  следующее выражение:</font></p>
+<DIR><p align="left"><font size="3" face="Times New Roman, Times, serif">result =(2+3)* 
+  (3+4);</font></p></DIR>
+<p align="left"><font size="3" face="Times New Roman">C++ вычисляет данное выражение 
+  в следующем порядке:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">result = (2 + 3) * (3 
+    + 4);<br>
+    = (5) * (3 + 4);<br>
+    = 5 * (7);<br>
+    =5*7;<br>
+    = 35;</font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman, Times, serif">Подобным образом группируя 
+  выражения внутри круглых скобок, вы можете управлять порядком, в котором C++ 
+  выполняет арифметические операции. Аналогично предыдущему примеру, ваша программа 
+  может сложить две стоимости внутри круглых скобок, как показано ниже:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">cost = (price_a + price_b) 
+    * 1.06;</font></p>
+</blockquote>
+<h2 align="center"><b><FONT FACE="Arial, Helvetica, sans-serif">СЛЕДИТЕ ЗА ОШИБКАМИ 
+  ПЕРЕПОЛНЕНИЯ ПРИ АРИФМЕТИЧЕСКИХ ОПЕРАЦИЯХ</FONT></b></h2>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Из урока 4 
+  вы узнали, что, если вы присваиваете переменной значение, которое не входит 
+  в диапазон значений для данного типа переменной, возникает ошибка переполнения. 
+  При выполнении арифметических операций необходимо помнить о возможности возникновения 
+  ошибок переполнения. Например, следующая программа MATHOVER.CPP умножает 200 
+  на 300 и присваивает результат переменной типа <i>int.</i> Однако, поскольку 
+  результат умножения (60000) превышает наибольшее возможное значение для типа 
+  <i>int </i>(32767), возникает ошибка переполнения:</font> </p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void)</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int result;<br>
+    &nbsp;&nbsp;&nbsp;result = 200 * 300;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "200 * 300 = " &lt;&lt; result &lt;&lt; endl;<br>
+    } </font></p>
+</blockquote>
+<p><font size="3" face="Times New Roman">Когда вы откомпилируете и запустите эту 
+  программу, на экране появится следующий вывод:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman"><b>С:\&gt; MATHOVER &lt;ENTER&gt;</b></font></p>
+  <p><b><font size="3" face="Times New Roman"> 200 * 300 = -5536</font></b></p>
+</blockquote>
+<h2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></h2>
+<P><font face="Times New Roman, Times, serif"></font><font face="Times New Roman, Times, serif" size="3">В 
+  данном уроке вы изучали обычные арифметические операции и операции приращения 
+  C++. Чтобы программы корректно выполняли арифметические вычисления, C++ назначает 
+  каждой операции приоритет, который управляет порядком выполнения операций. Из 
+  урока 6 вы узнаете, как использовать входной поток с именем <i>cin</i> для выполнения 
+  операций ввода с клавиатуры. До изучения урока 6 убедитесь, что вы освоили следующее:</font> 
+</P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><font SIZE="3" face="Times New Roman"><font size="3">C++ использует операторы 
+      +,- , * и / для сложения, вычитания, умножения и деления.</font></font></LI>
+    <LI><font size="3" face="Times New Roman"> C++ обеспечивает префиксные (до) 
+      и постфиксные (после) операции увеличения, которые прибавляют единицу к 
+      значению переменной.</font></LI>
+    <LI><font size="3" face="Times New Roman"> C++ обеспечивает префиксную (до) 
+      и постфиксную (после) операции уменьшения, которые вычитают единицу из значения 
+      переменной.</font></LI>
+    <LI><font size="3" face="Times New Roman"> Префиксные (до) операции указывают 
+      C++ сначала увеличить (или уменьшить) значение переменной, а затем использовать 
+      это значение.</font></LI>
+    <LI><font size="3" face="Times New Roman"> Постфиксные (после) операции указывают 
+      C++ сначала использовать значение переменной, а затем увеличить (или уменьшить) 
+      его.</font></LI>
+    <LI><font size="3" face="Times New Roman"> Чтобы гарантировать, что выражения 
+      выполняются корректно, C++ назначает каждой операции приоритет, управляющий 
+      порядком выполнения операций.</font></LI>
+    <LI><font size="3" face="Times New Roman"> Если вам нужно управлять порядком 
+      выполнения арифметических операций, используйте круглые скобки. C++ всегда 
+      вычисляет сначала выражение в скобках.</font></LI>
+  </OL>
+</BLOCKQUOTE>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 04.html">Предыдущий 
+  урок</A> | <A HREF="Урок 06.html">Следующий урок </A></FONT> 
+</CENTER>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 align="center"><font face="Arial, Helvetica, sans-serif">Урок 4</font></H2>
+<H2 align="center"><font face="Arial, Helvetica, sans-serif"> Программы хранят 
+  информацию в переменных</font></H2>
+<p align="left"><font face="Times New Roman" size="3">Все программы, представленные 
+  в уроках 1—3, были очень простыми. Однако по мере того, как ваши программы начинают 
+  выполнять более многоплановые задачи, они должны хранить информацию во время 
+  выполнения. Например, программе, печатающей файл, нужно знать имя файла и, возможно, 
+  число копий, которые вы хотите напечатать. В процессе выполнения программы хранят 
+  такую информацию в памяти компьютера. Чтобы использовать определенные ячейки 
+  памяти, программы применяют <i>переменные.</i> Проще говоря, переменная представляет 
+  собой имя ячейки памяти, которая может хранить конкретное значение. В этом уроке 
+  описано, как создавать и использовать переменные в программах на C++. К концу 
+  данного урока вы освоите следующие основные концепции:</font></p>
+<ul>
+  <li><font face="Times New Roman" size="3"> Вы должны объявлять переменные, которые 
+    будете использовать в программе, сообщая компилятору имя и тип переменной.</font></li>
+  <li><font size="3" face="Times New Roman, Times, serif"> <i>Тип</i> переменной 
+    определяет тип значения (например, целое число или число с плавающей точкой), 
+    которое может хранить переменная, а также операции, которые ваши программы 
+    могут выполнять над переменной.</font> </li>
+  <li><font face="Times New Roman" size="3"> Чтобы присвоить значения переменной, 
+    используйте оператор присваивания C++ (знак равно).</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3"> Для вывода значения 
+    переменной на экран программы используют выходной поток <i>cout.</i> </font></li>
+  <li><font size="3" face="Times New Roman, Times, serif"> При объявлении переменных 
+    используйте имена, выражающие смысл переменных, чтобы ваши программы было 
+    легче читать и понимать.</font> </li>
+  <li><font face="Times New Roman" size="3"> Используйте комментарии, описывающие 
+    работу программы. В этом случае, если другим программистам нужно изменить 
+    вашу программу, комментарии подробно опишут работу программы.</font></li>
+</ul>
+<p><font face="Times New Roman" size="3">Когда вы присваиваете значение переменной, 
+  представьте себе переменную в виде ящика, в который можно поместить значение. 
+  Если вам позже потребуется использовать значение переменной, компьютер просто 
+  посмотрит значение, содержащееся в ящике.</font></p>
+<h2 align="center"><font face="Arial">ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ В ПРОГРАММАХ</font></h2>
+<p align="left"><font face="Times New Roman" size="3">Ваши программы используют 
+  переменные для хранения информации. В зависимости от типа хранимого значения, 
+  например, целое число, буква алфавита или число с плавающей точкой, <i>тип</i> 
+  вашей переменной будет разным.</font></p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Тип переменной 
+  указывает тип значения, хранимого в переменной, а также набор операций (таких 
+  как сложение, умножение и другие), которые программа может выполнять над значением 
+  переменной. Большинство программ на C+<i>+</i> будут использовать типы переменных, 
+  перечисленные в табл. 4.1.</font> </p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3"><i><b>Таблица 
+  4.1.</b></i> Типы переменных C++.</font> </p>
+<div align="left"> 
+  <table BORDER="1">
+    <tr> 
+      <td> 
+        <p><font face="Times New Roman" size="3">Тип</font> 
+      </td>
+      <td> 
+        <p><font face="Times New Roman" size="3">Хранимые значения</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font size="3" face="Times New Roman, Times, serif">char</font></p>
+      </td>
+      <td> 
+        <p><font face="Times New Roman" size="3">Значения в диапазоне от -128 
+          до 127. Обычно используется для хранения букв алфавита</font></p>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+        <p><font size="3" face="Times New Roman, Times, serif">int </font></p>
+      </td>
+      <td><font face="Times New Roman" size="3">Значения в диапазоне 
+        от -32768 до 32767</font></td>
+    </tr>
+    <tr> 
+      <td><font size="3" face="Times New Roman, Times, serif">unsigned</font></td>
+      <td><font face="Times New Roman" size="3">Значения в диапазоне 
+        от 0 до 65535</font></td>
+    </tr>
+    <tr> 
+      <td><font size="3" face="Times New Roman, Times, serif">long</font></td>
+      <td><font face="Times New Roman, Times, serif" size="3">Значения 
+        в диапазоне от -2147483648 до 2147483647</font> </td>
+    </tr>
+    <tr> 
+      <td><font size="3" face="Times New Roman, Times, serif">float</font></td>
+      <td><font face="Times New Roman" size="3">Значения в диапазоне 
+        от -3.4 x 10-38 до 3.4 x 1038</font></td>
+    </tr>
+    <tr> 
+      <td><font size="3" face="Times New Roman, Times, serif">double</font></td>
+      <td><font face="Times New Roman" size="3">Значения в диапазоне 
+        от 1.7х 10-308 до 1.7х 10308</font></td>
+    </tr>
+  </table>
+</div>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Прежде чем 
+  вы сможете использовать переменную, ваша программа должна ее <i>объявить.</i> 
+  Другими словами, вам следует представить переменную компилятору C++. Чтобы объявить 
+  переменную в программе, вам следует указать тип переменной и ее имя, по которому 
+  программа будет обращаться к данной переменной. Указывайте тип и имя переменной 
+  после открывающей фигурной скобки главной программы, как показано ниже:</font> 
+</p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">тип_переменной имя_переменной;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Как правило, 
+  тип переменной будет одним из типов, перечисленных в табл. 4.1. Выбираемое вами 
+  имя переменной должно нести смысловую нагрузку, которая описывает (для всех, 
+  кто читает вашу программу) использование переменной. Например, ваша программа 
+  могла бы использовать переменные, такие как employee_name, employee_age и т. 
+  д. Обратите внимание на точку с запятой, которая следует за именем переменной. 
+  В C++ объявление переменной считается оператором. Поэтому вы должны поставить 
+  после объявления точку с запятой.</font></p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Фрагмент следующей 
+  программы объявляет три переменные, используя типы <i>int, float</i> и <i>long:</i> 
+  </font></p>
+<blockquote> 
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></p>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></p>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<br>
+    &nbsp;&nbsp;&nbsp;int test_score;<br>
+    &nbsp;&nbsp;&nbsp;float salary;<br>
+    &nbsp;&nbsp;&nbsp;long distance_to_mars;<br>
+    }</FONT></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Важно обратить внимание, что данная программа 
+  ничего не выполняет, а только объявляет переменные. Как видите, объявление каждой 
+  переменной заканчивается точкой с запятой. Если вы объявляете несколько переменных 
+  одного и того же типа, можно разделять их имена запятой. Следующий оператор, 
+  например, объявляет три переменных с плавающей точкой:</font></p>
+<blockquote> 
+  <P><font face="Times New Roman, Times, serif" size="3">float salary, income_tax, 
+    retirement_fund;</font></P>
+  <p><b><i><font face="Times New Roman, Times, serif" size="3">Изучение переменных</font></i></b></p>
+  <p><font face="Times New Roman, Times, serif" size="3"><i><b>Переменная представляет 
+    собой имя ячейки в памяти компьютера. Во время выполнения ваши программы хранят 
+    информацию в переменных. При создании программ вы должны объявлять переменные, 
+    сообщая компилятору C++ имя и тип переменной. Например, следующий оператор 
+    объявляет переменную с именем age типа int: </b></i></font></p>
+  <BLOCKQUOTE>
+    <P><font face="Times New Roman, Times, serif" size="3"><i><b>int age;</b></i></font></P>
+  </BLOCKQUOTE>
+</blockquote>
+<h3><b><font face="Times New Roman, Times, serif">Смысловые имена переменных</font></b></h3>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Каждая создаваемая 
+  вами переменная должна иметь уникальное имя. Чтобы сделать свои программы более 
+  легкими для чтения и понимания, следует использовать смысловые имена переменных. 
+  Например, следующий оператор объявляет три переменных с именами <i>х, y</i> 
+  и z:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">int х, у, z;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Предположим, 
+  что эти переменные хранят возраст, тестовые очки и оценку студента, тогда следующие 
+  имена переменных более понятны по смыслу для других программистов, читающих 
+  ваш исходный код:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">int student_age, test_score, 
+    grade;</font></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">При выборе 
+  имен переменных можно использовать комбинацию букв, цифр и подчеркивания (_). 
+  Первый символ в имени переменной должен быть буквой или подчеркиванием. Нельзя 
+  начинать имя переменной с цифры. Кроме того, в C++ буквы нижнего и верхнего 
+  регистров считаются разными. Сначала для имен своих переменных используйте только 
+  буквы нижнего регистра. Как только вы освоитесь в C++, можете комбинировать 
+  буквы верхнего и нижнего регистров для получения смысловых имен, как показано 
+  ниже:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">float MonthlySalary, 
+    IncomeTax;</font></p>
+</blockquote>
+<h3 align="left"><b><font face="Arial, Helvetica, sans-serif">Слова, которые нельзя 
+  использовать для имен переменных</font></b></h3>
+<p align="left"><font face="Times New Roman" size="3">При создании имен переменных 
+  необходимо знать, что в C++ слова, перечисленные в табл. 4.2, резервируются 
+  в качестве ключевых слов, имеющих специальное значение для компилятора.<b> </b>Вы 
+  не имеете права использовать ключевые слова C++ в качестве имен переменных.</font></p>
+<p align="left"><font face="Times New Roman, Times, serif" size="3"><i><b>Таблица 
+  4.2.</b></i> Ключевые слова C++.</font> </p>
+<div align="left">
+  <table border=0>
+    <tr> 
+      <td> 
+        <p><font size=2>asm</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">auto</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">break</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">case</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">catch</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">char</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">class</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">const</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font SIZE="3">default</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">delete</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">do</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">double</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">else</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">enum</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">extern</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">float</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font SIZE="3">friend</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">goto</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">if</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">inline</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">int</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">long</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">new</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">operator</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font SIZE="3">protected</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">public</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">register</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">return</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">short</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">signed</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">sizeof</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">static</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font SIZE="3">switch</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">template</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">this</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">throw</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">try</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">typedef</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">union</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">unsigned</font> 
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <p><font SIZE="3">void</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">volatile</font> 
+      </td>
+      <td> 
+        <p><font SIZE="3">while</font> 
+      </td>
+      <td> 
+        <p><FONT SIZE="3">continue</FONT> 
+      </td>
+      <td> 
+        <p><FONT SIZE="3">for</FONT> 
+      </td>
+      <td> 
+        <p><FONT SIZE="3">private</FONT> 
+      </td>
+      <td> 
+        <p><FONT SIZE="3">struct</FONT> 
+      </td>
+      <td> 
+        <p><FONT SIZE="3">virtual</FONT> 
+      </td>
+    </tr>
+  </table>
+</div>
+<blockquote> 
+  <p><i><b><font face="Times New Roman, Times, serif"><font size="3">Почему ваши 
+    программы используют переменные</font></font></b></i></p>
+  <p><i><b><font face="Times New Roman, Times, serif" size="3">По мере усложнения 
+    ваши программы могут выполнять самые разнообразные операции. Например, программа 
+    платежей обрабатывает информацию о каждом служащем. В такой программе вы могли 
+    бы использовать переменные с именами employee_name, employee_id, employee_salary 
+    и т. д. После запуска программа занесет информацию о первом служащем в эти 
+    переменные. После расчета оклада первого служащего программа повторит весь 
+    процесс для следующего служащего. Чтобы рассчитать оклад второго служащего, 
+    программа занесет информацию о втором служащем (его или ее имя, номер и оклад) 
+    в перечисленные выше переменные, а затем выполнит свою обработку. Другими 
+    словами, в процессе выполнения программа присваивает переменной разные значения, 
+    которые, в свою очередь, изменяют или варьируют значение переменной.</font> 
+    </b></i></p>
+</blockquote>
+<h2 align="center"><font face="Arial">ПРИСВАИВАНИЕ ЗНАЧЕНИЯ ПЕРЕМЕННОЙ</font></h2>
+<p align="left"><font face="Times New Roman" size="3">Как вы уже знаете, переменные 
+  хранят значения во время выполнения программы. После объявления переменной вы 
+  используете <i>оператор присваивания</i> C++ (знак равно), чтобы присвоить значение 
+  переменной. Следующие операторы присваивают значения нескольким разным переменным. 
+  Обратите внимание на использование точки с запятой в конце каждого оператора:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">age = 32;<br>
+    </font><font face="Arial" size="3">salary = 25000.75;<br>
+    </font><font face="Arial" size="3">distance_to_the_moon = 238857;</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3"><b><i>Замечание:</i></b><i> 
+  Значения, присваиваемые переменным, не должны содержать запятые (например, 25,000.75 
+  и 238,857) *. Если вы включаете запятые, компилятор C++ будет генерировать и 
+  выводить сообщения о синтаксических ошибках.</i></font></p>
+<p><font face="Times New Roman, Times, serif" size="3">Фрагмент следующей программы 
+  сначала объявляет переменные, а затем использует оператор присваивания, чтобы 
+  присвоить переменным значения:</font> </p>
+<p align="left">*<font face="Times New Roman" size="3">Американская запись чисел 
+  предполагает отделение каждых трех разрядов целой части числа запятой. - <i>Прим. 
+  ред.</i></font></p>
+<p align="left"> 
+<p align="left"></p>
+<blockquote> 
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></p>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></p>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<br>
+    &nbsp;&nbsp;&nbsp;int<b> </b>age<b>;<br>
+    </b>&nbsp;&nbsp;&nbsp;float salary;<br>
+    &nbsp;&nbsp;&nbsp;long distance_to_the_moon;</FONT></p>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;age 
+    = 32;<br>
+    &nbsp;&nbsp;&nbsp;salary = 25000.75;<br>
+    &nbsp;&nbsp;&nbsp;distance_to_the_moon = 238857;<br>
+    }</FONT></p>
+</blockquote>
+<h3><b><font face="Arial">Присваивание значения при объявлении</font></b></h3>
+<p align="left"><font face="Times New Roman" size="3">При объявлении переменной 
+  часто удобно присваивать ей начальное значение. Чтобы упростить такую процедуру, 
+  C++ позволяет присваивать значение во время объявления переменной, как показано 
+  ниже:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">int age = 32;<br>
+    float salary = 25000.75;<br>
+    long distance_to_the_moon = 238857;</font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Многие программы, представленные в этой 
+  книге, присваивают значения переменным при объявлении.</font></p>
+<blockquote> 
+  <p><b><i><font face="Times New Roman, Times, serif" size="3">Присваивание значений 
+    переменным</font></i></b></p>
+  <p><font size="3"><i><b><font face="Times New Roman, Times, serif">При выполнении 
+    программы переменные хранят информацию. Для записи значения в переменную программы 
+    должны использовать оператор присваивания C++ (знак равно). Следующая строка 
+    использует оператор присваивания для записи значения 4 в переменную lesson:</font></b></i></font></p>
+  <BLOCKQUOTE>
+    <P><font size="3"><i><b><font face="Times New Roman, Times, serif">lesson 
+      = 4;</font></b></i></font></P>
+  </BLOCKQUOTE>
+  <p><font size="3"><i><b><font face="Times New Roman, Times, serif">Для упрощения 
+    этого процесса в C++ можно также присвоить значение переменной при ее объявлении:</font></b></i></font></p>
+  <BLOCKQUOTE> 
+    <P><font size="3"><i><b><font face="Times New Roman, Times, serif">int lesson 
+      = 4;</font></b></i></font></P>
+  </BLOCKQUOTE>
+</blockquote>
+<H2 ALIGN="CENTER"><font face="Arial">ИСПОЛЬЗОВАНИЕ ЗНАЧЕНИЯ ПЕРЕМЕННОЙ</font></H2>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">После присвоения 
+  значения переменной ваши программы могут использовать это значение, просто обращаясь 
+  к ее имени. Следующая программа SHOWVARS.CPP присваивает значения трем переменным 
+  и затем выводит значение каждой переменной, используя <i>cout:</i> </font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main (void)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{</font><font face="Times New Roman, Times, serif" size="3"><br>
+    &nbsp;&nbsp;&nbsp;int age = 32,<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;float 
+    salary = 25000.75;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;long 
+    distance_to_the_moon = 238857;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащему " &lt;&lt; age &lt;&lt; " года (лет)" &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад служащего составляет $" &lt;&lt; salary &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "От земли до луны " &lt;&lt; distance_to_the_moon &lt;&lt; " миль" 
+    &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3"><i><b>Замечание:</b> Последний 
+  оператор cout не помещается на одной строке. В этом случае программа просто 
+  переносит слова на следующую строку. Вы можете сделать такой перенос, поскольку</i> 
+  C++ <i>использует точку с запятой для указания конца оператора. Если вам необходимо 
+  перенести строку, постарайтесь не делать этого в середине символьной строки 
+  (внутри двойных кавычек), используйте дополнительный отступ для перенесенной 
+  части строки, как показано выше.</i> </font></p>
+<p align="left"><font face="Times New Roman" size="3">Когда вы откомпилируете 
+  и запустите эту программу, на экране появится следующий вывод:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3"><b>С:\&gt; SHOWVARS &lt;ENTER&gt;</b></font> 
+  </p>
+  <p><font face="Times New Roman, Times, serif" size="3"><b>Служащему 32 года 
+    (лет)</b></font></p>
+  <p><font face="Times New Roman, Times, serif" size="3"><b>Оклад служащего составляет 
+    $25000.75</b></font></p>
+  <p><font face="Times New Roman, Times, serif" size="3"><b>От земли до луны 238857 
+    миль</b></font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Как видите, для использования значения 
+  переменной вы просто обращаетесь к имени переменной в вашей программе.</font></p>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ПРЕВЫШЕНИЕ ДИАПАЗОНА 
+  ЗНАЧЕНИЙ ПЕРЕМЕННОЙ</font></h2>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Как вы уже 
+  знаете, тип переменной определяет набор значений, которые переменная может хранить. 
+  Например, переменная типа <i>int</i> может хранить значения в диапазоне от -32768 
+  до 32767. Если вы присваиваете переменной значение, которое находится вне этого 
+  диапазона, возникает ошибка <i>переполнения. </i>Например,<i> </i>следующая 
+  программа OVERFLOW.CPP иллюстрирует, как превышение диапазона значений переменной 
+  приводит к ошибке. Как видите, программа присваивает значения, которые находятся 
+  вне диапазона для переменной каждого типа:</font> </p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;int positive = 40000;<br>
+    &nbsp;&nbsp;&nbsp;long big_positive = 4000000000;<br>
+    &nbsp;&nbsp;&nbsp;char little_positive = 210;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "сейчас positive содержит " &lt;&lt; positive 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "сейчас big_positive содержит " &lt;&lt; big_positive 
+    &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "сейчас little_poaitive содержит " &lt;&lt; 
+    little_positive &lt;&lt; endl;<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод: </font></p>
+<blockquote> 
+  <p><b><font face="Arial" size="3">сейчас positive содержит -25536</font></b></p>
+  <p><font size="3"><b><font face="Arial">сейчас big_positive содержит -294967296</font></b></font></p>
+  <p><font size="3"><b><font face="Arial">сейчас little_positive содержит Т</font></b></font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, программа присваивает 
+  переменным типа <i>int, long и char значения,</i> которые находятся вне диапазона 
+  хранения каждого типа, поэтому возникает ошибка переполнения. При работе с переменными 
+  вам необходимо помнить диапазон значений, которые может хранить переменная каждого 
+  типа. Ошибки переполнения плохо уловимы, и поэтому их трудно определить и исправить. 
+  Обратите внимание на значение, которое программа выводит для переменной <i>little_positive.</i> 
+  Поскольку это переменная типа <i>char,</i> выходной поток <i>cout</i> пытается 
+  вывести ее значение в символьном виде. В этом случае выведенное значение соответствует 
+  второй половине таблицы ASCII со значением 210. </font></p>
+<h2 align="center"><font face="Arial">ПРЕДСТАВЛЕНИЕ О ТОЧНОСТИ</font></h2>
+<p align="left"><font face="Times New Roman" size="3">В предыдущем разделе вы 
+  узнали, что ошибки переполнения возникают при присваивании переменной значения, 
+  которое находится вне диапазона значений для переменной данного типа. Подобно 
+  этому вам также необходимо знать, что компьютеры не могут обеспечить неограниченную 
+  <i>точность</i> при хранении чисел. Например, при работе с числами с плавающей 
+  точкой (числа с десятичной точкой) компьютер не всегда может представить число 
+  с требуемой точностью. Поэтому возможны ошибки округления, которые тяжело обнаружить. 
+  </font></p>
+<p align="left"><font face="Times New Roman" size="3">Следующая программа PRECISE. 
+  CPP присваивает значение чуть меньше 0.5 переменным <i>типа float и double.</i> 
+  К сожалению, поскольку компьютер обладает ограниченной способностью в представлении 
+  чисел, переменные реально содержат не присваиваемые им значения, а число 0.5: 
+  </font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;float 
+    f_not_half = 0.49999990;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;double 
+    d_not_half = 0.49999990;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Значение типа float 0.49999990 равно " &lt;&lt; f_not_half &lt;&lt; 
+    endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Значение типа double 0.49999990 равно "</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    d_not_half &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод:</font></p>
+<blockquote> 
+  <p><b><FONT FACE="Times New Roman, Times, serif" SIZE="3">Значение типа float 
+    0.49999990 равно 0.5 </FONT></b></p>
+  <p><FONT FACE="Times New Roman, Times, serif"><b><font SIZE="3">Значение типа 
+    double 0.49999990 равно 0.5</font></b></FONT></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, значения, присваиваемые 
+  программой переменным, и значения, которые переменные содержат в действительности, 
+  не идентичны. Такие ошибки округления происходят потому, что компьютер должен 
+  представлять числа, используя фиксированное количество единиц и нулей. В большинстве 
+  случаев компьютер может точно представлять числа. Однако иногда, как показано 
+  в этой программе, компьютер</font> <font face="Times New Roman, Times, serif" size="3">представляет 
+  числа приближенно, а не точно. При программировании вам необходимо всегда помнить 
+  о точности. В зависимости от значений, с которыми работают ваши программы, могут 
+  возникать трудно обнаруживаемые ошибки округления. </font></p>
+<h2 align="center"><font face="Arial">ИСПОЛЬЗОВАНИЕ КОММЕНТАРИЕВ ДЛЯ УЛУЧШЕНИЯ 
+  ЧТЕНИЯ ВАШИХ ПРОГРАММ</font></h2>
+<p align="left"><font face="Times New Roman" size="3">По мере усложнения ваших 
+  программ количество содержащихся в них операторов может сделать программы слишком 
+  трудными для понимания. Поскольку другим программистам может потребоваться понять 
+  и, возможно, изменить ваши программы, вам следует делать программы более удобочитаемыми. 
+  Способы улучшения удобочитаемости программ включают: </font></p>
+<ul>
+  <li><font face="Times New Roman" size="3"> Использование понятных по смыслу 
+    имен переменных, описывающих их применение. </font></li>
+  <li><font face="Times New Roman" size="3"> Использование подходящих отступов 
+    и выравнивания (см. урок 7).</font></li>
+  <li><font face="Times New Roman" size="3"> Использование пустых строк для разделения 
+    несвязанных операторов. </font></li>
+  <li><font face="Times New Roman" size="3"> Использование комментариев, которые 
+    объясняют работу программы. </font></li>
+</ul>
+<p><font face="Times New Roman" size="3">При создании программ вы можете поместить 
+  в исходном файле замечания, которые объясняют работу программы. Такие замечания 
+  (называемые <i>комментариями)</i> не только помогают другим программистам понять 
+  вашу программу, но могут напомнить, почему программа содержит определенные операторы, 
+  если вы ее посмотрите через несколько месяцев. Для размещения комментария в 
+  своих программах на C++ просто поставьте два знака прямого слеша (//), как показано 
+  ниже: </font></p>
+<blockquote>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Это комментарий</FONT></p>
+</blockquote>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Когда компилятор 
+  C++ встречает двойной слеш, он игнорирует весь оставшийся на этой строке текст. 
+  По крайней мере размещайте в начале каждой программы комментарии, которые указывают, 
+  кто написал программу, когда и почему: </font></p>
+<blockquote> 
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Программа: BUDGET.CPP<br>
+    // Программист: Kris Jamsa<br>
+    // дата создания: 1-10-96<br>
+    //<br>
+    // Цель: Ежемесячная информация о бюджете.</FONT></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">При выполнении вашей программой различных 
+  процессов вам следует поместить до или после определенных операторов комментарии, 
+  которые объясняют их назначение. Например, рассмотрим следующий оператор присваивания: 
+  </font></p>
+<blockquote>
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">distance_to_the_moon 
+    = 238857; // Расстояние в милях</FONT></p>
+</blockquote>
+<p align="left"><font face="Times New Roman" size="3">Комментарий справа от оператора 
+  присваивания обеспечивает дополнительную информацию всем, кто читает программу. 
+  У начинающих программистов часто возникают проблемы, связанные с тем, что и 
+  когда комментировать. Как правило, <i>вы включаете немного комментариев в ваши 
+  программы. </i>Поэтому убедитесь, что они полезны. Следующие комментарии не 
+  дают дополнительной информации программистам, читающим код: </font></p>
+<blockquote> 
+  <p><FONT FACE="Times New Roman, Times, serif" SIZE="3">аде =32; // Присвоить 
+    32 переменной age<br>
+    salary = 25000.75; // Присвоить 25000.75 переменной salary</FONT></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Цель использования комментариев заключается 
+  в том, чтобы объяснить работу программы. </font></p>
+<blockquote> 
+  <p><b><i><font face="Times New Roman, Times, serif" size="3">Добавление комментариев 
+    в ваши программы</font></i></b></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><i><b>При создании программ 
+    включайте комментарии, которые объясняют работу программы. Если другим программистам 
+    понадобится изменить вашу программу, они смогут воспользоваться комментариями, 
+    чтобы понять поведение программы. Обычно в программах на C++ комментарий начинается 
+    с двойного слеша: </b></i></font></p>
+  <BLOCKQUOTE>
+    <P><font size="3" face="Times New Roman, Times, serif"><i><b>// Это комментарий 
+      C++</b></i></font></P>
+  </BLOCKQUOTE>
+  <p><font size="3" face="Times New Roman, Times, serif"><i><b>Когда компилятор 
+    C++ встречает двойной слеш, он игнорирует весь текст (оставшийся в текущей 
+    строке), который следует за слешем. Хорошие программы должны быть легки для 
+    чтения и понимания. Комментарии улучшают удобочитаемость вашей программы. 
+    </b></i></font></p>
+  <p><font size="3" face="Times New Roman, Times, serif"><i><b>Замечание: В дополнение 
+    к использованию комментариев для улучшения удобочитаемости своей программы 
+    вам следует использовать пустые строки для разделения несвязанных операторов. 
+    Когда компилятор C++ встречает пустую строку, он просто пропускает ее. </b></i></font></p>
+</blockquote>
+<h2 align="center"><font face="Arial">ЧТО ВАМ НЕОБХОДИМО ЗНАТЬ</font></h2>
+<p align="left"><font face="Times New Roman, Times, serif" size="3">Из этого урока 
+  вы узнали, что программы во время выполнения хранят информацию в переменных. 
+  Говоря кратко, переменная представляет собой имя, которое ваша программа назначает 
+  ячейке памяти, в которой программа хранит информацию. Прежде чем ваша программа 
+  сможет использовать переменную, вы должны объявить ее тип и имя. Из урока 5 
+  вы узнаете, как выполнять простые операции, например, сложение и вычитание переменных. 
+  Однако до изучения урока 5 убедитесь, что вы освоили следующие основные концепции:</font></p>
+<ol>
+  <OL>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Для использования 
+      переменной в вашей программе вы должны объявить ее тип и имя.</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Имена переменных 
+      должны быть уникальны и понятны по смыслу другим программистам, читающим 
+      ваш исходный текст. Имя переменной должно соответствовать ее назначению.</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Имена переменных 
+      должны начинаться с буквы или символа подчеркивания.</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> В C++ буквы верхнего 
+      и нижнего регистров считаются разными.</font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Тип переменной определяет 
+      тип значения, которое переменная может содержать. Общими типами переменных 
+      являются <i>char, int, float </i>и <i>long.</i> </font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Комментарии повышают 
+      удобочитаемость вашей программы, поясняя ее работу. В программах на C++ 
+      комментарии начинаются с двойного слеша (//).</font></LI>
+  </OL>
+</ol>
+<BLOCKQUOTE>
+  <P>
+    <CENTER>
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 03.html">Предыдущий 
+      урок</A> | <A HREF="Урок 05.html">Следующий урок</A> </FONT> 
+    </CENTER>
+  </P>
+</BLOCKQUOTE>
+</body>
+</html>

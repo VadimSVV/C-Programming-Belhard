@@ -1,0 +1,322 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Урок 21 Знакомство с классами C++</TITLE>
+</HEAD>
+<BODY BACKGROUND="bgrwhite.gif">
+<FONT FACE="Times New Roman"> </FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 25</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Статические функции 
+  и элементы данных</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">До 
+  настоящего момента каждый создаваемый вами объект имел свой собственный набор 
+  элементов данных. В зависимости от назначения вашего приложения могут быть ситуации, 
+  когда объекты одного и того же класса должны совместно использовать один или 
+  несколько элементов данных. Например, предположим, что вы пишете программу платежей, 
+  которая отслеживает рабочее время для 1000 служащих. Для определения налоговой 
+  ставки программа должна знать условия, в которых работает каждый служащий. Пусть 
+  для этого используется переменная класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>state_of_work.</I> 
+  Однако, если все служащие работают в одинаковых условиях, ваша программа могла 
+  бы совместно использовать этот элемент данных для всех объектов типа</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>employee. </I>Таким образом, 
+  ваша программа уменьшает необходимое количество памяти, выбрасывая 999 копий 
+  одинаковой информации. Для совместного использования элемента класса вы должны 
+  объявить этот элемент как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static 
+  (статический).</I> Этот урок рассматривает шаги, которые вы должны выполнить 
+  для совместного использования элемента класса несколькими объектами. К концу 
+  этого урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ позволяет иметь 
+    объекты одного и того же типа, которые совместно используют один или несколько 
+    элементов класса.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа 
+    присваивает значение совместно используемому элементу, то все объекты этого 
+    класса сразу же получают доступ к этому новому значению.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для создания совместно 
+    используемого элемента данных класса вы должны предварять имя элемента класса 
+    ключевым словом</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">После того как программа 
+    объявила элемент класса как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> 
+    она должна объявить глобальную переменную (вне определения класса), которая 
+    соответствует этому совместно используемому элементу класса.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваши программы могут 
+    использовать ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static, 
+    </I>чтобы сделать метод класса вызываемым в то время, как программа, возможно, 
+    еще не объявила каких-либо объектов данного класса.</FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">СОВМЕСТНОЕ 
+  ИСПОЛЬЗОВАНИЕ ЭЛЕМЕНТА ДАННЫХ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обычно, 
+  когда вы создаете объекты определенного класса, каждый объект получает свой 
+  собственный набор элементов данных. Однако возможны такие ситуации, при которых 
+  объектам одного и того же класса необходимо совместно использовать один или 
+  несколько элементов данных <I>(статические э</I>лементы данных). В таких случаях 
+  объявляйте элементы данных как <I>общие ил</I>и <I>частные,</I> а затем предваряйте 
+  тип ключевым словом</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">static int shared_value;</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">После 
+  объявления класса вы должны объявить элемент как глобальную переменную вне класса, 
+  как показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int class_name::shared_value;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа SHARE_IT.CPP определяет класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>book_series,</I> 
+  совместно использующий элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count,</I> 
+  который является одинаковым для всех объектов (книг) класса (серии). Если программа 
+  изменяет значение этого элемента, изменение сразу же проявляется во всех объектах 
+  класса:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class book_series </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_series(char 
+    *, char *, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    set_pages(int) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;static 
+    int page_count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    title[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    author[ 64 ];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    price;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int book_series::page__count;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void book_series::set_pages(int 
+    pages) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;page_count 
+    = pages;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">book_series::book_series(char 
+    *title, char *author, float price) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(book_series::title, 
+    title); <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(book_series::author, 
+    author);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_series::price 
+    = price;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void book_series:: show_book 
+    (void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Заголовок:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; title &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Автор:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; author &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Цена:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; price &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Страницы:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; page_count &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_series 
+    programming( "Учимся программировать на C++", "Jamsa", 22.95);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_series 
+    word( "Учимся работать с Word для Windows", "Wyatt", 19.95);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;word.set_pages(256);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;programming.show_book 
+    ();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;word.show_book() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl &lt;&lt; "Изменение page_count " &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;programming.set_pages(512);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;programming.show_book();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;word.show_book();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, класс объявляет</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count</I> как</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static int.</I> Сразу 
+  же за определением класса программа объявляет элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count</I> 
+  как глобальную переменную. Когда программа изменяет элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count,</I> 
+  изменение сразу же проявляется во всех объектах класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>book_series.</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Совместное 
+    использование элементов класса</FONT></B></FONT></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от 
+    вашей программы возможны ситуации, когда вам потребуется совместно использовать 
+    определенные данные несколькими экземплярами объекта. Для этого объявите такой 
+    элемент как static. Далее объявите этот элемент вне класса как глобальную 
+    переменную. Любые изменения, которые ваша программа делает с этим элементом, 
+    будут немедленно отражены в объектах данного класса.</FONT></B></I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"></FONT></B></P>
+</BLOCKQUOTE>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Arial, Helvetica, sans-serif">Использование элементов 
+  с атрибутами <I>public static, если</I> объекты не существуют</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  только что узнали, при объявлении элемента класса как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static</I> 
+  этот элемент совместно используется всеми объектами данного класса. Однако возможны 
+  ситуации, когда программа еще не создала объект, но ей необходимо использовать 
+  элемент. Для использования элемента ваша программа должна объявить его как</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>public</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static.</I> 
+  Например, следующая программа USЕ_MBR.CPP использует элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count</I> 
+  из класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>book_series,</I> 
+  даже если объекты этого класса не существуют:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class book_series </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;static 
+    int page_count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    title [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    price;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int book_series::page_count;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_series::page_count 
+    = 256;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Текущее значение page_count равно "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    book_series::page_count &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном случае, поскольку 
+  класс определяет элемент класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>page_count 
+  </I>как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>public,</I> 
+  программа может обратиться к этому элементу класса, даже если объекты класса</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>book_series</I> не существуют.</FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ СТАТИЧЕСКИХ 
+  ФУНКЦИЙ-ЭЛЕМЕНТОВ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущая 
+  программа иллюстрировала использование <I>статических</I> элементов данных. 
+  Подобным образом C++ позволяет вам определить <I>статические</I> функции-элементы 
+  (методы). Если вы создаете <I>статический</I> метод, ваша программа может вызывать 
+  такой метод, даже если объекты не были созданы. Например, если класс содержит 
+  метод, который может быть использован для данных вне класса, вы могли бы сделать 
+  этот метод <I>статическим. </I>Ниже приведен класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>menu,</I> 
+  который использует esc-последовательность драйвера ANSI для очистки экрана дисплея. 
+  Если в вашей системе установлен драйвер ANSI.SYS, вы можете использовать метод</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>clear_screen</I> для 
+  очистки экрана. Поскольку этот метод объявлен как <I>статический,</I> программа 
+  может использовать его, даже если объекты типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>menu</I> 
+  не существуют. Следующая программа CLR_SCR.CPP использует метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>clear_screen</I> 
+  для очистки экрана дисплея:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class menu </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;static 
+    void clear_screen(void); <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;// 
+    Здесь должны быть другие методы <BR>
+    private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    number_of_menu_options;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void menu::clear_screen(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; '\033' &lt;&lt; "[2J";<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;menu::clear_screen();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Так как программа объявляет 
+  элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>clear_screen</I> 
+  как <I>статический,</I> она может использовать эту функцию для очистки экрана, 
+  даже если объекты типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>menu</I> 
+  не существуют. Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>clear_screen</I> 
+  использует esc-последовательность ANSI Esc[2J для очистки экрана.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><I><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Использование 
+    в ваших программах методов класса</FONT></B></FONT></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере создания 
+    методов класса возможны ситуации, когда функция, созданная вами для использования 
+    классом, может быть полезна для операций вашей программы, которые не включают 
+    объекты класса. Например, в классе</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">menu 
+    была определена функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">clear_screen, 
+    которую вы, возможно, захотите использовать в программе. Если ваш класс содержит 
+    метод, который вы захотите использовать вне объекта класса, поставьте перед 
+    его прототипом ключевое слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">static 
+    и объявите этот метод как public:</FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">public:<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">static 
+      void clear_screen(void);</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Внутри 
+    вашей программы для вызова такой функции используйте оператор глобального 
+    разрешения, как показано ниже:</FONT></B></I></FONT></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">menu::clear_screen();</FONT></B></I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"></FONT></B></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, что, если предварять элемент данных класса ключевым словом</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> все объекты 
+  данного класса могут совместно использовать этот элемент. Когда элемент данных 
+  является <I>общим,</I> ваши программы могут обращаться к его значению, даже 
+  если объекты этого класса не существуют. Подобно этому, если ваши программы 
+  предваряют общий метод класса ключевым словом</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> 
+  они могут использовать эту функцию для операций, которые не включают объекты 
+  класса. Из урока 26 вы узнаете, как использовать наследование для построения 
+  объекта из одного или нескольких уже существующих объектов. Использование наследования 
+  для создания новых объектов может сэкономить огромные усилия, затрачиваемые 
+  на программирование. До изучения урока 26 убедитесь, что освоили следующие основные 
+  концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Когда вы объявляете 
+      элемент класса как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> 
+      то такой элемент может совместно использоваться всеми объектами данного 
+      класса.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> После того как ваша 
+      программа объявляет элемент класса как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static, 
+      </I>она должна вне определения класса объявить глобальную переменную, соответствующую 
+      совместно используемому элементу класса.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если вы объявляете 
+      элемент как</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>public</I> 
+      и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static,</I> 
+      ваша программа может использовать такой элемент, даже если объекты данного 
+      класса не существуют. Для обращения к этому элементу ваша программа должна 
+      использовать оператор глобального разрешения, например <I>class_name::member_name.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если вы объявляете 
+      <I>общую статическую</I> функцию-элемент, ваша программа может вызывать 
+      эту функцию, даже если объекты данного класса не существуют. Для вызова 
+      данной функции программа должна использовать оператор глобального разрешения, 
+      например <I>menu::clear_screen().</I></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 24.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 26.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,550 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 34</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Файловые операции 
+  В/В в C++</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">По 
+  мере усложнения ваших программ они будут сохранять и получать информацию, используя 
+  файлы. Если вы знакомы с файловыми манипуляциями в языке С, вы сможете использовать 
+  подобные методы и в C++. Кроме того, как вы узнаете из этого урока, C++ предоставляет 
+  набор классов файловых потоков, с помощью которых можно очень легко выполнять 
+  операции ввода и вывода (В/В) с файлами. К концу данного урока вы освоите следующие 
+  основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя выходной файловый 
+    поток, вы можете писать информацию в файл с помощью оператора вставки (&lt;&lt;).</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя входной файловый 
+    поток, вы можете читать хранимую в файле информацию с помощью оператора извлечения 
+    (&gt;&gt;).</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для открытия и закрытия 
+    файла вы используете методы файловых классов.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для чтения и записи 
+    файловых данных вы можете использовать операторы вставки и извлечения, а также 
+    некоторые методы файловых классов.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Многие программы, которые 
+  вы создадите в будущем, будут интенсивно использовать файлы. Выберите время 
+  для экспериментов с программами, представленными в данном уроке. И вы обнаружите, 
+  что в C++ выполнять файловые операции очень просто.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ВЫВОД В ФАЙЛОВЫЙ 
+  ПОТОК</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  33 вы узнали, что</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  представляет собой объект типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ostream</I> 
+  (выходной поток). Используя класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ostream,</I> 
+  ваши программы могут выполнять вывод в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout</I> 
+  с использованием оператора вставки или различных методов класса, например</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.put.</I> Заголовочный 
+  файл</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>iostream.h</I> 
+  определяет выходной поток</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cout.</I> 
+  Аналогично, заголовочный файл f<I>stream.h</I> определяет класс выходного файлового 
+  потока с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream.</I> 
+  Используя объекты класса <I>ofstream,</I> ваши программы могут выполнять вывод 
+  в файл. Для начала вы должны объявить объект типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream,</I> 
+  указав имя требуемого выходного файла как символьную строку, что показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">ofstream file_object("FILENAME.EXT");</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  указываете имя файла при объявлении объекта типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream, 
+  C++</I> создаст новый файл на вашем диске, используя указанное имя, или перезапишет 
+  файл с таким же именем, если он уже существует на вашем диске Следующая программа 
+  OUT_FILE.CPP создает объект типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream</I> 
+  и затем использует оператор вставки для вывода нескольких строк текста в файл 
+  BOOKINFO.DAT:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ofstream 
+    book_file("BOOKINFO.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_file 
+    &lt;&lt; "Учимся программировать на языке C++, " &lt;&lt; "Вторая редакция"</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_file 
+    &lt;&lt; "Jamsa Press" &lt;&lt; endl; <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;book_file 
+    &lt;&lt; "22.95" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном случае программа 
+  открывает файл BOOKINFO.DAT и затем записывает три строки в файл, используя 
+  оператор вставки. Откомпилируйте и запустите эту программу. Если вы работаете 
+  в среде MS-DOS, можете использовать команду TYPE для вывода содержимого этого 
+  файла на экран:</FONT></P>
+<BLOCKQUOTE> 
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; TYPE BOOKINFO.DAT 
+    &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Учимся программировать 
+    на языке C++, Вторая редакция</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Jamsa Press</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">$22.95</FONT></B></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, в C++ достаточно 
+  просто выполнить операцию вывода в файл.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТЕНИЕ ИЗ ВХОДНОГО 
+  ФАЙЛОВОГО ПОТОКА</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Только 
+  что вы узнали, что, используя класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream,</I> 
+  ваши программы могут быстро выполнить операции вывода в файл. Подобным образом 
+  ваши программы могут выполнить операции ввода из файла, используя объекты типа 
+  <I>ifstream.</I> Опять же, вы просто создаете объект, передавая ему в качестве 
+  параметра требуемое имя файла:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">ifstream input_file("filename.EXT");</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа FILE_IN.CPP открывает файл BOOKINFO.DAT, который вы создали с помощью 
+  предыдущей программы, и читает, а затем отображает первые три элемента файла:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    one[64], two[64], three[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file 
+    &gt;&gt; one;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file 
+    &gt;&gt; two;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file 
+    &gt;&gt; three;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; one &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; two &lt;&lt; endl; <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; three &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, то, вероятно, предположите, что она 
+  отобразит первые три строки файла. Однако, подобно</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin, 
+  </I>входные файловые потоки используют пустые символы, чтобы определить, где 
+  заканчивается одно значение и начинается другое. В результате при запуске предыдущей 
+  программы на дисплее появится следующий вывод:</FONT></P>
+<BLOCKQUOTE> 
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; FILE_IN &lt;ENTER&gt;</B></FONT><B><FONT FACE="Times New Roman"> 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">учимся</FONT></FONT></B></P>
+  <P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">программировать</FONT></FONT></B></P>
+  <P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">на</FONT></FONT></B></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">Чтение 
+  целой строки файлового ввода</FONT></FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 
+  33 вы узнали, что ваши программы могут использовать</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>cin.getline 
+  </I>для чтения целой строки с клавиатуры. Подобным образом объекты типа <I>ifstream</I> 
+  могут <I>использовать getline для</I> чтения строки файлового ввода. Следующая 
+  программа FILELINE.CPP использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>getline</I> 
+  для чтения всех трех строк файла BOOKINFO.DAT:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    one[64], two[64], three [64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file.getline(one, 
+    sizeof(one)) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file.get 
+    line(two, sizeof(two));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;input_file.getline(three, 
+    sizeof(three)) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; one &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; two &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; three &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае программа успешно читает содержимое файла, потому что она знает, что 
+  файл содержит три строки. Однако во многих случаях ваша программа не будет знать, 
+  сколько строк содержится в файле. В таких случаях ваши программы будут просто 
+  продолжать</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">чтение 
+  содержимого файла пока не встретят конец файла.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПРЕДЕЛЕНИЕ КОНЦА 
+  ФАЙЛА</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обычной 
+  файловой операцией в ваших программах является чтение содержимого файла, пока 
+  не встретится конец файла. Чтобы определить конец файла, ваши программы могут 
+  использовать функцию еоf потокового объекта. Эта функция возвращает значение 
+  0, если конец файла еще не встретился, и 1, если встретился конец файла. Используя 
+  цикл</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>while,</I> 
+  ваши программы могут непрерывно читать содержимое файла, пока не найдут конец 
+  файла, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">while (! input_file.eof()) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;// 
+    Операторы <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае программа будет продолжать выполнять цикл, пока функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>eof</I> 
+  возвращает ложь (0). Следующая программа TEST_EOF.CPP использует функцию</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>eof для</I> чтения содержимого 
+  файла BOOKINFO.DAT, пока не достигнет конца файла:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    line[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (! input_file.eof()) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_file.getline(line, 
+    sizeof(line));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; line &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Аналогично, следующая программа 
+  WORD_EOF.CPP читает содержимое файла по одному слову за один раз, пока не встретится 
+  конец файла:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    word[64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (! input_file.eof()) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_file 
+    &gt;&gt; word;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; word &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">И наконец, 
+  следующая программа CHAR_EOF.CPP читает содержимое файла по одному символу за 
+  один раз, используя функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>get,</I> 
+  пока не встретит конец файла:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (! input_file.eof()) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letter 
+    = input_file.get();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРОВЕРКА ОШИБОК ПРИ 
+  ВЫПОЛНЕНИИ ФАЙЛОВЫХ ОПЕРАЦИЙ</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы, 
+  представленные до настоящего момента, предполагали, что во время файловых операций 
+  В/В не происходят ошибки. К сожалению, это сбывается не всегда. Например, если 
+  вы открываете файл для ввода, ваши программы должны проверить, что файл существует. 
+  Аналогично, если ваша программа пишет данные в файл, вам необходимо убедиться, 
+  что операция прошла успешно (к примеру, отсутствие места на диске, скорее всего, 
+  помешает записи данных). Чтобы помочь вашим программам следить за ошибками, 
+  вы можете использовать функцию fail файлового объекта. Если в процессе файловой 
+  операции ошибок не было, функция возвратит ложь (0). Однако, если встретилась 
+  ошибка, функция fail возвратит истину. Например, если программа открывает файл, 
+  ей следует использовать функцию fail, чтобы определить, произошла ли ошибка, 
+  как это показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">ifstream input_file("FILENAME.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (input_file.fail()) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Ошибка открытия FILENAME.EXT" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;exit(1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Таким образом, программы 
+  должны убедиться, что операции чтения и записи прошли успешно. Следующая программа 
+  TEST_ALL.CPP использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>fail</I> 
+  для проверки различных ошибочных ситуаций:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    line[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file("BOOKINFO.DAT") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (input_file.fail()) cerr &lt;&lt; "Ошибка открытия BOOKINFO.DAT"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while 
+    ((! input_file.eof()) &amp;&amp; (! input_file.fail())) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_file.getline(line, 
+    sizeof(line)) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (! input_file.fail()) cout &lt;&lt; line &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЗАКРЫТИЕ ФАЙЛА, ЕСЛИ 
+  ОН БОЛЬШЕ НЕ НУЖЕН</FONT></H2>
+<I><FONT FACE="Times New Roman"></FONT></I> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При завершении 
+  вашей программы операционная система закроет открытые ею файлы. Однако, как 
+  правило, если вашей программе файл больше не нужен, она должна его закрыть. 
+  Для закрытия файла ваша программа должна использовать функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>close,</I> 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">input_file.close ();</FONT><FONT FACE="Times New Roman"> 
+    </FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  закрываете файл, все данные, которые ваша программа писала в этот файл, сбрасываются 
+  на диск, и обновляется запись каталога для этого файла.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">УПРАВЛЕНИЕ ОТКРЫТИЕМ 
+  ФАЙЛА</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В примерах 
+  программ, представленных в данном уроке, файловые операции ввода и вывода выполнялись 
+  с начала файла. Однако, когда вы записываете данные в выходной файл, вероятно, 
+  вы захотите, чтобы программа добавляла информацию в конец существующего файла. 
+  Для открытия файла в<I> режиме добавления</I> вы должны при его открытии указать 
+  второй параметр, как показано ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">ifstream output_file("FILENAME.EXT", 
+    ios::app);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ios::app</I> 
+  указывает <I>режим открытия файла.</I> По мере усложнения ваших программ они 
+  будут использовать сочетание значений для режима открытия файла, которые перечислены 
+  в табл. 34.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Таблица 
+  34.</I> Значения режимов открытия.</FONT></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=2>
+  <TR> 
+    <TD WIDTH="24%" VALIGN="TOP"> 
+      <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman">Режим открытия</FONT></P>
+      </TD>
+    <TD WIDTH="76%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Назначение</P>
+      </FONT></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::app</TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Открывает файл в режиме добавления, располагая файловый 
+        указатель в конце файла.</P>
+      </FONT> </TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::ate</TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman">Располагает файловый 
+      указатель в конце файла.</FONT></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::in </TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman">Указывает открыть 
+      файл для ввода</FONT>.</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::nocreate</TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Если указанный файл не существует, не создавать файл 
+        и возвратить ошибку.</P>
+      <P ALIGN="JUSTIFY"></P>
+      </FONT></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::noreplace</TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman">Если файл существует, 
+      операция открытия должна быть прервана и должна возвратить ошибку.</FONT></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::out </TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman">Указывает открыть 
+      файл для вывода. </FONT></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="24%" VALIGN="TOP">ios::trunc</TD>
+    <TD WIDTH="76%" VALIGN="TOP"><FONT FACE="Times New Roman">Сбрасывает (перезаписывает) 
+      содержим, з существующего файла.</FONT></TD>
+  </TR>
+</TABLE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  операция открытия файла открывает файл для вывода, используя режим</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ios::noreplace,</I> 
+  чтобы предотвратить перезапись существующего файла:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">ifstream output_file("FIlename.EXT", 
+    ios::out | ios::noreplace);</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ВЫПОЛНЕНИЕ ОПЕРАЦИЙ 
+  ЧТЕНИЯ И ЗАПИСИ</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Все программы, 
+  представленные в данном уроке, выполняли файловые операции над символьными строками. 
+  По мере усложнения ваших программ, возможно, вам понадобится читать и писать 
+  массивы и структуры. Для этого ваши программы могут использовать функции</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>read</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>write.</I> 
+  При использовании функций</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>read</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>write</I> вы 
+  должны указать буфер данных, в который данные будут читаться или из которого 
+  они будут записываться, а также длину буфера в байтах, как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">input_file.read(buffer, 
+    sizeof(buffer)) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">output_file.write(buffer, 
+    sizeof(buffer));</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Например, следующая программа 
+  STRU_OUT.CPP использует функцию <I>write</I> для вывода содержимого структуры 
+  в файл EMPLOYEE.DAT:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;struct 
+    employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char name[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+    age;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    worker = { "Джон Дой", 33, 25000.0 };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ofstream 
+    emp_file("EMPLOYEE.DAT") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;emp_file.write((char 
+    *) &amp;worker, sizeof(employee));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>write</I> 
+  обычно получает указатель на символьную строку. Символы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(char 
+  *)</I> представляют собой оператор приведения типов, который информирует компилятор, 
+  что вы передаете указатель на другой тип. Подобным образом следующая программа 
+  STRU_IN.CPP использует метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>read 
+  для</I> чтения из файла информации о служащем:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;struct 
+    employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{ <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char name [6 4] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+    age;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    worker = { "Джон Дой", 33, 25000.0 };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    emp_file("EMPLOYEE.DAT");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;emp_file.read((char 
+    *) &amp;worker, sizeof(employee));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; worker.name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; worker.age &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; worker.salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере 
+  усложнения ваших программ вы регулярно будете использовать файловые операции. 
+  Выберите время для экспериментов с программами, представленными в этом уроке. 
+  Из урока 35 вы узнаете, как улучшить производительность ваших программ с использованием 
+  встроенных функций. Прежде чем перейти к уроку 35, убедитесь, что вы изучили 
+  следующее:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Заголовочный файл</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>fstream.h</I> определяет 
+      классы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ifstream</I> 
+      и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream,</I> 
+      с помощью которых ваша программа может выполнять операции файлового ввода 
+      и вывода.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для открытия файла 
+      на ввод или вывод вы должны объявить объект типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ifstream</I> 
+      или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>ofstream,</I> 
+      передавая конструктору этого объекта имя требуемого файла.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">После того как ваша 
+      программа открыла файл для ввода или вывода, она может читать или писать 
+      данные, используя операторы извлечения (&gt;&gt;) и вставки (&lt;&lt;).</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваши программы могут 
+      выполнять ввод или вывод символов в файл или из файла, используя функции</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>get</I> и</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>put.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваши программы могут 
+      читать из файла целую строку, используя функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>getline.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Большинство программ 
+      читают содержимое файла, пока не встретится конец файла. Ваши программы 
+      могут определить конец файла с помощью функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>eof.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваши программы 
+      выполняют файловые операции, они должны проверять состояние всех операций, 
+      чтобы убедиться, что операции выполнены успешно. Для проверки ошибок ваши 
+      программы могут использовать функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>fail.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вашим программам 
+      необходимо вводить или выводить такие данные, как структуры или массивы, 
+      они могут использовать методы <I>read</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>write.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа 
+      завершила работу с файлом, его следует закрыть с помощью функции</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>close.</I></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 33.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 35.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

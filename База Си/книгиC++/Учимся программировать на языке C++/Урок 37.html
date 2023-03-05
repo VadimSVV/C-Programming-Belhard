@@ -1,0 +1,415 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 37</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Использование констант 
+  и макрокоманд</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы улучшить 
+  удобочитаемость программы, C++ поддерживает именованные константы и макрокоманды. 
+  Например, используя именованную константу, вы можете заменить цифровое значение, 
+  такое как 50, внутри вашего исходного кода смысловой константой, такой как CLASS_SIZE. 
+  Когда ругой программист читает ваш код, он не сможет предположить, что означает 
+  цифровое значение 50. Если же вместо этого он каждый раз будет видеть СLASS_SIZE, 
+  то он поймет, что это значение соответствует числу студентов в классе. Аналогично, 
+  используя макрокоманды, ваши программы могут заменить сложные выражения типа</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = (х*у-3) * (х*у-3) 
+    * (х*у-3);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">вызовом 
+  функции с именем CUBE, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = CUBE(x*y-3);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае макрокоманда не только улучшает удобочитаемость вашего кода, но и упрощает 
+  ваш оператор, уменьшая вероятность ошибки. Этот урок рассматривает именованные 
+  константы и макрокоманды более подробно. К концу данного урока вы освоите следующие 
+  основные концепции:</FONT></P>
+</FONT> 
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы сделать программы 
+    легче для чтения, программисты часто заменяют цифровые значения более понятными 
+    по смыслу именованными константами.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя именованные 
+    константы в вашей программе вместо цифровых значений, вы можете сделать свои 
+    программы более легкими для изменения в будущем.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ позволяет программам 
+    заменять выражения смысловыми именами макрокоманд.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">До компиляции программы 
+    компилятор C++ запускает специальную программу, называемую <I>препроцессором,</I> 
+    чтобы заменить каждую константу или макрокоманду соответствующим значением.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Макрокоманды выполняются 
+    быстрее, чем функции, но увеличивают размер выполняемой программы.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Большинство компиляторов 
+    C++ имеют предопределенные константы и макрокоманды, которые вы можете использовать 
+    в своих программах.</FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ 
+  ИМЕНОВАННЫХ КОНСТАНТ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Именованная 
+  константа —</I> это просто имя, которому вы присваиваете постоянное значение 
+  (константу). Такая константа в отличие от значения переменной не может изменяться 
+  по мере выполнения программы. Вы создаете именованную константу, используя директиву 
+  препроцессора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>#define</I> 
+  (специальную инструкцию для препроцессора компилятора). Например, следующий 
+  оператор определяет именованную константу CLASS_SIZE как значение 50:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CLASS_SIZE 50</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы отличить 
+  именованную константу от переменной, большинство программистов используют для 
+  именованных констант буквы верхнего регистра. Например, следующая программа 
+  CONSTANT.CPP определяет и выводит именованную константу CLASS_SIZE:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CLASS_SIZE 50 
+    // Число студентов в классе</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Константа CLASS_SIZE равна</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; CLASS_SIZE &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа определяет константу, используя директиву #<I>define</I> в начале 
+  исходного кода. После того как вы определяете константу, вы можете использовать 
+  ее значение на протяжении всей программы, просто обращаясь к имени значения 
+  константы.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Замечание: 
+  Предыдущее определение константы не заканчивается точкой с запятой. Если вы 
+  поставите точку с запятой в конце определения, препроцессор включит ее в ваше 
+  определение. Например, если вы в директиве #define предыдущей программы поставите 
+  точку с запятой после значения 50, препроцессор в дальнейшем каждый экземпляр 
+  константы CLASS_SIZE заменит значением 50 с точкой с запятой (50;), что, очень 
+  вероятно, приведет к синтаксической ошибке.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Что 
+    такое директивы препроцессора</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Прежде чем приступить 
+    к компиляции программы, компилятор C++ запускает специальную программу, которая 
+    называется препроцессором. Препроцессор ищет в программе строки, начинающиеся 
+    с символа #, например #include или #define. Если препроцессор, например, встречает 
+    директиву #include, он включает указанный в ней файл в ваш исходный файл, 
+    как будто бы вы сами печатали содержимое включаемого файла в вашем исходном 
+    коде. Каждая программа, которую вы создали при изучении данной книги, использовала 
+    директиву #include, чтобы заставить препроцессор включить содержимое заголовочного 
+    файла</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">iostream.h 
+    в ваш исходный файл. Если препроцессор встречает директиву</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">#define, 
+    он создает именованную константу или макрокоманду. В дальнейшем, если препроцессор 
+    встречает имя константы или макрокоманды, он заменяет это имя значением, указанным 
+    в директиве #define.</FONT></B></I></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  определяете константы в своих программах, C++ не ограничивает вас в использовании 
+  только цифровых значений. Вы можете также использовать константы для хранения 
+  символьных строк и значений с плавающей точкой. Например, следующая программа 
+  BOOKINFO.CPP использует директиву #<I>define</I> для создания трех констант, 
+  которые содержат информацию об этой книге:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define TITLE "Учимся 
+    программировать на языке C++" <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define LESSON 
+    37 <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define PRICE 22.95</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Название книги: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    TITLE &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Текущий урок: " &lt;&lt; LESSON</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Цена: $" &lt;&lt; PRICE &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; BOOKINFO &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Название книги: Учимся 
+    программировать на языке C++</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Текущий урок: 37</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Цена: $22.95</FONT></B></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>Использование #define 
+    для создания именованных констант</I></B></FONT></P>
+  <P> <I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для улучшения 
+    читаемости ваших программ заменяйте числовые значения в исходном коде константами 
+    со смысловыми именами. Для определения именованной константы ваши программы 
+    должны использовать директиву препроцессора #define. Размещайте свои константы 
+    в верхней части вашего исходного файла. Кроме того, чтобы отличать константы 
+    от переменных, большинство программистов для имен констант используют буквы 
+    верхнего регистра. </FONT></B></I></P>
+  <P> <I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Например, следующая 
+    директива #define создает константу с именем SECONDS_PER_HOUR</FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define SECONDS_PER_HOUR 
+      3600</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Во время компиляции 
+    программы препроцессор C++ будет заменять каждый экземпляр имени SECONDS_PER_HOUR 
+    числовым значением 3600. Обратите внимание, что определение константы не заканчивается 
+    точкой с запятой. Если вы поставите после 3600 точку с запятой, препроцессор 
+    C++ в дальнейшем заменит каждый экземпляр имени SECONDS_PER_HOUR его значением 
+    с точкой с запятой (3600;), что, очень вероятно, приведет к синтаксической 
+    ошибке.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ИМЕНОВАННЫХ 
+  КОНСТАНТ ДЛЯ УПРОЩЕНИЯ ИЗМЕНЕНИЯ КОДА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Кроме того, 
+  что именованные константы делают вашу программу легче для восприятия, они еще 
+  и облегчают модификацию программ. Например, следующий фрагмент кода несколько 
+  раз ссылается на число 50 (количество студентов в классе):</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    test_score8[50];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    grades[50];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    student;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student = 0; student &lt; 50; student++) get_test_score(student);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student =0; student &lt; 50; student++) calculate_grade(student);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student =0; student &lt; 50; student++) print_grade(student) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предположим, 
+  например, что количество студентов в классе увеличилось до 55. В этом случае 
+  вы должны отредактировать предыдущую программу, чтобы заменить каждый экземпляр 
+  значения 50 значением 55. В следующей программе применен другой подход, она 
+  использует именованную константу CLASS_SIZE:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CLASS_SIZE 50 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    test_scores[CLASS_SIZE] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    grades[CLASS_SIZE] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    student;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student = 0; student &lt; CLASS_SIZE; student++) get_test_score(student);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student = 0; student &lt; CLASS_SIZE; student++) calculate_grade(student) 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (student = 0; student &lt; CLASS_SIZE; student++) print_grade(student);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае для изменения количества студентов во всей программе вам необходимо изменить 
+  только одну строку, которая содержит директиву <I>#define,</I> определяющую 
+  эту константу:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CLASS_SIZE 55</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЗАМЕНА ВЫРАЖЕНИЙ 
+  МАКРОКОМАНДАМИ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваши 
+  программы выполняют реальные вычисления, то в общем случае ваш код будет содержать 
+  сложные выражения типа:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = (х*у-3) * (х*у-3) 
+    * (х*у-3);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае программа вычисляет куб выражения (х*у-3). Чтобы улучшить читаемость 
+  вашей программы и уменьшить вероятность внесения ошибок из-за опечаток, создайте 
+  макрокоманду с именем CUBE, которую ваша программа может использовать следующим 
+  образом:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = CUBE(x*y-3);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">И опять 
+  общепринятым среди программистов считается использование больших букв для имен 
+  макрокоманд, чтобы отличить их от функций.</FONT></P>
+</FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для создания 
+  макрокоманды вы должны использовать директиву препроцессора #<I>define.</I> 
+  Например, следующий оператор создает макрокоманду CUBE:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CUBE(x) ((х)*(х)*(х))</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа определяет макрокоманду CUBE для умножения параметра <I>х</I> на самого 
+  себя дважды. Следующая программа SHOWCUBE.CPP использует макрокоманду CUBE для 
+  вывода куба значений от 1 до 10:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CUBE(x) ((x)* 
+    (x)* (x))</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 1; i &lt;= 10; i++) cout &lt;&lt; "Для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; i &lt;&lt; " куб равен "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    CUBE(i) &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При компиляции 
+  этой программы препроцессор C++ заменит каждый экземпляр макрокоманды CUBE соответствующим 
+  определением. Другими словами, замена макрокоманды препроцессором приведет к 
+  следующему коду:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define CUBE(x) ((х)*(х)*(х))<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (int i = 1; i &lt;= 10; i++) cout &lt;&lt; "Для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; i &lt;&lt; " куб равен "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    ((i) * (i) * (i)) &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обратите 
+  внимание, что предыдущая макрокоманда поместила параметр х внутрь круглых скобок, 
+  использовав запись ((х)*(х)*(х)) вместо <I>(х*х*х).</I> При создании макрокоманд 
+  вы должны помещать параметры в круглые скобки, как показано выше, тогда можете 
+  быть уверены, что C++ трактует ваши выражения именно так, как вы хотите. Как 
+  вы помните из урока 5, C++ использует старшинство операций для определения порядка 
+  выполнения арифметических операций. Предположим, например, что программа использует 
+  макрокоманду CUBE с выражением 3+5-2, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = CUBE(3+5-2);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если макрокоманда 
+  заключает свой параметр в круглые скобки, то препроцессор сгенерирует следующий 
+  оператор:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = ((3+5-2) * (3+5-2) 
+    * (3+5-2));</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Однако, 
+  если в определении макрокоманды опустить круглые скобки, препроцессор сгенерирует 
+  следующий оператор:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">result = (3+5-2*3+5-2*3+5-2);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  вычислите оба выражения, то обнаружите, что их результаты отличаются. Заключая 
+  аргументы макрокоманды в круглые скобки, вы избавитесь от подобных ошибок.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧЕМ МАКРОКОМАНДЫ 
+  ОТЛИЧАЮТСЯ ОТ ФУНКЦИЙ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Определение 
+  макрокоманды не является функцией. Если программа использует функцию, то в выполняемую 
+  программу помещается только одна копия операторов функции. Каждый раз при вызове 
+  функции ваша программа помещает параметры в стек и затем выполняет переход к 
+  коду функции. После завершения функции программа удаляет параметры из стека 
+  и переходит обратно к оператору, который следует непосредственно за вызовом 
+  функции.</FONT></P>
+</FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В случае 
+  с макрокомандой препроцессор заменяет в вашем коде каждую ссылку на макрокоманду 
+  соответствующим определением макрокоманды. Например, если предыдущая программа 
+  использует макрокоманду CUBE в 100 различных местах, препроцессор подставит 
+  код макрокоманды 100 раз. Используя макрокоманды, вы избегаете издержек на вызов 
+  функции (издержек на помещение параметров в стек и удаление их оттуда, а также 
+  издержек на выполнение перехода к коду функции и возврат из него). Это происходит 
+  благодаря тому, что в случае с макрокомандой препроцессор встраивает в тело 
+  программы соответствующие операторы. Однако, поскольку препроцессор заменяет 
+  каждую ссылку на макрокоманду соответствующим кодом, макрокоманды увеличивают 
+  размер вашей выполняемой программы.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ МАКРОКОМАНД 
+  ПРЕДОСТАВЛЯЕТ БОЛЬШУЮ ГИБКОСТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы можете 
+  использовать макрокоманды в своих программах различным образом. Однако имейте 
+  в виду, что цель использования макрокоманд состоит в упрощении кодирования и 
+  улучшении восприятия ваших программ. Следующая программа MACDELAY.CPP иллюстрирует 
+  гибкость макрокоманд. Кроме того, эта программа поможет вам лучше представить, 
+  как препроцессор заменяет имя макрокоманды соответствующими операторами:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#define delay(х) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ \<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Задержка на</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; х</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; \ <BR>
+    &nbsp;&nbsp;&nbsp;for (long int i=0; i &lt; х; i++) \ <BR>
+    &nbsp;&nbsp;&nbsp;; \<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;delay(l00000L);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;delay(200000L);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;delay(300000L);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае, поскольку определение макрокоманды занимает несколько строк, это определение 
+  помещает один символ обратного слэша (\) в конце каждой строки, которая имеет 
+  продолжение. Когда препроцессор встретит ссылку на макрокоманду, он заменит 
+  эту ссылку операторами, которые появляются в определении макрокоманды.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Макрокоманды 
+  и именованные константы предназначены для улучшения восприятия ваших программ 
+  и упрощения программирования. Данный урок описывает создание и использование 
+  именованных констант и макрокоманд в ваших кодах. Из урока 38 вы узнаете, что 
+  такое полиморфизм, который позволяет объектам изменять форму во время выполнения 
+  программы. Однако, прежде чем приступить к уроку 38, убедитесь, что вы освоили 
+  следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Макрокоманды 
+      и именованные константы облегчают чтение ваших программ, заменяя сложные 
+      выражения и числовые константы смысловыми именами.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Заменяя 
+      на протяжении всей программы числовые выражения именованными константами, 
+      вы уменьшаете количество изменений, которые вам придется выполнить позже, 
+      если значение константы потребуется изменить.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В процессе компиляции 
+      компилятор C++ использует специальную программу, которая называется препроцессором, 
+      для замены каждой именованной константы или макрокоманды соответствующим 
+      значением.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Макрокоманды 
+      выполняются быстрее функций, но они увеличивают размер вашей выполняемой 
+      программы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      определение макрокоманды выходит за пределы одной строки, вы должны в конце 
+      каждой строки поместить символ обратного слэша (\), чтобы информировать 
+      препроцессор о том, что определение продолжается на следующей строке.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 36.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 38.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

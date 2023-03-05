@@ -1,0 +1,342 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 27</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Множественное наследование</FONT></H2>
+<P><FONT FACE="Times New Roman"></FONT><FONT FACE="Times New Roman" SIZE="3">Из 
+  урока 26 вы узнали, что можно построить один класс из другого, наследуя его 
+  характеристики. Оказывается, C++ позволяет порождать класс из нескольких базовых 
+  классов. Когда ваш класс наследует характеристики нескольких классов, вы используете 
+  множественное наследование. Как вы узнаете из данного урока, C++ полностью поддерживает 
+  множественное наследование. К концу этого урока вы изучите следующие основные 
+  концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+    вы порождаете класс из нескольких базовых классов, то получаете преимущества 
+    множественного наследования.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+    множественном наследовании производный класс получает атрибуты двух или более 
+    классов.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+    использовании множественного наследования для порождения класса конструктор 
+    производного класса должен вызвать конструкторы всех базовых классов.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+    порождении класса из производного класса вы создаете иерархию наследования 
+    (иерархию классов).</FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Множественное 
+  наследование является мощным инструментом объектно-ориентированного программирования. 
+  Экспериментируйте с программами, представленными в этом уроке, и вы обнаружите, 
+  что построение класса из уже существующего значительно экономит усилия на программирование.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРОСТОЙ ПРИМЕР</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предположим, 
+  к примеру, у вас есть класс computer_screen:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class computer_screen 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer_screen(char 
+    *, long, int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_screen(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    type[32] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    colors;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    x_resolution;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    y_resolution;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предположим, 
+  что у вас есть также класс mother_board:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class mother_board </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;mother_board(int, 
+    int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_mother_board(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    processor;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    speed;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    RAM;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя 
+  эти два класса, можно породить класс computer, что показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class computer : public 
+    computer_screen, public mother_board</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer(char 
+    *, int, float, char *, long, int, int, int, int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_computer(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    hard_disk;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    floppy;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, этот класс указывает свои базовые классы сразу после двоеточия, следующего 
+  за именем класса computer.</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class computer : <U>public 
+    computer_screen, public mother_board</U> //</FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">——————&gt; 
+    Базовые классы</FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа COMPUTER. CPP порождает класс computer, используя базовые классы computer_screen 
+  и mother_board:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> #include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class computer_screen 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer_screen(char 
+    *, long, int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_screen(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    type[32];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    colors;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    x_resolution;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    y_resolution;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">computer_screen::computer_screen(char 
+    *type, long colors, int x_res, int y_ree) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(computer_screen::type, 
+    type);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer_screen::colors 
+    = colors;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer_screen::x_resolution 
+    = x_res;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer_screen::y_resolution 
+    = y_res;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void computer_screen::show_screen(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Тип экрана: " &lt;&lt; type &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Цветов: " &lt;&lt; colors &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Разрешение: " &lt;&lt; x_resolution</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    " на</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" &lt;&lt; 
+    y_resolution &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class mother_board </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;mother_board(int, 
+    int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_mother_board(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    processor;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    speed;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    RAM;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">mother_board::mother_board(int 
+    processor, int speed, int RAM) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;mother_board::processor 
+    = processor;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;mother_board::speed 
+    = speed;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;mother_board::RAM 
+    = ram;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void mother_board::show_mother_board(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Процессор: " &lt;&lt; processor &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Частота: " &lt;&lt; speed &lt;&lt; "МГц" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "ОЗУ: " &lt;&lt; RAM &lt;&lt; " МВайт" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class computer : public 
+    computer_screen, public mother_board </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer(char 
+    *, int, float, char *, long, int, int, int, int, int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_computerf void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    hard_disk;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    floppy;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">computer::computer(char 
+    *name, int hard_disk, float floppy, char *screen, long colors, int x_res, 
+    int y_res, int processor, int speed, int RAM) : computer_screen(screen, colors, 
+    x_res, y_res), mother_board(processor, speed, ram)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(computer::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer::hard_disk 
+    = hard_disk;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer::floppy 
+    = floppy;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void computer::show_computer(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Тип: " &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Жесткий диск: " &lt;&lt; hard_disk &lt;&lt; "МВайт" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Гибкий диск: " &lt;&lt; floppy &lt;&lt; "МВайт" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_mother_board();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_screen();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;computer 
+    my_pc("Compaq", 212, 1.44, "SVGA", 16000000, 640, 480, 486, 66, 8);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;my_pc.show_computer();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+  вы проанализируете конструктор класса computer, то обнаружите, что он вызывает 
+  конструкторы классов mother_board и computer_screen, как показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">computer::computer(char 
+    *name, int hard_disk, float floppy, char *screen, long colors, int x_res, 
+    int y_res, int processor, int speed, int RAM) : </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">computer_screen(screen, 
+    colors, x_res, y_res), mother_board(processor, speed, RAM)</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПОСТРОЕНИЕ ИЕРАРХИИ 
+  КЛАССОВ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании 
+  наследования в C++ для порождения одного класса из другого возможны ситуации, 
+  когда вы порождаете свой класс из класса, который уже, в свою очередь, является 
+  производным от некоторого базового класса. Например, предположим, вам необходимо 
+  использовать класс сотputer базовый для порождения класса workstation, как показано 
+  ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class work_station : 
+    public computer </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;work_station 
+    (char *operating_system, </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">char 
+    *name, int hard_disk, float floppy, </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">char 
+    *screen, long colors, int x_res, int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_res,</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">int 
+    processor, int speed, int RAM);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_work_station(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    operating_system[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Конструктор класса workstation 
+  просто вызывает конструктор класса computer, который в свою очередь вызывает 
+  конструкторы классов сотрuter_screen и mother_board:</FONT></P>
+<BLOCKQUOTE> 
+  <BLOCKQUOTE>
+    <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">work_station::work_station( 
+      char *operating_system, char *name, int hard_disk, float floppy, char *screen, 
+      long colors, int &nbsp;&nbsp;&nbsp;x_res, int y_res, int processor, int 
+      speed, int RAM) : </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">computer 
+      (name, hard_disk, floppy, screen, colors, x_res, y_res, &nbsp;&nbsp;&nbsp;processor, 
+      speed, RAM) </FONT></P>
+    <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+      </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(work_station::operating_system, 
+      operating_system);<BR>
+      </FONT>}</P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+  данном случае класс computer выступает в роли базового класса. Однако вы знаете, 
+  что класс computer был порожден из классов computer_screen и mother_board. В 
+  результате класс work_station наследует характеристики всех трех классов. На 
+  рис. 27 показано, что порождение классов приводит к иерархии классов.</FONT></FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><img src="p27.gif" width="455" height="244"></FONT></P>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Рис. 27. 
+  Построение иерархии классов.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваши 
+  программы будут интенсивно использовать наследование, ваша иерархия классов, 
+  а следовательно, и количество наследуемых элементов может стать довольно длинной.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Множественное 
+  наследование представляет собой возможность порождать класс из нескольких базовых 
+  классов. При использовании множественного наследования производный класс получает 
+  характеристики (элементы) существующих базовых классов. Поддержка множественного 
+  наследования в C++ предоставляет вашим программам огромные возможности объектно-ориентированного 
+  программирования. Из урока 28 вы узнаете, как обеспечить доступ к частным элементам 
+  класса со стороны других классов или функций других классов, которые вы указываете 
+  как друзей. Используя таких друзей, вы можете предоставить определенным функциям 
+  прямой доступ к элементам класса, одновременно обеспечивая их защиту от остальной 
+  части программы. Прежде чем перейти к уроку 28, убедитесь, что вы изучили следующее:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Множественное 
+      наследование является способностью порожденного класса наследовать характеристики 
+      нескольких базовых классов.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      порождения класса из нескольких базовых после имени нового класса и двоеточия 
+      вы указываете имена базовых классов, разделяя их запятыми, например class 
+      cabbit: public cat, public rabbit.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+      определении конструктора производного класса вы должны вызвать конструкторы 
+      всех базовых классов, передавая им необходимые параметры.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+      порождении классов может случиться так, что используемый вами базовый класс 
+      реально порожден из других базовых классов. Если так, то ваша программа 
+      создает иерархию классов. Если вызывается конструктор вашего производного 
+      класса, то вызываются также и конструкторы наследуемых классов (последовательно).</FONT></FONT><FONT FACE="Times New Roman"></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 26.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 28.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

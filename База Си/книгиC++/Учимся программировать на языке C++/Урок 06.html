@@ -1,0 +1,253 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 6</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Чтение ввода с клавиатуры</FONT></H2>
+<B><FONT FACE="Courier New" SIZE=4></FONT></B> 
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В этой книге ваши программы 
+  использовали выходной поток <I>cout</I> для отображения вывода на экран. Из 
+  данного урока вы узнаете, что C++ обеспечивает входной поток с именем <I>cin,</I> 
+  из которого программы могут читать информацию, введенную пользователем с клавиатуры. 
+  При использовании <I>cin </I>для чтения ввода с клавиатуры вы указываете одну 
+  или несколько переменных, которым <I>cin</I> будет присваивать входные значения. 
+  К тому времени, когда вы закончите этот урок, вы освоите следующие основные 
+  концепции:</FONT> </P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Вы можете использовать 
+    входной поток <I>cin</I> для присваивания определенным переменным символов 
+    и чисел, введенных с клавиатуры.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> При применении <I>cin</I> 
+    для чтения и присваивания переменной значения, введенного с клавиатуры, можно 
+    использовать содержимое переменной так, как если бы ваша программа использовала 
+    оператор присваивания для сохранения значения в переменной.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Когда ваша программа 
+    использует <I>cin</I> для выполнения ввода с клавиатуры, остерегайтесь ошибок 
+    переполнения и ошибок, возникающих при вводе пользователем значения неверного 
+    типа.</FONT> </LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже знаете, если 
+  ваши программы используют выходной поток <I>cout,</I> они помещают данные в 
+  поток с помощью оператора вставки (&lt;&lt;). Подобным образом, если ваши программы 
+  применяют <I>cin</I> для чтения ввода с клавиатуры, они будут использовать оператор 
+  <I>извлечения</I> (&gt;&gt;).</FONT> </P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПЕРВОЕ ЗНАКОМСТВО 
+  С cin </FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Точно так же как выходной 
+  поток <I>cout</I> позволяет вашим программам записать вывод на экран, входной 
+  поток <I>cin</I> позволяет программам читать ввод с клавиатуры. Когда программы 
+  используют <I>cin</I> для чтения ввода с клавиатуры, они должны указать переменную, 
+  в которую <I>cin</I> поместит данные. Следующая программа FIRSTCIN.CPP использует 
+  <I>cin</I> для чтения числа, введенного с клавиатуры. Программа присваивает 
+  введенное число переменной с именем <I>number,</I> а затем выводит значение 
+  переменной, используя выходной поток <I>cout:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt; </FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int number; <I>II</I> Число, читаемое с клавиатуры<BR>
+    &nbsp;&nbsp;&nbsp;cout<B> &lt;&lt;</B> "Введите ваше любимое число и нажмите 
+    Enter: ";<BR>
+    &nbsp;&nbsp;&nbsp;cin &gt;&gt; number;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Ваше любимое число равно " &lt;&lt; number 
+    &lt;&lt; endl;<BR>
+    } </FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы откомпилируете 
+  и запустите эту программу, на вашем экране появится сообщение, предлагающее 
+  вам ввести ваше любимое число. Если вы введете число и нажмете<B> ENTER,</B> 
+  программа присвоит ввод переменной <I>number.</I> Затем, используя <I>cout,</I> 
+  программа выведет сообщение, отображающее ваше любимое число. </FONT></P>
+<P> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая программа TWONBRS.CPP 
+  запрашивает у вас два числа. Программа присваивает числа переменным <I>first</I> 
+  и <I>second.</I> Затем программа выводит числа, используя <I>cout:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int first, second; // Числа, введенные с клавиатуры<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Введите два числа и нажмите Enter: ";<BR>
+    &nbsp;&nbsp;&nbsp;cin &gt;&gt; first &gt;&gt; second;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Были введены числа " &lt;&lt; first &lt;&lt; 
+    " и " &lt;&lt; second &lt;&lt; endl;<BR>
+    }</FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обратите внимание на использование 
+  с <I>cin</I> двух операторов извлечения: </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">cin 
+    &gt;&gt; first &gt;&gt; second;</FONT></FONT></P>
+</BLOCKQUOTE> 
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В этом случае <I>cin</I> 
+  присвоит первое введенное значение переменной <I>first,</I> a второе переменной 
+  <I>second.</I> Если для вашей программы требуется третье значение, вы можете 
+  использовать третий оператор извлечения, как показано </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">ниже: 
+  </FONT></P>
+<FONT FACE="Times New Roman"></FONT>
+<BLOCKQUOTE>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">cin 
+    &gt;&gt; first &gt;&gt; second &gt;&gt; third;</FONT></FONT></P>
+</BLOCKQUOTE> 
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы применяете <I>cin</I> 
+  для чтения чисел с клавиатуры, <I>cin</I> использует левый <I>пустой символ</I> 
+  (пробел, табуляцию, возврат каретки), чтобы определить, где начинается одно 
+  значение, а где второе. Экспериментируйте с программой TWONBRS, разделяя числа 
+  табуляцией, пробелом и возвратом каретки. </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтение 
+    ввода с клавиатуры с помощью cin</FONT></B></I></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>Для чтения ввода 
+    с клавиатуры программы могут использовать входной поток cin. При использовании 
+    cin вы должны указать переменную, в которую cin помещает данные. Затем используйте 
+    оператор извлечения </B></I></FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>(&gt;&gt;) 
+    для направления данных, как показано ниже: </B></I></FONT></FONT></P>
+  <BLOCKQUOTE>
+    <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>cin 
+      &gt;&gt; some_variable;</B></I></FONT></FONT></P>
+  </BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>Оператор 
+    извлечения называется так, потому что он извлекает (удаляет) данные из входного 
+    потока, присваивая значение указанной переменной. </B></I></FONT></FONT></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Arial"><FONT FACE="Arial, Helvetica, sans-serif">Следите за ошибками 
+  переполнения</FONT></FONT></H3>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваши программы выполняют 
+  ввод с использованием <I>cin,</I> остерегайтесь возможных ошибок, возникающих 
+  при вводе пользователем неверного числа. Например, запустите программу FIRSTCIN, 
+  которую вы только что создали. Когда программа запросит вас ввести ваше любимое 
+  число, введите число 1000000 и нажмите<B> ENTER.</B> При этом программа не сможет 
+  отобразить число 1000000 в качестве введенного значения. Вместо этого возникнет 
+  ошибка переполнения, так как 1000000 превышает наибольшее значение, которое 
+  может хранить тип <I>int.</I> </FONT></P>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы внимательно рассмотрите 
+  программу FIRSTCIN. CPP, то обратите внимание, что <I>cin</I> присваивает введенное 
+  число переменной типа <I>int.</I> Как вы узнали из урока 4, переменные типа 
+  <I>int</I> могут хранить значения только в диапазоне от -32768 до 32767. Поскольку 
+  переменная типа <I>int не</I> может вместить значение 1000000, возникает ошибка. 
+  Запустите программу еще несколько раз, вводя отрицательные и положительные числа. 
+  Обратите внимание на ошибки, которые возникают, если вы выходите за допустимые 
+  пределы значений для той переменной, в которую <I>cin</I> помещает ввод. </FONT></P>
+<H3><FONT FACE="Arial, Helvetica, sans-serif">Следите за ошибками несовпадения 
+  типов</FONT></H3>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как уже обсуждалось, программа 
+  FIRSTCIN.CPP предполагает, что пользователь вводит значение в диапазоне от -32768 
+  до 32767. Если вместо ввода числа вне этого диапазона, пользователь вводит буквы 
+  или другие символы, то возникает другая ошибка — <I>ошибка несовпадения типов.</I> 
+  Другими словами, программа ожидала значение одного типа <I>(int),</I> а пользователь 
+  ввел значение другого типа <I>(char).</I> Для примера запустите программу второй 
+  раз. Когда программа запросит число, введите буквы АВС. Как и раньше, возникнет 
+  ошибка, поскольку программа ожидает целое число, а не буквы. </FONT></P>
+<FONT FACE="Times New Roman">
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Выполните подобные эксперименты 
+  с программой TWONBRS, вводя бессмысленные значения или числа с плавающей точкой. 
+  Вы обнаружите, что программа наталкивается на те же ошибки. В последующих уроках 
+  вы научитесь выполнять операции ввода таким образом, чтобы уменьшить возможность 
+  подобных ошибок. А сейчас просто помните, что такие ошибки могут возникать. 
+  </FONT></P>
+</FONT>
+<H3><FONT FACE="Arial">Чтение символьных данных</FONT></H3>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обе предыдущие программы 
+  использовали <I>cin</I> для чтения целых чисел в переменные типа <I>int.</I> 
+  Следующая программа CIN_CHAR.CPP использует входной поток <I>cin</I> для чтения 
+  символов с клавиатуры. Как видите, программа читает символ в переменную типа 
+  <I>char.</I> </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите любой символ и нажмите Enter: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Был введен символ " &lt;&lt; letter &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Откомпилируйте и поэкспериментируйте 
+  с данной программой, вводя более одного символа и наблюдая за реакцией программы. 
+  Вы обнаружите, что программа каждый раз работает только с одним символом. </FONT></P>
+</FONT>
+<H3><FONT FACE="Arial, Helvetica, sans-serif">Чтение слов с клавиатуры</FONT></H3>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Во второй части данной 
+  книги вы научитесь сохранять слова или даже строки текста в одной переменной. 
+  Там же вы узнаете, как использовать входной поток <I>cin</I> для чтения слов 
+  и целых строк. А сейчас можете создать свою собственную простую программу, которая 
+  читает значения типа <I>float</I> или <I>long. </I>Например, следующая программа 
+  CIN_LONG.CPP использует <I>cin</I> для чтения значения типа <I>long:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;long value;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Введите большое число и нажмите Enter: ";<BR>
+    &nbsp;&nbsp;&nbsp;cin &gt;&gt; value;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Было введено число " &lt;&lt; value &lt;&lt; 
+    endl;<BR>
+    }</FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  и раньше, поэкспериментируйте с этой программой, вводя очень большие числа (и 
+  отрицательные тоже).</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перенаправление 
+    В/В и входной поток cin</FONT></B></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже знаете 
+    из урока 3, если ваши программы используют выходной поток cout, пользователь 
+    может перенаправить вывод программы с экрана дисплея в файл или на принтер. 
+    Как уже обсуждалось, выходной поток cout соответствует стандартному выводу 
+    операционной системы. Подобным образом входной поток cin соответствует стандартному 
+    вводу операционной системы. В результате, если ваша программа использует cin 
+    для выполнения операций ввода, пользователь может перенаправить ввод программы 
+    с клавиатуры на файл. В последующих уроках вы научитесь писать программы, 
+    которые читают и обрабатывают перенаправленный ввод. </FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial"><B><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></B></FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В этом уроке вы научились 
+  использовать входной поток <I>cin для</I> выполнения ввода с клавиатуры. Как 
+  вы уже знаете, если ваши программы используют <I>cin для</I> чтения ввода с 
+  клавиатуры, вам следует указать переменные, которым <I>cin </I>присваивает вводимые 
+  значения. В уроке 7 вы научитесь использовать оператор C++ <I>if,</I> чтобы 
+  позволить программам принимать собственные решения. Однако перед тем, как приступить 
+  к уроку 7, убедитесь, что вы освоили следующие основные концепции: </FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> C++ предоставляет 
+      входной поток <I>cin,</I> который ваши программы могут использовать для 
+      чтения ввода с клавиатуры. </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если программы для 
+      чтения ввода используют <I>cin,</I> они должны указать одну или несколько 
+      переменных, в которые <I>cin</I> будет помещать данные. </FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Чтобы направить ввод в переменную, вам следует использовать <I>cin с </I>оператором 
+      извлечения (&gt;&gt;). </FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> При применении <I>cin 
+      для</I> чтения нескольких значений, <I>cin</I> использует пустые символы 
+      (пробел, табуляция или возврат каретки), чтобы определить, где заканчивается 
+      одно значение и начинается другое. </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если пользователь 
+      вводит неверные данные, могут возникать ошибки переполнения или несоответствия 
+      типов, а значения, присвоенные входным потоком <I>cin</I> переменным вашей 
+      программы, будут неверны.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 05.html">Предыдущий 
+  урок</A> | <A HREF="Урок 07.html">Следующий урок </A></FONT> 
+</CENTER>
+</BODY>
+</HTML>

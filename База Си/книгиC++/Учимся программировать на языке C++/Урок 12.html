@@ -1,0 +1,346 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 12</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Локальные переменные 
+  и область видимости</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, функции позволяют разделить программу на небольшие легко управляемые 
+  части. Все функции, используемые вами до настоящего момента, были совершенно 
+  просты. Как только вашим функциям потребуется выполнить более сложную работу, 
+  они должны будут использовать переменные для реализации своих задач. Переменные, 
+  объявляемые внутри функции, называются <I>локальными переменными.</I> Их значения 
+  и даже сам факт, что локальные переменные существуют, известны только данной 
+  функции, Другими словами, если вы объявляете локальную переменную с именем <I>salary</I> 
+  в функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>payroll,</I> 
+  то другие функции не имеют доступа к значению переменной</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>salary.</I> 
+  Фактически, другие функции не имеют никакого представления о том, что переменная</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>salary</I> существует. 
+  Этот урок рассматривает область видимости переменной, или участок внутри вашей 
+  программы, в котором переменная известна. К концу этого урока вы освоите следующие 
+  основные концепции:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">• Вы 
+    объявляете локальные переменные внутри функции точно так же, как и внутри</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main:</I> указывая 
+    тип и имя переменной.</FONT></P>
+  <FONT FACE="Times New Roman">
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Имена 
+    переменных, используемых внутри функций, должны быть уникальными только по 
+    отношению к данной функции.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Область 
+    видимости переменной определяет участок программы, где переменная известна 
+    и доступна.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Глобальные 
+    переменные в отличие от локальных переменных известны на протяжении всей программы 
+    и доступны внутри всех функций.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Оператор 
+    глобальной области видимости C++ (::) позволяет вам управлять областью видимости 
+    переменной.</FONT></P>
+  </FONT></DIR>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Объявление 
+  локальных переменных внутри функции достаточно просто. Фактически вы уже это 
+  делали каждый раз, когда объявляли переменные внутри</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main.</I></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">ОБЪЯВЛЕНИЕ 
+  ЛОКАЛЬНЫХ ПЕРЕМЕННЫХ</FONT></B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Локальная 
+  переменная</I> представляет собой переменную, определенную внутри функции. Такая 
+  переменная называется <I>локальной,</I> потому что ее известность ограничена 
+  данной функцией. Вы объявляете локальные переменные в начале функции после открывающей 
+  фигурной скобки:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    some_function(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int count;<BR>
+    &nbsp;&nbsp;&nbsp;float result;<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа USEBEEPS.CPP использует функцию so<I>und_speaker,</I> которая заставляет 
+  играть встроенный компьютерный динамик столько раз, сколько указано параметром</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>beeps.</I> Внутри функции 
+  so<I>und_speaker локальная</I> переменная</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>counter</I> 
+  хранит количество звуков, издаваемых динамиком:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt; </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    sound_beeps(int beeps)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;for (int counter = 1; counter &lt;= beeps; counter++) cout 
+    &lt;&lt; '\a';<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;sound_beeps(2);<BR>
+    &nbsp;&nbsp;&nbsp;sound_beeps(3);<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>sound_beeps</I> 
+  объявляет переменную</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>counter</I> 
+  сразу же после открывающей фигурной скобки. Поскольку</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>counter</I> 
+  определяется внутри функции <I>sound_beeps,</I> эта переменная является локальной 
+  по отношению к <I>sound_beeps,</I> и это означает, что только <I>sound_beeps</I> 
+  знает об этой переменной и может к ней обращаться.</FONT></P>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><B>О конфликте 
+  имен</B></FONT> </H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При объявлении 
+  локальных переменных внутри функции очень вероятно, что имя локальной переменной, 
+  объявляемой вами в одной функции, будет таким же<I>,</I> как и имя переменной, 
+  используемой в другой функции. Как уже упоминалось, локальные переменные известны 
+  только в текущей функции. Таким образом, если две функции используют одно и 
+  то же имя для своих локальных переменных, это не приводит к конфликту. C++ трактует 
+  имя каждой переменной как локальное по отношению к соответствующей функции.</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая программа LCLNAME.CPP 
+  использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_values</I> 
+  для сложения двух</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">целочисленных 
+  значений. Эта функция присваивает свой результат локальной переменной</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>value.</I> Однако в</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main</I> один из параметров, 
+  передаваемых в функцию, также носит имя</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>value.</I> 
+  Тем не менее, поскольку C++ трактует обе переменные как локальные для соответствующих 
+  функций, их имена не конфликтуют:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <FONT FACE="Courier New"> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int add_values(int 
+    a,&#9;int b)<BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;int value;</FONT><FONT FACE="Times New Roman, Times, serif"><BR>
+    <FONT SIZE="3">&nbsp;&nbsp;&nbsp;value =a + b;<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(value);<BR>
+    }</FONT></P>
+  </FONT> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main (void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int value = 1001;<BR>
+    &nbsp;&nbsp;&nbsp;int other value = 2002;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; value &lt;&lt; " + " &lt;&lt; other_value 
+    &lt;&lt; <I>"</I> = " &lt;&lt; add_values(value, other_value) &lt;&lt; endl;<BR>
+    }</FONT></P>
+</DIR>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>О 
+    локальных переменных</I></B></FONT> </P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Локальные 
+    переменные представляют собой переменные, объявляемые внутри функции. Имя 
+    и значение локальной переменной известны только функции, внутри которой переменная 
+    объявлена. Вы должны объявлять локальные переменные в начале вашей функции 
+    сразу же после первой открывающей фигурной скобки. Имена, назначаемые локальным 
+    переменным, должны быть уникальными только для функции,</FONT> <FONT SIZE="3">внутри 
+    которой эти переменные определены. При объявлении локальной переменной внутри 
+    функции ее можно инициализировать с помощью оператора присваивания.</FONT></B></I></FONT></P>
+</DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">ГЛОБАЛЬНЫЕ 
+  ПЕРЕМЕННЫЕ</FONT></B></FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, локальная переменная объявляется и известна только в определенной 
+  функции. В дополнение к локальным переменным C++ позволяет вашим программам 
+  объявлять <I>глобальные переменные, </I>которые известны на протяжении всей 
+  программы (глобально для всех функций). Чтобы объявить глобальную переменную, 
+  следует просто поместить объявление переменной в начало вашей программы вне 
+  какой-либо функции:</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int some_global_variable; 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---&gt; 
+    <I>Объявление глобальной переменной</I></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;// Здесь должны быть операторы программы<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа GLOBAL. CPP использует глобальную переменную именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number.</I> 
+  Каждая функция в программе может использовать (или изменять) значение глобальной 
+  переменной. В данном случае каждая функция выводит текущее значение этой переменной, 
+  а затем увеличивает это значение на единицу:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt; </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int number 
+    = 1001;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    first_change(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">(<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "значение number в first_cbange " &lt;&lt; 
+    number &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;number++;<BR>
+    }</FONT></P>
+</DIR>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    second_change(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "значение number в second_change " &lt;&lt; 
+    number &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;number++;<BR>
+    }</FONT></P>
+</DIR>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "значение number в main " &lt;&lt; number 
+    &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;number++;<BR>
+    &nbsp;&nbsp;&nbsp;first_change () ;<BR>
+    &nbsp;&nbsp;&nbsp;second_change();<BR>
+    }</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как правило, 
+  следует избегать использования в ваших программах глобальных переменных. Поскольку 
+  любая функция может изменить значение глобальной переменной, сложно отследить 
+  все функции, которые потенциально могли бы изменить данную переменную. Вместо 
+  этого вашим программам следует объявлять переменную внутри</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main</I> 
+  и затем передавать ее (как параметр) в функции, которым она нужна. (Помните, 
+  что в данной ситуации в стек помещается временная копия этой переменной; оригинал 
+  не изменяется.)</FONT></P>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><B>Если имена глобальных 
+  и локальных переменных конфликтуют</B></FONT> </H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере 
+  возможности следует избегать использования в программах глобальных переменных. 
+  Однако если ваша программа должна использовать глобальную переменную, то может 
+  случиться, что имя глобальной переменной конфликтует с именем локальной переменной. 
+  При возникновении такого конфликта C++ предоставляет приоритет локальной переменной. 
+  Другими словами, программа предполагает, что в случае конфликта каждая</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">ссылка на имя соответствует 
+  локальной переменной.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Однако 
+  могут быть ситуации, когда вам необходимо обратиться к глобальной переменной, 
+  чье имя конфликтует с именем локальной переменной. В таких случаях ваши программы 
+  могут использовать <I>глобальный </I>оператор <I>разрешения</I> С++ (::), если 
+  вы хотите использовать глобальную переменную. Например, предположим, что у вас 
+  есть глобальная и локальная переменные с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number.</I> 
+  Если ваша функция хочет использовать локальную переменную</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number,</I> 
+  она просто обращается к этой переменной, как показано ниже:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">number 
+    = 1001; // обращение к локальной переменной</FONT></P>
+</DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">С другой 
+  стороны, если ваша функция хочет обратиться к глобальной переменной, программа 
+  использует глобальный оператор разрешения, как показано ниже:</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">::number 
+    = 2002; // Обращение к глобальной переменной</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа GLOBLOCA.CPP использует глобальную переменную</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number.</I> 
+  В дополнение к этому функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_numbers</I> 
+  использует локальную переменную с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>number.</I> 
+  Эта функция использует оператор глобального разрешения для обращения к глобальной 
+  переменной:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt; int number = 1001; // Глобальная переменная</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    show_numbers(int number) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Локальная переменная number" &lt;&lt; " содержит 
+    " &lt;&lt; number &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Глобальная переменная number" &lt;&lt; " 
+    содержит " &lt;&lt; ::number &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)<BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;int some_value = 2002;<BR>
+    &nbsp;&nbsp;&nbsp;show_numbers(some_value) ;<BR>
+    }</FONT></P>
+</DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  откомпилируете и запустите эту программу, на вашем экране появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; 
+    GLOBLOCA &lt;ENTER&gt;</B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">Локальная 
+    переменная number содержит 2002</FONT></B></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">Глобальная 
+    переменная number содержит 1001</FONT></B></FONT></P>
+</DIR>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  ваши программы могут выбрать глобальную или локальную переменную с помощью глобального 
+  оператора разрешения. Однако, как вы, вероятно, заметили, использование глобальных 
+  и локальных переменных может вызвать путаницу, которая в свою очередь может 
+  привести к ошибкам. Поэтому по мере возможности избегайте использования глобальных 
+  переменных.</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>О 
+    глобальных переменных</B></FONT></I></FONT></P>
+  <FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Глобальная переменная 
+  представляет собой переменную, чье имя и значение известны на протяжении всей 
+  программы. Для создания глобальной переменной вы объявляете переменную в начале 
+  вашего исходного файла вне какой-либо функции. Все функции, которые следуют 
+  за таким объявлением, могут использовать эту глобальную переменную. Однако, 
+  поскольку злоупотребление глобальными переменными может привести к ошибкам, 
+  следует избегать их использования в ваших программах везде, где это возможно.</FONT></B></I></FONT></DIR>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><B>Представление 
+  об области видимости переменных</B></FONT></H3>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При чтении 
+  книг и журнальных статей по C++ вы можете встретить термин <I>область видимости,</I> 
+  что определяет участок в программе, где имя переменной имеет смысл (и, следовательно, 
+  используется). Для локальной переменной область видимости ограничена функцией, 
+  внутри которой эта переменная объявлена. С другой стороны, глобальные переменные 
+  известны на протяжении всей программы. В результате глобальные переменные имеют 
+  большую область видимости.</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, как объявлять локальные переменные внутри функции. Как только 
+  ваши функции выполняют более или менее существенную работу, им требуются локальные 
+  переменные. В этом уроке представлены также глобальные переменные, чьи имена 
+  и значения известны на протяжении всей программы. Поскольку они могут приводить 
+  к трудно обнаруживаемым ошибкам, лучше избегать использования глобальных переменных, 
+  если только это возможно. Из урока 13 вы узнаете, как C++ позволяет объявлять 
+  две или несколько функций с одним и тем же именем, но с разными параметрами 
+  и типами возвращаемых значений. Перегружая подобным образом имена функций, вы 
+  упрощаете использование функций. Прежде чем перейти к уроку 13, убедитесь, что 
+  вы изучили следующие основные концепции: </FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Локальные переменные 
+      представляют собой переменные, объявленные внутри функции.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Локальные переменные 
+      известны только той функции, внутри которой они объявлены.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Несколько 
+      функций могут использовать одно и то же имя для локальной переменной без 
+      каких-либо конфликтов.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Глобальная 
+      переменная представляет собой переменную, чье имя и значение известны на 
+      протяжении всей программы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы 
+      объявить глобальную переменную, объявите переменную в начале вашего исходного 
+      файла вне какой-либо функции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Поскольку 
+      глобальные переменные могут быть легко изменены любой функцией, они привносят 
+      возможность появления трудно обнаруживаемьгх ошибок, поэтому избегайте использования 
+      глобальных переменных в своих программах.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 11.html">Предыдущий 
+  урок</A> | <A HREF="Урок 13.html">Следующий урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

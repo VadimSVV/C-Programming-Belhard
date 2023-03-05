@@ -1,0 +1,766 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 7</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Программа принимает 
+  решение</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже знаете, программа 
+  представляет собой последовательность инструкций, выполняемых компьютером для 
+  реализации определенных задач. Все созданные вами до сих пор простые программы 
+  на C++ выполняли операторы по порядку, начиная с первого до конца программы. 
+  По мере усложнения программ вам потребуется, чтобы выполнялся один набор операторов, 
+  если определенное условие соблюдается, и другой набор, если условие не соблюдается. 
+  Другими словами, вам потребуется, чтобы ваши программы приняли решение и соответственно 
+  отреагировали. В этом уроке описывается оператор C++ <I>if,</I> который будет 
+  использоваться вашей программой для принятия подобных решений. К концу данного 
+  урока вы освоите следующие основные концепции:</FONT> </P>
+<UL>
+  <LI><FONT FACE="Times New Roman" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+    Программы на C++ используют <I>операции сравнения,</I> чтобы определить, равны 
+    ли два значения или одно значение больше или меньше другого.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Для принятия решений 
+    используется оператор C++ <I>if.</I> </FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Операторы C++ могут 
+    быть <I>простыми</I> (одна операция) или <I>составными </I>(несколько операций, 
+    сгруппированных внутри правой и левой фигурных скобок {}).</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Ваши программы используют 
+    оператор C++ <I>if-else</I> для выполнения одного набора операторов, если 
+    определенное условие соблюдается, и другого набора операторов, если условие 
+    не соблюдается.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Комбинируя несколько 
+    операторов <I>if-else,</I> программы могут проверять несколько условий.</FONT> 
+  </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используя логические 
+    операторы C++ И и ИЛИ, ваши программы могут проверить несколько условий, например: 
+    <I>Есть ли у пользователя собака И долматин ли это ?</I></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы, 
+  которые принимают решения, выполняют <I>условную обработку.</I> Другими словами, 
+  на основании результата одного или нескольких Условий программа будет выполнять 
+  определенные операторы. Экспериментируйте с программами данного урока; ваш набор 
+  инструментальных средств C++ уже достаточно обширен для создания полезных программ.</FONT></FONT></P>
+<P ALIGN="CENTER"></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СРАВНЕНИЕ ДВУХ ЗНАЧЕНИЙ</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваши программы принимают 
+  решение, они обычно выполняют некоторый вид проверки. Например, одна программа 
+  может проверять, равны ли тестовые очки студента 100, а вторая программа — составляет 
+  ли стоимость покупки больше $50.00. Для выполнения подобных проверок ваши программы 
+  будут использовать операции сравнения C++, перечисленные в табл. 7.1. Операции 
+  сравнения позволяют проверять, каким образом одно значение соотносится с другим. 
+  Другими словами, используя операции сравнения, программы могут проверить, больше 
+  одно значение, меньше или равно другому.</FONT> </P>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>Таблица 7.1.</B></I> 
+  Операции сравнения C++.</FONT> </P>
+<TABLE BORDER=0>
+  <TR> 
+    <TD VALIGN="MIDDLE"> 
+      <P><FONT FACE="Times New Roman" SIZE="3">Операция</FONT> 
+    </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P><FONT SIZE="3">Проверка </FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P><FONT SIZE="3">Пример </FONT> 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">==</FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если два значения равны 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(score == 100) 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">!= </FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если два значения не равны 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(old != new) 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">&gt; </FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если первое значение больше 
+      второго</FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(cost &gt; 50.00) 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">&lt; </FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если первое значение меньше 
+      второго </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(salary &lt; 20000.00) 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">&gt;= </FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если первое значение больше 
+      или равно второму </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(stock_price &gt;= 30.0) 
+      </FONT> </TD>
+  </TR>
+  <TR BORDERCOLOR="1"> 
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P><FONT SIZE="3">&lt;=</FONT> 
+      </FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT FACE="Times New Roman" SIZE=2> 
+      <P>Если первое значение меньше 
+      или равно второму</FONT> </TD>
+    <TD VALIGN="MIDDLE"> <FONT SIZE=2> 
+      <P>(age &lt;= 21) 
+      </FONT> </TD>
+  </TR>
+</TABLE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа использует 
+  операции сравнения для сравнения двух значений, результат сравнения может быть 
+  истиной или ложью. Другими словами, два значения или равны (истина), или нет 
+  (ложь). Каждый из операторов <I>if,</I> представленных в этой книге, использует 
+  операции сравнения, перечисленные в табл. 7.1.</FONT> </P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">ЗНАКОМСТВО 
+  С ОПЕРАТОРОМ <I>if</I></FONT></B> </FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Оператор C++ <I>if</I> 
+  позволяет вашим программам осуществлять проверку и затем на основании этой проверки 
+  выполнять операторы. Формат оператора <I>if </I>следующий:</FONT> </P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Arial" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3">if 
+    (условие_выполняется) оператор;</FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обычно оператор <I>if</I> 
+  выполняет проверку, используя операцию сравнения C++. Если результат проверки 
+  является истиной, <I>if</I> выполняет оператор, который следует за ним. Следующая 
+  программа FIRST_IF.CPP использует оператор <I>if</I> для сравнения значения 
+  переменной <I>test_score</I> со значением 90. Если набранные тестовые очки больше 
+  или равны 90, программа выведет </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>сообщение</I> 
+  пользователю, что он получил А. В противном случае, если значение меньше 90, 
+  программа просто завершается:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></FONT></P>
+  <P><FONT FACE="Arial" SIZE=2><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int test_score = 95;<BR>
+    &nbsp;&nbsp;&nbsp;if (test_score &gt;= 90) cout &lt;&lt; "Поздравляем, вы 
+    получили А!" &lt;&lt; endl;<BR>
+    } </FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, для выполнения проверки программа использует операцию сравнения C++ 
+  "больше или равно" (&gt;=). Если результат сравнения значений является истиной, 
+  программа выполняет оператор, который следует за <I>if</I>, в данном случае 
+  вывод сообщения с использованием <I>cout.</I> Если результат сравнения не является 
+  истинным, программа не выводит сообщение. Экспериментируйте с этой программой, 
+  изменяя проверочные очки (в том числе и меньше 90), и обратите внимание на работу 
+  оператора <I>if.</I> </FONT></P>
+<H3><FONT FACE="Arial">Представление о простых и составных операторах</FONT></H3>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании оператора 
+  <I>if </I>для условной обработки в некоторых случаях, если условие истинно, 
+  программе потребуется выполнить один оператор, а в других случаях несколько 
+  операторов. Когда программа выполняет только один оператор, следующий за <I>if,</I> 
+  такой оператор называется <I>простым оператором:</I></FONT> </P>
+<P ALIGN="LEFT"><FONT SIZE="3" FACE="Times New Roman, Times, serif">if (test_score 
+  &gt;= 90) cout &lt;&lt; "Поздравляем, вы получили A!" &lt;&lt; endl; <B><I>//-------&gt; 
+  Простой оператор</I></B></FONT> </P>
+<FONT FACE="Times New Roman" SIZE=2> </FONT>
+<P><FONT FACE="Times New Roman" SIZE="3">Если программе необходимо выполнить несколько 
+  инструкций, когда результат сравнения — истина, операторы должны быть сгруппированы 
+  внутри левой и правой фигурных скобок {}. Операторы, которые находятся внутри 
+  фигурных скобок, образуют <I>составной оператор,</I> как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (test_score &gt;= 
+    90)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Поздравляем, вы получили A!" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Ваши тестовые очки были " &lt;&lt; test_Score 
+    &lt;&lt; endl;<BR>
+    } <I><B>//-----------------&gt;Составной</B></I> </FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>оператор</I></B></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вам необязательно запоминать 
+  термины "простой" и "составной" операторы, но вы должны знать, что <I>следует 
+  группировать связанные операторы внутри левой и правой фигурных скобок.</I> 
+  Следующая программа COMPOUND.CPP представляет собой измененный вариант предыдущей 
+  и выводит два сообщения, если тестовые очки больше или равны 90:</FONT></P>
+<P ALIGN="LEFT"> 
+<P ALIGN="LEFT"></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    test_score = 95;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (test_score &gt;= 90) </FONT></P>
+  <BLOCKQUOTE> 
+    <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+      </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+      &lt;&lt; "Поздравляем, вы получили А!" &lt;&lt; endl;<BR>
+      </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+      &lt;&lt; "Ваши тестовые очки были " &lt;&lt; test_score &lt;&lt; endl;<BR>
+      </FONT>}<BR>
+  </BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT> </P>
+  <P><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif"><B><I><FONT SIZE="3">Использование 
+    простых и составных операторов</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">При выполнении 
+    условной обработки в некоторых случаях программе необходимо выполнить только 
+    один оператор (простой оператор), если условие истинно. Однако в других случаях 
+    программа должна будет выполнить несколько операторов (составной оператор). 
+    Если в зависимости от результата определенного условия вашей программе нужно 
+    выполнить два или несколько связанных операторов, вы должны сгруппировать 
+    операторы внутри левой и правой фигурных скобок, как показано ниже:</FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (age &gt;= 
+      21)</FONT></B></I></P>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+      &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Все на выборы!" &lt;&lt; endl;<BR>
+      &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Это то, что вам надо!" &lt;&lt; endl;<BR>
+      } </FONT></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПЕРАТОР <I>else</I> 
+  </FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Две предыдущие 
+  программы использовали оператор <I>if,</I> чтобы определить, больше тестовые 
+  очки или равны 90. Если условие было истинным, программы выводили сообщение 
+  на экран. В противном случае, т. е. если тестовые очки были меньше 90, программы 
+  не выводили сообщение, они просто завершались. В большинстве случаев вашим программам 
+  потребуется указать один набор операторов, выполняющийся, если условие истинно, 
+  и второй набор, выполняющийся, если условие ложно. Для указания операторов, 
+  которые должны выполняться, когда условие ложно, ваши программы должны использовать 
+  оператор <I>else.</I> Ниже приведен формат оператора <I>else:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (условие_истинно)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> &nbsp;&nbsp;&nbsp;оператор;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;оператор;</FONT> 
+  </P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа IF_ELSE.CPP использует оператор <I>if,</I> чтобы проверить, больше 
+  тестовые очки или равны 90. Если условие истинно, программа выводит поздравление. 
+  Если условие ложно, программа сообщает, что студент должен работать усерднее:</FONT> 
+</P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">int test_score 
+    =95;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (test_score 
+    &gt;= 90)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Поздравляю, вы получили А!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "В следующий раз вы должны" </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    " работать усерднее!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРИМЕНЕНИЕ СОСТАВНЫХ 
+  ОПЕРАТОРОВ ДЛЯ else </FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, составной оператор представляет собой группу связанных операторов, заключенных 
+  между левой и правой фигурными скобками. Когда программа использует <I>else 
+  для</I> указания операторов, выполняющихся, если условие ложно, то для указания 
+  нескольких операторов можно использовать составной оператор. Следующая программа 
+  CMP_ELSE.CPP использует составные операторы как для <I>if,</I> так и для <I>else:</I> 
+  </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int test_score = 65;<BR>
+    &nbsp;&nbsp;&nbsp;if (test_score &gt;= 90)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; " Поздравляю, 
+    вы получили A!" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Ваши 
+    тестовые очки были " &lt;&lt; test_score &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вы должны 
+    работать усерднее!" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вы потеряли 
+    " &lt;&lt; 100 - test_score &lt;&lt; " очков " &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как и ранее, найдите время 
+  поэкспериментировать с этой программой, изменяя значения переменной <I>test_score</I> 
+  так, чтобы оно было меньше или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">больше 
+  90. Следующая программа GETSCORE.CPP использует входной поток <I>cin</I> для 
+  ввода тестовых очков пользователем. Затем программа сравнивает тестовые очки 
+  со значением 90, выводя соответствующее сообщение:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    test_score;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите тестовые очки и нажмите Enter: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; test_score;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (test_score &gt;= 90) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Поздравляем, вы получили А!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Ваши тестовые очки были " &lt;&lt; test_score &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы должны работать усерднее!" &lt;&lt; endl;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы потеряли " &lt;&lt; 100 - test_score &lt;&lt; " очков " &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+    <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Откомпилируйте 
+  и запустите эту программу. Вы увидите, что при комбинации операций ввода с условной 
+  обработкой ваши программы станут более совершенными.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B><I>Представление об 
+    if-else</I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере усложнения 
+    ваши программы будут проверять разные условия и выполнять один набор операторов, 
+    если условие истинно, и другой набор, если условие ложно. Для выполнения такой 
+    условной обработки программы используют операторы if-else, как показано ниже: 
+    </FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (условие_истинно) 
+      <BR>
+      &nbsp;&nbsp;&nbsp;оператор;<BR>
+      </FONT></B></I><B><I><FONT FACE="Times New Roman, Times, serif" SIZE="3">else<BR>
+      </FONT><FONT FACE="Times New Roman, Times, serif"> </FONT> </I></B><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;оператор;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда программе 
+    требуется выполнить несколько операторов, если условие ложно или истинно, 
+    вы должны сгруппировать связанные операторы внутри левой и правой фигурных 
+    скобок {}: </FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (условие_истинно)</FONT></B></I></P>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;первый_оператор_для_истины;<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;второй_оператор_для_истины;<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">else 
+      <BR>
+      &nbsp;&nbsp;&nbsp;{<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;первый_оператор_для_лжи;<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;второй_оператор_для_лжи;<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ 
+  ОТСТУПОВ ДЛЯ УЛУЧШЕНИЯ УДОБОЧИТАЕМОСТИ ВАШЕЙ ПРОГРАММЫ</FONT></FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Рассматривая 
+  программы, представленные в этой главе, вы увидите, что в них применяются отступы 
+  перед операторами, которые следуют за <I>if, else</I> или левой скобкой. Сдвигая 
+  подобным образом свои операторы на одну или две позиции, вы упрощаете процесс 
+  чтения ваших программ, выделяя связанные группы операторов, как показано ниже: 
+  </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (test_score &gt;= 
+    90) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Поздравляем, вы получили А!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Ваши тестовые очки были " &lt;&lt; test_score &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">else <BR>
+    &nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы должны работать усерднее!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы потеряли " &lt;&lt; 100 - test_score &lt;&lt; " очков " &lt;&lt; 
+    endl;</FONT> <BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании программ используйте 
+  подобные отступы, чтобы программы были более удобочитаемыми. Отступы нужны не 
+  C++, а программистам, которые будут читать и пытаться понять ваш код. </FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">ПРОВЕРКА 
+  ДВУХ ИЛИ БОЛЕЕ УСЛОВИЙ</FONT></FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, оператор <I>if</I> позволяет программам проверять определенные условия. 
+  По мере усложнения ваших программ возникает необходимость в проверке сразу нескольких 
+  условий. Например, программа могла бы проверить, будут ли тестовые очки больше 
+  или равны 90, и получит ли студент оценку А. Подобно этому, вы могли бы проверить, 
+  есть ли у пользователя собака и долматин ли это. Для выполнения таких проверок 
+  можно использовать логическую операцию C++ И (&amp;&amp;). Кроме того, если 
+  вы хотите проверить, есть ли у пользователя собака или кошка, вам следует использовать 
+  логическую операцию ИЛИ (||). Если программы для проверки нескольких условий 
+  используют логические операции И или ИЛИ, поместите каждое условие внутри круглых 
+  скобок, как показано ниже: </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">if <U>((user_owns_a_dog) 
+    &amp;&amp; (dog == dalmatian)) </U> <B><I>//-------------&gt;Полное условие</I></B> 
+    </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа группирует каждое условие внутри своих собственных круглых скобок, 
+  которые затем заключаются во внешние круглые скобки.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">if ((user_owns_a_dog) 
+    &amp;&amp; (dog == dalmatian))</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваша 
+  программа использует логическую операцию И (&amp;&amp;), то результат полного 
+  условия является истинным, только если все проверяемые условия истинны. Если 
+  какое-либо условие ложно, то полное условие становится ложным. Например, если 
+  у пользователя нет собаки, то предыдущее условие является ложным. Подобно этому, 
+  если собака пользователя не долматин, условие является ложным. Чтобы условие 
+  было истинным, у пользователя должна быть собака и она должна быть породы долматин. 
+  Следующий оператор использует логическую операцию ИЛИ (||), чтобы определить, 
+  есть ли у пользователя собака или кошка:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">if ((user_owns_a_dog) 
+    || (user_owns_a_cat))</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании 
+  логической операции ИЛИ полное условие будет истинным, если хотя бы одно условие 
+  является истинным. Например, если у пользователя есть собака, условие истинно. 
+  Если у пользователя есть кошка, условие истинно. Подобно этому, если у пользователя 
+  есть и собака, и кошка, условие истинно. Условие будет ложным только в том случае, 
+  если у пользователя нет ни собаки, ни кошки.</FONT></P>
+<H3 ALIGN="LEFT"><FONT FACE="Arial, Helvetica, sans-serif">В C++ истина представляется 
+  как ненулевое значение, а ложь как 0</FONT></H3>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Достоинством 
+  C++ является то, что истина представляется как любое ненулевое значение, а ложь 
+  как 0. Предположим, ваша программа использует переменную с именем <I>user_owns_a_dog,</I> 
+  чтобы определить, есть ли у пользователя собака или нет. Если у пользователя 
+  нет собаки, вы можете присвоить этой переменной значение 0 (ложь), как показано 
+  ниже:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">user_owns_a_dog = 0;</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если у пользователя есть 
+  собака, вы можете присвоить этой переменной любое ненулевое значение, например 
+  1:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">user_owns_a_dog = 1;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Затем ваши 
+  программы могут проверить эту переменную, используя оператор <I>if,</I> как 
+  показано ниже:</FONT> </P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">if (user_owns_a_dog)</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если переменная 
+  содержит ненулевое значение, условие оценивается как истина; в противном случае, 
+  если переменная содержит 0, условие ложно. Исходя из того, как C++ представляет 
+  истину и ложь, предыдущий оператор идентичен следующему:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">if (user_owns_a_dog == 
+    1)</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа DOG_CAT.CPP использует переменные <I>user_owns_a_dog </I>и<I> user_owns_a_cat</I> 
+  внутри оператора <I>if,</I> чтобы определить, какие животные есть у пользователя.</FONT> 
+</P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void main(void)</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    user_owns_a_dog = 1;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int 
+    user_owns_a_cat = 0;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (user_owns_a_dog)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">cout 
+    &lt;&lt; "Собаки великолепны" &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    (user_owns_a_cat)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">cout 
+    &lt;&lt; "Кошки великолепны" &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    ((user_owns_a_dog) &amp;&amp; (user_owns_a_cat))<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">cout 
+    &lt;&lt; "Собаки и кошки могут ужиться" &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;if 
+    {(user_owns_a_dog) II (user_owns_a_cat))<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">cout 
+    &lt;&lt; "Домашние животные великолепны!" &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Экспериментируйте с этой 
+  программой, присваивая обоим переменным значение 1 или 0, а затем одной 1, а 
+  другой 0 и наоборот. Как видите, проверить два условия очень легко, используя 
+  логические операции И и ИЛИ.</FONT></P>
+<H3 ALIGN="LEFT"><FONT FACE="Arial, Helvetica, sans-serif">Использование 
+  операции НЕ в C++</FONT></H3>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы уже знаете, 
+  что, когда программа проверяет определенное условие, в ряде случаев она должна 
+  выполнить некоторые операторы, если это условие истинно. С другой стороны, вам 
+  может потребоваться, чтобы программа выполнила операторы, если условие является 
+  не истинным. Операция C++ НЕ </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">— 
+  восклицательный знак (!) — позволяет вашим программам проверить, является ли 
+  условие не истинным. Например, следующий оператор проверяет, нет ли у пользователя 
+  собаки:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">if (! user_owns_a_dog)<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "вы должны купить собаку" &lt;&lt; endl;</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Операция НЕ превращает 
+  ложь в истину, а истину в ложь. Например, предположим, что у пользователя нет 
+  собаки. Следовательно, переменная <I>user_owns_a_dog </I>должна содержать значение 
+  0. Если C++ оценивает условие с Помощью операции НЕ, он использует текущее значение 
+  переменной (0) и применяет операцию НЕ. Операция НЕ превращает значение 0 в 
+  1 (истину). </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Таким 
+  образом, полное условие превращается в истину и выполняется соответствующий 
+  оператор.</FONT></P>
+<P ALIGN="LEFT"> 
+<P ALIGN="LEFT"></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа USE_NOT.CPP иллюстрирует использование операции НЕ:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;int user_owns_a_dog = 0;<BR>
+    &nbsp;&nbsp;&nbsp;int user_owns_a_cat = 1;<BR>
+    &nbsp;&nbsp;&nbsp;if (! user_owns_a_dog) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вы должны купить собаку" 
+    &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;if (! user_owns_a_cat) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вы должны купить кошку" 
+    &lt;&lt; endl;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как и раньше, экспериментируйте 
+  со значениями, присваиваемыми переменным <I>user_owns_a_dog</I> и <I>user_owns_a_cat,</I> 
+  и обратите внимание на поведение программы. По мере усложнения ваших программ 
+  вы будете постоянно использовать операцию НЕ. Например, ваша программа может 
+  продолжать повторять обработку, пока <I>не</I> встретит конец файла.</FONT> 
+</P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B><I>Использование логических 
+    операций C++</I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы указываете 
+    условия в программах, то иногда эти условия будут состоять из нескольких частей. 
+    Например, ваша программа может проверять, имеет ли служащий почасовую оплату 
+    и работал ли он более 40 часов на этой неделе. Если для истинности условия 
+    каждая из двух его частей должна быть истиной, вам следует использовать операцию 
+    C++ И (&amp;&amp;). При ,использовании операции И группируйте каждое условие 
+    внутри круглых скобок, а затем оба условия заключите в еще одну пару круглых 
+    скобок, как показано ниже:</FONT> </B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if ((employee_pay 
+      == hourly) &amp;&amp; (employee_hours &gt; 40))<BR>
+      &nbsp;&nbsp;&nbsp; оператор;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда необходимо, 
+    чтобы условие было истинным, если только одна из его частей истинна, вам следует 
+    использовать операцию C++ ИЛИ (|[). Например, следующее условие проверяет, 
+    есть ли у пользователя машина или мотоцикл:</FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if ((vehicle 
+      == car) II (vehicle == motorcycle)) <BR>
+      &nbsp;&nbsp;&nbsp; оператор;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как и ранее, программа 
+    группирует каждое условие внутри скобок. В ряде случаев вам потребуется, чтобы 
+    ваши программы выполняли оператор, если условие является не истинным. В таких 
+    случаях следует использовать операцию C++ НЕ (!). Операция НЕ превращает истину 
+    в ложь, а ложь в истину.</FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Операции C++ И, 
+    ИЛИ и НЕ представляют собой логические операции.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">ОБРАБОТКА 
+  НЕСКОЛЬКИХ УСЛОВИЙ</FONT></FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы, 
+  представленные в этом уроке, использовали <I>if </I>и<I> else,</I> чтобы указать 
+  один набор операторов, который программе следует выполнить, если условие истинно, 
+  и другой набор операторов, выполняемых, если условие ложно. Однако в некоторых 
+  случаях программам потребуется проверить несколько разных условий. Предположим, 
+  например, что вашей программе необходимо определить тестовые очки студента. 
+  Для этого программа должна проверить, больше тестовые очки или равны 90, 80, 
+  70, 60 и т. д. Следующая программа SHOWGRAD.CPP использует для этого серию операторов 
+  <I>if-else:</I> </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    test_score;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите тестовые очки и нажмите Enter: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; test_score;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (test_score &gt;= 90)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Вы получили А!" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    if (test_score &gt;= 80)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Вы получили В!" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">else 
+    if (test_score &gt;= 70)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Вы получили С" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">else 
+    if (test_score &gt;= 60)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Ваша оценка была D" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Вы провалили тест" &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При выполнении 
+  первого оператора <I>if</I> программа проверяет, больше тестовые очки или равны 
+  90. Если это так, программа выводит сообщение пользователю, что он получил А. 
+  В противном случае, если тестовые очки не больше или равны 90, программа выполняет 
+  следующие <I>else if,</I> чтобы проверить, больше ли тестовые очки или равны 
+  80. Программа повторяет данный процесс до тех пор, пока не определит правильную 
+  оценку. Как и ранее, экспериментируйте с этой программой, вводя разные тестовые 
+  очки.</FONT> </P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ОПЕРАТОРА 
+  <I>switch</I></FONT> </H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, комбинируя серии операторов <I>if-else,</I> программы могут проверять 
+  несколько условий. В предыдущей программе использовались операторы <I>if-else,</I> 
+  чтобы определить, находятся ли тестовые очки в данном</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">диапазоне 
+  значений. В тех случаях, когда вашим программам необходимо осуществить проверку 
+  определенных значений, они могут использовать оператор C++ switch.</FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы используете 
+  оператор switch, вы должны указать условие и затем </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">один 
+  или несколько вариантов (case), которые программа попытается сопоставить с условием. 
+  Например, следующая программа SWITCH.CPP использует оператор switch для вывода 
+  сообщения, основываясь на текущей оценке студента:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void main(void) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    grade = 'В';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;switch 
+    (grade) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">case 
+    'A': cout &lt;&lt; "Поздравляем, вы получили А" &lt;&lt; endl; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">break;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">case 
+    'В': cout &lt;&lt; "Хорошо, у вас В" &lt;&lt; endl; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">break;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">case 
+    'С': cout &lt;&lt; "У вас всего лишь С" &lt;&lt; endl; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">break;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">case 
+    'D': cout &lt;&lt; "Плохо, у вас D" &lt;&lt; endl; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">break;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">default: 
+    cout &lt;&lt; "Ужасно! Учите лучше!" &lt;&lt; endl; </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">break;<BR>
+    &nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Оператор <I>switch</I> 
+  состоит из двух частей. Первая часть оператора <I>switch </I>представляет собой 
+  условие, которое появляется после ключевого слова <I>switch.</I> Вторая часть 
+  представляет собой возможные варианты соответствия. Когда программа встречает 
+  оператор <I>switch,</I> она сначала исследует условие, а затем пытается найти 
+  среди возможных вариантов тот, который соответствует условию. Если программа 
+  находит соответствие, выполняются указанные операторы. Например, в предыдущей 
+  программе выбор варианта<B> 'В'</B> соответствует условию. Таким образом, программа 
+  выводит сообщение, что пользователь получил В. Найдите время для эксперимента 
+  с этой программой, изменяя оценку и наблюдая поведение программы. Если же ни 
+  один из указанных вариантов не соответствует условию, то выполняется вариант 
+  <I>default.</I> </FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обратите внимание 
+  на использование оператора <I>break</I> в каждом варианте предыдущей программы. 
+  Оказывается, если C++ встречает вариант, соответствующий условию оператора <I>switch,</I> 
+  то он подразумевает, что все последующие варианты тоже соответствуют условию. 
+  Оператор <I>break</I> указывает C++ завершить текущий оператор <I>switch</I> 
+  и продолжить выполнение программы с первого оператора, следующего за оператором 
+  <I>switch.</I> Если вы удалите операторы <I>break</I> из предыдущей программы, 
+  то программа выведет </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">не 
+  только требуемое сообщение, но и сообщение для всех последующих вариантов (потому 
+  что если один вариант является истинным, то и все последующие варианты в C++ 
+  рассматриваются как истинные).</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого урока 
+  вы узнали, как использовать оператор C++ <I>if для</I> выполнения условной обработки, 
+  которая позволяет вашим программам принимать собственные решения. Как вы знаете, 
+  программы могут использовать оператор <I>if,</I> чтобы выполнить один набор 
+  операторов, когда условие истинно, и <I>else</I> для указания операторов, выполняющихся 
+  программой, если условие ложно. Из урока 8 вы узнаете, как использовать итеративные 
+  операторы C++ для повторения операторов указанное число раз или до тех пор, 
+  пока выполняется определенное условие. Например, вы можете повторять один и 
+  тот же оператор 100 раз, чтобы прибавить 100 студентам тестовые очки. Однако 
+  до изучения урока 8 убедитесь, что вы освоили следующие основные концепции:</FONT> 
+</P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Операции сравнения 
+      C++ позволяют вашим программам проверять, равны ли два значения или нет, 
+      или одно значение больше или меньше другого.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор C++ <I>if</I> 
+      позволяет программе проверять условия и выполнять один или несколько операторов, 
+      если условие истинно.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор C++ <I>else</I> 
+      позволяет указать один или несколько операторов, которые выполняются, если 
+      условие, проверяемое с помощью оператора <I>if,</I> является ложным.</FONT> 
+    </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> C++ представляет 
+      истину, используя любое ненулевое значение, а ложь как 0.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Логические операции 
+      C++ И (&amp;&amp;) и ИЛИ (||) позволяют вашим программам проверять несколько 
+      условий.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Логическая операция 
+      НЕ (!) позволяет программам проверять условие на неистинность.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если в операторе 
+      <I>if или else</I> нужно выполнить несколько операторов, то такие операторы 
+      следует расположить внутри левой и правой фигурных скобок {}.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используйте отступы 
+      при записи операторов программы, чтобы помочь программистам, читающим ваш 
+      код, легко находить связанные операторы.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если вашей программе 
+      необходимо проверить, соответствует ли условие указанным значениям, следует 
+      использовать оператор <I>switch.</I> </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Когда программа встречает 
+      в операторе <I>switch</I> вариант <I>(case),</I> соответствующий условию, 
+      то все последующие варианты рассматриваются как удовлетворяющие условию. 
+      Используя оператор <I>break,</I> вы можете указать C++ прервать оператор 
+      <I>switch</I> и продолжить выполнение программы с первого оператора, который 
+      следует за <I>switch.</I></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+<FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 06.html">Предыдущий 
+урок</A> | <A HREF="Урок 08.html">Следующий урок </A></FONT> 
+</CENTER>
+</BODY>
+</HTML>

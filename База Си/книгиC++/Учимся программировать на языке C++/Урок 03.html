@@ -1,0 +1,542 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial">Урок З</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial"> Вывод сообщений на экран</FONT></H2>
+<B><FONT FACE="Arial" SIZE=4></FONT></B> 
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Все программы 
+  на C++, созданные вами в уроках 1 и 2, использовали выходной поток <I>cout</I> 
+  для вывода сообщений на экран. В этом уроке вы будете использовать <I>cout</I> 
+  для вывода символов, целых чисел, например 1001, и чисел с плавающей точкой, 
+  например 0.12345. К концу данного урока вы освоите следующие основные концепции:</FONT> 
+</P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Для вывода символов 
+    и чисел на экран вы можете использовать выходной поток <I>cout.</I> </FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> В C++ можно использовать 
+    с <I>cout</I> специальные символы для вывода табуляции или новой строки и 
+    даже для воспроизведения звука на вашем компьютере.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman" SIZE="3"> В C++ можно легко отображать числа 
+    в десятичном, восьмеричном (по основанию 8) или шестнадцатеричном (по основанию 
+    16) формате.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используя в командной 
+    строке операционной системы операторы переназначения, вы можете перенаправить 
+    выходные сообщения своей программы, посылаемые в <I>cout,</I> с экрана в файл 
+    или на принтер.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используя выходной 
+    поток <I>cerr,</I> ваши программы могут посылать сообщения на стандартное 
+    устройство ошибок, избавляя пользователей от необходимости переназначения 
+    сообщений.</FONT> </LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Вы можете форматировать 
+    вывод вашей программы, используя модификатор <I>setw</I> внутри выходного 
+    потока.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Почти все создаваемые вами 
+  программы на C++ используют <I>cout</I> для вывода сообщений на экран. Из этого 
+  урока вы узнаете, как лучше использовать сом/.</FONT> </P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial">ИСПОЛЬЗОВАНИЕ cout ДЛЯ ВЫВОДА ЧИСЕЛ</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">До сих пор созданные вами 
+  программы использовали сом/ для вывода <I>символьных строк</I> (букв и чисел, 
+  взятых в кавычки). Теперь вы узнаете, что сом/ можно также использовать для 
+  вывода чисел. Следующая программа 1001.СРР выводит число 1001 на ваш экран:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void main(void) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3"><FONT FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; 1001;<BR>
+    </FONT><FONT FACE="Arial"> }</FONT></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Откомпилируйте и запустите эту программу. 
+  На вашем экране будет отображено число 1001, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">С:\&gt; 1001 &lt;ENTER&gt; 
+    </FONT></B></P>
+  <P><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">1001</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее отредактируйте 
+  программу и измените оператор <I>cout</I>, чтобы вывести число 2002, как показано 
+  ниже:</FONT> </P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; 2002;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Кроме отображения <I>целых 
+  чисел</I> (чисел без десятичной точки), сом/также позволяет вашим программам 
+  отображать <I>числа с плавающей точкой,</I> например 1.2345. Следующая программа 
+  FLOATING.CPP использует сом/для вывода числа 0.12345 на экран:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; 0.12345;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Как и ранее, откомпилируйте 
+  и запустите эту программу. На вашем экране появится следующий вывод:</FONT></P>
+<BLOCKQUOTE> 
+  <P><B><FONT FACE="Times New Roman" SIZE="3">С:\&gt; FLOATING &lt;ENTER&gt;</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman" SIZE="3"> 0.12345</FONT></B></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><B><FONT FACE="Arial">ВЫВОД НЕСКОЛЬКИХ ЗНАЧЕНИЙ ОДНОВРЕМЕННО</FONT></B></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, двойной знак "меньше" является <I>операцией вставки</I> (эта операция 
+  вставляет символы в выходной поток для отображения). С помощью <I>cout</I> вы 
+  можете использовать несколько операций вставки в пределах одного оператора. 
+  Например, следующая программа 1001ТОО.СРР использует эту операцию четыре раза 
+  для отображения числа 1001 на вашем экране:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">(<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; 1 &lt;&lt; 0 &lt;&lt; 0 &lt;&lt; 1;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующее:</FONT></P>
+<BLOCKQUOTE> 
+  <P><B><FONT FACE="Arial" SIZE="3">С:\&gt; 1001TOO &lt;ENTER&gt; </FONT></B></P>
+  <P><B><FONT FACE="Arial" SIZE="3">1001</FONT></B></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Каждый раз, когда в C++ 
+  встречается операция вставки, число или символы просто добавляются к тем, что 
+  находятся в настоящее время в выходном потоке. Следующая программа SHOW1001.CPP 
+  с помощью <I>cout</I> выводит символьную строку и число:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Мое любимое число равно " &lt;&lt; 1001;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обратите внимание, что 
+  пробел, следующий за словом <I>равно</I> (внутри кавычек), служит для отделения 
+  числа 1001 от этого слова. Без пробела число сливается со следующим словом (равно 
+  1001). Подобным образом следующая программа 1001MID.CPP отображает число 1001 
+  в середине символьной строки:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; <I>"Число " &lt;&lt;</I> 1001 &lt;&lt; " мне 
+    очень нравится";<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как и ранее, обратите внимание 
+  на расстановку пробелов до и после числа 1001.</FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Наконец, следующая 
+  программа MIXMATCH.CPP комбинирует строки, символы, целые числа и числа с плавающей 
+  точкой внутри одного и того же выходного потока:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Arial" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "B " &lt;&lt; 20 &lt;&lt; <I>"</I> лет мой оклад был " &lt;&lt; 493.34 
+    &lt;&lt; endl;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Когда вы откомпилируете и запустите эту 
+  программу, на вашем экране появится следующий вывод:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman" SIZE="3"><B><FONT SIZE="3">С:\&gt; MIXMATCH 
+    &lt;ENTER&gt; </FONT></B></FONT></P>
+  <P><FONT SIZE="3"><B><FONT FACE="Times New Roman">В 20 лет мой оклад был 493.34</FONT></B></FONT></P>
+  <P>&nbsp;</P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial">ИСПОЛЬЗОВАНИЕ СПЕЦИАЛЬНЫХ СИМВОЛОВ ВЫВОДА</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Все программы, созданные 
+  вами до сих пор, отображали свой вывод в виде одной строки. Однако большинство 
+  программ, которые вы создадите в дальнейшем, будут отображать несколько строк 
+  вывода. Например, предположим, что вы пишете программу, которая будет выводить 
+  адреса на экран. Вероятно, вы захотите, чтобы адреса появлялись в виде нескольких 
+  строк.</FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Если необходимо переместить 
+  курсор в начало следующей строки, можно поместить <I>символ новой строки</I> 
+  (\n) в выходной поток. В C++ вам предоставляется два разных способа генерации 
+  новой строки. Во-первых, вы можете поместить символы \n внутри символьной строки. 
+  Например, следующая программа TWOLINES.CPP отображает свой вывод в виде двух 
+  строк, используя символ новой строки:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) <BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Это строка один\nЭто строка два";<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Когда вы откомпилируете и запустите эту 
+  программу, символ новой строки обеспечит вывод двух строк, как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman" SIZE="3"><B><FONT SIZE="3">С:\&gt; TWOLINES 
+    &lt;ENTER&gt; </FONT></B></FONT></P>
+  <P><FONT SIZE="3"><B><FONT FACE="Times New Roman">Это строка один </FONT></B></FONT></P>
+  <P><FONT SIZE="3"><B><FONT FACE="Times New Roman">Это строка два</FONT></B></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Если вы не выводите символьную строку, 
+  можете поместить символ новой строки внутри одинарных кавычек. Например, следующая 
+  программа NEWLINES.CPP выводит числа 1, 0, 0 и 1, каждое на своей собственной 
+  строке:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) <BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; 1 &lt;&lt; <I>'\n' &lt;&lt; 0 &lt;&lt;</I> 
+    '\n' &lt;&lt; 0 &lt;&lt; '\n' &lt;&lt; 1;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В дополнение к использованию 
+  символа новой строки для продвижения курсора в начало следующей строки ваши 
+  программы могут использовать символ <I>endl</I> (конец строки). Следующая программа 
+  ENDL.CPP иллюстрирует использование <I>endl </I>для продвижения курсора в начало 
+  новой строки:</FONT> </P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "А теперь..." &lt;&lt; endl <BR>
+    <B>&nbsp;&nbsp;&nbsp;</B>&lt;&lt; "Учимся программировать на языке C++";<BR>
+    <B> </B> } </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Как и ранее, когда вы откомпилируете 
+  и запустите эту программу, на экране будет отображен вывод программы в виде 
+  двух строк:</FONT></P>
+<P ALIGN="LEFT"></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><FONT SIZE="3">C:\&gt; 
+    ENDL &lt;ENTER&gt;</FONT></B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>А теперь</B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Учимся программировать 
+    на языке C++</B></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Наконец, следующая программа ADDRESS.CPP 
+  выводит адрес издательства "Jamsa Press" в несколько строк:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Jamsa Press" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "2975 South Rainbow, Suite I" &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Las Vegas, NV 89102" &lt;&lt; endl;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Arial, Helvetica, sans-serif">Другие специальные символы</FONT></H3>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В дополнение 
+  к символу новой строки, позволяющему вашим программам продвигать курсор в начало 
+  новой строки, вы можете использовать специальные символы, перечисленные в табл. 
+  3.1.</FONT></P>
+<TABLE BORDER=1 >
+  <TR> 
+      <TD VALIGN="MIDDLE" COLSPAN=2> 
+        <P><I><FONT FACE="Times New Roman" SIZE=2>Таблица 3.1.</FONT></I><FONT FACE="Times New Roman" SIZE=2> 
+          Специальные символы для использования с </FONT><I><FONT SIZE=2>cout.</FONT></I> 
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Назначение</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">\а</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Сигнальный (или звонок) символ</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">\Ь</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ возврата</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">V</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ перевода страницы</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\n</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ новой строки</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">\г</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Возврат каретки (не перевод строки)</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\t</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ горизонтальной табуляции</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\v</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ вертикальной табуляции</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\\</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Символ обратный слеш</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\?</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Знак вопроса</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P>\' 
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Одинарные кавычки</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\"</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Двойные кавычки</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\0</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Нулевой символ</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\000</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Восьмеричное значение, например 
+          \007</FONT>
+      </TD>
+    </TR>
+    <TR> 
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT SIZE="3">\xhhhh</FONT>
+      </TD>
+      <TD VALIGN="MIDDLE"> 
+        <P><FONT FACE="Times New Roman" SIZE="3">Шестнадцатеричное значение, например 
+          \xFFFF</FONT>
+      </TD>
+    </TR>
+  </TABLE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>Замечание:</B> 
+  При использовании специальных символов, перечисленных в табл. 3.1, вам следует 
+  располагать их внутри одинарных кавычек, если вы используете данные символы 
+  сами по себе, например '\n', или внутри двойных кавычек, если вы используете 
+  их внутри строки, например "Привem\nMup!".</I> </FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Следующая программа SPECIAL.CPP 
+  использует специальные символы сигнала (\а) и табуляции (\t) для выдачи звука 
+  на встроенный динамик компьютера и затем выводит слова <I>Звонок Звонок Звонок,</I> 
+  разделенные табуляцией:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "3вонок\a\tЗвонок\a\tЗвонок\a";<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial">ВЫВОД ВОСЬМЕРИЧНЫХ И ШЕСТНАДЦАТЕРИЧНЫХ ЗНАЧЕНИЙ</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы, 
+  представленные в этом уроке до сих пор, выводили числа в десятичном виде. В 
+  зависимости от назначения ваших программ вам, возможно, потребуется выводить 
+  числа в восьмеричном или шестнадцатеричном виде. Для этого можно разместить 
+  модификаторы <I>dec,</I> <I>oct </I>и<I> hex</I> внутри выходного потока. Следующая 
+  программа ОСТНЕХ.СРР использует эти модификаторы для вывода значений в десятичном, 
+  восьмеричном и шестнадцатеричном виде:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Восьмеричный: " &lt;&lt; oct &lt;&lt; 10 
+    &lt;&lt; ' ' &lt;&lt; 20 &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Шестнадцатеричный: " &lt;&lt; hex &lt;&lt; 
+    10 &lt;&lt; ' ' &lt;&lt; 20 &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Десятичный: " &lt;&lt; dec &lt;&lt; 10 &lt;&lt; 
+    ' ' &lt;&lt; 20 &lt;&lt; endl;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Когда вы откомпилируете и запустите эту 
+  программу, на экране появится следующий результат:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE="3"><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">С:\&gt; 
+    OCTEX &lt;ENTER&gt; </FONT></B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Восьмеричный: 12 24 
+    </B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Шестнадцатеричный: 
+    а 14 </B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Десятичный: 10 20</B></FONT></P>
+</BLOCKQUOTE>
+<P><I><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Примечание:</B> Когда 
+  вы используете один из модификаторов для выбора восьмеричного, шестнадцатеричного 
+  или десятичного вывода, ваш выбор будет оставаться в силе до тех пор, пока программа 
+  не закончится или пока вы не используете другой модификатор.</FONT></I></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial">ВЫВОД НА СТАНДАРТНОЕ УСТРОЙСТВО ОШИБОК</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, используя <I>cout,</I> вы можете перенаправить вывод программы на устройство 
+  или файл с помощью операторов переназначения вывода операционной системы. Однако, 
+  если ваши программы сталкиваются с </FONT><FONT FACE="Times New Roman" SIZE="3">ошибкой, 
+  вы, вероятно, не захотите, чтобы сообщение об ошибке было перенаправлено с экрана. 
+  Перенаправление сообщений об ошибках в файл может скрыть от пользователя факт 
+  появления ошибки.</FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вашей 
+  программе нужно вывести сообщение об ошибке, вы должны использовать выходной 
+  поток <I>cerr.</I> C++ связывает <I>cerr</I> со стандартным устройством ошибок 
+  операционной системы. Следующая программа CERR.CPP использует выходной поток 
+  <I>cerr</I> для вывода на экран сообщения <I>"Это сообщение появляется всегда 
+  ":</I></FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;cerr &lt;&lt; "Это сообщение появляется всегда";<BR>
+    } </FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Откомпилируйте и запустите эту программу. 
+  Далее попытайтесь перенаправить вывод программы в файл, используя оператор переназначения 
+  вывода: </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT SIZE="3"><B><FONT FACE="Times New Roman">С:\&gt; CERR &gt; FILENAME.EXT 
+    &lt;ENTER&gt;</FONT></B></FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Так как операционная система 
+  не позволит вашим программам перенаправить вывод, записываемый на стандартное 
+  устройство ошибок, сообщение появится на вашем экране. </FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">УПРАВЛЕНИЕ ШИРИНОЙ 
+  ВЫВОДА</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Несколько 
+  предыдущих программ выводили числа на экран. Чтобы гарантировать правильное 
+  отображение этих чисел (с правильной расстановкой пробелов), программы включали 
+  пробелы до и после чисел. При выводе на <I>cout </I>или <I>cerr</I> ваши программы 
+  могут указать ширину вывода каждого числа, используя модификатор <I>setw</I> 
+  (установка ширины). С помощью <I>setw</I> программы указывают минимальное количество 
+  символов, занимаемое числом. Например, следующая программа SETW.CPP использует 
+  модификатор <I>setw </I>для выбора ширины 3, 4, 5 и 6 для числа 1001. Чтобы 
+  использовать модификатор <I>setw,</I> ваша программа должна включать заголовочный 
+  файл <I>iomanip.h:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iomanip.h&gt;</FONT> 
+  </P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Мое любимое число равно" &lt;&lt; setw(3) 
+    &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Мое любимое число равно" &lt;&lt; setw(4) 
+    &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Мое любимое число равно" &lt;&lt; setw(5) 
+    &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Мое любимое число равно" &lt;&lt; setw(6) 
+    &lt;&lt; 1001 &lt;&lt; endl;<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman" SIZE="3">Когда вы откомпилируете и запустите эту 
+  программу, на экране появится следующий вывод:</FONT></P>
+<BLOCKQUOTE> 
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">С:\&gt; SETW &lt;ENTER&gt; 
+    </FONT></B></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Мое любимое число 
+    равно1001 </B></FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Мое любимое число 
+    равно1001 </B></FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Мое любимое число 
+    равно 1001 </B></FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"><B>Мое любимое число 
+    равно 1001</B></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы указываете ширину 
+  с помощью <I>setw,</I> вы указываете <I>минимальное </I>количество символьных 
+  позиций, занимаемых числом. В предыдущей программе модификатор <I>setw(3)</I> 
+  указывал минимум три символа. Однако, так как число 1001 потребовало больше 
+  трех символов, <I>cout</I> использовал реально требуемое количество, которое 
+  в данном случае равнялось четырем. Следует отметить, что при использовании <I>setw</I> 
+  для выбора ширины, указанная ширина действительна для вывода только одного числа. 
+  Если вам необходимо указать ширину для нескольких чисел, вы должны использовать 
+  <I>setw</I> несколько раз. </FONT></P>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>Замечание:</I></B><I> 
+  Предыдущая программа использует заголовочный файл IOMANIP.H. Вам, возможно, 
+  понадобится сейчас напечатать и исследовать содержимое этого файла. Как и в 
+  случае с заголовочным файлом IOSTREAM.H вы найдете данный файл внутри подкаталога 
+  INCLUDE, который находится в каталоге с файлами вашего компилятора.</I></FONT> 
+</P>
+<H2 ALIGN="CENTER"><B><FONT FACE="Arial">ЧТО ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></B></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого урока 
+  вы узнали несколько способов использования <I>cout</I> для отображения вывода 
+  на экран. Все программы, которые вы создадите в процессе изучения оставшейся 
+  части книги, будут использовать <I>cout </I>для отображения вывода. Из урока 
+  4 вы узнаете, как использовать переменные внутри своих программ для хранения 
+  значений, которые могут изменяться в процессе выполнения программы. Однако до 
+  изучения урока 4 убедитесь, что вы освоили следующие основные концепции:</FONT> 
+</P>
+<OL>
+  <OL>
+    <LI><FONT SIZE="3" FACE="Times New Roman, Times, serif"> Выходной поток <I>cout</I> 
+      позволяет вам выводить символы и числа.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используя специальные 
+      символы внутри выходного потока, ваша программа может указать новую строку, 
+      табуляцию и другие специальные возможности.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Для продвижения курсора 
+      в начало следующей строки программы могут создать новую строку, используя 
+      символ \n или модификатор <I>endl.</I> </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Модификаторы <I>dec, 
+      oct</I> и <I>hex</I> позволяют программам выводить значения в десятичном, 
+      восьмеричном и шестнадцатеричном виде.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Используя выходной 
+      поток <I>cerr,</I> программы могут записать сообщения в стандартное устройство 
+      ошибок операционной системы.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> С помощью модификатора 
+      <I>setw</I> ваши программы могут управлять шириной вывода чисел.</FONT> 
+    </LI>
+  </OL>
+</OL>
+<P ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 02.html">Предыдущий 
+  урок</A> | <A HREF="Урок 04.html">Следующий урок</A> </FONT> </P>
+</BODY>
+</HTML>

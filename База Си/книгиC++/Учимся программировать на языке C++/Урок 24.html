@@ -1,0 +1,564 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 24</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Перегрузка операторов</FONT></H2>
+<P> <FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  вы уже знаете, тип переменной определяет набор значений, которые она может хранить, 
+  а также набор операций, которые можно выполнять над этой переменной. Например, 
+  над значением переменной типа int ваша программа может выполнять сложение, вычитание, 
+  умножение и деление. С другой стороны, использование оператора плюс для сложения 
+  двух строк лишено всякого смысла. Когда вы определяете в своей программе класс, 
+  то по существу вы определяете новый тип. А если так, C++ позволяет вам определить 
+  операции, соответствующие этому новому типу.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Перегрузка 
+  оператора</I> состоит в изменении смысла оператора (например, оператора плюс 
+  (+), который обычно в C++ используется для сложения) при использовании его с 
+  определенным классом. В данном уроке вы определите класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string</I> 
+  и перегрузите операторы плюс и минус. Для объектов типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string 
+  </I>оператор плюс будет добавлять указанные символы к текущему содержимому строки. 
+  Подобным образом оператор минус будет удалять каждое вхождение указанного символа 
+  из строки. К концу данного урока вы изучите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы перегружаете операторы 
+    для улучшения удобочитаемости ваших программ, но перегружать операторы следует 
+    только в том случае, если это упрощает понимание вашей программы.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для перегрузки операторов 
+    программы используют ключевое слово C++ <I>operator.</I></FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Переопределяя оператор, 
+    вы указываете функцию, которую C++ вызывает каждый раз, когда класс использует 
+    перегруженный оператор. Эта функция, в свою очередь, выполняет соответствующую 
+    операцию.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша программа 
+    перегружает оператор для определенного класса, то смысл этого оператора изменяется 
+    только для указанного класса, оставшаяся часть программы будет продолжать 
+    использовать этот оператор для выполнения его стандартных операций.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ позволяет перегружать 
+    большинство операторов, за исключением четырех, перечисленных в таблице 24, 
+    которые программы не могут перегружать.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка операторов может 
+  упростить наиболее общие операции класса и улучшить читаемость программы. Найдите 
+  время для эксперимента с</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">программами, 
+  представленными в этом уроке, и вы обнаружите, что перегрузка операторов выполняется 
+  очень просто.</FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПЕРЕГРУЗКА ОПЕРАТОРОВ 
+  ПЛЮС И МИНУС</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  перегружаете оператор для какого-либо класса, то смысл данного оператора не 
+  изменяется для переменных других типов. Например, если вы перегружаете оператор 
+  плюс для класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string,</I> 
+  то смысл этого оператора не изменяется, если необходимо сложить два числа. Когда 
+  компилятор С++ встречает в программе оператор, то на основании типа переменной 
+  он определяет ту операцию, которая должна быть выполнена.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Ниже приведено 
+  определение класса, создающее класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string.</I> 
+  Этот класс содержит один элемент данных, который представляет собой собственно 
+  символьную строку. Кроме того, этот класс содержит несколько различных методов 
+  и пока не определяет каких-либо операторов:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // Конструктор <BR>
+    &nbsp;&nbsp;&nbsp;void str_append(char *);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    chr_minus(char);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, класс определяет 
+  функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>str_append,</I> 
+  которая добавляет указанные символы к содержимому строки класса. Аналогичным 
+  образом функция</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>chr_minus 
+  -</I> удаляет каждое вхождение указанного символа из строки класса. Следующая 
+  программа STRCLASS.CPP использует класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string</I> 
+  для создания двух объектов символьных строк и манипулирования ими.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // Конструктор <BR>
+    &nbsp;&nbsp;&nbsp;void str_append(char *);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    chr_minus(char);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">string::string(char *str) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(data, 
+    str);<BR>
+    } </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::str_append(char 
+    *str)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcat(data, 
+    str);<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::chr_minus(char 
+    letter)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    temp[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i, j;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0, j = 0; data[i]; i++) // Эту букву необходимо удалить? <BR>
+    &nbsp;&nbsp;&nbsp;if (data[i] != letter) // Если нет, присвоить ее temp <BR>
+    &nbsp;&nbsp;&nbsp;temp[j++] = data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;temp[j] 
+    = NULL; // Конец temp<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Копировать содержимое 
+    temp обратно в data <BR>
+    &nbsp;&nbsp;&nbsp;strcpy(data, temp);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::show_string(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; data &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    title( "Учимся программировать на языке C++");<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    lesson("Перегрузка операторов"); <BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.show_string() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.str_append(" 
+    я учусь!");<BR>
+    </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;itle.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.chr_minus('p') 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, программа использует 
+  функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>str_append</I> 
+  для добавления символов к строковой переменной</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>title.</I> 
+  Программа также использует функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>chr_minus</I> 
+  для удаления каждой буквы "<I>р"</I> из символьной строки</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>lesson.</I> 
+  В данном случае программа использует вызовы функции для выполнения этих операций. 
+  Однако, используя перегрузку операторов, программа может выполнять идентичные 
+  операции с помощью операторов плюс (+) и минус (-).</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При перегрузке 
+  оператора используйте ключевое слово C++ <I>operator</I> вместе с прототипом 
+  и определением функции, чтобы сообщить компилятору C++, что класс будет использовать 
+  этот метод как оператор. Например, следующее определение класса использует ключевое 
+  слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>operator,</I> 
+  чтобы назначить операторы плюс и минус функциям</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>str_append</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>chr_minus</I> 
+  внутри класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string:</I></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // Конструктор <BR>
+    &nbsp;&nbsp;&nbsp;void operator +(char *);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    operator -(char); —————<I>Определение операторов класса </I>void show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"></FONT></FONT><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, класс перегружает операторы плюс и минус. Как уже упоминалось, когда 
+  класс перегружает оператор, он должен указать функцию, которая реализует операцию, 
+  соответствующую этому оператору. В случае оператора плюс определение такой функции 
+  становится следующим:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::operator 
+    +(char *str) </FONT></P>
+  <P>{<BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcat(data, 
+    str);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, определение 
+  этой функции не содержит имени, поскольку здесь определяется перегруженный оператор 
+  класса. Для перегрузки оператора плюс программа не изменила обработку, которая 
+  осуществляется внутри функции (код этой функции идентичен коду предыдущей функции 
+  <I>str_append).</I> Вместо этого программа просто заменила имя функции ключевым 
+  словом</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>operators</I> 
+  соответствующим оператором. Следующая программа OPOVERLD.CPP иллюстрирует использование 
+  перегружаемых операторов плюс и минус:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // Конструктор <BR>
+    &nbsp;&nbsp;&nbsp;void operator +(char *);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    operator -(char);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">string::string(char *str) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(data, 
+    str);<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::operator 
+    +(char *str)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcat(data, 
+    str);<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::operator 
+    -(char letter)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    temp[256] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i, j;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0, j = 0; data[i]; i++) if (data[il 1= letter) temp[j++] = data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;temp[j] 
+    = NULL;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(data, 
+    temp);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::show_string(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; data &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;string title( "Учимся программировать на C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    lesson("Перегрузка операторов");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title 
+    + " я учусь!";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.show_string() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson 
+    - 'P';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, программа использует перегруженные операторы:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>title + " я учусь!"; 
+    // Добавить текст</B></FONT> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    я учусь!"</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">lesson - 'р'; // Удалить 
+    букву 'р'</FONT></B></P>
+</BLOCKQUOTE>
+<P> <FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном случае синтаксис 
+  оператора законен, но немного непривычен. Обычно вы используете оператор плюс 
+  в выражении, которое возвращает результат, например, как в операторе</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>some_str = title + "текст 
+  ";.</I> Когда вы определяете оператор, C++ предоставляет вам полную свободу 
+  в отношении поведения оператора. Однако, как вы помните, ваша цель при перегрузке</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">операторов состоит в том, 
+  чтобы упростить понимание ваших программ. Поэтому следующая программа STR_OVER.CPP 
+  немного изменяет предыдущую программу, чтобы позволить ей выполнять операции 
+  над переменными типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string,</I> 
+  используя синтаксис, который более согласуется со стандартными операторами присваивания:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // Конструктор <BR>
+    &nbsp;&nbsp;&nbsp;char * operator +(char *) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    * operator -(char);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256] ;<BR>
+    } </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">string::string(char *str) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(data, 
+    str);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char * string::operator 
+    +(char *str) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(strcat(data, 
+    str));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char * string::operator 
+    -(char letter) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    temp[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i, j;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0, j = 0; data[i]; i++) if (data[i] 1= letter) temp[j++] = data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;temp[j] 
+    = NULL;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(strcpy(data, 
+    temp));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::show_string(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; data &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    <I>title("Учимся</I> программировать на C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    lesson("Перегрузка операторов");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title 
+    = title + <I>" я</I> учусь";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;title.show_string() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson 
+    = lesson - '?';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;lesson.show_string();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Изменив 
+  перегруженные операторы плюс и минус таким образом, чтобы они возвращали указатель 
+  на символьную строку, программа может теперь использовать эти операторы в привычном 
+  для оператора присваивания виде:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>title = title + " 
+    учимся программировать!";</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">lesson = lesson - 
+    'р';</FONT></B></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">Второй 
+  пример</FONT></FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">При 
+  создании ваших собственных типов данных с помощью классов наиболее общей операцией 
+  будет проверка, являются ли два объекта одинаковыми. Используя перегрузку, ваши 
+  программы могут перегрузить операторы равенства (==), неравенства (!=) или другие 
+  операторы сравнения. Следующая программа COMP_STR.CPP добавляет новый оператор 
+  в класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string,</I> 
+  который проверяет, равны ли два объекта</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>string.</I> 
+  Используя перегрузку операторов, ваши программы могут проверять, содержат ли 
+  строковые объекты одинаковые строки, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (some_string == another_string) 
+    </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ниже приведена 
+  реализация программы COMP_STR.CPP:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class string </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string(char 
+    *); // конструктор<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    * operator +(char *);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    * operator -(char);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    operator ==(string);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_string(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    data[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">string::string(char *str) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(data, 
+    str);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char * string::operator 
+    +(char *str) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(strcat(data, 
+    str));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char * string::operator 
+    -(char letter) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    temp[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i, j;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0, j = 0; data[i]; i++) if (data[i] 1= letter) temp[j++] = data[i];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;temp[j] 
+    = NULL;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return(strcpy(data, 
+    temp));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int string::operator 
+    ==(string str) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; data[i] == str.data[i]; i++)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    ((data[i] == NULL) &amp;&amp; (str.data[i] == NULL)) return(1); // Равно<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;return 
+    (0); //He равно <BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void string::show_string(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; data &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    title( "Учимся программировать на C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    lesson("Перегрузка операторов");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;string 
+    str( "Учимся программировать на C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (title == lesson) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "title и lesson равны"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (str == lesson) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "str и lesson равны"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (title == str) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "title и str равны"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT>}</P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, перегружая операторы подобным образом, вы упрощаете понимание ваших 
+  программ.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПЕРАТОРЫ, КОТОРЫЕ 
+  Вbl HE МОЖЕТЕ ПЕРЕГРУЗИТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В общем 
+  случае ваши программы могут перегрузить почти все операторы С++. В табл. 24 
+  перечислены операторы, которые C++ не позволяет перегружать. </FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Таблица 
+  24.</I> Операторы C++, которые ваши программы не могут перегрузить.</FONT></P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=2>
+  <TR> 
+    <TD WIDTH="16%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Оператор</P>
+      </FONT> 
+      <P ALIGN="JUSTIFY">&nbsp;</P>
+    </TD>
+    <TD WIDTH="54%" VALIGN="TOP" > <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Назначение
+      </FONT></TD>
+    <TD WIDTH="30%" VALIGN="TOP" > <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY">Пример</P>
+      </FONT> </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="16%" VALIGN="TOP" ><B>.</B></TD>
+    <TD WIDTH="54%" VALIGN="TOP"><FONT FACE="Times New Roman">Выбор 
+      элемента</FONT></TD>
+    <TD WIDTH="30%" VALIGN="TOP" >object.member </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="16%" VALIGN="TOP" ><B>.*</B></TD>
+    <TD WIDTH="54%" VALIGN="TOP"><FONT FACE="Times New Roman">Указатель 
+      на элемент</FONT></TD>
+    <TD WIDTH="30%" VALIGN="TOP" >object.*member</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="16%" VALIGN="TOP"><B>::</B></TD>
+    <TD WIDTH="54%" VALIGN="TOP"><FONT FACE="Times New Roman">Разрешение 
+      области видимости</FONT></TD>
+    <TD WIDTH="30%" VALIGN="TOP">classname::member </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="16%" VALIGN="TOP" > 
+      <P ALIGN="JUSTIFY"><B>?: </B></P>
+      </TD>
+    <TD WIDTH="54%" VALIGN="TOP"> <FONT FACE="Times New Roman"> 
+      <P ALIGN="JUSTIFY"> Условный оператор сравнения
+      </FONT></TD>
+    <TD WIDTH="30%" VALIGN="TOP" > <FONT FACE="Times New Roman">с</FONT> 
+      =<FONT FACE="Times New Roman"> (а</FONT> &gt; b) ?<FONT FACE="Times New Roman"> 
+      а</FONT> : b;</TD>
+  </TR>
+</TABLE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+  операторов — это возможность назначать новый смысл операторам при использовании 
+  их с определенным классом. Используя перегрузку операторов, вы можете повысить 
+  удобочитаемость ваших программ и облегчить их понимание, выражая операции класса 
+  более понятным образом. Из урока 25 вы узнаете, как разделить данные между объектами 
+  с помощью элемента</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>static</I> 
+  и как использовать методы класса, когда никакие объекты класса не объявляются. 
+  До изучения урока 25 убедитесь, что вы освоили следующее:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Чтобы перегрузить оператор, вы должны определить класс, которому оператор 
+      будет назначен.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Когда вы перегружаете 
+      оператор, перегрузка действует только для класса, в котором он определяется. 
+      Если программа использует оператор с неклассовыми переменными (например, 
+      переменными типа <I>int </I>или</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>float),</I> 
+      используется стандартное определение оператора.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Чтобы перегрузить 
+      оператор класса, используйте ключевое слово C++ <I>operator для</I> определения 
+      метода класса, который C++ вызывает каждый раз, когда переменная класса 
+      использует оператор.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> C++ не позволяет 
+      вашим программам перегружать оператор выбора элемента (.), оператор указателя 
+      на элемент (.*), оператор разрешения области видимости (::) и условный оператор 
+      сравнения (?:).</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 23.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 25.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

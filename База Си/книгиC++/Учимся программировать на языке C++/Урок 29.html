@@ -1,0 +1,284 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 29</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Использование шаблонов 
+  функций</FONT></H2>
+<P><FONT FACE="Arial, Helvetica, sans-serif"></FONT><FONT FACE="Times New Roman" SIZE="3">При 
+  создании функций иногда возникают ситуации, когда две функции выполняют одинаковую 
+  обработку, но работают с разными типами данных (например, одна использует параметры 
+  типа int, а другая типа float). Вы уже знаете из урока 13, что с помощью механизма 
+  перегрузки функций можно использовать одно и то же имя для функций, выполняющих 
+  разные действия и имеющих разные типы параметров. Однако, если функции возвращают 
+  значения разных типов, вам следует использовать для них уникальные имена (см. 
+  примечание к уроку 13). Предположим, например, что у вас есть функция с именем 
+  тах, которая возвращает максимальное из двух целых значений. Если позже вам 
+  потребуется подобная функция, которая возвращает максимальное из двух значений 
+  с плавающей точкой, вам следует определить другую функцию, например fmax. Из 
+  этого урока вы узнаете, как использовать шаблоны C++ для быстрого создания функций, 
+  возвращающих значения разных типов. К концу данного урока вы освоите следующие 
+  основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблон 
+    определяет набор операторов, с помощью которых ваши программы позже могут 
+    создать несколько функций.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы 
+    часто используют шаблоны функций для быстрого определения нескольких функций, 
+    которые с помощью одинаковых операторов работают с параметрами разных типов 
+    или имеют разные типы возвращаемых значений.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблоны 
+    функций имеют специфичные имена, которые соответствуют имени функции, используемому 
+    вами в программе.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">После 
+    того как ваша программа определила шаблон функции, она в дальнейшем может 
+    создать конкретную функцию, используя этот шаблон для задания прототипа, который 
+    включает имя данного шаблона, возвращаемое функцией значение и типы параметров.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+    процессе компиляции компилятор C++ будет создавать в вашей программе функции 
+    с использованием типов, указанных в прототипах функций, которые ссылаются 
+    на имя шаблона.</FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблоны 
+  функций имеют уникальный синтаксис, который может быть на первый взгляд непонятен. 
+  Однако после создания одного или двух шаблонов вы обнаружите, что реально их 
+  очень легко использовать.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОЗДАНИЕ ПРОСТОГО 
+  ШАБЛОНА ФУНКЦИИ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблон 
+  функции определяет типонезависимую функцию. С помощью такого шаблона ваши программы 
+  в дальнейшем могут определить конкретные функции с требуемыми типами. Например, 
+  ниже определен шаблон для функции с именем тах, которая возвращает большее из 
+  двух значений:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class Т&gt; 
+    Т mах(Т а, Т b)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (а &gt; b) return(а);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    return(b);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Буква 
+  T данном случае представляет собой общий тип шаблона. После определения шаблона 
+  внутри вашей программы вы объявляете прототипы функций для каждого требуемого 
+  вам типа. В случае шаблона тах следующие прототипы создают функции типа float 
+  и int.</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">float max(float, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">int max(int, int);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда компилятор 
+  C++ встретит эти прототипы, то при построении функции он заменит тип шаблона 
+  T указанным вами типом. В случае с типом float функция тах после замены примет 
+  следующий вид:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class Т&gt; 
+    Т max(Т а, Т b)</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"></FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (a &gt; b)</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> return(а) 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+    return(b);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">float max(float a, float 
+    b)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (a &gt; b) return(a) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    return(b); <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа МАХ_ТЕМР.СРР использует шаблон тах для создания функции типа int и 
+  float.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class 
+    T&gt; Т mах(Т а, Т b)</FONT></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (a &gt; b) return(a);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    return(b);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">float max(float, float);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">int max(int, int);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Максимум 100 и 200 равен " &lt;&lt; max(100, 200) &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Максимум 5.4321 и 1.2345 равен " &lt;&lt; max(5.4321, 1.2345) &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В процессе компиляции компилятор 
+  C++ автоматически создает операторы для построения одной функции, работающей 
+  с типом int, и второй функции, работающей с типом float. Поскольку компилятор 
+  C++ управляет операторами, соответствующими функциям, которые вы создаете с 
+  помощью шаблонов, он позволяет вам использовать одинаковые имена для функций, 
+  которые возвращают значения разных типов. Вы не смогли бы это сделать, используя 
+  только перегрузку</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">функций, 
+  как обсуждалось в уроке 13.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Использование 
+    шаблонов функций</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере того как 
+    ваши программы становятся более сложными, возможны ситуации, когда вам потребуются 
+    подобные функции, выполняющие одни и те же операции, но с разными типами данных. 
+    Шаблон функции позволяет вашим программам определять общую, или типонезависимую, 
+    функцию. Когда программе требуется использовать функцию для определенного 
+    типа, например int или float, она указывает прототип функции, который использует 
+    имя шаблона функции и типы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">возвращаемого 
+    значения и параметров. В процессе компиляции C++ создаст соответствующую функцию. 
+    Создавая шаблоны, вы уменьшаете количество функций, которые должны кодировать 
+    самостоятельно, а ваши программы могут использовать одно и то же имя для функций,</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">выполняющих определенную 
+    операцию, независимо от возвращаемого функцией значения и типов параметров.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ШАБЛОНЫ, КОТОРЫЕ 
+  ИСПОЛЬЗУЮТ НЕСКОЛЬКО ТИПОВ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущее 
+  определение шаблона для функции max использовало единственный общий тип Т. Очень 
+  часто в шаблоне функции требуется указать несколько типов. Например, следующие 
+  операторы создают шаблон для функции show_array, которая выводит элементы массива. 
+  Шаблон использует тип Т для определения типа массива и тип Т1 для указания типа 
+  параметра count:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T,class 
+    T1&gt; void show_array(T *array,T1 count) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (index =0; index &lt; count; index++) cout &lt;&lt; array[index] &lt;&lt; 
+    ' '; <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  и ранее, программа должна указать прототипы функций для требуемых типов:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void show_array(int *, 
+    int);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">void show_array(float 
+    *, unsigned);</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа SHOW_TEM.CPP использует шаблон для создания функций, которые выводят 
+  массивы типа int и типа float.</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class T,class 
+    T1&gt; void show_array( T *array,T1 count)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;T1 
+    index;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (index =0; index &lt; count; index++) cout &lt;&lt; array[index] “ ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void show_array(int *, 
+    int);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void show_array(float 
+    *, unsigned);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P>{<BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    pages[] = { 100, 200, 300, 400, 500 };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    pricesH = { 10.05, 20.10, 30.15 };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_array(pages, 
+    5);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;show_array(prices, 
+    3);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Шаблоны 
+    и несколько типов</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">По 
+    мере того как шаблоны функций становятся более сложными, они могут обеспечить 
+    поддержку нескольких типов. Например, ваша программа может создать шаблон 
+    для функции с именем array_sort, которая сортирует элементы массива. В данном 
+    случае функция может использовать два параметра: первый, соответствующий массиву, 
+    и второй, соответствующий количеству элементов массива. Если программа предполагает, 
+    что массив никогда не будет содержать более 32767 значений она может использовать 
+    тип int для параметра размера массива. Однако более универсальный шаблон мог 
+    бы предоставить программе возможность указать свой собственный тип этого параметра, 
+    как показано ниже:</FONT></FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">template&lt;class 
+      Т, class T1&gt; void array_sort(T array[], T1 elements) </FONT></B></I></P>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">// 
+      операторы <BR>
+      }</FONT></FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">С 
+    помощью шаблона array_sort программа может создать функции которые сортируют 
+    маленькие массивы типа float (менее 128 элементов) и очень большие массивы 
+    типа int, используя следующие прототипы:</FONT></FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">void array_sort(float, 
+      char);<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+      array_sort(int, long);</FONT></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, использование шаблонов функций уменьшает объем программирования, 
+  позволяя компилятору C++ генерировать операторы для функций, которые отличаются 
+  только типами возвращаемых значений и параметров. Из урока 30 вы узнаете, как 
+  использовать шаблоны для создания типонезависимых, или общих, классов. До изучения 
+  урока 30 убедитесь, что вы освоили следующие основные концепции:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Шаблоны 
+      функций позволяют вам объявлять типонезависимые, или </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">общие, 
+      функции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+      вашей программе требуется использовать функцию с определенными типами данных, 
+      она должна указать прототип функции, который определяет требуемые типы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+      компилятор C++ встретит такой прототип функции, он создаст операторы, соответствующие 
+      этой функции, подставляя требуемые типы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ваши 
+      программы должны создавать шаблоны для общих функций, которые работают с 
+      отличающимися типами. Другими словами, если вы используете с какой-либо 
+      функцией только один тип, нет необходимости применять шаблон.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      функция требует несколько типов, шаблон просто назначает каждому типу уникальный 
+      идентификатор, например Т, T1 и Т2. Позже в процессе компиляции компилятор 
+      C++ корректно назначит типы, указанные вами в прототипе функции.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 28.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 30.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

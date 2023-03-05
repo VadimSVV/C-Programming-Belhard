@@ -1,0 +1,493 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 8 </FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Повторение одного 
+  или нескольких операторов</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 7 
+  вы узнали, как использовать в ваших программах оператор C++ <I>if </I>для принятия 
+  решений. С подобным принятием решений тесно связана способность повторять одну 
+  или несколько инструкций определенное число раз или до достижения некоторого 
+  условия. В этом уроке вы будете использовать итеративные конструкции C++ для 
+  повторения одного или нескольких операторов. К концу данного урока вы освоите 
+  следующие основные концепции: </FONT></P>
+<UL>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3"> Для повторения операторов 
+    определенное число раз ваши программы используют оператор C++ <I>for.</I> 
+    </FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> С помощью оператора 
+    C++ <I>while</I> программы повторяют операторы до тех пор, пока указанное 
+    условие истинно. </FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор C++ <I>do 
+    while</I> позволяет программам выполнять операторы по крайней мере один раз, 
+    а затем, возможно, повторять операторы, основываясь на определенном условии. 
+    </FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman" SIZE="3">Возможность повторять операторы очень 
+  важна в программировании. Экспериментируйте с программами, представленными в 
+  этом уроке. К концу урока вы сможете значительно усовершенствовать свои возможности 
+  программирования на C++. </FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial">ПОВТОРЕНИЕ ОПЕРАТОРОВ УКАЗАННОЕ ЧИСЛО РАЗ</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Одной из наиболее 
+  широко используемых операций в ваших программах является повторение одного или 
+  нескольких операторов определенное число раз. Например, одна программа могла 
+  бы повторять один и тот же оператор, чтобы напечатать пять копий файла, а другая 
+  могла бы повторять некоторый Набор операторов 30 раз, чтобы определить, поднялась 
+  или упала цена ваших 30 акций. Оператор C++ <I>for</I> предоставляет чрезвычайно 
+  простую возможность вашим программам повторять один или несколько операторов 
+  указанное число раз. </FONT></P>
+<P ALIGN="LEFT"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша 
+  программа использует оператор <I>for</I> (часто называемый циклом <I>for),</I> 
+  она должна указать переменную, которая называется <I>управляющей переменной,</I> 
+  хранящей количество выполнений цикла. Например, следующий </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">цикл 
+  <I>for</I> использует переменную <I>count для</I> хранения количества выполнений 
+  цикла. В данном случае цикл будет выполнен десять раз. </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">for (count = 1; count 
+    &lt;= 10; count++) <BR>
+    &nbsp;&nbsp;&nbsp; оператор;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Цикл <I>for</I> 
+  состоит из четырех частей. Первые три части управляют количеством выполнений 
+  цикла. Сначала оператор <I>count = 1,</I> присваивает переменной управления 
+  начальное значение. Цикл <I>for</I> выполняет эту инициализацию один раз при 
+  запуске цикла. Далее цикл проверяет условие <I>count &lt;= 10. </I>Если условие 
+  истинно, цикл <I>for</I> выполняет следующий оператор. Если условие ложно, цикл 
+  завершается и программа продолжает свое выполнение с первого оператора, следующего 
+  за циклом. Если условие истинно и <I>цикл for </I>выполняет свой оператор, то 
+  после этого цикл увеличивает переменную <I>count,</I> используя оператор <I>count++.</I> 
+  Далее программа проверяет условие <I>count &lt;= 10.</I> Если это условие все 
+  еще истинно, то опять повторяется выполнение оператора внутри цикла, увеличение 
+  и проверка переменной <I>count</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Arial" SIZE="2">for &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>(count 
+    = 1;</u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <U>count 
+    &lt;= 10;</U> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<U>count++)</U></FONT></P>
+  <P><I><FONT FACE="Arial" SIZE="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Инициализация 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Проверка&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    Увеличение</FONT></I></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая программа FIRSTFOR.CPP 
+  использует цикл <I>for</I> для вывода на экран дисплея значений от 1 до 100:</FONT> 
+</P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (count = 1; count &lt;=100; count++) cout &lt;&lt; count &lt;&lt;' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, оператор <I>for</I> 
+  инициализирует переменную <I>count</I> значением 1. Затем цикл проверяет, меньше 
+  ли значение переменной <I>count или</I> равно 100. Если это так, цикл <I>for</I> 
+  выполняет соответствующий оператор и затем увеличивает <I>count,</I> повторяя 
+  проверку. Экспериментируйте с этой программой, изменяя значение 100 на 10, 20 
+  и даже 5000. </FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman" SIZE="3">Следующая программа ASKCOUNT.CPP 
+  выводит сообщение, запрашивающее пользователя ввести число, при котором цикл 
+  должен завершиться. Затем программа выводит числа от одного до указанного значения: 
+  </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    ending_value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите конечное значение и нажмите Enter: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; ending_value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (count = 0; count &lt;= ending_value; count++) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; count &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Экспериментируйте 
+  с этой программой, вводя разные числа, например 10, 1 и даже 0. Если вы вводите 
+  значение 0 или 1, цикл <I>for</I> никогда не выполняется, потому что условие<B> 
+  count &lt;= ending_value</B> сразу же ложно. Помните, если вы введете значение 
+  вне диапазона значений, которые может хранить переменная типа <I>int,</I> возникнет 
+  ошибка переполнения. Например, запустите программу и введите значение 50000. 
+  Поскольку это значение превышает наибольшее возможное для переменной типа <I>int,</I> 
+  то переполнение приводит к отрицательному значению, которое предотвращает выполнение 
+  цикла.</FONT> </P>
+<H3 ALIGN="LEFT"><FONT FACE="Arial, Helvetica, sans-serif">Циклы <I>for C++</I> 
+  поддерживают составные операторы</FONT></H3>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из урока 7 
+  вы узнали, что если программы выполняют несколько операторов внутри <I>if или 
+  else,</I> то такие операторы следует сгруппировать внутри левой и правой фигурных 
+  скобок. Это же относится и к нескольким операторам в цикле <I>for.</I> Следующая 
+  программа ADD1_100.CPP зацикливает числа от 1 до 100, выводя и добавляя каждое 
+  число в общий итог:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    total = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (count = 1; count &lt;= 100; count++) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Прибавляю " &lt;&lt; count &lt;&lt; " к " &lt;&lt; total;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total 
+    = total + count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; " получаю " &lt;&lt; total &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+    <BR>
+    }</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Группируя операторы внутри 
+  фигурных скобок, цикл <I>for</I> тем самым может выполнить несколько операторов 
+  за один проход (называемый <I>umepa-цией</I> цикла).</FONT> </P>
+<H3 ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">Изменение 
+  и увеличение цикла <I>for</I></FONT> </FONT></H3>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Все представленные 
+  до настоящего момента циклы <I>for</I> увеличивали управляющую переменную цикла 
+  на 1 на каждой итерации цикла. Однако цикл <I>for</I> не обязывает ваши программы 
+  увеличивать эту переменную на единицу. Следующая программа BY_FIVES.CPP выводит 
+  каждое пятое число в диапазоне от 0 до 100:</FONT> </P>
+<BLOCKQUOTE> 
+  <P>&nbsp;</P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    count;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (count = 0; count &lt;= 100; count += 5)<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; count &lt;&lt;<I> ' '';<BR>
+    </I> </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы откомпилируете 
+  эту программу, на вашем экране будут отображаться числа 0, 5,10 и т. д. до 100. 
+  Обратите внимание, что оператор цикла for </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">использует 
+  для увеличения переменную <I>count.</I> </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">count += 5;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы хотите 
+  добавить некоторое значение к текущему значению переменной, а затем присвоить 
+  результат той же переменной, C++ позволяет вам сделать это двумя способами. 
+  Первый: предположим, вашей программе необходимо добавить значение 5 к переменной 
+  <I>count,</I> это можно сделать, как показано ниже:</FONT> </P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">count = count + 5;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Второй: C++ 
+  позволяет вам использовать краткую запись, представленную ниже, для добавления 
+  значения 5 к переменной <I>count.</I> </FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">count += 5;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Поскольку 
+  это легче записать, то данная краткая форма является общепринятой внутри циклов.</FONT></P>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании 
+  цикла <I>for</I> вы не обязаны продвигать счетчик в сторону увеличения. Следующая 
+  программа CNT_DOWN.CPP использует цикл <I>for</I> для вывода чисел в порядке 
+  уменьшения от 100 до 1:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    count ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (count = 100; count &gt;= 1; count--) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; count &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+  видите, цикл <I>for</I> инициализирует переменную <I>count</I> значением 100. 
+  <B>На</B> каждой итерации цикл уменьшает значение этой переменной на 1. Цикл 
+  завершается, когда переменная <I>count</I> содержит значение 0.</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I>Остерегайтесь бесконечных 
+    циклов</I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже знаете, 
+    цикл for предоставляет вашим программам способ повторять связанные операторы 
+    определенное количество раз. Используя переменную управления, цикл for по 
+    существу считает количество выполненных итераций. Когда цикл достигает своего 
+    конечного условия, ваша программа прекращает повторение операторов и продолжает 
+    свое выполнение с первого оператора, следующего за циклом for. </FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">К сожалению, из-за 
+    ошибок в программах в некоторых случаях цикл никогда не достигает своего завершающего 
+    условия и, таким образом, зацикливается навсегда (или до тех пор, пока вы 
+    не прервете программу). Такие не завершающиеся циклы называются бесконечными 
+    циклами. Другими словами, это циклы, не имеющие способа для завершения. Например, 
+    следующий оператор for создает бесконечный цикл:</FONT> </B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">for (count = 
+      0; count &lt; 100; wrong_variable++) <BR>
+      &nbsp;&nbsp;&nbsp;// операторы</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, цикл 
+    for использует переменную count в качестве своей управляющей переменной. Однако 
+    в секции цикла увеличения программа увеличивает не ту переменную. В результате 
+    цикл никогда не увеличивает переменную count, и она никогда не будет иметь 
+    значение больше или равно 100. Таким образом, этот цикл превращается в никогда 
+    не завершающийся бесконечный цикл.</FONT> </B></I></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Важно обратить внимание, 
+  что циклы <I>for</I> не ограничиваются использованием переменных типа <I>int</I> 
+  в качестве их управляющих переменных. Например, следующая программа LOOPVAR.CPP 
+  использует переменную типа <I>char </I>для вывода букв алфавита внутри одного 
+  цикла и переменную типа <I>float </I>для вывода чисел с плавающей точкой внутри 
+  другого цикла:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    value;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (letter = 'A'; letter &lt;= 'Я'; letter++) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (value = 0.0; value &lt;= 1.0; value += 0.1) <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout &lt;&lt; value &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы откомпилируете 
+  и запустите эту программу, на экране появится следующий вывод:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ</B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B> 0 0.1 0.2 0.3 0.4 
+    0.5 0.6 0.7 0.8 0.9</B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif"><B><I><FONT SIZE="5">Повторение 
+    цикла определенное число раз</FONT></I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Одна из наиболее 
+    общих операций, которую будут выполнять ваши программы, состоит в повторении 
+    одного или нескольких операторов определенное количество раз. Оператор C++ 
+    for позволяет вашим программам сделать именно это. Такой оператор for использует 
+    управляющую переменную, хранящую количество выполнений цикла. Общий формат 
+    оператора for выглядит так:</FONT> </B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">for (инициализация; 
+      проверка; увеличение) <BR>
+      &nbsp;&nbsp;&nbsp; оператор;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">При запуске этот 
+    цикл for присваивает начальное значение управляющей переменной цикла. Далее 
+    программа проверяет условие цикла. Если условие истинно, она выполняет операторы 
+    внутри цикла, затем увеличивает управляющую переменную цикла и повторяет проверку 
+    условия. Если условие истинно, процесс повторяется. Если же условие ложно, 
+    цикл for завершается и программа продолжает свое выполнение с первого оператора, 
+    следующего за циклом for. </FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ВЗГЛЯД НА ЦИКЛ <I>while</I></FONT> 
+</H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы только 
+  что узнали, цикл <I>C++ for</I> позволяет вашим программам повторять один или 
+  несколько операторов определенное количество раз. Однако в некоторых случаях 
+  программе необходимо повторять операторы, пока удовлетворяется (истинно) некоторое 
+  условие. Например, в следующих уроках вы узнаете, как читать содержимое файла. 
+  Такие программы могли бы повторять цикл, пока не встретится конец файла. В ситуациях, 
+  когда программам необходимо выполнять цикл, пока удовлетворяется некоторое условие 
+  (но не обязательно определенное количество раз), ваши программы могут использовать 
+  оператор C++ <I>while.</I> Общий формат оператора <I>while</I> выглядит так:</FONT> 
+</P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">while (условие_верно) 
+    <BR>
+    &nbsp;&nbsp;&nbsp; оператор;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если ваша 
+  программа встречает оператор <I>while,</I> она проверяет заданное условие. Если 
+  условие истинно, программа выполняет операторы цикла <I>while.</I> После выполнения 
+  последнего оператора в цикле, цикл <I>while</I> опять проверяет условие. Если 
+  условие все еще истинно, повторяются операторы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">цикла 
+  и повторяется данный процесс. Когда условие, наконец, становится ложным, цикл 
+  завершается и программа продолжает свое выполнение с первого оператора, следующего 
+  за циклом. Следующая программа GET_YN.CPP просит вас ввести Д для <I>да</I> 
+  или <I>Н</I> для <I>нет.</I> Затем программа использует цикл while для чтения 
+  символов с клавиатуры, пока пользователь не введет <I>Д</I> или <I>Н.</I> Если 
+  пользователь вводит значение, отличное от <I>Д</I> или <I>Н, </I>программа сигналит 
+  встроенным динамиком, записывая символ сигнала '\а' в выходной поток <I>cout</I>: 
+  </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    done = 0; // Устанавливается в состояние „истина",</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+    если введены Д или Н char letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (! done)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "\nВведите Д или Н" </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    " и нажмите Enter для продолжения: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; letter;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    ((letter == 'Д') II (letter == 'д'))</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;done 
+    = 1;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+    if ((letter == 'Н'<I>)</I> II (letter == 'н'))</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;done 
+    = 1;</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+    cout &lt;&lt; '\а'; // Играть сигнал динамика для неверного символа</FONT><BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Вы ввели букву " &lt;&lt; letter &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, цикл <I>while</I> 
+  тоже поддерживает несколько операторов, сгруппированных внутри левой и правой 
+  фигурных скобок. В данном случае программа использует переменную <I>done</I> 
+  для управления циклом. Пока программа не завершится (т. е. пока пользователь 
+  не введет <I>Д</I> или <I>Н),</I> цикл продолжает выполняться. Когда пользователь 
+  вводит <I>Д</I> или Я, программа устанавливает переменную <I>done</I> в значение 
+  истина и цикл завершается. Как только ваши программы начнут работать с файлами, 
+  вы регулярно будете использовать цикл <I>while.</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Повторение 
+    цикла до выполнения заданного условия</FONT></I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере усложнения 
+    ваших программ им, возможно, понадобится выполнять группы связанных операторов, 
+    пока не реализуется заданное условие. Например, программа может вычислять 
+    суммы платежей для служащих компании. В этом случае цикл будет выполняться 
+    до тех пор, пока не обработаны данные для последнего служащего. Для повторения 
+    операторов до выполнения заданного условия программы как правило, будут использовать 
+    оператор while: </FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">while (условие) 
+      <BR>
+      &nbsp;&nbsp;&nbsp;оператор;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Сталкиваясь с оператором 
+    while, программа будет оценивать условие цикла. Если условие истинно, ваша 
+    программа выполняет операторы цикла while. После выполнения последнего оператора 
+    цикла программа снова проводит проверку условия. Если условие истинно, программа 
+    повторит этот процесс, выполнит операторы, а затем повторит проверку условия. 
+    Если условие оценивается как ложь, программа продолжит свое выполнение с первого 
+    оператора, который следует за оператором while. </FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><FONT FACE="Arial, Helvetica, sans-serif">ВЫПОЛНЕНИЕ 
+  ОПЕРАТОРОВ ПО КРАЙНЕЙ МЕРЕ ОДИН РАЗ</FONT></FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы уже 
+  знаете, цикл C++ <I>while</I> позволяет вашим программам повторять набор операторов, 
+  пока данное условие удовлетворяется. Когда программа встречает оператор <I>while,</I> 
+  она сначала оценивает заданное условие. Если условие истинно, программа входит 
+  в цикл. Если условие ложно, операторы цикла <I>while</I> никогда не выполняются. 
+  В зависимости от назначения ваших программ, возможны ситуации, когда некоторый 
+  набор операторов должен выполняться по крайней мере один раз, а затем выполнение, 
+  основываясь на некотором условии, может повторяться. В подобном случае ваши 
+  программы могут использовать цикл <I>do while:</I> </FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">do </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;операторы;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> while (условие_истинно);</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если программа встречает 
+  цикл <I>do while,</I> она входит в цикл и запускает выполнение операторов, содержащихся 
+  в цикле. Затем программа оценивает заданное условие. Если условие истинно, программа 
+  возвращается к началу цикла:</FONT> </P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">do <I><B>&lt;----------------------------------------</B></I></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;операторы;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    |<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> while (условие_истинно); 
+    <I> <B>----------</B></I> </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если условие 
+  ложно, программа не повторяет инструкции цикла, продолжая вместо этого выполнение 
+  с первого оператора, следующего за циклом. Обычно цикл <I>do while</I> используется 
+  для отображения пунктов меню и затем обработки выбора пользователя. Вам требуется, 
+  чтобы программа отобразила меню по крайней мере один раз. Если пользователь 
+  выбирает какой-либо</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">пункт 
+  меню, кроме Quit, программа выполнит пункт, а затем отобразит меню снова (повторяя 
+  оператор цикла). Если пользователь выбирает Quit, цикл завершится и программа 
+  продолжит свое выполнение с первого оператора после цикла.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Повторение 
+    операторов, если условие истинно</FONT></I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от 
+    назначения программы, возможно, потребуется выполнить набор операторов, по 
+    крайней мере, один раз, и повторить операторы, если заданное условие истинно. 
+    В таких случаях ваши программы используют оператор C++ do while: </FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">do {<BR>
+    </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;оператор;<BR>
+    </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">} 
+    while (условие);</FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда программа 
+    встречает оператор do while, она сразу же выполняет операторы, содержащиеся 
+    в цикле. Затем программа исследует условие цикла. Если условие истинно, программа 
+    повторяет операторы цикла и процесс продолжается. Если условие цикла становится 
+    ложным, программа продолжает свое выполнение с первого оператора, следующего 
+    за оператором do while. </FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="LEFT"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Итеративная 
+  обработка</I> представляет собой способность программы повторять один или несколько 
+  операторов. В этом уроке были описаны итеративные (или циклические) операторы 
+  C++. Как вы уже знаете, оператор <I>for</I> позволяет вашим программам повторять 
+  один или несколько операторов заданное число раз. Используя оператор <I>while,</I> 
+  программы повторяют операторы до тех пор, пока указанное условие истинно. Наконец, 
+  с помощью оператора <I>do while</I> программы выполняют операторы, по крайней 
+  мере один раз, повторяя их, если заданное условие истинно. Из урока 9 вы узнаете, 
+  как разделить программы на небольшие легко управляемые части, называемые <I>функциями.</I> 
+  Однако до изучения урока 9 убедитесь, что освоили следующее:</FONT> </P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор <I>C++ for</I> 
+      позволяет вашим программам повторять один или более операторов заданное 
+      число раз.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор <I>for</I> 
+      состоит из четырех частей: инициализации, проверяемого условия, операторов, 
+      которые повторяются, и приращения.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор <I>for</I> 
+      не обязывает вас увеличивать управляющую переменную цикла именно на 1 или 
+      использовать именно приращение.</FONT> </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Цикл C++ <I>while</I> 
+      позволяет вашим программам повторять операторы, пока указанное условие истинно.</FONT> 
+    </LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Программы часто используют 
+      цикл <I>while</I> для чтения содержимого файла, пока не встретится конец 
+      файла. </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Оператор C++ <I>do 
+      while</I> позволяет вашим программам выполнять один или несколько операторов, 
+      по крайней мере один раз, и воз можно, повторять их на основании заданного 
+      условия. </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Программы часто используют 
+      операторы <I>do while</I> для работы с меню </FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если проверяемые 
+      условия в циклах, <I>while</I> или <I>do while</I> становятся ложью, программа 
+      продолжает свое выполнение с первого оператора, следующего за циклом. </FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 07.html">Предыдущий 
+  урок</A> | <A HREF="Урок 09.html">Следующий урок </A></FONT> 
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,345 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE></TITLE>
+</HEAD>
+<BODY BACKGROUND="bgrwhite.gif">
+<FONT FACE="Times New Roman"> </FONT> 
+<h2 ALIGN="center"><FONT FACE="Arial, Helvetica, sans-serif">Урок 20</FONT></h2>
+<h2 ALIGN="center"><FONT FACE="Arial, Helvetica, sans-serif"> Указатели</FONT></h2>
+<P ALIGN="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете, программы на C++ хранят переменные в памяти. Указатель представляет 
+  собой адрес памяти, который указывает (или ссылается) на определенный участок. 
+  Из урока 10 вы узнали, что для изменения параметра внутри функции ваша программа 
+  должна передать адрес параметра (указатель) в функцию. Далее функция в свою 
+  очередь использует переменную-указатель для обращения к участку памяти. Некоторые 
+  программы, созданные вами в нескольких предыдущих уроках, использовали указатели 
+  на параметры. Аналогично этому, когда ваши программы работают с символьными 
+  строками и массивами, они обычно используют указатели, чтобы оперировать элементами 
+  массива. Так как применение указателей является</font> <font face="Times New Roman, Times, serif" size="3">общепринятым, 
+  очень важно, чтобы вы хорошо понимали их использование. Таким образом, этот 
+  урок рассматривает еще один аспект применения указателей. К концу данного урока 
+  вы освоите следующие основные концепции:</font></P>
+<ul>
+  <li><font face="Times New Roman, Times, serif" size="3">Для простоты (для уменьшения 
+    кода) многие программы трактуют символьную строку как указатель и манипулируют 
+    содержимым строки, используя операции с указателями.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Когда вы увеличиваете 
+    переменную-указатель (переменную, которая хранит адрес), C++ автоматически 
+    увеличивает адрес на требуемую величину (на 1 байт для</font> <font face="Times New Roman, Times, serif" size="3"><I>char,</I> 
+    на 2 байта для</font> <font face="Times New Roman, Times, serif" size="3"><I>int,</I> 
+    на 4 байта <I>для float</i> и т.д.).</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Ваши программы могут 
+    использовать указатели для работы с массивами целочисленных значений или значений 
+    с плавающей точкой.</font></li>
+</ul>
+<p><font face="Times New Roman, Times, serif" size="3">Операции с указателями 
+  широко используются в C++. Выберите время для эксперимента с программами, представленными 
+  в этом уроке.</font></p>
+<h2 ALIGN="center"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ УКАЗАТЕЛЯ 
+  НА СИМВОЛЬНУЮ СТРОКУ</FONT></h2>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете, указатель содержит адрес памяти. Когда ваша программа передает массив 
+  (например, символьную строку) в функцию, C++ передает адрес первого элемента 
+  массива. В результате совершенно обычно для функции использовать указатель на 
+  символьную строку. Чтобы объявить указатель на символьную строку, функция просто 
+  предваряет имя переменной звездочкой, как показано ниже:</font></P>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">void some_function(char 
+    *string);</font></p>
+</blockquote>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Звездочка, 
+  которая предваряет имя переменной, указывает C++, что переменная будет хранить 
+  адрес памяти — указатель. Следующая программа PTR_STR.CPP использует указатель 
+  на символьную строку внутри функции <I>show_string</I> для вывода содержимого 
+  строки по одному символу за один раз:</font></P>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void show_string(char 
+    *string)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;while (*string != '\0') </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; *string;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;show_string( "Учимся программировать на языке C++!");<br>
+    }</font></p>
+  </blockquote>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Обратите 
+  внимание на цикл</font> <font face="Times New Roman, Times, serif" size="3"><I>while</I> 
+  внутри функции</font> <font face="Times New Roman, Times, serif" size="3"><I>show_slring.</I> 
+  Условие <I>while (*string</I> != <I>'\0')</I> проверяет, не является ли текущий 
+  символ, указываемый с помощью указателя</font> <font face="Times New Roman, Times, serif" size="3"><I>string,</I> 
+  символом NULL, который определяет последний символ строки. Если символ не NULL, 
+  цикл выводит текущий символ с помощью</font> <font face="Times New Roman, Times, serif" size="3"><I>cout.</I> 
+  Затем оператор</font> <font face="Times New Roman, Times, serif" size="3"><I>string++;</I> 
+  увеличивает указатель</font> <font face="Times New Roman, Times, serif" size="3"><I>siring</I> 
+  таким образом, что он указывает на следующий символ строки. Когда указатель 
+  <I>string</I> указывает на символ NULL, функция уже вывела строку и цикл завершается.</font> 
+</P>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3"><img src="p20.gif" width="455" height="388"></font></P>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3"><B>Рис.</b> 
+  20. Сканирование строки с помощью указателя.</font></P>
+<P ALIGN="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">Предположим, 
+  например, что строка, переданная в функцию, находится в памяти компьютера по 
+  адресу 1000. Каждый раз, когда функция увеличивает указатель</font> <font face="Times New Roman, Times, serif" size="3"><I>string,</I> 
+  он указывает на следующий символ (адрес 1001,1002, 1003 и т. д.), как показано 
+  на рис. 20.</font></P>
+<h3 ALIGN="JUSTIFY"><b><font face="Times New Roman">Второй пример</font></b></h3>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Вы только 
+  что узнали, что, используя указатель, ваша функция может сканировать строку 
+  символов, пока не будет обнаружен символ NULL. Следующая программа PTR_LEN.CPP 
+  использует указатель на строку в функции <I>string_length</I> для определения 
+  количества символов в строке:</font></P>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">int string_length(char 
+    *string) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;int length = 0;<br>
+    &nbsp;&nbsp;&nbsp;while (*string != '\0') </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;length++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string++;<br>
+    &nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;return(length);<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;char title[] = "Учимся программировать на языке C++";<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; title &lt;&lt; " содержит</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; string_length(title) &lt;&lt; " символов";<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, функция</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>string_length</I> сканирует 
+  символы строки до тех пор, пока не встретит символ NULL.</font></p>
+<BLOCKQUOTE>
+  <P><font face="Times New Roman"><B><I>Увеличение указателя на символьную строку</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Когда программа 
+    передает массив в функцию, C++ передает адрес памяти первого элемента этого 
+    массива. Используя переменную-указатель, функция может перемещаться по содержимому 
+    массива, просто увеличивая значение указателя. Например, предположим, что 
+    программа передает в функцию символьную строку "Привет". Внутри функции переменная-указатель 
+    сначала указывает на участок памяти, который содержит букву 'П'. Когда функция 
+    увеличивает указатель, то он далее указывает на участок памяти, который содержит 
+    букву 'р'. По мере увеличения функцией значения указателя, он поочередно указывает 
+    на каждую букву в строке и наконец указывает на символ NULL.</font></B></I></P>
+</BLOCKQUOTE>
+<h3 ALIGN="JUSTIFY"><b><font face="Times New Roman">Уменьшение количества операторов</font></b></h3>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Чтобы определить 
+  конец символьной строки, каждая из предыдущих программ использовала следующий 
+  цикл</font> <font face="Times New Roman, Times, serif" size="3"><I>while:</i></font></P>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">while (*string != '\0')</font></p>
+</blockquote>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как уже 
+  обсуждалось, символ NULL ('\0') представляет собой значение ASCII 0. Так как 
+  C++ использует значение 0, чтобы представить ложь, ваши программы могут записать 
+  предыдущий цикл следующим образом:</font></P>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">while (*string)</font></p>
+</blockquote>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">В данном 
+  случае пока символ, определяемый указателем строки, не равен 0 (NULL), условие 
+  оценивается как истинное и цикл будет продолжаться. Из урока 5 вы узнали, что 
+  постфиксная операция увеличения C++ позволяет вам использовать значение переменной, 
+  а затем увеличивает это значение. Многие программы на C++ используют постфиксные 
+  операции увеличения и уменьшения, чтобы сканировать массивы с помощью указателей. 
+  Например, использование постфиксной операции увеличения делает следующие циклы</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>while</I> идентичными:</font></P>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">while (*string) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; *string++;<br>
+    } </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3"></font><font face="Times New Roman, Times, serif" size="3">while 
+    (*string) <br>
+    { <br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; *string;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;string++;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Оператор</font> <font face="Times New Roman, Times, serif" size="3"><I>cout 
+  &lt;&lt; *string++,</I> заставляет C++ вывести символ, указываемый указателем</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>string,</I> а затем увеличить 
+  текущее значение</font> <font face="Times New Roman, Times, serif" size="3"><I>string,</I> 
+  чтобы он указывал на следующий символ. С помощью этих методов следующая программа 
+  SMARTPTR.CPP иллюстрирует новую реализацию функций <I>show_string</I> и</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>string_length:</i></font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void show_string(char 
+    *string) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;while (*string) cout &lt;&lt; *string++;<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;int 
+    string_length(char •string) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">(<br>
+    &nbsp;&nbsp;&nbsp;int length = 0;<br>
+    &nbsp;&nbsp;&nbsp;while (*string++) length++;<br>
+    &nbsp;&nbsp;&nbsp;return(length) ;<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;char title[] = "Учимся программировать на языке C++";<br>
+    &nbsp;&nbsp;&nbsp;show_string(title) ;<br>
+    &nbsp;&nbsp;&nbsp;сout</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    " содержит</font> <font face="Times New Roman, Times, serif" size="3">" &lt;&lt; 
+    string_length(title) &lt;&lt; " символов";<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Если вы встретите функции 
+  C++, которые манипулируют строками с помощью указателей, то они с большой долей 
+  вероятности будут использовать подобную краткую запись.</font></p>
+<BLOCKQUOTE>
+  <P><font face="Times New Roman"><B><I>Сканирование символьной строки</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Одно из наиболее 
+    широко употребляемых использовании указателей в программах на C++ заключается 
+    в сканировании символьных строк. Для уменьшения количества кода многие программы 
+    используют следующие операторы для сканирования строки:</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">while (*string) 
+      </font></B></I></P>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">{<br>
+      &nbsp;&nbsp;&nbsp;// операторы<br>
+      &nbsp;&nbsp;&nbsp;string++; <br>
+      &nbsp;&nbsp;&nbsp;// продвинуть к следующему символу <br>
+      }</font></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Следующая функция</font> 
+    <font face="Times New Roman, Times, serif" size="3">string_uppercase использует 
+    указатели для преобразования символов строки в символы верхнего регистра:</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">char *string_uppercase(char* 
+      string) </font></B></I></P>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">{<br>
+      &nbsp;&nbsp;&nbsp;char *starting_address = string; // адрес string[0];<br>
+      &nbsp;&nbsp;&nbsp;while (*string)</font></B></I></P>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ((*string &gt;= 'а') &amp;&amp; (*string 
+      &lt;= 'я')) *string = *string - 'a' + 'A';<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string++;<br>
+      &nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;&nbsp;return(starting_address);<br>
+      }</font></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Эта 
+    функция сохраняет и возвращает начальный адрес строки, ко</font></FONT><font face="Times New Roman, Times, serif" size="3">торый 
+    позволяет вашим программам использовать функцию следующим образом:</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">cout &lt;&lt; 
+      Btring_uppercase("Привет, мир!")</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+      endl;</font></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">* Поскольку 
+  при переводе книги обрабатываемые символы заменены с английских на русские, 
+  то этот алгоритм работает не для всех кодировок кирилицы в DOS и Windows. — 
+  <i>Прим. перев.</i></font></P>
+</font> 
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ УКАЗАТЕЛЕЙ 
+  С ДРУГИМИ ТИПАМИ МАССИВОВ</font></h2>
+<B><FONT FACE="Times New Roman"></font></B> 
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Несмотря 
+  на то что указатели широко используются с символьными строками, вы можете использовать 
+  указатели с массивами других типов. Например, следующая программа PTRFLOAT.CPP 
+  использует указатель на массив типа <I>float для</I> вывода значений с плавающей 
+  точкой:</font></P>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void show_float(float 
+    *array, int number_of_elements)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;int 
+    i;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; number_of_elements; i++) cout &lt;&lt; *array++ &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;float 
+    values[5] = {1.1, 2.2, 3.3, 4.4, 5.5);<br>
+    </font><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;show_float(values, 
+    5);<br>
+    </font><font face="Times New Roman, Times, serif" size="3">}</font></p>
+  </blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, внутри функции</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>show_float</I> цикл</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>for</I> использует значение, 
+  указываемое с помощью указателя</font> <font face="Times New Roman, Times, serif" size="3"><I>array,</I> 
+  а затем увеличивает этот указатель до следующего значения. В данном случае программа 
+  должна передать параметр, который задает количество элементов массива, поскольку 
+  в отличие от символьных строк массивы <I>типа float</i> (или</font> <font face="Times New Roman, Times, serif" size="3"><I>int, 
+  long и т.</I> д.) не используют символ NULL для определения последнего элемента.</font></p>
+<h2 ALIGN="center"><font face="Arial, Helvetica, sans-serif">О МАТЕМАТИКЕ УКАЗАТЕЛЯ</font></h2>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  уже знаете, ваши программы могут использовать указатели на массивы любых типов. 
+  В предыдущей программе функция</font> <font face="Times New Roman, Times, serif" size="3"><I>show_float</I> 
+  увеличивала указатель для продвижения по массиву типа</font> <font face="Times New Roman, Times, serif" size="3"><I>float.</I> 
+  Указатель указывает на участок памяти, содержащий значение определенного типа, 
+  например</font> <font face="Times New Roman, Times, serif" size="3"><I>char, 
+  int</I> или</font> <font face="Times New Roman, Times, serif" size="3"><I>float.</I> 
+  Когда функция сканирует массив с помощью указателя, функция увеличивает указатель 
+  для продвижения от одного значения к следующему. Чтобы указатель указывал на 
+  следующий элемент массива, C++ должен знать размер каждого элемента (в байтах), 
+  чтобы определить, на сколько необходимо увеличить значение указателя. Например, 
+  для продвижения указа-</font></P>
+<P ALIGN="JUSTIFY"> <font face="Times New Roman, Times, serif" size="3">теля к 
+  следующему символу в массиве, C++ должен увеличить значение указателя на 1. 
+  Однако, чтобы указать следующее значение в массиве типа</font> <font face="Times New Roman, Times, serif" size="3"><I>int 
+  </I>C++ должен увеличить указатель на два байта (значение типа</font> <font face="Times New Roman, Times, serif" size="3"><I>int</I> 
+  занимает два байта памяти). Для значений <I>типа. float</i> C++ увеличивает 
+  указатель на 4 байта. Зная тип значения, на которое указывает указатель, C++ 
+  знает, на сколько необходимо увеличить значение этого указателя. В ваших программах 
+  вы просто используете оператор увеличения, например</font> <font face="Times New Roman, Times, serif" size="3"><I>pointer++.</I> 
+  Однако за кулисами C++ увеличивает реальное значение (адрес памяти), содержащееся 
+  в указателе, на корректную величину.</font></P>
+<FONT FACE="Times New Roman"><B> </B></FONT>
+<h2 ALIGN="center"><font face="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</font></h2>
+<P ALIGN="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Программы 
+  на C++ широко используют указатели, особенно для манипулирования строками. В 
+  данном уроке рассмотрен еще один широко используемый аспект при работе с указателями. 
+  В уроке 21 вы начнете использовать объектно-ориентированные возможности C++! 
+  Для начала вы создадите классы, подобные структурам. Ваши программы будут использовать 
+  класс для определения объекта, например</font> <font face="Times New Roman, Times, serif" size="3"><I>file.</I> 
+  Внутри класса вы укажете функции для манипулирования этим объектом, например</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>print Jile</I> или</font> 
+  <font face="Times New Roman, Times, serif" size="3"><I>delete_file.</I> До перехода 
+  к уроку 21 убедитесь, что вы изучили следующее:</font></P>
+<ol>
+  <OL>
+    <LI><font face="Times New Roman, Times, serif" size="3">Указатели содержат 
+      адрес памяти. Когда вы передаете в функцию массив, C++ передает адрес первого 
+      элемента массива.</font></LI>
+    <LI><FONT FACE="Times New Roman"><font face="Times New Roman, Times, serif" size="3"> 
+      Увеличивая значение указателя, вы можете адресовать с его помощью следующий 
+      элемент массива.</font></FONT></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> Функции, которые 
+      манипулируют строками с помощью указателей, обычно сканируют строку до того 
+      момента, пока не найден символ <B>NULL.</b></font></LI>
+    <LI><FONT FACE="Times New Roman"><font face="Times New Roman, Times, serif" size="3"> 
+      При использовании указателей с массивами других типов ваши функции должны 
+      знать количество элементов массива или специальный маркер конца массива.</font></FONT></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3"> При использовании 
+      указателей с массивами других типов C++ автоматически (за кулисами) увеличивает 
+      указатель (адрес памяти) на требуемую величину таким образом, чтобы данный 
+      указатель указывал на следующий элемент массива.</font></LI>
+  </OL>
+</ol>
+<CENTER>
+  <A HREF="Урок 19.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 21.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,195 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Урок 
+  13 </FONT></B></FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"><B>Перегрузка функций</B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">При определении 
+  функций в своих программах вы должны указать тип возвращаемого функцией значения, 
+  а также количество параметров и тип каждого из них. В прошлом (если вы программировали 
+  на языке С), когда у вас была функция с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_values,</I> 
+  которая работала с двумя целыми значениями, а вы хотели бы использовать подобную 
+  функцию для сложения трех целых значений, вам следовало создать функцию с другим 
+  именем. Например, вы могли бы использовать</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_two_values 
+  </I>и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_three_values.</I> 
+  Аналогично если вы хотели использовать подобную функцию для сложения значений 
+  типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>float,</I> 
+  то вам была бы необходима еще одна функция с еще одним именем. Чтобы избежать 
+  дублирования функции, C++ позволяет вам определять несколько функций с одним 
+  и тем же именем. В процессе компиляции C++ принимает во внимание количество 
+  аргументов, используемых каждой функцией, и затем вызывает именно требуемую 
+  функцию. Предоставление компилятору выбора среди нескольких функций называется 
+  <I>перегрузкой.</I> В этом уроке вы научитесь использовать перегруженные функции. 
+  К концу данного урока вы освоите следующие основные концепции:</FONT></P>
+<FONT FACE="Times New Roman"> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Перегрузка 
+    функций позволяет вам использовать одно и то же имя для нескольких функций 
+    с разными типами параметров.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Для 
+    перегрузки функций просто определите две функции с одним и тем же именем и 
+    типом возвращаемого значения, которые отличаются количеством параметров или 
+    их типом.</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+  функций является особенностью языка C++, которой нет в языке С. Как вы увидите, 
+  перегрузка функций достаточно удобна и может улучшить удобочитаемость ваших 
+  программ.</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПЕРВОЕ ЗНАКОМСТВО 
+  С ПЕРЕГРУЗКОЙ ФУНКЦИЙ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+  функций позволяет вашим программам определять несколько функций с одним и тем 
+  же именем и типом возвращаемого значения. Например, следующая программа перегружает 
+  функцию с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_values.</I> 
+  Первое определение функции складывает два значения типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>int.</I> 
+  Второе определение функции складывает три значения. В процессе компиляции C++ 
+  корректно определяет функцию, которую необходимо использовать:</FONT></P>
+<DIR><FONT FACE="Courier New"> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int add_values(int 
+    a,int b)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {<BR>
+    &nbsp;&nbsp;&nbsp;return(a + b);<BR>
+    )</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int add_values 
+    (int a, int b, int c)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> (<BR>
+    &nbsp;&nbsp;&nbsp;return(a + b + c);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "200 + 801 = " &lt;&lt; add_values(200, 801) 
+    &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "100 + 201 + 700 = " &lt;&lt; add_values(100, 
+    201, 700) &lt;&lt; endl;<BR>
+    }</FONT></P>
+  </FONT></DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа определяет две функции с именами</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>add_values 
+  </I>Первая функция складывает два значения типа <I>int,</I> в то время как вторая 
+  складывает три значения. Вы не обязаны что-либо предпринимать специально для 
+  того, чтобы предупредить компилятор о перегрузке, просто используйте ее. Компилятор 
+  разгадает, какую функцию следует использовать, основываясь на предлагаемых программой 
+  параметрах.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Подобным 
+  образом следующая программа MSG_OVR.CPP перегружает функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_message.</I> 
+  Первая функция с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_message</I> 
+  выводит стандартное сообщение, параметры ей не передаются. Вторая выводит передаваемое 
+  ей сообщение, а третья выводит два сообщения:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    show_message(void) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Стандартное сообщение: " &lt;&lt; "Учимся 
+    программировать на C++" &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    show_message(char *message) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; message &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <FONT FACE="Courier New"> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    show_message(char *first, char *second) </FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; first &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; second &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;show_message();<BR>
+    &nbsp;&nbsp;&nbsp;show_message("Учимся программировать на языке C++!");<BR>
+    &nbsp;&nbsp;&nbsp;show_message("B C++ нет предрассудков!","Перегрузка - это 
+    круто!") ;<BR>
+    }</FONT></P>
+  </FONT></DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">КОГДА НЕОБХОДИМА 
+  ПЕРЕГРУЗКА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Одним из 
+  наиболее общих случаев использования перегрузки является применение функции 
+  для получения определенного результата, исходя из различных параметров. Например, 
+  предположим, что в вашей программе есть функция с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>day_of_week,</I> 
+  которая возвращает текущий день недели (0 для воскресенья, 1 для понедельника, 
+  ..., 6 для субботы). Ваша программа могла бы перегрузить эту функцию таким образом, 
+  чтобы она верно возвращала день недели, если ей передан юлианский день в качестве 
+  параметра, или если ей переданы день, месяц и год:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int day_of_week(int 
+    julian_day)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;// Операторы<BR>
+    }</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">int day_of_week(int 
+    month, int day, int year)</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {<BR>
+    &nbsp;&nbsp;&nbsp;// Операторы<BR>
+    }</FONT></P>
+</DIR>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">По мере 
+  изучения объектно-ориентированного программирования в C++, представленного в 
+  следующих уроках, вы будете использовать перегрузку функций для расширения возможностей 
+  своих программ.</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>Перегрузка 
+    функций улучшает удобочитаемость программ</B></FONT></I></FONT></P>
+  <FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Перегрузка функций 
+  C++ позволяет вашим программам определять несколько функций с одним и тем же 
+  именем. Перегруженные функции должны возвращать значения одинакового типа*, 
+  но могут отличаться количеством и типом параметров. До появления перегрузки 
+  функций в C++ программисты языка С должны были создавать несколько функций с 
+  почти одинаковыми именами. К сожалению программисты, желающие использовать такие 
+  функции, должны были помнить, какая комбинация параметров соответствует какой 
+  функции. С другой стороны, перегрузка функций упрощает задачу программистов, 
+  требуя, чтобы они помнили только одно имя функции.</FONT></B></I></FONT></DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>* Перегруженные 
+  функции не обязаны возвращать значения одинакового типа по той причине, что 
+  компилятор однозначно идентифицирует функцию по ее имени и набору ее аргументов. 
+  Для компилятора функции с одинаковыми именами, но различными типами аргументов 
+  — разные функции, поэтому тип возвращаемого значения — прерогатива каждой функции. 
+  — Прим.перев.</I></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+  функций позволяет вам указать несколько определений для одной и той же функции. 
+  В процессе компиляции C++ определит, какую функцию следует использовать, основываясь 
+  на количестве и типе передаваемых параметров. Из данного урока вы узнали, что 
+  перегружать функции достаточно просто. Из урока 14 вы узнаете, как ссылки C++ 
+  упрощают процесс изменения параметров внутри функций. Однако, прежде чем перейти 
+  к уроку 14, убедитесь, что вы изучили следующие основные концепции:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+      функций предоставляет несколько "взглядов" на одну и ту же функцию внутри 
+      вашей программы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      перегрузки функций просто определите несколько функций с одним и тем же 
+      именем и типом возвращаемого значения, которые отличаются только количеством 
+      и типом параметров.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+      процессе компиляции C++ определит, какую функцию следует вызвать, основываясь 
+      на количестве и типе передаваемых параметров.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Перегрузка 
+      функций упрощает программирование, позволяя программистам работать только 
+      с одним именем функции.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><A HREF="Урок 12.html">Предыдущий 
+  урок</A> | <A HREF="Урок 14.html">Следующий урок </A></FONT> 
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,555 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 23</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Конструктор и деструктор</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">При создании 
+  объектов одной из наиболее широко используемых операций которую вы будете выполнять 
+  в ваших программах, является инициализация элементов данных объекта. Как вы 
+  узнали из урока 22, единственным способом, с помощью которого вы можете обратиться 
+  к частным элементам данных, является использование функций класса. Чтобы упростить 
+  процесс инициализации элементов данных класса, C++ использует специальную функцию, 
+  называемую конструктором, которая запускается для каждого создаваемого вами 
+  объекта. Подобным образом C++ обеспечивает функцию, называемую деструктором, 
+  которая запускается при уничтожении объекта. В данном уроке конструктор и деструктор 
+  рассматриваются более подробно. К концу этого урока вы освоите следующие основные 
+  концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Конструктор представляет 
+    собой метод класса, который облегчает вашим программам инициализацию элементов 
+    данных класса.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Конструктор имеет такое 
+    же имя, как и класс.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Конструктор не имеет 
+    возвращаемого значения.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Каждый раз, когда ваша 
+    программа создает переменную класса, C++ вызывает конструктор класса, если 
+    конструктор существует.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Многие объекты могут 
+    распределять память для хранения информации; когда вы уничтожаете такой объект, 
+    C++ будет вызывать специальный деструктор, который может освобождать эту память, 
+    очищая ее после объекта.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Деструктор имеет такое 
+    же имя, как и класс, за исключением того, что вы должны предварять его имя 
+    символом тильды (~).</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Деструктор не имеет 
+    возвращаемого значения.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Термины 
+  конструктор и деструктор не должны вас пугать. Вместо этого представьте конструктор 
+  как функцию, которая помогает вам строить (конструировать) объект. Подобно этому, 
+  деструктор представляет собой функцию, которая помогает вам уничтожать объект. 
+  Деструктор обычно используется, если при уничтожении объекта нужно освободить 
+  память, которую занимал объект.</FONT></FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОЗДАНИЕ ПРОСТОГО 
+  КОНСТРУКТОРА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Конструктор 
+  представляет собой метод класса, который имеет такое же имя, как и класс. Например, 
+  если вы используете класс с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee, 
+  конструктор также будет иметь имя</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee. 
+  Подобно этому, для класса с именем dogs конструктор будет иметь имя</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">dogs. 
+  Если ваша программа определяет конструктор, C++ будет автоматически вызывать 
+  его каждый раз, когда вы создаете объект. Следующая программа CONSTRUC.CPP создает 
+  класс с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee. 
+  Программа также определяет конструктор с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee 
+  который присваивает начальные значения объекту. Однако конструктор не возвращает 
+  никакого значения, несмотря на то, что он не объявляется как void. Вместо этого 
+  вы просто не указываете тип возвращаемого значения:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long, float); //Конструктор<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+  вашей программе вы просто определяете конструктор так же, как любой другой метод 
+  класса:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id, float salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Недопустимый 
+    оклад <BR>
+    &nbsp;&nbsp;&nbsp;employee::salary = 0.0;<BR>
+    }</FONT></P>
+  </BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, конструктор 
+  не возвращает значение вызвавшей функции. Для него также не используется тип</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">void. В данном случае конструктор 
+  использует оператор глобального разрешения и имя класса перед именем каждого 
+  элемента, как уже обсуждалось в уроке 23. Ниже приведена реализация программы 
+  CONSTRUC.CPP:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id, </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">float 
+    salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Недопустимый 
+    оклад <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary = 0.0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащий:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker("Happy Jamsa", 101, 10101.0);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обратите внимание, что 
+  за объявлением объекта</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">worker 
+  следуют круглые скобки и начальные значения, как и при вызове функции. Когда 
+  вы используете конструктор, передавайте ему параметры при объявлении объекта:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee worker("Happy 
+    Jamsa", 101, 10101.0);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вашей 
+  программе потребуется создать несколько объектов</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee, 
+  вы можете инициализировать элементы каждого из них с помощью конструктора, как 
+  показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee worker("Happy 
+    Jamsa", 101, 10101.0);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee secretary("John 
+    Doe", 57, 20000.0);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee manager("Jane 
+    Doe", 1022, 30000.0);</FONT></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Представление 
+    о конструкторе</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Конструктор представляет 
+    собой специальную функцию, которую C++ автоматически вызывает каждый раз при 
+    создании объекта. Обычное назначение конструктора заключается в инициализации 
+    элементов данных объекта. Конструктор имеет такое же имя, как и класс. Например, 
+    класс с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">file 
+    использует конструктор с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">file. 
+    Вы определяете конструктор внутри своей программы так же, как и любой метод 
+    класса. Единственное различие заключается в том, что конструктор не имеет 
+    возвращаемого значения. Когда вы позже объявляете объект, вы можете передавать 
+    параметры конструктору, как показано ниже:</FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">class_name object(valuel, 
+      value2, value3)</FONT></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> </FONT>
+<H3><FONT FACE="Arial, Helvetica, sans-serif">Конструкторы и параметры по умолчанию</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете из урока 15, C++ позволяет указывать значения по умолчанию для параметров 
+  функции. Если пользователь не указывает каких-либо параметров, функция будет 
+  использовать значения по умолчанию. Конструктор не является исключением; ваша 
+  программа может указать для него значения по умолчанию так же, как и для любой 
+  другой функции. Например, следующий конструктор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee 
+  использует по умолчанию значение оклада равным 10000.0, если программа не указывает 
+  оклад при создании объекта. Однако программа должна указать имя служащего и 
+  его номер:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id, float salary = 10000.00) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0)<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Недопустимый 
+    оклад <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary = 0.0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H3><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">Перегрузка 
+  конструкторов</FONT></FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете из урока 13, C++ позволяет вашим программам перегружать определения 
+  функций, указывая альтернативные функции для других типов параметров. C++ позволяет 
+  вам также перегружать конструкторы. Следующая программа CONSOVER.CPP перегружает 
+  конструктор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee. 
+  Первый конструктор требует, чтобы программа указывала имя служащего, номер служащего 
+  и оклад. Второй конструктор запрашивает пользователя</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">ввести 
+  требуемый оклад, если программа не указывает его:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id) </FONT></P>
+  <P>{<BR>
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;do 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите оклад для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; " меньше $50000: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; employee::salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (salary &gt;= 50000.0);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Внутри 
+  определения класса программа должна указать прототипы для обоих конструкторов, 
+  как показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    (char *, long, float);|___ Прототипы перегруженных<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|функций<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Ниже приведена 
+  реализация программы CONSOVER.CPP:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> #include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id, float salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0) employee::salary = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Недопустимый 
+    оклад <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employee::salary = 0.0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;do 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите оклад для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; " меньше $50000: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; employee::salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp;&nbsp;while (salary &gt;= 50000.0);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащий:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker("Happy Jamsa", 101, 10101.0);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    manager("Jane Doe", 102);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;manager.sbow_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, на вашем экране появится запрос ввести 
+  оклад для Jane Doe. Когда вы введете оклад, программа отобразит информацию об 
+  обоих служащих.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ПРЕДСТАВЛЕНИЕ О ДЕСТРУКТОРЕ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Деструктор 
+  автоматически запускается каждый раз, когда программа уничтожает объект. В следующих 
+  уроках вы узнаете, как создать списки объектов, которые увеличиваются или уменьшаются 
+  по мере выполнения программы. Чтобы создать такие динамические списки, ваша 
+  программа для хранения объектов распределяет память динамически (что вы еще 
+  не научились делать). К настоящему моменту вы можете создавать и уничтожать 
+  объекты в процессе выполнения программы. В таких случаях имеет смысл применение 
+  деструкторов.</FONT></P>
+</FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Каждая 
+  из созданных вами до сих пор программ создавала объекты в самом начале своего 
+  выполнения, просто объявляя их. При завершении программ C++ уничтожал объекты. 
+  Если вы определяете деструктор внутри своей программы, C++ будет автоматически 
+  вызывать деструктор для каждого объекта, когда программа завершается (т.е. когда 
+  объекты уничтожаются). Подобно конструктору, деструктор имеет такое же имя, 
+  как и класс объекта. Однако в случае деструктора вы предваряете его имя символом 
+  тильды (~), как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">~class_name (void) <I><B>//-----------&gt;указывает 
+    деструктор</B></I></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Операторы деструктора 
+    <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+  отличие от конструктора вы не можете передавать параметры деструктору. </FONT></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа DESTRUCT.CPP определяет деструктор для класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">employee:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::-employee(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Уничтожение объекта для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном случае деструктор 
+  просто выводит на ваш экран сообщение о том, что C++ уничтожает объект. Когда 
+  программа завершается, C++ автоматически вызывает деструктор для каждого объекта. 
+  Ниже приведена реализация программы DESTRUCT.CPP:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee(char 
+    *, long, float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;~employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    change_salary(float);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    get_id(void);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name [64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::employee(char 
+    *name, long employee_id, float salary) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(employee::name, 
+    name) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::employee_id 
+    = employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (salary &lt; 50000.0) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">employee::salary 
+    = salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// Недопустимый 
+    оклад<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee::salary 
+    в 0.0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::-employee(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Уничтожение объекта для</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащий:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker("Happy Jamsa", 101, 10101.0);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+  вы откомпилируете и запустите эту программу, на вашем экране появится следующий 
+  вывод:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; DESTRUCT &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Служащий: 
+    Happy Jamsa</FONT></FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Номер служащего: 101</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Оклад: 10101</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Уничтожение 
+    объекта для Happy Jamsa</FONT></FONT></B></P>
+</BLOCKQUOTE>
+<P><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"></FONT></FONT></B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  видите, программа автоматически вызывает деструктор, без какого-либо явного 
+  вызова функции деструктора. До настоящего момента вашим программам, вероятно, 
+  не требовалось использовать деструктор. Однако, когда программы начнут распределять 
+  память внутри объектов, вы обнаружите, что деструктор обеспечивает удобный способ 
+  освобождения памяти при уничтожении объекта.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><I><B><FONT FACE="Arial, Helvetica, sans-serif">Деструкторы</FONT></B></I></FONT></FONT></P>
+  <P><B><I><FONT FACE="Times New Roman, Times, serif" SIZE="3">Деструктор представляет 
+    собой функцию, которую C++ автоматически запускает, когда он или ваша программа 
+    уничтожает объект. Деструктор имеет такое же имя, как и класс объекта; однако 
+    вы предваряете имя деструктора символом тильды (~), например ~employee. В</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">своей программе вы определяете 
+    деструктор точно так же, как и любой другой метод класса.</FONT></I></B></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Конструкторы 
+  и деструкторы представляют собой специальные функции класса, которые ваша программа 
+  автоматически вызывает при создании или уничтожении объекта. Большинство программ 
+  используют конструктор для инициализации элементов данных класса. Простые программы, 
+  создаваемые сейчас вами, вероятно, не потребуют использования деструктора. Из 
+  урока 24 вы узнаете, как перегружать операторы. Другими словами, вы можете переопределить 
+  символ плюс таким образом, что он будет добавлять содержимое одной строки к 
+  другой. Как вы уже знаете, тип (например,</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">char, 
+  float и int) определяет набор значений, которые может хранить переменная, и 
+  набор операций, которые ваши программы могут выполнять над этой переменной. 
+  Когда вы определяете класс, вы по существу определяете тип. C++ позволяет вам 
+  указать, как ведут себя операторы с данным типом. До изучения урока 24 убедитесь, 
+  что освоили следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Конструктор представляет собой специальную функцию, которую ваша программа 
+      автоматически вызывает каждый раз при создании объекта. Конструктор имеет 
+      такое же имя, как и класс объекта.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Конструктор не имеет 
+      возвращаемого значения, но вы не указываете ему тип</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">void. 
+      Вместо этого вы просто не указываете возвращаемое значение вообще.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Когда ваша программа создает объект, она может передать параметры конструктору 
+      во время объявления объекта.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> C++ позволяет вам 
+      перегружать конструкторы и разрешает использовать значения по умолчанию 
+      для параметров.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Деструктор представляет собой специальную функцию, которую ваша программа 
+      вызывает автоматически каждый раз при уничтожении объекта. Деструктор имеет 
+      такое же имя, как и класс объекта, но его имя предваряется символом тильды 
+      (~).</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 22.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 24.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

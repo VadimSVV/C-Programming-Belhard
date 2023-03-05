@@ -1,0 +1,381 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 21</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Знакомство с классами 
+  C++</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Класс представляет 
+  собой главное инструментальное средство C++ для объектно-ориентированного программирования. 
+  Как вы узнаете из данного урока, класс очень похож на структуру, в которой сгруппированы 
+  элементы, соответствующие данным о некотором объекте, и оперирующие этими данными 
+  функции (называемые <I>методами).</I> Вы узнаете, что объект представляет собой 
+  некоторую сущность, например телефон. Класс C++ позволяет вашим программам определять 
+  все атрибуты объекта. В случае, когда объектом является телефон, класс может 
+  содержать такие элементы данных, как номер и тип телефона (кнопочный или дисковый) 
+  и функции, работающие с телефоном, например</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dial, 
+  answer,</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>hang_up. 
+  </I>Группируя данные об объекте и кодируя их в одной переменной, вы упрощаете 
+  процесс программирования и увеличиваете возможность повторного использования 
+  своего кода. Этот урок знакомит вас с классами C++ . К концу урока вы освоите 
+  следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    определения класса программа должна указать имя класса, элементы данных класса 
+    и функции класса (методы).</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Определение класса обеспечивает 
+    шаблон, с помощью которого ваши программы могут создать объекты типа этого 
+    класса, подобно тому, как программы создают переменные типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>int, 
+    char</I> и т. д.</FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программа 
+    присваивает значения элементам данных класса, используя оператор точку.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программа 
+    вызывает функцию-элемент класса, используя оператор точку.</FONT></FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ПРЕДСТАВЛЕНИЕ 
+  ОБ ОБЪЕКТАХ И </FONT></FONT><FONT FACE="Arial, Helvetica, sans-serif">ОБЪЕКТНО-ОРИЕНТИРОВАННОМ 
+  ПРОГРАММИРОВАНИИ</FONT></H2>
+<FONT FACE="Times New Roman"></FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В известном 
+  смысле объект представляет собой сущность. Программа обычно использует переменные 
+  для хранения информации о различных реально существующих сущностях, например 
+  служащих, книгах и даже файлах. При объектно-ориентированном программировании 
+  вы фокусируетесь на предметах, образующих систему, и операциях, которые вы должны 
+  выполнять над этими предметами. Например, для объекта-файла вы могли бы иметь</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3">операции, которые печатают, 
+  отображают или изменяют файл. В C++ вы используете класс для определения своих 
+  объектов. Ваша цель состоит в том чтобы включить в класс столько информации 
+  об объекте, сколько требуется. Исходя из этого, можно подобрать класс, созданный 
+  вами для одной программы, и использовать его в нескольких разных программах.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Класс 
+  позволяет вашим программам группировать данные и функции которые выполняют операции 
+  над этими данными. Большинство книг и статей об объектно-ориентированном программировании 
+  называют функции класса методами. Подобно структуре, класс C++ должен иметь 
+  уникальное имя, за которым следует открывающая фигурная скобка, один или несколько 
+  элементов и закрывающая фигурная скобка:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class class_name </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    data_member; // Элемент данных<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_member(int); // Функция-элемент <BR>
+    </FONT>};</P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">После определения класса 
+  вы можете объявлять переменные типа этого класса (называемые <I>объектами),</I> 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class_name object_one, 
+    object_two, object_three;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующее 
+  определение создает класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>employee,</I> 
+  который содержит определения данных и метода:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    &nbsp;&nbsp;&nbsp;public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    name[64] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Имя:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;};<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае класс содержит три переменные и одну функцию-элемент. Обратите внимание 
+  на использование метки</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>public</I> 
+  внутри определения класса. Как вы узнаете из урока 22, элементы класса могут 
+  быть <I>частными (private)</I> или <I>общими {public),</I> от чего зависит, 
+  как ваши программы обращаются к элементам класса. В данном случае все элементы 
+  являются общими, это означает, что программа может обращаться к любому элементу, 
+  используя оператор точку. После определения класса внутри вашей программы вы 
+  можете объявить объекты (переменные) типа этого класса, как показано ниже:</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">————————————————————— 
+  <I><B>Имя класса</B></I></FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><U>employee</U> 
+  <U>worker, boss, secretary</U>; <I><B>//---------&gt;Переменные класса (объекты)</B></I></FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа EMPCLASS.CPP создает два объекта employee. Используя оператор точку, 
+  программа присваивает значения элементам данных Затем программа использует элемент</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_employee</I> для 
+  вывода информации о служащем:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public: <BR>
+    &nbsp;&nbsp; char name [64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;long 
+    employee_id;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    salary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_employee(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Имя:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;};<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;employee 
+    worker, boss;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(worker.name, 
+    "John Doe");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.employee_id 
+    = 12345;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.salary 
+    = 25000;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(boss.name, 
+    "Happy Jamsa");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;boss.employee_id 
+    = 101;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;boss.salary 
+    = 101101.00;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;boss.show_employee();<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, программа объявляет 
+  два объекта типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>employee 
+  — worker</I> и <I>boss, а.</I> затем использует оператор точку для присваивания 
+  значений элементам и вызова функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_employee.</I></FONT></P>
+<BLOCKQUOTE>
+  <P><I><FONT FACE="Times New Roman"><B>Представление об объектах</B></FONT></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Большинство программ 
+    на C++ отражают реальные существующие объекты. В известном смысле объекты 
+    представляют собой сущности, например автомобиль, собаку, часы и т. д. Обычно 
+    объект имеет несколько атрибутов и операций, которые программа должна выполнять 
+    над этими атрибутами. Например, в случае часов свойства могут включать текущее 
+    время и время будильника. Операции такого объекта могли бы содержать установку 
+    времени, установку будильника или выключение будильника. При объектно-ориентированном 
+    программировании ваши программы фокусируются на объектах и операциях над этими 
+    объектами.</FONT></B></I></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПРЕДЕЛЕНИЕ МЕТОДОВ 
+  КЛАССА ВНЕ КЛАССА</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В предыдущем 
+  классе</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>employee</I> 
+  функция была определена внутри самого класса <I>(встроенная (inline) функция).</I> 
+  При увеличении функций определение встроенных функций внутри класса может внести 
+  беспорядок в описание класса. В качестве альтернативы вы можете поместить прототип 
+  функции внутри класса, а затем определить функцию вне класса. Ваше определение 
+  класса с прототипом становится следующим:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    &nbsp;&nbsp;&nbsp;char name[64];<BR>
+    &nbsp;&nbsp;&nbsp;long employee_id;<BR>
+    &nbsp;&nbsp;&nbsp;float salary;<BR>
+    &nbsp;&nbsp;&nbsp;void show_employee(void); <B>|————————&gt; <I>Прототип функции<BR>
+    </I></B><I> </I>};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Так как разные классы могут 
+  использовать функции с одинаковыми именами, вы должны предварять имена определяемых 
+  вне класса функций именем класса и оператором глобального разрешения (::). В 
+  данном случае определение функции становится следующим:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee:: show_employee 
+    (void) //--------------&gt;Имя класса</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;сout</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    "Имя:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" &lt;&lt; 
+    name &lt;&lt; endl; Имя элемента cout &lt;&lt; "Номер служащего:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; employee_id &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    };</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  приведенный код предваряется определением функции с именем класса</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(employee)</I> 
+  и оператором глобального разрешения (::). Следующая программа CLASSFUN.CPP помещает 
+  определение функции <I>show_employee</I> вне класса, используя оператор глобального 
+  разрешения для указания имени класса:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class employee </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    &nbsp;&nbsp;&nbsp;char name [64];<BR>
+    &nbsp;&nbsp;&nbsp;long employee_id;<BR>
+    &nbsp;&nbsp;&nbsp;float salary;<BR>
+    &nbsp;&nbsp;&nbsp;void show_employee(void);<BR>
+    };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void employee::show_employee(void)<BR>
+    {<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Имя:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; name &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Номер служащего: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    employee_id &lt;&lt; endl;<BR>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Оклад:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; salary &lt;&lt; endl;<BR>
+    };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;employee worker, boss;<BR>
+    &nbsp;&nbsp;&nbsp;strcpy(worker.name, "John Doe");<BR>
+    &nbsp;&nbsp;&nbsp;worker.employee_id = 12345;<BR>
+    &nbsp;&nbsp;&nbsp;worker.salary = 25000;<BR>
+    &nbsp;&nbsp;&nbsp;strcpy(boss.name, "Happy Jamsa");<BR>
+    &nbsp;&nbsp;&nbsp;boss.employee_id = 101;<BR>
+    &nbsp;&nbsp;&nbsp;boss.salary = 101101.00;<BR>
+    &nbsp;&nbsp;&nbsp;worker.show_employee();<BR>
+    &nbsp;&nbsp;&nbsp;boss.show_employee();<BR>
+    }</FONT></P>
+  <P><I><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Методы 
+    класса</FONT></B></FONT></FONT></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Классы C++ позволяют 
+    вашим программам группировать данные объекта и функции объекта (методы), которые 
+    оперируют с этими данными, в одной переменной. У вас есть две возможности 
+    определения методов объекта. Первая состоит в том, что вы можете включить 
+    весь код функции внутрь определения класса. Несмотря на то что включение кода 
+    метода в определение класса может представляться удобным, однако, когда классы 
+    становятся сложнее и включают несколько методов, операторы функций могут вносить 
+    беспорядок в определение классов. Таким образом, многие программы определяют 
+    операторы функции вне класса. В определение класса программа должна включать 
+    прототип</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">функции, 
+    который указывает имя функции, тип возвращаемого значения и типы параметров.</FONT></B></I></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+    определения функции вне определения класса ваша программа должна предварять 
+    определение функции именем класса и оператором глобального разрешения, как 
+    показано ниже:</FONT></B></I></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">return_type class_name::function_name(parameters) 
+    <BR>
+    {</FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">// 
+    Операторы }</FONT></B></I></P>
+  </BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ВТОРОЙ 
+  ПРИМЕР</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа PEDIGREE.CPP создает класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dog,</I> 
+  который содержит несколько полей данных и функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_breed.</I> 
+  Программа определяет функцию класса вне определения самого класса. Затем программа 
+  создает два объекта типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dog</I> 
+  и выводит информацию о каждой собаке:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class dogs </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    breed[64];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    average_weight;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    average_height;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    show_dog(void) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void dogs::show_breed(void) 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Порода:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; breed &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Средний вес: "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    average_weight &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Средняя высота:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; average_height &lt;&lt; endl;<BR>
+    }</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;dogs 
+    happy, matt;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(happy.breed, 
+    "Долматин") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;happy.average_weight 
+    = 58;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;happy.average_height 
+    = 24;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(matt.breed, 
+    "Колли");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;matt.average_weight 
+    =22;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;matt.average_height 
+    = 15;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;happy.show_breed() 
+    ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;matt.show_breed();<BR>
+    </FONT>}</P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы 
+  на C++ широко используют классы. Говоря кратко, классы позволяют вашим программам 
+  группировать для определенного объекта его данные и методы (функции), которые 
+  оперируют этими данными, в одной переменной. Как видите, классы очень похожи 
+  на структуры, которые вы рассматривали в уроке 18. Классы C++ являются основой 
+  объектно-ориентированного программирования. Следующие уроки расширяют возможности 
+  предоставляемые классами. Упоминавшаяся в этом уроке метка</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>public, 
+  по</I>являющаяся в определении класса, делает элементы класса доступными для 
+  всей программы. Из урока 22 вы больше узнаете о частных и общих элементах класса. 
+  До изучения урока 22 убедитесь, что освоили следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+      известном смысле объект представляет собой сущность, с которой ваши программы 
+      выполняют разные операции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы на C++ представляют 
+      объекты посредством классов.</FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Класс, подобно структуре, содержит элементы. Элементы класса могут хранить 
+      информацию (данные) или быть функциями (методами), которые оперируют этими 
+      данными.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Каждый класс имеет уникальное имя.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      После определения класса вы можете объявлять объекты этого класса, используя 
+      имя класса в качестве типа.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Для обращения к элементам класса (как к данным, так и к функциям) ваши программы 
+      используют оператор точку.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Программы могут определять 
+      функцию класса внутри или вне определения класса. Если вы определяете функцию 
+      вне определения класса, вам следует указать имя класса и использовать оператор 
+      глобального разрешения, например</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>class:: 
+      function.</I></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 20.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 22.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

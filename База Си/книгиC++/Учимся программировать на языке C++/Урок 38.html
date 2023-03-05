@@ -1,0 +1,485 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 38</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Полиморфизм</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда 
+  программисты говорят о C++ и объектно-ориентированном программировании, то очень 
+  часто употребляют термин полиморфизм. В общем случае <I>полиморфизм</I> представляет 
+  собой способность объекта изменять форму. Если вы разделите этот термин на части, 
+  то обнаружите, что <I>поли</I> означает много, а <I>морфизм</I> относится к 
+  изменению формы. Полиморфный объект, следовательно, представляет собой объект, 
+  который может принимать разные формы. Этот урок вводит понятие полиморфизма 
+  и рассматривает, как использовать полиморфные объекты внутри ваших программ 
+  для упрощения и уменьшения кода. К концу данного урока вы освоите следующие 
+  основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Полиморфизм</I> представляет 
+    собой способность объекта изменять форму во время выполнения программы.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">C++ упрощает создание 
+    полиморфных объектов.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для создания полиморфных 
+    объектов ваши программы должны использовать виртуальные</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(virtual)</I> 
+    функции.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Виртуальная</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(virtual)</I> 
+    функция — это функция базового класса, перед именем которой стоит ключевое 
+    слово</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>virtual.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Любой производный от 
+    базового класс может использовать или перегружать виртуальные функции.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для создания полиморфного 
+    объекта вам следует использовать указатель на объект базового класса.</FONT></LI>
+</UL>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ТАКОЕ ПОЛИМОРФИЗМ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Полиморфный 
+  объект представляет собой такой объект, который может изменять форму во время 
+  выполнения программы. Предположим, например, что вы программист, работающий 
+  в телефонной компании, и вам необходимо написать программу, которая эмулирует 
+  телефонные операции. Поскольку вы знакомы с тем, как люди используют телефон, 
+  вы быстро выберете общие операции, такие как набор номера, звонок, разъединение 
+  и индикация занятости. С помощью этих операций вы определите следующий класс:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char "number) { cout &lt;&lt; "Набор номера " &lt;&lt; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">number 
+    &lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    ring(void) { cout &lt;&lt; "Звонок, звонок, звонок"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;) <BR>
+    &nbsp;&nbsp;&nbsp;phone(char *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">);</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа PHONEONE.CPP использует класс</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>phone</I> 
+  для создания объекта-телефона:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char *number) { cout &lt;&lt; "Набор номера " &lt;&lt; number</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void ring(void) { cout &lt;&lt; "Звонок, звонок, звонок" 
+    &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;phone(char *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;phone 
+    telephone("555-1212"); <BR>
+    &nbsp;&nbsp;&nbsp;telephone.dial("212-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  продемонстрируете программу вашему боссу, то он или она скажет, что ваша программа 
+  не делает различий между дисковым и кнопочным телефонами, и что она не поддерживает 
+  платные телефоны, когда пользователь должен заплатить 25 центов, чтобы позвонить.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Поскольку 
+  вы знаете наследование, то примете решение породить классы <I>touch_tone</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>pay_phone</I> 
+  из <I>класса phone,</I> как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class touch_tone : phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char * number) { cout &lt;&lt; "Пик пик Набор номера</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; number 
+    &lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;touch_tone(char 
+    *number) : phone(number) { } <BR>
+    };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class pay_phone : phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char * number) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Пожалуйста, оплатите " 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; amount 
+    &lt;&lt; " центов"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Набор номера "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    number </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; <BR>
+    &nbsp;&nbsp;&nbsp;} </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;pay_phone(char 
+    *number, int amount) : phone(number) { </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">pay_phone::amount 
+    = amount; } <BR>
+    private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    amount;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  классы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>touch_tone</I> 
+  и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>pay__phone</I> 
+  определяют свой собственный метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dial.</I> 
+  Если вы предположите, что метод</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dial 
+  класса, phone</I> основан на дисковом телефоне, то вам не потребуется создавать 
+  класс для дискового телефона. Следующая программа NEWPHONE.CPP использует эти 
+  классы для создания объектов</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>rotary, 
+  touch_tone</I> и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>pay_phone:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char *number) { cout &lt;&lt; "Набор номера "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">number &lt;&lt; 
+    endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void ring(void) { cout &lt;&lt; "Звонок, звонок, звонок" 
+    &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;phone(char *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">protected:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">);</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class touch_tone : phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char *number) { cout &lt;&lt; "Пик пик Набор номера</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; number &lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;touch_tone(char 
+    *number) : phone(number) { } <BR>
+    };</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class pay_phone : phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char * number) { cout &lt;&lt; "Пожалуйста, оплатите " &lt;&lt; amount 
+    &lt;&lt; " центов"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; 
+    "Набор номера &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>" &lt;&lt;</I> number 
+    &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;pay_phone(char * number, int amount) : phone(number) { </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">pay_phone::amount 
+    = amount; } <BR>
+    private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    amount ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main (void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;phone 
+    rotary(&quot;303-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;rotary.dial("602-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;touch_tone 
+    telephone("555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;telephone.dial("212-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;pay_phone 
+    city_phone("555-1111", 25);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;city_phone.dial("212-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; NEWPHONE &lt;Enter&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Набор номера 602-555-1212</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Пик пик Набор номера 
+    212-555-1212</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Пожалуйста, оплатите 
+    25 центов</FONT></B></P>
+  <P> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Набор номера 212-555-1212</FONT></B></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как уже 
+  упоминалось, полиморфный объект представляет собой такой объект, который изменяет 
+  форму во время выполнения программы. Предыдущая программа, например, не использовала 
+  полиморфные объекты. Иначе говоря, в ней нет объектов, которые бы изменяли форму.</FONT></P>
+</FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">СОЗДАНИЕ ПОЛИМОРФНОГО 
+  ОБЪЕКТА-ТЕЛЕФОНА</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">После того 
+  как вы показали начальству вашу новую телефонную программу, ваше руководство 
+  сказало вам, что ваш объект-телефон должен уметь эмулировать дисковый, кнопочный 
+  или платный телефон на выбор. Другими словами, для одного звонка объект-телефон 
+  мог бы представлять кнопочный аппарат, для другого выступал бы как платный телефон 
+  и т.д. Иначе говоря, от одного звонка к другому ваш объект-телефон должен изменять 
+  форму.</FONT></P>
+</FONT> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В этих 
+  разных классах телефона существует единственная отличающаяся функция — это метод</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>dial.</I> Для создания 
+  полиморфного объекта вы сначала определяете функции базового класса, которые 
+  отличаются от функций производных классов тем, что они <I>виртуальные,</I> предваряя 
+  их прототипы ключевым словом</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>virtual,</I> 
+  как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;virtual 
+    void dial(char •number) { cout &lt;&lt; "Набор номера " &lt;&lt; number &lt;&lt; 
+    endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" &lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    ring(void) { cout &lt;&lt; "Звонок, звонок, звонок" &lt;&lt; endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;phone(char 
+    *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">protected:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Далее в 
+  программе вы создаете указатель на объект базового класса. Для вашей телефонной 
+  программы вы создадите указатель на базовый класс <I>phone:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">phone *poly_phone;</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для изменения 
+  формы объекта вы просто присваиваете этому указателю адрес объекта производного 
+  класса, как показано ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">poly_phone = (phone *) 
+    &amp;home_phone;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Символы</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(phone *),</I> которые 
+  следуют за оператором присваивания, являются оператором приведения типов, который 
+  сообщает компилятору C++, что все в порядке, необходимо присвоить адрес переменной 
+  одного типа (<I>touch_tone)</I> указателю на переменную другого типа (<I>phone).</I> 
+  Поскольку ваша программа может присваивать указателю объекта</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>poly_phone</I> 
+  адреса различных объектов, то этот объект может изменять форму, а следовательно, 
+  является полиморфным. Следующая программа POLYMORP.CPP использует этот метод 
+  для создания объекта-телефона. После запуска программы объект <I>poly_phone</I> 
+  меняет форму с дискового телефона на кнопочный, а затем на платный:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;virtual 
+    void dial(char *number) { cout &lt;&lt; "Набор номера " &lt;&lt; number &lt;&lt; 
+    endl; }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void ring(void) { cout &lt;&lt; "Звонок, звонок, звонок" 
+    &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;phone(char *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">protected:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13] ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class touch_tone : phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{ <BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char * number) { cout &lt;&lt; "Пик пик Набор номера</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; number &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;touch_tone(char *number) : phone(number) { }<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class pay_phone: phone 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;void 
+    dial(char *number) { cout &lt;&lt; "Пожалуйста, оплатите " &lt;&lt; amount 
+    &lt;&lt; " центов"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl; </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; 
+    "Набор номера "</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt; 
+    number &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;pay_phone(char *number, int amount) : phone(number) { </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">pay_phone::amount 
+    = amount; } <BR>
+    private:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    amount;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;pay_phone 
+    city_phone("702-555-1212", 25);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;touch_tone 
+    home_phone("555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;phone 
+    rotary("201-555-1212") ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    Сделать объект дисковым телефоном <BR>
+    &nbsp;&nbsp;&nbsp;phone *poly_phone = &amp;rotary;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;poly_phone-&gt;dial("818-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    Заменить форму объекта на кнопочный телефон <BR>
+    &nbsp;&nbsp;&nbsp;poly_phone = (phone *) &amp;home_phone;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;poly_phone-&gt;dial("303-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+    Заменить форму объекта на платный телефон <BR>
+    &nbsp;&nbsp;&nbsp;poly_phone = (phone *) &amp;city_phone;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;poly_phone-&gt;dial("212-555-1212");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  откомпилируете и запустите эту программу, на экране дисплея появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; POLYMORP &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Набор номера 818-555-1212</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Пик пик Набор номера 
+    303-555-1212</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Пожалуйста, оплатите 
+    25 центов</FONT></B></P>
+  <P> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Набор номера 212-555-1212</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Поскольку 
+  объект</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>poly_phone</I> 
+  изменяет форму по мере выполнения программы, он является полиморфным.</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Полиморфные 
+    объекты могут изменять форму во время выполнения программы</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Полиморфный 
+    объект представляет собой такой объект, который может изменять форму во время 
+    выполнения программы. Для создания полиморфного объекта ваша программа должна 
+    использовать указатель на объект базового класса. Далее программа должна присвоить 
+    этому указателю адрес объекта производного класса. Каждый раз, когда программа 
+    присваивает указателю адрес объекта другого класса, объект этого указателя 
+    (который является полиморфным) изменяет форму. Программы строят полиморфные 
+    объекты, основываясь на виртуальных функциях базового класса.</FONT></FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ТАКОЕ ЧИСТО ВИРТУАЛЬНЫЕ 
+  ФУНКЦИИ</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, для создания полиморфного объекта ваши программы определяют один 
+  или несколько методов базового класса как <I>виртуальные</I> функции. Производный 
+  класс может определить свою собственную функцию, которая выполняется вместо 
+  виртуальной функции базового класса, или использовать базовую функцию (другими 
+  словами, производный класс может и не определять свой собственный метод). В 
+  зависимости от программы иногда не имеет смысла определять виртуальную функцию 
+  в базовом классе. Например, объекты производных типов могут настолько сильно 
+  отличаться, что им не нужно будет использовать метод базового класса. В таких 
+  случаях вместо определения операторов для виртуальной функции базового класса 
+  ваши программы могут создать <I>чисто виртуальную функцию,</I> которая не содержит 
+  операторов.</FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для создания 
+  чисто виртуальной функции ваша программа указывает прототип функции, но не указывает 
+  ее операторы. Вместо них программа присваивает функции значение ноль, как показано 
+  ниже:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">class phone </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    public:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;virtual 
+    void dial (char *number) =0; // Чисто виртуальная</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+    функция <BR>
+    &nbsp;&nbsp;&nbsp;void answer(void) { cout &lt;&lt; "Ожидание ответа"</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; endl; }<BR>
+    &nbsp;&nbsp;&nbsp;void hangup(void) { cout &lt;&lt; "Звонок выполнен - повесить 
+    трубку" &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;void ring(void) { cout &lt;&lt; "Звонок, звонок, звонок" 
+    &lt;&lt; endl; } <BR>
+    &nbsp;&nbsp;&nbsp;phone(char *number) { strcpy(phone::number, number); };<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">protected:<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    number[13];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">};</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Каждый 
+  производный класс, определенный в вашей программе, должен определить свою функцию 
+  вместо чисто виртуальной функции базового класса. Если производный класс опустит 
+  определение функции для чисто виртуальной функции, компилятор C++ сообщит о 
+  синтаксических ошибках.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Полиморфизм 
+  представляет собой способность объекта изменять форму во время выполнения программы. 
+  В этом уроке рассмотрены шаги, которые вам необходимо выполнить для создания 
+  полиморфных объектов. Из урока 39 вы узнаете, как использовать исключительные 
+  ситуации в C++ для обеспечения надежности вашей программы. Прежде чем приступить 
+  к уроку 39 убедитесь, что вы освоили следующие основные концепции:</FONT><FONT FACE="Times New Roman"> 
+  </FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Полиморфный 
+      объект может изменять форму во время выполнения программы.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вы 
+      создаете полиморфные объекты, используя классы, порожденные от существующего 
+      базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В базовом для полиморфного 
+      объекта классе вы должны определить одну или несколько функций как виртуальные</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>(virtual).</I></FONT><FONT FACE="Times New Roman"> 
+      </FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+      общем случае полиморфные объекты отличаются использованием виртуальных функций 
+      базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      создания полиморфного объекта вам необходимо создать указатель на объект 
+      базового класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для 
+      изменения формы полиморфного объекта вы просто направляете указатель на 
+      различные объекты, присваивая новый адрес объекта указателю на полиморфный 
+      объект.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чисто виртуальная 
+      функция — это виртуальная функция базового класса, для которой в базовом 
+      классе не определены операторы. Вместо них базовый класс присваивает такой 
+      функции значение 0.</FONT><FONT FACE="Times New Roman"> </FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Производные 
+      классы должны обеспечить определение функции для каждой чисто виртуальной 
+      функции базового класса.</FONT></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 37.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 39.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,382 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 31</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Использование свободной 
+  памяти в С++</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  вы уже знаете, если ваша программа объявляет массив, компилятор C++ распределяет 
+  память для хранения его элементов. Однако представляется возможным, что до некоторого 
+  времени размер массива может быть не так велик, чтобы вместить все необходимые 
+  данные. Например, предположим, что вы создали массив для хранения 100 акций. 
+  Если позже вам потребуется хранить более 100 акций, вы должны изменить свою 
+  программу и перекомпилировать ее. С другой стороны, вместо распределения массива 
+  фиксированного размера ваши программы могут запрашивать необходимое количество 
+  памяти динамически, т.е. во время выполнения. Например, если программе необходимо 
+  следить за акциями, она могла бы запросить память, достаточную для хранения 
+  100 акций. Аналогично, если программе необходимы только 25 акций, она могла 
+  бы запросить меньше памяти. Распределяя подобным образом память динамически, 
+  ваши программы непрерывно изменяют свои потребности без дополнительного программирования. 
+  Если ваши программы запрашивают память во время выполнения, они указывают требуемое 
+  количество памяти, а C++ возвращает указатель на эту память. C++ распределяет 
+  память из областей памяти, которые называются <I>свободной памятью.</I> В этом 
+  уроке рассматриваются действия, которые должна выполнить ваша программа для 
+  динамического распределения, а впоследствии освобождения памяти во время выполнения. 
+  К концу данного урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы запросить память 
+    во время выполнения, ваши программы должны использовать оператор C++ <I>new.</I></FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании оператора</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> программы указывают 
+    количество требуемой памяти. Если оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+    может успешно выделить требуемый объем памяти, он возвращает указатель на 
+    начало области выделенной памяти.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если оператор</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> не может удовлетворить 
+    запрос на память вашей программы (возможно, свободной памяти уже не осталось), 
+    он возвращает указатель NULL.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы позже освободить 
+    память, распределенную с помощью оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> 
+    ваши программы должны использовать оператор C++ <I>delete.</I></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Динамическое 
+  распределение памяти во время выполнения является чрезвычайно полезной возможностью. 
+  Экспериментируйте с программами, представленными в данном уроке. И вы поймете, 
+  что динамическое распределение памяти реально выполняется очень просто.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ ОПЕРАТОРА 
+  <I>new</I></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Оператор 
+  C++ <I>new</I> позволяет вашим программам распределять память во время выполнения. 
+  Для использования оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  вам необходимо указать количество байтов памяти, которое требуется программе. 
+  Предположим, например, что вашей программе необходим 50-байтный массив. Используя 
+  оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> 
+  вы можете заказать эту память, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">char *buffer = new char[50];</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Говоря 
+  кратко, если оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  успешно выделяет память, он возвращает указатель на начало области этой памяти. 
+  В данном случае, поскольку программа распределяет память для хранения массива 
+  символов, она присваивает возвращаемый указатель переменной, определенной как 
+  указатель на тип</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>char.</I> 
+  Если оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  не может выделить запрашиваемый вами объем памяти, он возвратит NULL-указатель, 
+  который содержит значение 0. Каждый раз, когда ваши программы динамически распределяют 
+  память с использованием оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> 
+  они должны проверять возвращаемое оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  значение, чтобы определить, не равно ли оно NULL.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Зачем 
+    необходимо динамически распределять память с использованием new</FONT></I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Многие 
+    программы интенсивно используют массивы для хранения множества значений определенного 
+    типа. При проектировании своих программ программисты обычно пытаются объявить 
+    массивы с размерами, достаточными для удовлетворения будущих потребностей 
+    программы. К сожалению, если случится так, что потребности программы когда-нибудь 
+    превысят подобные ожидания программиста, то кому-то придется редактировать 
+    и перекомпилировать такую программу.</FONT></FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Вместо редактирования 
+    и перекомпилирования программ, которые просто запрашивают память с запасом, 
+    вам следует создавать свои программы таким образом, чтобы они распределяли 
+    требуемую им память динамически во время выполнения, используя оператор</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">new. В этом случае ваши 
+    программы могут адаптировать использование памяти в соответствии с вашими 
+    изменившимися потребностями, избавляя вас от необходимости редактировать и 
+    перекомпилировать программу.</FONT></B></I></P>
+</BLOCKQUOTE>
+<P> <I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"></FONT></B></I><FONT FACE="Times New Roman, Times, serif" SIZE="3">Например, 
+  следующая программа USE_NEW.CPP использует оператор <I>new для</I> получения 
+  указателя на 100-байтный массив:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> void main(void)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    *pointer = new char[100];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (pointer != NULL) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Память успешно выделена"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Ошибка 
+    выделения памяти"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, программа сразу 
+  проверяет значение, присвоенное оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  переменной-указателю. Если указатель содержит значение NULL, значит</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  не смог выделить запрашиваемый объем памяти. Если же указатель содержит не NULL, 
+  следовательно, new успешно выделил память и указатель содержит адрес начала 
+  блока памяти.</FONT></P>
+<BLOCKQUOTE> 
+  <P> <FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Если 
+    new не может удовлетворить запрос на память, он возвратит NULL</FONT></I></B></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">При использовании 
+    оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new для 
+    выделения памяти может случиться так, что ваш запрос не может быть удовлетворен, 
+    поскольку нет достаточного объема свободной памяти. Если оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new 
+    не способен выделить требуемую память, он присваивает указателю значение NULL. 
+    Проверяя значение указателя, как показано в предыдущей программе, вы можете 
+    определить, был ли удовлетворен запрос на память. Например, следующий оператор 
+    использует</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new 
+    для распределения памяти под массив из 500 значений с плавающей точкой:</FONT></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">float *array 
+      = new float[100];</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы определить, 
+    выделил ли оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new 
+    память, ваша программа должна сравнить значение указателя с NULL, как показано 
+    ниже:</FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">if (array != 
+      NULL) </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+      &lt;&lt; "Память выделена успешно"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+      endl;<BR>
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">else 
+      </FONT></B></I><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+      &lt;&lt; "new не может выделить память"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+      endl;</FONT></B></I></P>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущая программа использовала 
+  оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new для</I> 
+  выделения 100 байт памяти. Поскольку эта программа "жестко закодирована" на 
+  объем требуемой памяти, возможно, вам потребуется ее редактировать и перекомпилировать, 
+  если возникнет необходимость, чтобы программа выделила меньше или больше памяти. 
+  Как уже кратко обсуждалось, одна из причин для динамического распределения памяти 
+  состоит в том, чтобы избавиться от необходимости редактировать и перекомпилировать 
+  программу при изменении требований к объему памяти. Следующая программа ASK_MEM.CPP 
+  запрашивает у пользователя количество байт памяти, которое необходимо выделить, 
+  и затем распределяет память, используя оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    *pointer;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Введите размер массива, до 30000: ";<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cin 
+    &gt;&gt; size;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (size &lt;= 30000) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pointer 
+    = new char[size];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (pointer != NULL) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Память выделена успешно"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Невозможно 
+    выделить память"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда ваши 
+  программы используют оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new 
+  для</I> динамического распределения памяти, то вполне вероятно, что они сами 
+  знают, сколько памяти необходимо выделить. Например, если программа распределяет 
+  память для хранения информации о служащих, она, возможно, сохранила количество 
+  служащих в файле. Следовательно, при запуске она может прочитать количество 
+  служащих из файла, а затем выделить соответствующее количество памяти.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа NOMEMORY.CPP выделяет каждый раз память для 10000 символов до тех 
+  пор, пока оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  не сможет больше выделить память из свободной памяти. Другими словами, эта программа 
+  удерживает выделенную память, пока не использует всю доступную свободную память. 
+  Если программа успешно выделяет память, она извещает об этом сообщением. Если 
+  память больше не может быть выделена, программа выводит сообщение об ошибке 
+  и завершается:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    * pointer;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;do 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pointer 
+    = new char[10000];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (pointer != NULL) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "Выделено 10000 байт"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; "Больше 
+    нет памяти"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;} 
+    while (pointer 1= NULL);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+  </BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>Замечание: 
+  </I>Если выработаете в среде MS-DOS, то, возможно, будете удивлены тем, что 
+  свободная память исчерпается после того, как программа выделит 64 Кбайт, Большинство 
+  работающих в MS-DOS компиляторов<I> C++ </I>по умолчанию используют малую модель 
+  памяти, которая обеспечивает только 64 К6aйm свободной памяти. Аналогично, если 
+  вы используете среду MS-DOS, то наибольшая область памяти, к которой могут обратиться 
+  ваши программы, может быть ограничена 64Кбайт.</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">О 
+    свободной памяти</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Каждый раз при 
+    запуске вашей программы компилятор C++ устанавливает отдельную область неиспользуемой 
+    памяти, которая называется свободной памятью. Используя оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">new, 
+    ваша программа может выделить память из этой свободной памяти во время выполнения. 
+    Используя свободную память для распределения требуемой памяти, ваши программы 
+    не стеснены фиксированными размерами массивов. Размер свободной памяти может 
+    изменяться в зависимости от вашей</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">операционной 
+    системы и модели памяти компилятора. Если увеличивается количество динамической 
+    памяти, требуемой вашими программами, вам необходимо убедиться, что вас не 
+    сдерживают ограничения свободной памяти вашей системы.</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ОСВОБОЖДЕНИЕ 
+  ПАМЯТИ, ЕСЛИ ОНА БОЛЬШЕ НЕ НУЖНА</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  знаете, оператор C++ <I>new</I> позволяет вашим программам выделять память динамически 
+  во время выполнения. Если вашей программе больше не нужна выделенная память, 
+  она должна ее освободить, используя оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete. 
+  </I>Для освобождения памяти с использованием оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete</I> 
+  вы просто указываете этому оператору указатель на данную область памяти, как 
+  показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">delete pointer;</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа DEL_MEM.CPP использует оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete</I> 
+  для освобождения выделенной с помощью оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+  памяти:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    *pointer = new char[100];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;strcpy(pointer, 
+    "Учимся программировать на языке C++");<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; pointer &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;delete 
+    pointer; <BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">По умолчанию, если ваша 
+  программа не освобождает выделенную ей память до своего завершения, операционная 
+  система автоматически освобождает эту память после завершения программы. Однако 
+  если ваша программа использует оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete</I> 
+  для освобождения памяти по мере того, как она (память) становится ненужной, 
+  то эта память вновь становится доступной для других целей (возможно, для вашей 
+  программы, которая опять будет использовать оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> 
+  или для операционной системы).</FONT></P>
+<H3 ALIGN="JUSTIFY"><FONT FACE="Arial, Helvetica, sans-serif">Второй пример</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа ALLOCARR.CPP выделяет память для хранения массива из 1000 целочисленных 
+  значений. Затем она заносит в массив значения от 1 до 1000, выводя их на экран. 
+  Потом программа освобождает эту память и распределяет память для массива из 
+  2000 значений с плавающей точкой, занося в массив значения от 1.0 до 2000.0:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostreain.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(void) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    *int_array = new int[1000];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float 
+    *float_array;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (int_array 1= NULL) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 1000; i++) int_array[i] = i + 1;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 1000; i++) cout &lt;&lt; int_array[i] &lt;&lt; ' ';<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete 
+    int_array;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;float_array 
+    = new float[2000];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (float_array != NULL) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i &lt; 2000; i++) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">float_array[i] 
+    = (i + 1) • 1.0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; 2000; i++) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; float_array[i] &lt;&lt; ' ' ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete 
+    float_array;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как правило, 
+  ваши программы должны освобождать память с помощью оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete</I> 
+  по мере того, как память становится программам не нужна.</FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из этого 
+  урока вы узнали, что ваши программы могут распределять память динамически во 
+  время выполнения из неиспользуемой памяти, называемой свободной памятью, используя 
+  для этих целей оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new.</I> 
+  Выделяя подобным образом память динамически, программы могут удовлетворять ваши 
+  изменяющиеся запросы без редактирования и перекомпиляции самой программы. Из 
+  урока 32 вы узнаете, как управлять распределением свободной памяти, и что делают 
+  операторы</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> 
+  если они не могут удовлетворить запрос на распределение памяти. Прежде чем перейти 
+  к уроку 32, убедитесь, что вы изучили следующее:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> 
+      Способность выделять память динамически во время выполнения снимает с ваших 
+      программ зависимость от фиксированных размеров массивов.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если оператор</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> успешно выделяет 
+      требуемую вашей программой память, он возвращает указатель на начало области 
+      этой памяти.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если оператор</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> не может 
+      выделить требуемую вашей программой память, он возвращает NULL-указатель, 
+      который содержит значение 0.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Каждый раз, когда 
+      ваши программы распределяют память динамически с использованием оператора</FONT> 
+      <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new,</I> они должны 
+      проверять значение возвращаемого оператором</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+      указателя, чтобы определить, не равен ли он NULL, что указывает на невозможность 
+      выделения памяти.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Используя указатель 
+      на массив, ваши программы могут обращаться к памяти, выделенной с помощью 
+      оператора</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>new</I> 
+      выделяет память из блока неиспользуемой памяти, называемой свободной памятью.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> В зависимости от 
+      вашей операционной системы и модели памяти компилятора размер свободной 
+      памяти может быть различным. В среде MS-DOS свободная память может быть 
+      ограничена 64 Кбайт.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Если вашей программе 
+      больше не нужна выделенная память, она должна освободить ее (вернуть в свободную 
+      память), используя для этого оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>delete.</I></FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 30.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 32.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

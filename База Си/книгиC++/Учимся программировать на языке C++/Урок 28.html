@@ -1,0 +1,439 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 28</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"> Частные элементы 
+  и друзья</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif"></FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как 
+  вы уже знаете, ваши программы могут обращаться к частным (private) элементам 
+  класса только с помощью функций-элементов этого же класса. Используя частные 
+  элементы класса вместо общих во всех ситуациях, где это только возможно, вы 
+  уменьшаете возможность программы испортить значения элементов класса, так как 
+  программа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">может обращаться 
+  к таким элементам только через интерфейсные функции (которые управляют доступом 
+  к частным элементам). Однако в зависимости от использования объектов вашей программы, 
+  иногда вы можете существенно увеличить производительность позволяя одному классу 
+  напрямую обращаться к частным элементам другого. В этом случае уменьшаются издержки 
+  (требуемое время выполнения) на вызов интерфейсных функций. В подобных ситуациях 
+  C++ позволяет определить класс в качестве друга (friend} другого класса и разрешает 
+  классу-другу доступ к частным элементам этого другого класса. В этом уроке объясняется, 
+  как ваши программы могут указать, что два класса являются друзьями. К концу 
+  данного урока вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Используя 
+    ключевое слово friend, класс может сообщить C++, кто является его другом, 
+    т. е. другими словами, что другие классы могут обращаться напрямую к его частным 
+    элементам.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Частные 
+    элементы класса защищают данные класса, следовательно, вы должны ограничить 
+    круг классов-друзей только теми классами, которым действительно необходим 
+    прямой доступ к частным элементам искомого класса.</FONT></FONT></LI>
+  <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">C++ 
+    позволяет ограничить дружественный доступ определенным набором функций.</FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Частные 
+  (private) элементы позволяют вам защищать классы и уменьшить вероятность ошибок. 
+  Таким образом, вы должны ограничить использование классов-друзей настолько, 
+  насколько это возможно. Иногда программа напрямую может изменить значения элементов 
+  класса, это увеличивает вероятность появления ошибок.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПРЕДЕЛЕНИЕ ДРУЗЕЙ 
+  КЛАССА</FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">C++ позволяет 
+  друзьям определенного класса обращаться к частным элементам этого класса. Чтобы 
+  указать C++, что один класс является другом (friend) другого класса, вы просто 
+  помещаете ключевое слово friend и имя соответствующего класса-друга внутрь определения 
+  этого другого класса. Например, приведенный ниже класс book объявляет класс 
+  librarian своим другом. Поэтому объекты класса librarian могут напрямую обращаться 
+  к частным элементам класса book, используя оператор точку:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class book </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book 
+    (char *, char *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    librarian;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">private:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title [64] ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, чтобы указать 
+  друга, необходим только один оператор внутри определения класса. Например, следующая 
+  программа VIEWBOOK.CPP использует librarian в качестве друга класса book. Следовательно, 
+  функции класса librarian могут напрямую обращаться к частным элементам класса 
+  book. В данном случае программа использует функцию change_catalog класса librarian 
+  для изменения номера карточки каталога</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">определенной 
+  книги:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"> #include &lt;string.h&gt;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class book </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book 
+    (char *, char *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    librarian;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">private:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[64] ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">book::book(char *title, 
+    char *author, char •catalog) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::title, 
+    title);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::author, 
+    author) ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::catalog, 
+    catalog);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void book::show_book(void) 
+    </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Название: " &lt;&lt; title &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Автор: " &lt;&lt; author &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Каталог: " &lt;&lt; catalog &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class librarian </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    change_catalog(book *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    *get_catalog(book);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void librarian::change_catalog(book 
+    *this_book, </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">char 
+    *new_catalog) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(this_book-&gt;catalog, 
+    new_catalog);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">char *librarian: :get__catalog(book 
+    this_book) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;static 
+    char catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(catalog, 
+    this_book.catalog);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;return(catalog) 
+    ;<BR>
+    }</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void main(void) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book 
+    programming( "Учимся программировать на языке C++", "Jamsa", "P101");<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;librarian 
+    library;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;programming.show_book();<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;library.change_catalog(&amp;programming, 
+    "Легкий C++ 101");<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;programming.show_book();<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как 
+  видите, программа передает объект book в функцию change_catalog класса librarian 
+  по адресу. Поскольку эта функция изменяет элемент класса book, программа должна 
+  передать параметр по адресу, а затем использовать указатель для обращения к 
+  элементу этого класса. Экспериментируйте с данной программой, попробуйте удалить 
+  оператор friend из определения класса book. Поскольку класс librarian больше 
+  не имеет доступа к частным элементам класса book, компилятор C++ сообщает о 
+  синтаксических ошибках при каждой ссылке на частные данные класса book.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">О 
+    друзьях класса</FONT></I></B></FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Обычно 
+    единственный способ, с помощью которого ваши программы могут обращаться к 
+    частным элементам класса, заключается в использовании интерфейсных функций. 
+    В зависимости от использования объектов программы иногда может быть удобным 
+    (или более эффективным с точки зрения скорости вычислений) разрешить одному 
+    классу обращаться к частным элементам другого. Для этого вы должны информировать 
+    компилятор C++, что класс является другом (friend). Компилятор, в свою очередь, 
+    позволит классу-другу обращаться к частным элементам требуемого класса. Чтобы 
+    объявить класс другом, поместите ключевое слово friend и имя класса-друга 
+    в секцию public определения класса, как показано ниже:</FONT></B></I></FONT></P>
+  <BLOCKQUOTE> 
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">class abbott 
+      </FONT></B></I></P>
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+      public:<BR>
+      </FONT></B></I><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">friend 
+      costello;<BR>
+      </FONT></B></I><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">// 
+      Общие элементы <BR>
+      private:<BR>
+      </FONT></B></I></FONT><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">// 
+      Частные элементы <BR>
+      };</FONT></B></I></FONT></P>
+  </BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Как 
+    друзья отличаются от защищенных (protected) элементов</FONT></I></B></FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Из 
+    урока 26 вы узнали, что в C++ существуют защищенные (protected) элементы класса, 
+    что позволяет производным классам обращаться к защищенным элементам базового 
+    класса напрямую, используя оператор точку. Помните, что к защищенным элементам 
+    класса могут обращаться только те классы, которые являются производными от 
+    данного базового класса, другими словами, классы, которые наследуют элементы 
+    базового класса (защищенные элементы класса являются как бы частными по отношению 
+    к остальным частям программы). Классы-друзья C++ обычно не связаны между собой 
+    узами наследования. Единственный способ для таких не связанных между собой 
+    классов получить доступ к частным элементам другого класса состоит в том, 
+    чтобы этот другой класс информировал компилятор, что данный класс является 
+    другом.</FONT></B></I></FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ОГРАНИЧЕНИЕ 
+  КОЛИЧЕСТВА ДРУЗЕЙ</FONT></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  только что узнали, если вы объявляете один класс другом другого класса, вы обеспечиваете 
+  классу-другу доступ к частным элементам данных этого другого класса. Вы также 
+  знаете и то, что чем больше доступа к частным данным класса, тем больше шансов 
+  на внесение ошибок в программу. Следовательно, если доступ к</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">частным 
+  данным другого класса необходим только нескольким функциям класса, C++ позволяет 
+  указать, что только определенные функции дружественного класса будут иметь доступ 
+  к частным элементам. Предположим, например, что класс librarian, представленный 
+  в предыдущей программе, содержит много разных функций. Однако предположим, что 
+  только функциям change_catalog и get_catalog необходим доступ к частным элементам 
+  класса book. Внутри определения класса book мы можем ограничить доступ к частным 
+  элементам только этими двумя функциями, как показано ниже:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class book </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book(char 
+    *, char *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    show_book(void);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    char *librarian::get_catalog(book);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    void librarian: :change_catalog( book *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">private:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    author[ 64 ];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как 
+  видите, операторы friend содержат полные прототипы всех дружественных функций, 
+  которые могут напрямую обращаться к частным элементам.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">О 
+    функциях-друзьях</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если 
+    ваша программа использует друзей для доступа к частным данным класса, вы можете 
+    ограничить количество функций-элементов класса-друга, который может обращаться 
+    к частным данным, используя дружественные функции. Для объявления функции-друга 
+    укажите ключевое слово friend, за которым следует полный прототип, как показано 
+    ниже:</FONT></FONT></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">public:<BR>
+      </FONT></B></I><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">friend 
+      class_name::function_name(parameter types);</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Только 
+    функции-элементы, указанные как друзья, могут напрямую обращаться к частным 
+    элементам класса, используя оператор точку.</FONT></FONT></B></I></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Если ваша 
+  программа начинает ссылаться на один класс из другого, вы можете получить синтаксические 
+  ошибки, если порядок определения классов неверен. В данном случае определение 
+  класса book использует прототипы функций, определенные в классе librarian. Следовательно, 
+  определение класса librarian должно предшествовать определению класса book. 
+  Однако если вы проанализируете класс librarian, то обнаружите, что он ссылается 
+  на класс book:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class librarian </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    change_catalog(book *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    *get_catalog(book);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Поскольку 
+  вы не можете поставить определение класса book перед определением класса librarian, 
+  C++ позволяет вам объявить класс book, тем самым сообщая компилятору, что такой 
+  класс есть, а позже определить его. Ниже показано, как это сделать:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">class 
+    book; // объявление класса</FONT></FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Следующая 
+  программа LIMITFRI.CPP использует дружественные функции для ограничения доступа 
+  класса librarian к частным данным класса book. Обратите внимание на порядок 
+  определения классов:</FONT></P>
+</FONT> 
+<BLOCKQUOTE> 
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;iostream.h&gt; 
+    </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">#include &lt;string.h&gt;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class book;</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class librarian </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    change_catalog(book *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    *get_catalog(book);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">class book </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    public:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book(char 
+    *, char *, char *) ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;void 
+    show_book (void);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    char *librarian::get_catalog(book);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;friend 
+    void librarian::change_catalog( book *, char *);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">private:<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    title[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    author[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;char 
+    catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">};</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">book::book(char *title, 
+    char *author, char *catalog)</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::title, 
+    title);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::author, 
+    author);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(book::catalog, 
+    catalog);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void book::show_book(void) 
+    </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Название: " &lt;&lt; title &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Автор: " &lt;&lt; author &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Каталог: " &lt;&lt; catalog &lt;&lt; endl;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void librarian::change_catalog(book 
+    *this_book, char *new_catalog) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(this_book-&gt;catalog, 
+    new_catalog) ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif"> char *librarian::get_catalog(book 
+    this_book)</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;static 
+    char catalog[64];<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;strcpy(catalog, 
+    this_book.catalog);<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;return(catalog) 
+    ;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">void main(void) </FONT></P>
+  <P><FONT SIZE="3" FACE="Times New Roman, Times, serif">{<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;book 
+    programming( "Учимся программировать на C++", "Jamsa", "P101");<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;librarian 
+    library;<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;programming.show_book();<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;library.change_catalog(&amp;programming, 
+    "Легкий C++ 101");<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;programming.show_book();<BR>
+    </FONT><FONT SIZE="3" FACE="Times New Roman, Times, serif">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Как 
+  видите, программа сначала использует объявление, чтобы сообщить компилятору, 
+  что класс book будет определен позже. Поскольку объявление извещает компилятор 
+  о классе book, определение класса librarian может ссылаться на класс book, который 
+  еще не определен в программе.</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Что 
+    такое идентификатор класса</FONT></I></B></FONT></FONT></P>
+  <P><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Идентификатор 
+    представляет собой имя, например имя переменной или класса. Если ваши программы 
+    используют дружественные классы, то может случиться, что определение одного 
+    класса ссылается на другой класс (его имя или идентификатор), о котором компилятор 
+    C++ еще ничего не знает. В таких случаях компилятор C++ будет сообщать о синтаксических 
+    ошибках. Чтобы избавиться от ошибок типа "что следует определять сначала", 
+    C++ позволяет вам включать в начало исходного текста программы объявление 
+    класса, тем самым вводя идентификатор класса:</FONT></B></I></FONT></P>
+  <BLOCKQUOTE>
+    <P><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">class class_name;</FONT></B></I></P>
+  </BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman"><I><B><FONT SIZE="3" FACE="Times New Roman, Times, serif">Эта 
+    строка сообщает компилятору, что ваша программа позже определит указанный 
+    класс, а пока программе разрешается ссылаться на этот класс.</FONT></B></I></FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО 
+  ВАМ НЕОБХОДИМО ЗНАТЬ</FONT></FONT></H2>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT SIZE="3" FACE="Times New Roman, Times, serif">В данном 
+  уроке вы изучили, как использовать классы-друзья для обращения к частным элементам 
+  другого класса напрямую с использованием оператора точки. В уроке 29 вы изучите, 
+  как использовать в C++ шаблоны функций для упрощения определения подобных функций. 
+  Но прежде чем перейти к уроку 29 убедитесь, что вы освоили следующее:</FONT></P>
+</FONT> 
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Использование 
+      в ваших программах на C++ друзей позволяет одному классу обращаться к частным 
+      элементам другого класса напрямую, используя оператор точку.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Для 
+      объявления одного класса другом (friend) другого класса вы должны внутри 
+      определения этого другого класса указать ключевое слово friend, за которым 
+      следует имя первого класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">После 
+      объявления класса другом по отношению к другому классу, все функции-элементы 
+      класса-друга могут обращаться к частным элементам этого другого класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT SIZE="3" FACE="Times New Roman, Times, serif">Чтобы 
+      ограничить количество дружественных методов, которые могут обращаться к 
+      частным данным класса, C++ позволяет указать дружественные функции. Для 
+      объявления функции-друга вы должны указать ключевое слово friend, за которым 
+      следует прототип функции, которой, собственно, и необходимо обращаться к 
+      частным элементам класса.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">При объявлении дружественных 
+      функций вы можете получить синтаксические ошибки, если неверен порядок определений 
+      классов. Если необходимо сообщить компилятору, что идентификатор представляет 
+      имя класса, который программа определит позже, вы можете использовать оператор 
+      такого вида class class_name;.</FONT></LI>
+  </OL>
+</OL>
+<CENTER>
+  <A HREF="Урок 27.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 29.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>

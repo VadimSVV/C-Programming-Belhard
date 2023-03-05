@@ -1,0 +1,364 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<font face="Times New Roman"> </font> 
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">Урок 18</font></h2>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">Хранение связанной 
+  информации в структурах</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Из урока 
+  16 вы узнали, что C++ позволяет хранить в массиве связанную информацию одного 
+  и того же типа. Вы уже выяснили, что группировка связанных значений в массив 
+  очень удобна. В большинстве случаев программам необходимо группировать связанную 
+  информацию разного типа. Например предположим, что ваша программа работает с 
+  информацией о служащих. Она должна отслеживать данные о фамилии, возрасте, окладе, 
+  адресе, номере служащего и т. д. Для хранения этой информации программе потребуются 
+  переменные типа</font> <font face="Times New Roman, Times, serif" size="3"><i>char, 
+  int, float,</i> а также символьные строки.</font></p>
+<font face="Times New Roman">
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Если вашей 
+  программе требуется хранить связанную информацию разных типов, она может использовать 
+  <i>структуру.</i> Вы узнаете, что структура представляет собой переменную, группирующую 
+  связанные части информации, называемые элементами, типы которых могут различаться. 
+  Группируя данные в одну переменную подобным образом, вы упрощаете ваши программы, 
+  снижая количество переменных, которыми необходимо управлять, передавать в функции 
+  и т. д. В данном уроке рассматривается создание и использование структур. К 
+  концу этого урока вы освоите следующие основные концепции:</font></p>
+</font> 
+<ul>
+  <li><font face="Times New Roman, Times, serif" size="3">Структуры позволяют 
+    вашим программам группировать в одной переменной связанные данные, типы которых 
+    могут различаться.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Структура состоит из 
+    одной или нескольких частей данных, называемых элементами.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Для определения структуры 
+    внутри программы следует указать имя структуры и ее элементы.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Каждый элемент структуры 
+    имеет тип, например</font> <font face="Times New Roman, Times, serif" size="3"><i>char, 
+    int и float,</i> и имя каждого элемента должно быть уникальным.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">После того как ваша 
+    программа определит структуру, она может объявить переменные типа этой структуры.</font></li>
+  <li><font face="Times New Roman, Times, serif" size="3">Для изменения элементов 
+    структуры внутри функции ваши программы должны передать структуру в функцию 
+    с помощью адреса.</font></li>
+</ul>
+<p><font face="Times New Roman, Times, serif" size="3">Ваше умение понимать структуры 
+  и работать с ними облегчит использование объектно-ориентированных классов C++ 
+  в части 4. Выберите время для эксперимента с программами, представленными в 
+  этом уроке.</font></p>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">ОБЪЯВЛЕНИЕ СТРУКТУРЫ</FONT></h2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Структура 
+  определяет шаблон, с помощью которого ваша программа может позднее объявить 
+  одну или несколько переменных. Другими словами, ваша программа сначала определяет 
+  структуру, а затем объявляет переменные типа этой структуры. Для определения 
+  структуры ваши программы используют ключевое слово</font> <font face="Times New Roman, Times, serif" size="3"><i>struct,</i> 
+  за которым обычно следует имя и левая фигурная скобка. Следом за открывающей 
+  фигурной скобкой вы указываете тип и имя одного или нескольких <i>элементов.</i> 
+  За последним элементом вы размещаете правую закрывающую фигурную скобку. В этот 
+  момент вы можете (необязательно) объявить переменные данной структуры:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">struct name </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;int member_name_l<b>; |</b>——————<b> <i>Объявления элементов 
+    структуры<br>
+    </i></b>&nbsp;&nbsp;&nbsp;float member_name_2; } variable;<b> |</b>———————————————<b> 
+    <i>Объявление переменной<br>
+    </i></b>}<b><i> </i></b></font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Например, следующее определение 
+  создает структуру, содержащую информацию о служащем:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">struct employee </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;char name [64] ;<br>
+    &nbsp;&nbsp;&nbsp;long employee_id;<br>
+    &nbsp;&nbsp;&nbsp;float salary;<br>
+    &nbsp;&nbsp;&nbsp;char phone[10];<br>
+    &nbsp;&nbsp;&nbsp;int office_number;<br>
+    };</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">В данном случае определение 
+  не объявляет какие-либо переменные типа этой структуры. После того как вы определите 
+  структуру, ваша программа может объявить переменные типа этой структуры, используя 
+  имя структуры (иногда называемое <i>структурным тэгом),</i> как показано ниже:</font></p>
+<blockquote>
+  <p><b><font face="Times New Roman, Times, serif" size="3">—————————————————————————— 
+    <i>Тэг</i></font></b></p>
+  <p><font face="Times New Roman, Times, serif" size="3"><u>employee</u> <u>boss, 
+    worker, new_employee;</u><b> <i>Объявление переменных</i></b></font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">В данном 
+  случае оператор создает три переменные структуры</font> <font face="Times New Roman, Times, serif" size="3"><i>employee.</i> 
+  В некоторых случаях вы можете увидеть объявление, в котором тэг структуры предваряется 
+  ключевым словом</font> <font face="Times New Roman, Times, serif" size="3"><i>struct,</i> 
+  как показано ниже:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">struct employee boss, 
+    worker, new_employee;</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Ключевое 
+  слово</font> <font face="Times New Roman, Times, serif" size="3"><i>struct</i> 
+  является обязательным при программировании на С, так что некоторые программисты 
+  могут включать его по привычке. Однако в C++ использовать ключевое слово</font> 
+  <font face="Times New Roman, Times, serif" size="3"><i>struct</i> необязательно.</font></p>
+<h3 align="JUSTIFY"><font face="Times New Roman">Использование элементов структуры</font></h3>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Структура 
+  позволяет вашим программам группировать информацию, называемую элементами, в 
+  одной переменной. Чтобы присвоить значение элементу или обратиться к значению 
+  элемента, используйте оператор C++ <i>точку</i> (.). Например, следующие операторы 
+  присваивают значения различным элементам переменной с именем</font> <font face="Times New Roman, Times, serif" size="3"><i>worker 
+  тута employee;</i></font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">worker.employee_id = 
+    12345;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">worker.salary = 25000.00;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">worker.оffice_number 
+    = 102;</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Для обращения к элементу 
+  структуры укажите имя переменной, за которым следует точка и имя элемента. Следующая 
+  программа EMPLOYEE.CPP иллюстрирует использование структуры типа</font> <font face="Times New Roman, Times, serif" size="3"><i>employee:</i></font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;string.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;struct employee</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3"> &nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char name [64];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long employee_id;</font><br>
+    <font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float 
+    salary;</font><br>
+    <font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char 
+    phone[10];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int office_number;<br>
+    &nbsp;&nbsp;&nbsp;} worker;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">// Копировать имя в строку 
+    strcpy(worker.name, "Джон Дой");</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;worker.employee_id 
+    = 12345;<br>
+    &nbsp;&nbsp;&nbsp;worker.salary = 25000.00;<br>
+    &nbsp;&nbsp;&nbsp;worker.office_number = 102;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">// Копировать номер телефона 
+    в строку strcpy(worker.phone, "555-1212") ;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Служащий:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.name &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Телефон:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.phone &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Номер служащего: "</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    worker.employee_id &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Оклад:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.salary &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Офис:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.office_number &lt;&lt; endl;<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, присваивание 
+  целому элементу и элементу с плавающей точкой очень просто. Программа использует 
+  оператор присваивания, чтобы присвоить значение соответствующему элементу. Однако 
+  обратите внимание на использование функции</font> <font face="Times New Roman, Times, serif" size="3"><i>strcpy</i> 
+  для копирования символьной строки в элементы</font> <font face="Times New Roman, Times, serif" size="3"><i>name</i> 
+  и</font> <font face="Times New Roman, Times, serif" size="3"><i>phone.</i> Если 
+  вы не инициализируете элементы при объявлении переменной типа данной структуры, 
+  вы должны копировать символьные строки в символьно-строковые элементы.</font></p>
+<BLOCKQUOTE> 
+  <P><font face="Arial, Helvetica, sans-serif"><B><I>Объявление переменных структуры</I></B></font></P>
+  <P><I><B><font face="Times New Roman, Times, serif" size="3">Структуры C++ позволяют 
+    вашим программам группировать в одну переменную связанную информацию различных 
+    типов. Структура определяет шаблон для объявлений будущих переменных вашей 
+    программы. Каждая структура имеет уникальное имя (иногда называемое тэгом). 
+    Используя имя структуры, вы можете объявить переменные типа данной структуры. 
+    Биты информации, хранящиеся в структуре, называются элементами. Чтобы использовать 
+    или присвоить значение элементу, используйте оператор C++ точку, как показано 
+    ниже:</font></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">variable.member 
+      = some_value;<BR>
+      </font></B></I><I><B><font face="Times New Roman, Times, serif" size="3">some_variable 
+      = variable.other_member;</font></B></I></P>
+    </BLOCKQUOTE>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><font face="Arial, Helvetica, sans-serif">СТРУКТУРЫ И ФУНКЦИИ</font></H2>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Если функция 
+  не изменяет структуру, вы можете передать структуру в функцию по имени. Например, 
+  следующая программа<b> SHOW_EMP.CPP</b> использует функцию</font> <font face="Times New Roman, Times, serif" size="3"><i>show_employee 
+  для</i> вывода элементов структуры типа</font> <font face="Times New Roman, Times, serif" size="3"><i>employee:</i></font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;string.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">struct employee </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{ <br>
+    &nbsp;&nbsp;&nbsp;char name[64];<br>
+    &nbsp;&nbsp;&nbsp;long employee_id;<br>
+    &nbsp;&nbsp;&nbsp;float salary;<br>
+    &nbsp;&nbsp;&nbsp;char phone[10];<br>
+    &nbsp;&nbsp;&nbsp;int office_number;<br>
+    };</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void show_employee(employee 
+    worker) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Служащий:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.name &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Телефон:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.phone &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Номер служащего: "</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    worker. employee_id &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Оклад:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.salary &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Офис:</font> <font face="Times New Roman, Times, serif" size="3">" 
+    &lt;&lt; worker.office_number &lt;&lt; endl;<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;employee worker;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">// Копировать имя в строку 
+    strcpy(worker.name, "Джон Дой");</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;worker.employee_id 
+    = 12345;<br>
+    &nbsp;&nbsp;&nbsp;worker.salary = 25000.00;<br>
+    &nbsp;&nbsp;&nbsp;worker.office_number = 102;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">// Копировать номер телефона 
+    в строку strcpy(worker.phone, "555-1212");</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;show_employee(worker);<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman, Times, serif" size="3">Как видите, программа передает 
+  переменную типа данной структуры <i>worker</i> в функцию</font> <font face="Times New Roman, Times, serif" size="3"><i>show__employee</i> 
+  по имени. Далее функция</font> <font face="Times New Roman, Times, serif" size="3"><i>show_employee</i> 
+  выводит элементы структуры. Однако обратите внимание, что программа теперь определяет 
+  структуру</font> <font face="Times New Roman, Times, serif" size="3"><i>employee</i> 
+  вне</font> <font face="Times New Roman, Times, serif" size="3"><i>main</i> и 
+  до функции</font> <font face="Times New Roman, Times, serif" size="3"><i>show_employee. 
+  </i>Поскольку функция объявляет переменную</font> <font face="Times New Roman, Times, serif" size="3"><i>worker</i> 
+  типа</font> <font face="Times New Roman, Times, serif" size="3"><i>employee,</i> 
+  определение структуры</font> <font face="Times New Roman, Times, serif" size="3"><i>employee</i> 
+  должно располагаться до функции.</font></p>
+<h3 align="JUSTIFY"><font face="Arial, Helvetica, sans-serif">Функции, изменяющие 
+  элементы структуры</font></h3>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как вы 
+  знаете, если функция изменяет параметр, вам следует передавать этот параметр 
+  в функцию с помощью адреса. Если функция изменяет элемент структуры, вы должны 
+  передавать эту структуру в функцию с помощью адреса, Для передачи переменной 
+  типа структуры с помощью адреса вы просто предваряете имя переменной оператором 
+  адреса C++ (&amp;), как показано ниже:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">some_function(&amp;worker);</font></p>
+</blockquote>
+<font face="Times New Roman">
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Внутри 
+  функции, которая изменяет один или несколько элементов, вам следует работать 
+  с указателем. Если вы используете указатель на структуру, легче всего обращаться 
+  к элементам структуры, используя следующий синтаксис:</font></p>
+</font> 
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">pointer_variable-&gt;member 
+    = some_value;</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Например, 
+  следующая программа CHG_MBR.CPP передает структуру типа</font> <font face="Times New Roman, Times, serif" size="3"><i>employee</i> 
+  в функцию с именем</font> <font face="Times New Roman, Times, serif" size="3"><i>get_employee_id,</i> 
+  которая запрашивает у пользователя идентификационный номер служащего и затем 
+  присваивает этот номер элементу структуры</font> <font face="Times New Roman, Times, serif" size="3"><i>employee_id.</i> 
+  Чтобы изменить элемент, функция работает с указателем на структуру:</font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;iostream.h&gt; 
+    </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">#include &lt;string.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">struct employee </font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{ <br>
+    &nbsp;&nbsp;&nbsp;char name[64];<br>
+    &nbsp;&nbsp;&nbsp;long employee_id;<br>
+    &nbsp;&nbsp;&nbsp;float salary;<br>
+    &nbsp;&nbsp;&nbsp;char phone[10];<br>
+    &nbsp;&nbsp;&nbsp;int office_number;<br>
+    };</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void get_employee_id(employee 
+    *worker)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Введите номер служащего:</font> <font face="Times New Roman, Times, serif" size="3">";<br>
+    &nbsp;&nbsp;&nbsp;cin &gt;&gt; worker-&gt;employee_id;<br>
+    }</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">void main(void)</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">{<br>
+    &nbsp;&nbsp;&nbsp;employee worker;</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">// Копировать имя в строку 
+    strcpy(worker.name, "Джон Дой");</font></p>
+  <p><font face="Times New Roman, Times, serif" size="3">&nbsp;&nbsp;&nbsp;get_employee_id(&amp;worker) 
+    ;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Служащий: "</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    worker, name &lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Номер служащего: "</font> <font face="Times New Roman, Times, serif" size="3">&lt;&lt; 
+    worker.employee_id &lt;&lt; endl;<br>
+    }</font></p>
+  </blockquote>
+<p align="JUSTIFY"><font face="Times New Roman, Times, serif" size="3">Как видите, 
+  внутри</font> <font face="Times New Roman, Times, serif" size="3"><i>main</i> 
+  программа передает переменную</font> <font face="Times New Roman, Times, serif" size="3"><i>worker</i> 
+  типа структуры в функцию</font> <font face="Times New Roman, Times, serif" size="3"><i>get_employee_id 
+  с</i> помощью адреса. Внутри функции <i>gel_employee_id</i> значение, введенное 
+  пользователем, присваивается элементу <i>employee_id</i> с помощью следующего 
+  оператора:</font></p>
+<blockquote> 
+  <p><font face="Times New Roman, Times, serif" size="3">cin &gt;&gt; worker-&gt;employee_id;</font></p>
+  <P><font face="Times New Roman"><B><I>Работа с указателями на структуры</I></B></font></P>
+  <P><font face="Times New Roman"><I><B><font face="Times New Roman, Times, serif" size="3">Если 
+    функция изменяет элемент структуры, вызвавшая программа должна передать структуру 
+    в функцию с помощью адреса. Функция, в свою очередь, использует указатель 
+    на структуру. Для обращения к элементу структуры функции следует использовать 
+    следующий формат:</font></B></I></font></P>
+  <BLOCKQUOTE> 
+    <P><I><B><font face="Times New Roman, Times, serif" size="3">value = variable-&gt;member;<BR>
+      </font></B></I><I><B><font face="Times New Roman, Times, serif" size="3">variable-&gt;other_member 
+      = some_value;</font></B></I></P>
+    </BLOCKQUOTE>
+</blockquote>
+<b><font face="Times New Roman"> </font></b> 
+<h2 align="center"><b><font face="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</font></b></h2>
+<P><font face="Times New Roman, Times, serif" size="3">Структуры позволяют вашим 
+  программам группировать связанные части информации различных типов в одной и 
+  той же переменной. Комбинируя подобным образом данные в одной переменной, ваши 
+  программы могут лучше представлять объекты, состоящие из двух или более частей, 
+  например, информацию о служащих, книгах и т. д.<b> </b>Из урока 19 вы узнаете, 
+  как использовать объединения C++, которые, подобно структурам, используют элементы, 
+  но в отличие от структур по-другому хранятся в памяти. Независимо от количества 
+  элементов объединение может хранить только одно значение в каждый момент времени. 
+  Прежде чем вы приступите к уроку 19, убедитесь, что освоили следующие основные 
+  концепции:</font></P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Структуры 
+      позволяют вашим программам группировать связанную информацию различных типов 
+      в одной переменной.</font></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Части 
+      информации, из которых состоит структура, называются элементами.</font></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Структура 
+      определяет шаблон, который ваши программы могут использовать для объявления 
+      переменных.</font></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">После 
+      определения структуры вы можете использовать ее имя (тэг) для объявления 
+      переменных типа данной структуры.</font></font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3">Чтобы присвоить значение 
+      или обратиться к значению элемента структуры, ваши программы используют 
+      оператор точку, например <i>variable.member.</i></font></LI>
+    <LI><font face="Times New Roman"><font face="Times New Roman, Times, serif" size="3">Если 
+      функция изменяет значение элемента структуры, переменная структуры должна 
+      быть передана в функцию с помощью адреса.</font></font></LI>
+    <LI><font face="Times New Roman, Times, serif" size="3">Если функция использует 
+      указатель на структуру, функция должна использовать формат</font> <font face="Times New Roman, Times, serif" size="3"><i>variable-&gt;member</i> 
+      для обращения к элементу структуры.<b></b></font></LI>
+  </OL>
+  <CENTER>
+    <A HREF="Урок 17.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+    урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 19.html">Следующий 
+    урок</A> </FONT> 
+  </CENTER>
+</BLOCKQUOTE>
+</body>
+</html>

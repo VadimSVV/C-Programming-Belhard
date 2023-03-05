@@ -1,0 +1,366 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">Урок 36</FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman">Использование аргументов командной 
+  строки</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  знаете, большинство команд, вводимых вами в ответ на системную подсказку, позволяют 
+  включать дополнительную информацию, такую как имя файла. Например, при использовании 
+  команды MS-DOS COPY для копирования содержимого одного файла во второй файл 
+  вы указываете в командной строке имена обоих файлов. Аналогично, если ваш компилятор 
+  основан на командной строке, вы должны включать имя вашего исходного файла при 
+  вызове компилятора. В этом уроке рассмотрены способы, с помощью которых ваши 
+  программы на C++ обращаются к аргументам командной строки. К концу данного урока 
+  вы освоите следующие основные концепции:</FONT></P>
+<UL>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Программы на C++ трактуют 
+    аргументы командной строки как параметры функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">По традиции C++ передает 
+    два (иногда три) параметра в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main,</I> 
+    которые в большинстве программ называются</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+    и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv.</I></FONT></LI>
+  <LI> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+    содержит количество аргументов командной строки, передаваемых в вашу программу.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+    представляет собой массив указателей на символьные строки, каждая из которых 
+    соответствует одному параметру командной строки.</FONT></LI>
+  <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от компилятора 
+    ваши программы могут получить доступ к третьему параметру с именем</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env,</I> который представляет 
+    собой массив указателей на символьные строки, указывающих на переменные среды.</FONT></LI>
+</UL>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Способность 
+  программ обращаться к аргументам командной строки повышает количество способов, 
+  которыми вы можете использовать одну и ту же программу. Например, вы можете 
+  создать свою собственную программу, используемую для копирования любого исходного 
+  файла, который вы указываете в качестве первого аргумента командной строки, 
+  в целевой файл, который вы указываете в качестве второго аргумента командной 
+  строки.</FONT></FONT></P>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ДОСТУП К</FONT> <FONT FACE="Arial, Helvetica, sans-serif"><I>argv</I> 
+  И</FONT> <FONT FACE="Arial, Helvetica, sans-serif"><I>argc</I></FONT></H2>
+<FONT FACE="Times New Roman">
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если вы 
+  запускаете программу из системной подсказки, командная строка, которую вы вводите, 
+  становится вашей командной строкой:</FONT></P>
+</FONT> 
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; COPY SOURCE.DOC 
+    TARGET.DOC &lt;ENTER&gt;</B></FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В данном 
+  случае командная строка указывает команду (COPY) и два аргумента (имя файлов 
+  SOURCE. DOC и TARGET. DOC). Чтобы разрешить вашей программе доступ к командной 
+  строке, C++ передает два параметра в функцию</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[])</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Первый 
+  параметр argc содержит количество элементов в массиве</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv.</I> 
+  Например, в случае предыдущей команды COPY параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+  должен содержать значение 3 (он включает имя команды и два аргумента). Следующая 
+  программа SHOWARGC.CPP использует параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+  для вывода количества аргументов командной строки:</FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[]) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; "Количество аргументов командной строки равно</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; argc &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Выберите 
+  время для эксперимента с этой программой, вызывая ее с разным количеством параметров, 
+  как показано ниже:</FONT></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; SHOWARGC А 
+    В С &lt;ENTER&gt; </B></FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>Количество аргументов 
+    командной строки равно 4</B></FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">В 
+  зависимости от типа компилятор может рассматривать аргументы, которые группируются 
+  внутри двойных кавычек, в качестве одного аргумента:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; SHOWARGC "Это 
+    один аргумент" &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3"> Количество аргументов 
+    командной строки равно 2</FONT></B></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><img src="p36.gif" width="455" height="256"></FONT></P>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Рис. 36. 
+  Массив</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  указывает аргументы командной строки.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Второй 
+  параметр функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main 
+  с</I> именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  представляет собой массив указателей на символьные строки, которые содержат 
+  индивидуальные части командной строки. Например, рис. 36 иллюстрирует, как элементы 
+  массива <I>argv</I> могли бы указывать записи командной строки.</FONT></P>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа SHOWARGV.CPP использует оператор</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>for</I> 
+  для вывода элементов массива</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  (командная строка программы). Программа запускается с первого элемента массива 
+  (имя программы) и затем выводит каждый элемент, пока значение переменной цикла 
+  не станет больше, чем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc:</I></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[]) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; i &lt; argc; i++) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "argv[" &lt;&lt; i &lt;&lt; "] содержит</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; argv[i] &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Откомпилируйте 
+  и запустите эту программу, используя командную строку, подобную следующей:</FONT></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; SHOWARGV А 
+    В С</B></FONT> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;ENTER&gt; 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">argv[0] содержит SHOWARGV.EXE 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">argv[l] содержит А 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">argv[2] содержит В 
+    </FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">argv[3] содержит С</FONT></B></P>
+  <P><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif"><B><I><FONT FACE="Arial, Helvetica, sans-serif">Доступ 
+    к аргументам командной строки</FONT></I></B></FONT></FONT></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">Для увеличения 
+    количества задач, выполняемых программой, C++ позволяет вашей программе обращаться 
+    к аргументам командной строки, используя два параметра, которые C++ передает 
+    в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">main. Первый 
+    параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">argc содержит 
+    количество аргументов командной строки (включая имя программы). Второй параметр</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">argv представляет собой 
+    массив указателей на символьные строки. Каждая символьная строка соответствует 
+    аргументу командной строки. Чтобы обратиться к аргументам командной строки, 
+    измените заголовок функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">main, 
+    как показано ниже:</FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, 
+    char *argv[])</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ВЫПОЛНЕНИЕ ЦИКЛА, 
+  ПОКА</FONT> <FONT FACE="Arial, Helvetica, sans-serif"><I>argv</I> НЕ СОДЕРЖИТ 
+  NULL</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, программы C++ используют символ NULL для завершения символьной строки. 
+  Подобным способом C++ использует символ NULL, чтобы отметить последний элемент 
+  массива</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv.</I> 
+  Следующая программа ARGVNULL.CPP изменяет оператор for предыдущей программы, 
+  чтобы выполнять цикл по элементам</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv,</I> 
+  пока текущий элемент</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  не будет равен NULL:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[]) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;for 
+    (i = 0; argv[i] != NULL; i++) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; "argv[" &lt;&lt; i &lt;&lt; "] содержит</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; argv[i] &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ТРАКТОВКА <I>argv</I> 
+  КАК УКАЗАТЕЛЯ</FONT></H2>
+<P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, C++ позволяет вам обращаться к элементам массивов, используя указатели. 
+  Следующая программа ARGVPTR.CPP трактует</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  как указатель на указатель символьной строки (другими словами, указатель на 
+  указатель), чтобы вывести содержимое командной строки:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    **argv) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;int 
+    i = 0;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (*argv) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; 
+    "argv[" &lt;&lt; i++ &lt;&lt; "] содержит</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">" 
+    &lt;&lt; *argv++ &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Выберите 
+  время, чтобы проанализировать объявление параметра</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argvв 
+  main:</I></FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    **argv)</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Первая 
+  звездочка в объявлении сообщает компилятору C++, что</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+  представляет собой указатель. Вторая звездочка сообщает компилятору, что</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv </I>представляет 
+  собой указатель на указатель — в данном случае указатель на указатель типа</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>char.</I> Представьте</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> как массив указателей. 
+  Каждый элемент массива в данном случае указывает на массив типа</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>char.</I></FONT></P>
+<FONT FACE="Times New Roman"> </FONT>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ИСПОЛЬЗОВАНИЕ АРГУМЕНТОВ 
+  КОМАНДНОЙ СТРОКИ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа FILESHOW.CPP использует аргументы командной строки для вывода содержимого 
+  указанного пользователем файла на экран. Например, чтобы использовать программу 
+  FILESHOW для вывода содержимого файла AUTOEXEC.BAT из корневого каталога, ваша 
+  командная строка становится следующей:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>C: \&gt; FILESHOW 
+    \AUTOEXEC.BAT &lt;Enter&gt;</B></FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующие 
+  операторы реализуют программу FILESHOW.CPP. Эта программа начинается с проверки 
+  параметра</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc,</I> 
+  чтобы убедиться, что пользователь указал файл в командной строке. Если пользователь 
+  включает имя файла параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+  будет содержать значение 2. Далее программа открывает и выводит содержимое файла, 
+  используя методы, которые вы изучали в уроке 34. Как видите, если программа 
+  не может открыть указанный файл, она выводит сообщение об ошибке и завершается:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;fstream.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;stdlib.h&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[]) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;char 
+    line[256];<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (argc &lt; 2) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cerr 
+    &lt;&lt; "Вы должны указать имя файла"</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(1);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;}</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;ifstream 
+    input_file(argv[1]) ;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;if 
+    (input_file.fail()) cerr &lt;&lt; "Ошибка открытия BOOKINPO.DAT" &lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;else 
+    </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while 
+    ((! input_file.eof()) &amp;&amp; (! input_file.fail())) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_file.getline(line, 
+    sizeof(line));<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+    (! input_file.fail()) cout &lt;&lt; line &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>
+    &nbsp;&nbsp;&nbsp;}<BR>
+    }</FONT></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ДОСТУП К ПЕРЕМЕННЫМ 
+  СРЕДЫ ОПЕРАЦИОННОЙ СИСТЕМЫ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  знаете, большинство операционных систем позволяют вам определять переменные 
+  среды, к которым ваши программы могут обращаться для определения разных параметров, 
+  таких как командный путь. Например, если вы используете среду MS-DOS, вы устанавливаете 
+  или выводите переменные среды с помощью команды SET. В зависимости от типа вашего 
+  компилятора вы можете обращаться к переменным среды из вашей программы, используя 
+  третий параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main</I> 
+  с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env.</I> 
+  Подобно параметру</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv,</I> 
+  параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env</I> 
+  представляет собой указатель на массив указателей на символьные строки. Также, 
+  подобно</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv,</I> 
+  C++ завершает этот массив символом NULL. Если ваш компилятор поддерживает параметр</FONT> 
+  <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env,</I> вы можете изменить 
+  заголовок функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main, 
+  </I>как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[], char *env[])</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа SHOWENV.CPP выполняет цикл по элементам массива</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env 
+  для</I> вывода переменных среды программы:</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include &lt;iostream.b&gt;</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, char 
+    *argv[], char *env[]) </FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">&nbsp;&nbsp;&nbsp;while 
+    (*env) </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout &lt;&lt; 
+    *env++ &lt;&lt; endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT></P>
+</BLOCKQUOTE>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  программа просто выполняет цикл по элементам массива</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env, 
+  </I>пока не встретит указатель NULL, который указывает последнюю запись массива. 
+  Если вы откомпилируете и запустите эту программу, она выведет ваши переменные 
+  среды, как показано ниже:</FONT></P>
+<BLOCKQUOTE>
+  <P> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; SHOWENV &lt;ENTER&gt;</B></FONT></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">ТЕМР=С:\WINDOWS\TEMP</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">PROMPT=$p$g</FONT></B></P>
+  <P><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">COMSPEC=C:\WINDOWS\COMMAND.СОМ</FONT></B></P>
+  <P> <B><FONT FACE="Times New Roman, Times, serif" SIZE="3">РАТН=С:\WINDOWS;С:\DOS</FONT></B></P>
+  <P><B><I><FONT FACE="Arial, Helvetica, sans-serif">Доступ к переменным среды</FONT></I></B></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от 
+    типа компилятора, ваши программы могут обращаться к переменным среды операционной 
+    системы, используя третий параметр функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">main 
+    с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">env. Подобно 
+    параметру</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">argv, 
+    параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">env представляет 
+    собой массив указателей на символьные строки, каждый из которых указывает 
+    переменную среды. Чтобы обратиться к переменным среды, используя параметр</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">env, измените заголовок 
+    функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">main следующим 
+    образом:</FONT></B></I></P>
+  <P><I><B><FONT FACE="Times New Roman, Times, serif" SIZE="3">void main(int argc, 
+    char *argv[], char *env[])</FONT></B></I></P>
+</BLOCKQUOTE>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы увеличить количество 
+  приложений, поддерживаемых вашей программой, C++ позволяет использовать аргументы 
+  командной строки. Из урока 37 вы узнаете, как с помощью макрокоманд и констант 
+  можно упростить ваше</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">программирование 
+  или создать более удобочитаемый код. Однако, прежде чем перейти к уроку 37, 
+  убедитесь, что вы освоили следующие основные концепции:</FONT></P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы запускаете 
+      программу из системной подсказки, информация которую вы вводите, становится 
+      командной строкой программы.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы позволить вашим 
+      программам обращаться к командной строке C++ передает функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main</I> 
+      два параметра:</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+      и</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv.</I></FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argc</I> 
+      содержит количество аргументов командной строки.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">Параметр</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>argv</I> 
+      представляет собой массив указателей на символьные строки, каждая из которых 
+      содержит аргумент командной строки.</FONT></LI>
+    <LI><FONT FACE="Times New Roman, Times, serif" SIZE="3">В зависимости от вашего 
+      компилятора программа может обращаться к третьему параметру</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>main</I> 
+      с именем</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>env,</I> 
+      который представляет собой массив указателей на символьные строки, содержащие 
+      переменные среды.</FONT></LI>
+  </OL>
+  <CENTER>
+    <A HREF="Урок 35.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+    урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 37.html">Следующий 
+    урок</A> </FONT> 
+  </CENTER>
+</BLOCKQUOTE>
+</BODY>
+</HTML>

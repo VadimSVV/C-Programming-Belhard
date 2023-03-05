@@ -1,0 +1,381 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+</head>
+
+<body bgcolor="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<font face="Times New Roman"> </font> 
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">Урок 16</FONT></h2>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif"> Хранение значений 
+  в массивах</FONT></h2>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Как вы уже знаете, ваши 
+  программы во время выполнения хранят информацию в переменных. До сих пор каждая 
+  переменная в программе хранила только одно значение в каждый момент времени. 
+  Однако в большинстве случаев программам необходимо хранить множество значений, 
+  например 50 тестовых очков, 100 названий книг или 1000 имен файлов. Если вашим 
+  программам необходимо хранить несколько значений, они должны использовать специальную 
+  структуру данных, называемую <i>массивом.</i> Для объявления массива необходимо 
+  указать имя, тип массива и количество значений, которые массив будет хранить. 
+  Этот урок описывает, как программы объявляют массивы, а затем сохраняют и обращаются 
+  к информации, содержащейся в массиве. К концу данного урока вы освоите следующие 
+  основные концепции:</font></p>
+<ul>
+  <li><font face="Times New Roman"><font size="3">Массив представляет собой структуру 
+    данных, которая позволяет одной переменной хранить несколько значений.</font></font></li>
+  <li><font face="Times New Roman" size="3">При объявлении массива вы должны указать 
+    тип значений, хранящихся в массиве, а также количество значений (называемых</font> 
+    <font size="3"><i><font face="Times New Roman">элементами массива).</font></i></font></li>
+  <li><font face="Times New Roman" size="3">Все элементы внутри массива должны 
+    быть одного и того же типа, например,</font> <font size="3"><i>int, float</i><font face="Times New Roman"> 
+    или</font></font> <font size="3"><i>char.</i></font></li>
+  <li><font face="Times New Roman"><font size="3">Для сохранения значения внутри 
+    массива вам следует указать номер элемента массива, в котором вы хотите сохранить 
+    свое значение.</font></font></li>
+  <li><font face="Times New Roman"><font size="3">Чтобы обратиться к значению, 
+    хранящемуся внутри массива, ваши программы указывают имя массива и номер элемента.</font></font></li>
+  <li><font face="Times New Roman"><font size="3">При объявлении массива программы 
+    могут использовать оператор присваивания для инициализации элементов массива.</font></font></li>
+  <li><font face="Times New Roman"><font size="3">Программы могут передавать переменные-массивы 
+    в функции точно так же, как они передают любой другой параметр.</font></font></li>
+</ul>
+<p><font face="Times New Roman"><font size="3">Программы на C++ широко используют 
+  массивы. Когда в уроке 17 вы начнете работать с символьными строками (например, 
+  название книги, имя файла и т. д.), вы будете оперировать массивами символов.</font></font></p>
+<font face="Times New Roman"><b> </b></font>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ОБЪЯВЛЕНИЕ ПЕРЕМЕННОЙ 
+  МАССИВА</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman" size="3"><i>Массив</i> представляет 
+  собой переменную, способную хранить одно или несколько значений. Подобно переменным, 
+  используемым вашими программами до сих пор, массив должен иметь тип (например,</font> 
+  <font size="3"><i>inl, char<font face="Times New Roman"> или</font> float)</i><font face="Times New Roman"> 
+  и уникальное имя. В дополнение к этому вам следует указать количество значений, 
+  которые массив будет хранить. Все сохраняемые в массиве значения должны быть 
+  одного и того же типа. Другими словами, ваша программа не может поместить значения 
+  <i>типа</i></font><i> float, char<font face="Times New Roman"> и long в</font></i><font face="Times New Roman"> 
+  один и тот же массив. Следующее объявление создает массив с именем</font></font> 
+  <font size="3"><i>test_scores,</i><font face="Times New Roman"> который может 
+  вмещать</font> 100<font face="Times New Roman"> целых значений для тестовых 
+  очков:</font></font></p>
+<b>
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif">———————————————— 
+  <i>Тип массива</i></font></p>
+</b> 
+<p align="JUSTIFY"><font size="3" face="Times New Roman, Times, serif"><u>int</u> 
+  test_scores<u>[100]</u>;<b> //------&gt; <i>Размер массива</i></b></font></p>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Когда компилятор</font><font size="3"> 
+  C++<font face="Times New Roman"> встречает объявление этой переменной, он распределит 
+  достаточно памяти для хранения</font> 100<font face="Times New Roman"> значений 
+  типа</font></font> <font size="3"><i>int.</i><font face="Times New Roman"> Значения, 
+  хранящиеся в массиве, называются <i>элементами массива.</i></font></font></p>
+<BLOCKQUOTE> 
+  <P align="JUSTIFY"><font face="Arial, Helvetica, sans-serif"><B><I>Массивы хранят 
+    несколько значений одного и того же типа</I></B></font></P>
+  <P><I><B><font face="Times New Roman" size="3">По мере усложнения вашим программам 
+    потребуется работать с несколькими значениями одного и того же типа. Например, 
+    программы могут хранить возраст</font><font size="3"> 100<font face="Times New Roman"> 
+    служащих или стоимость</font> 25<font face="Times New Roman"> акций. Вместо 
+    того чтобы заставлять программу работать со</font> 100<font face="Times New Roman"> 
+    или с</font> 25<font face="Times New Roman"> переменными с уникальными именами,</font> 
+    C++<font face="Times New Roman"> позволяет вам определить одну переменную</font> 
+    — <font face="Times New Roman">массив</font> —,<font face="Times New Roman"> 
+    которая может хранить несколько связанных значений.</font></font></B></I></P>
+  <P><I><B><font face="Times New Roman"><font size="3">Для объявления массива 
+    вы должны указать тип и уникальное имя массива, а также количество элементов, 
+    которые будет содержать массив. Например, следующие операторы объявляют три 
+    разных массива:</font></font></B></I></P>
+  <BLOCKQUOTE> 
+    <P><I><B><font size="3" face="Times New Roman, Times, serif">float part_cost[50];<BR>
+      </font></B></I><I><B><font size="3" face="Times New Roman, Times, serif">int 
+      employee_age[100];<BR>
+      </font></B></I><I><B><font size="3" face="Times New Roman, Times, serif">float 
+      stock_prices[25];</font></B></I></P>
+    </BLOCKQUOTE>
+</BLOCKQUOTE>
+<h3 align="JUSTIFY"><font face="Times New Roman">Обращение к элементам массива</font></h3>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Как вы уже знаете, массив 
+  позволяет вашим программам хранить несколько значений в одной и той же переменной. 
+  Для обращения к определенным значениям, хранящимся в массиве, используйте <i>значение 
+  индекса,</i> которое указывает на требуемый элемент. Например, для обращения 
+  к первому элементу массива</font> <font size="3"><i>test_scores</i><font face="Times New Roman"> 
+  вы должны использовать значение индекса</font> 0.<font face="Times New Roman"> 
+  Для обращения ко второму элементу используйте индекс</font> 1.<font face="Times New Roman"> 
+  Подобно этому, для обращения к третьему элементу используйте индекс</font> 2.<font face="Times New Roman"> 
+  Как показано на рис.</font> 16.1, <font face="Times New Roman">первый элемент 
+  массива всегда имеет индекс</font> 0,<font face="Times New Roman"> а значение 
+  индекса последнего элемента на единицу меньше размера массива:</font></font></p>
+<p align="JUSTIFY"><img src="p16_1.gif" width="250" height="421"></p>
+<p align="JUSTIFY"><font size="3"><b><font face="Times New Roman">Рис.</font> 
+  16.1.</b><font face="Times New Roman"> Как</font> C++<font face="Times New Roman"> 
+  индексирует элементы массива.</font></font></p>
+<p align="JUSTIFY"> <font face="Times New Roman" size="3">Важно помнить, что</font><font size="3"> 
+  C++<font face="Times New Roman"> всегда использует</font> 0<font face="Times New Roman"> 
+  для индекса первого элемента массива, а индекс последнего элемента на единицу 
+  меньше размера массива. Следующая программа</font><b> ARRAY. CPP</b><font face="Times New Roman"> 
+  создает массив с именем</font></font> <font size="3"><i>values,</i><font face="Times New Roman"> 
+  который вмещает пять целочисленных значений. Далее программа присваивает элементам 
+  значения</font> 100, 200, 300, 400<font face="Times New Roman"> и</font> 500:</font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int values[5]; // Объявление массива<br>
+    &nbsp;&nbsp;&nbsp;values[0] = 100;<br>
+    &nbsp;&nbsp;&nbsp;values[1] = 200;<br>
+    &nbsp;&nbsp;&nbsp;values[2] = 300;<br>
+    &nbsp;&nbsp;&nbsp;values[3] = 400;<br>
+    &nbsp;&nbsp;&nbsp;values [4] = 500;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Массив содержит следующие значения"</font> 
+    <font size="3" face="Times New Roman, Times, serif">&lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; values [0] &lt;&lt; ' ' &lt;&lt; values [1] 
+    &lt;&lt; ' ' &lt;&lt; values [2] &lt;&lt; ' ' &lt;&lt; values [3] &lt;&lt; 
+    ' ' &lt;&lt; values [4] &lt;&lt; endl;<br>
+    }</font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Как видите, программа присваивает первое 
+  значение элементу 0 (va</font><font size="3"><i>lues[0]).</i><b><font face="Times New Roman"> 
+  Она</font></b><font face="Times New Roman"> также присваивает последнее значение 
+  элементу</font> 4<font face="Times New Roman"> (размер Массива</font> (5)<font face="Times New Roman"> 
+  минус</font> 1).</font></p>
+<BLOCKQUOTE>
+  <P><font face="Times New Roman"><I><B>Использование индекса для обращения к 
+    элементам массива</B></I></font></P>
+  <P><I><B><font face="Times New Roman" size="3">Массив позволяет вашим программам 
+    хранить несколько значений внутри одной и той же переменной. Для обращения 
+    к определенному значению внутри массива программы используют индекс. Говоря 
+    кратко, значение индекса указывает требуемый элемент массива. Все массивы</font><font size="3"> 
+    C++<font face="Times New Roman"> начинаются с элемента с индексом</font> 0.<font face="Times New Roman"> 
+    Например, следующий оператор присваивает значение</font> 100<font face="Times New Roman"> 
+    первому элементу массива с именем</font></font> <font size="3">scores:</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font size="3" face="Times New Roman, Times, serif">scores[0] = 100;</font></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><font face="Times New Roman" size="3">Когда ваша программа объявляет 
+    массив, она указывает количество элементов, которые массив может хранить. 
+    Например, следующий оператор объявляет массив, способный хранить</font><font size="3"> 
+    100<font face="Times New Roman"> значений типа</font></font> <font size="3">int.</font></B></I></P>
+  <BLOCKQUOTE>
+    <P><I><B><font size="3" face="Times New Roman, Times, serif">int scores[100];</font></B></I></P>
+  </BLOCKQUOTE>
+  <P><I><B><font face="Times New Roman" size="3">В данном случае массив представляет 
+    собой элементы от</font> <font size="3"><font face="Times New Roman">scores[0] 
+    до scores[99].</font></font></B></I></P>
+</BLOCKQUOTE>
+<h3 align="JUSTIFY"><font face="Times New Roman"><font face="Arial, Helvetica, sans-serif">Использование 
+  индексной переменной</font></font></h3>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Если ваши программы используют 
+  массив, обычной операцией является использование индексной переменной для обращения 
+  к элементам массива. Например, предположим, что переменная</font><font size="3"> 
+  /<font face="Times New Roman"> содержит значение</font> 3,<font face="Times New Roman"> 
+  следующий оператор присваивает значение</font> 400<font face="Times New Roman"> 
+  элементу</font></font> <font size="3"><i>values[3J:</i></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">values[i] = 400;</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Следующая программа</font><font size="3"> 
+  SHOWARRA.CPP<font face="Times New Roman"> использует индексную переменную</font> 
+  i<font face="Times New Roman"> внутри цикла</font></font> <font size="3"><i>for</i><font face="Times New Roman"> 
+  для вывода элементов массива. Цикл for инициализирует</font></font> <font size="3"><i>i</i><font face="Times New Roman"> 
+  нулем, так что программа может обращаться к элементу</font></font> <font size="3"><i>values[O]. 
+  </i><font face="Times New Roman">Цикл</font></font> <font size="3"><i>for</i><font face="Times New Roman"> 
+  завершается, когда i больше</font> 4<font face="Times New Roman"> (последний 
+  элемент массива):</font></font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main (void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int values[5]; // Объявление массива int i;<br>
+    &nbsp;&nbsp;&nbsp;values[0] = 100;<br>
+    &nbsp;&nbsp;&nbsp;values[1] = 200;<br>
+    &nbsp;&nbsp;&nbsp;values[2] = 300;<br>
+    &nbsp;&nbsp;&nbsp;values[3] = 400;<br>
+    &nbsp;&nbsp;&nbsp;values[4] = 500;<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Массив содержит следующие значения"</font> 
+    <font size="3" face="Times New Roman, Times, serif">&lt;&lt; endl;<br>
+    &nbsp;&nbsp;&nbsp;for (i = 0; i<b> &lt; 5;</b> i++) cout &lt;&lt; values [i]<b> 
+    &lt;&lt; ' ';<br>
+    </b>}</font></p>
+</blockquote>
+<p><font face="Times New Roman" size="3">Каждый раз, когда цикл</font> for <font size="3"> 
+  <font face="Times New Roman"> увеличивает переменную</font> i,<font face="Times New Roman"> 
+  программа может обратиться к следующему элементу массива. Экспериментируйте 
+  с этой программой, изменяя цикл</font></font> <font size="3"><i>for</i><font face="Times New Roman"> 
+  следующим образом:</font></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">for (i = 4; i &gt;= 0; 
+    i--) cout &lt;&lt; values [i]<b> &lt;&lt; ' ';</b></font></p>
+</blockquote>
+<font face="Times New Roman"> 
+<p align="JUSTIFY"><font size="3">В данном случае программа будет выводить элементы 
+  массива от большего к меньшему.</font></p>
+</font>
+<h2 align="center"><FONT FACE="Arial, Helvetica, sans-serif">ИНИЦИАЛИЗАЦИЯ МАССИВА 
+  ПРИ ОБЪЯВЛЕНИИ</FONT></h2>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Как вы уже знаете,</font><font size="3"> 
+  C++<font face="Times New Roman"> позволяет вашим программам инициализировать 
+  переменные при объявлении. То же верно и для массивов. При объявлении массива 
+  вы можете указать первоначальные значения, поместив их между левой и правой 
+  фигурными скобками, следующими за знаком равенства. Например, следующий оператор 
+  инициализирует массив</font></font> <font size="3"><i>values:</i></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">int values[5] = { 100, 
+    200, 300, 400, 500<b> };</b></font></p>
+</blockquote>
+<font face="Times New Roman">
+<p align="JUSTIFY"><font size="3">Подобным образом следующее объявление инициализирует 
+  массив с плавающей точкой:</font></p>
+</font> 
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">float salaries[3] = { 
+    25000.00. 35000.00, 50000.00<b> };</b></font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Если вы не указываете 
+  первоначальное значение для какого-либо элемента массива, большинство компиляторов</font><font size="3"> 
+  C++<font face="Times New Roman"> будут инициализировать такой элемент нулем. 
+  Например, следующее объявление инициализирует первые три из пяти элементов массива:</font></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">int values[5] = { 100, 
+    200, 300<b> };</b></font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Программа не инициализирует 
+  элементы</font> <font size="3"><i>values[3]<font face="Times New Roman"> и</font> 
+  values[4].</i><font face="Times New Roman"> В зависимости от вашего компилятора, 
+  эти элементы могут содержать значение</font> 0.<font face="Times New Roman"> 
+  Если вы не указываете размер массива, который вы инициализируете при объявлении,</font> 
+  C++<font face="Times New Roman"> распределит достаточно памяти, чтобы вместить 
+  все определяемые элементы. Например, следующее объявление создает массив, способяый 
+  хранить четыре целочисленных значения:</font></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">int numbers[] = { 1, 
+    2, 3, 4 };</font></p>
+</blockquote>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ПЕРЕДАЧА МАССИВОВ 
+  В ФУНКЦИИ</font></h2>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Ващи программы будут 
+  передавать массивы в функции точно так же, как и любые другие переменные. Функция 
+  может инициализировать массив, прибавить к массиву значения или вывести элементы 
+  массива на экран. Когда</font> <font face="Times New Roman" size="3">вы передаете 
+  массив в функцию, вы должны указать тип массива. Нет необходимости указывать 
+  размер массива. Вместо этого вы передаете параметр например</font> <font size="3"><i>number_of_elements,</i><font face="Times New Roman"> 
+  который содержит количество элементов в массиве:</font></font></p>
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">void some_function(int 
+    array[], int number_of_elements);</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Следующая программа</font><font size="3"><b> 
+  ARRAYFUN.CPP</b><font face="Times New Roman"> передает массивы в функцию </font><i>show_array,</i> 
+  <font face="Times New Roman">которая использует цикл</font></font> <font size="3"><i>for</i><font face="Times New Roman"> 
+  для вывода значений массивов:</font></font></p>
+<blockquote>
+  <p><font face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font face="Times New Roman, Times, serif">void show_array (int array [] 
+    , int number_of_elements) </font></p>
+  <p><font face="Times New Roman, Times, serif">{<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int i;<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;for (i 
+    = 0; i &lt; number_of_elements; i++) cout &lt;&lt; array[i] &lt;&lt; ' <i>';<br>
+    </i></font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;cout 
+    &lt;&lt; endl;<br>
+    </font><font face="Times New Roman, Times, serif">}</font></p>
+  <p><font face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font face="Times New Roman, Times, serif">{<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int little_numbers[5] 
+    ={1,2,3,4,5};<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;int big_numbers[3] 
+    = { 1000, 2000, 3000 };<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;show_array(little_numbers, 
+    5);<br>
+    </font><font face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;show_array(big_numbers, 
+    3);<br>
+    </font><font face="Times New Roman, Times, serif">}</font></p>
+  </blockquote>
+<font face="Times New Roman">
+<p align="JUSTIFY"><font size="3">Как видите, программа просто передает массив 
+  в функцию по имени, а также указывает параметр, который сообщает функции количество 
+  элементов, содержащихся в массиве:</font></p>
+</font> 
+<blockquote>
+  <p><font size="3" face="Times New Roman, Times, serif">show_array(little_numbers, 
+    5);</font></p>
+</blockquote>
+<p align="JUSTIFY"><font face="Times New Roman" size="3">Следующая программа</font><font size="3"> 
+  GETARRAY.CPP<font face="Times New Roman"> использует функцию</font></font> <font size="3"><i><font face="Times New Roman">get_values, 
+  ч</font></i><font face="Times New Roman">тобы присвоить три значения массиву</font></font> 
+  <font size="3"><i>numbers:</i></font></p>
+<blockquote> 
+  <p><font size="3" face="Times New Roman, Times, serif">#include &lt;iostream.h&gt;</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void get_values(int array[], 
+    int number_of_elements) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int i;<br>
+    &nbsp;&nbsp;&nbsp;for (i = 0; i &lt; number_of_elements; i++) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout “ "Введите значение " &lt;&lt; 
+    i &lt;&lt; ": ";<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cin ” array [i];<br>
+    &nbsp;&nbsp;&nbsp;}<br>
+    }</font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">void main(void) </font></p>
+  <p><font size="3" face="Times New Roman, Times, serif">{<br>
+    &nbsp;&nbsp;&nbsp;int numbers[3];<br>
+    &nbsp;&nbsp;&nbsp;get_values(numbers, 3);<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; "Значения массива"</font> <font size="3" face="Times New Roman, Times, serif">&lt;&lt; 
+    endl;<br>
+    &nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; 3; i++)<br>
+    &nbsp;&nbsp;&nbsp;cout &lt;&lt; numbers [i] &lt;&lt; endl;<br>
+    }</font></p>
+  </blockquote>
+<p><font face="Times New Roman" size="3">Как видите, программа передает массив 
+  в функцию по имени. Функция в свою очередь присваивает массиву элементы. Из 
+  урока</font><font size="3"> 10<font face="Times New Roman"> вы узнали, что, 
+  пока ваша программа не передаст параметры в функцию с помощью адреса, функция 
+  не может изменить эти параметры. Однако, как можно заметить в данном случае, 
+  функция</font></font> <font size="3"><i>get_values</i><font face="Times New Roman"> 
+  изменяет параметр-массив</font></font> <font size="3"><i>numbers.</i><font face="Times New Roman"> 
+  Как вы узнаете из урока</font> 20, C++<font face="Times New Roman"> действительно 
+  передает массивы в функцию, используя указатели. Таким образом, функция может 
+  изменить элементы массива, если ей это нужно.</font></font></p>
+<font face="Times New Roman"><b> </b></font>
+<h2 align="center"><font face="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</font></h2>
+<P><font face="Times New Roman" size="3">Из этого урока вы узнали, что ваши программы 
+  могут хранить несколько значений одного и того же типа внутри массива. Программы 
+  на</font><font size="3"> C++<font face="Times New Roman"> широко используют 
+  массивы. Из урока</font> 17<font face="Times New Roman"> вы узнаете, что программы 
+  могут использовать массивы для хранения символьных строк. До изучения урока</font> 
+  17<font face="Times New Roman"> убедитесь, что вы освоили следующие основные 
+  концепции:</font></font></P>
+<BLOCKQUOTE>
+  <OL>
+    <LI><font face="Times New Roman"><font size="3">Массив представляет собой 
+      переменную, которая может хранить одно или несколько значений одного и того 
+      же типа.</font></font></LI>
+    <LI><font face="Times New Roman"><font size="3"> Для объявления массива вам 
+      следует указать тип, имя массива, а также количество значений, хранящихся 
+      в массиве.</font></font></LI>
+    <LI><font face="Times New Roman"><font size="3"> Значения внутри массива называются 
+      элементами массива.</font></font></LI>
+    <LI><font face="Times New Roman" size="3"> Первый элемент массива хранится 
+      как элемент</font><font size="3"> 0 <i>(array[OJ),</i><font face="Times New Roman"> 
+      индекс последнего элемента массива на единицу меньше размера массива.</font></font></LI>
+    <LI><font face="Times New Roman"><font size="3"> Программы часто используют 
+      индексные переменные для обращения к элементам массива.</font></font></LI>
+    <LI><font face="Times New Roman"><font size="3">Если функция воспринимает 
+      массив как параметр, она должна указать тип и имя, но не размер массива.</font></font></LI>
+    <LI><font face="Times New Roman"><font size="3">Если программа передает массив 
+      в функцию, она, как правило, передает и параметр, который сообщает функции 
+      количество элементов содержащихся в массиве.</font></font></LI>
+    <LI><font face="Times New Roman" size="3">Так как</font><font size="3"> C++<font face="Times New Roman"> 
+      передает массив в функцию с помощью адреса массива функция может изменять 
+      значения, содержащиеся в массиве.</font></font></LI>
+  </OL>
+  <P> 
+    <CENTER>
+      <A HREF="Урок 15.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+      урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 17.html">Следующий 
+      урок</A> </FONT> 
+    </CENTER>
+  </P>
+</BLOCKQUOTE>
+</body>
+</html>

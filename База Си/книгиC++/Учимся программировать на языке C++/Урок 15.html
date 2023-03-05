@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="bgrwhite.gif">
+<H2 ALIGN="CENTER"><FONT FACE="Times New Roman, Times, serif"><B><FONT FACE="Arial, Helvetica, sans-serif">Урок 
+  15</FONT></B></FONT></H2>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif"><B> Значения параметров 
+  по умолчанию</B></FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как вы 
+  уже знаете, C++ позволяет вам с помощью параметров передавать информацию в функции. 
+  Из урока 13 вы выяснили, что C++ также обеспечивает перегрузку функций, предусматривая 
+  определения, содержащие разное количество параметров или даже параметры разных 
+  типов. Кроме этого, в C++ при вызове функций можно опускать параметры. В таких 
+  случаях для опущенных параметров будут использоваться значения по умолчанию. 
+  Этот урок описывает как устанавливать значения по умолчанию для параметров функций. 
+  К концу данного урока вы освоите следующие основные концепции:</FONT></P>
+<FONT FACE="Times New Roman"> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• C++ 
+    позволяет программам указывать для параметров значения по умолчанию.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Значения 
+    по умолчанию для параметров указываются в заголовке функции при ее определении.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Если 
+    вызов функции опускает значения одного или нескольких параметров, C++ будет 
+    использовать значения по умолчанию.</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">• Если 
+    вызов функции опускает значение определенного параметра, то должны быть опущены 
+    и значения всех последующих параметров.</FONT></P>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обеспечение 
+  значений по умолчанию для параметров упрощает возможность <I>повторного использования</I> 
+  функций (их использования несколькими программами).</FONT></P>
+</FONT> 
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ 
+  ПО УМОЛЧАНИЮ</FONT> </H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Обеспечить 
+  значения по умолчанию для параметров функции очень легко. Вы просто присваиваете 
+  значение параметру с помощью оператора присваивания С++ прямо при объявлении 
+  функции, как показано ниже:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    some_function(int <U>size=12,</U> float <U>cost=19.95)</U></FONT><B><I> //----&gt;Значения по умолчанию </I></B></P> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">// 
+    Операторы функции <BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">} </FONT>
+</DIR>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Следующая 
+  программа DEFAULTS. CPP присваивает значения по умолчанию параметрам a, b и 
+  c внутри функции</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_parameters.</I> 
+  Затем программа четыре раза вызывает эту функцию, сначала не указывая параметров 
+  вообще, затем указывая значение только для <I>а,</I> потом значения для <I>а</I> 
+  и b и, наконец, указывая значения для всех трех параметров:</FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">#include 
+    &lt;iostream.h&gt;</FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"> void 
+    show__parameters (int a=1, int b=2, int c=3)</FONT></P>
+  <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"> {<BR>
+    &nbsp;&nbsp;&nbsp;</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">cout 
+    &lt;&lt; <I>"a" &lt;&lt; a &lt;&lt; " b " &lt;&lt; </I> b &lt;&lt; " с</FONT> 
+    <FONT FACE="Times New Roman, Times, serif" SIZE="3">" &lt;&lt; с</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3">&lt;&lt; 
+    endl;<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">void 
+    main(void)</FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif" SIZE="3">{<BR>
+    &nbsp;&nbsp;&nbsp;</FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">show_parameters();<BR>
+    &nbsp;&nbsp;&nbsp;show_parameters(1001);<BR>
+    &nbsp;&nbsp;&nbsp;show_parameters(1001, 2002);<BR>
+    &nbsp;&nbsp;&nbsp;show_parameters(1001, 2002, 3003);<BR>
+    </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3">}</FONT>
+</DIR>
+<FONT FACE="Times New Roman"> </FONT><FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Когда вы 
+  откомпилируете и запустите эту программу, на вашем экране появится следующий 
+  вывод:</FONT></P>
+</FONT> 
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3"><B>С:\&gt; 
+    DEFAULTS &lt;ENTER&gt;</B></FONT></P>
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">а 
+    1 b 2 с 3</FONT></B></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">а 
+    1001 b 2 с 3</FONT></B></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">а 
+    1001 b 2002 с 3</FONT></B></FONT></P>
+  <P ALIGN="JUSTIFY"> <FONT FACE="Times New Roman, Times, serif"><B><FONT SIZE="3">а 
+    1001 b 2002 с 3003</FONT></B></FONT></P>
+</DIR>
+<FONT FACE="Times New Roman"> 
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Как видите, 
+  если необходимо, функция использует значения параметров по умолчанию.</FONT></P>
+</FONT> 
+<H3 ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif">Правила для пропуска 
+  значений параметров</FONT></H3>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если программа 
+  опускает определенный параметр для функции, обеспечивающей значения по умолчанию, 
+  то следует опустить и все последующие параметры. Другими словами, вы не можете 
+  опускать средний параметр. В случае предыдущей программы, если требовалось опустить 
+  значение параметра b в</FONT> <FONT FACE="Times New Roman, Times, serif" SIZE="3"><I>show_parameters,</I> 
+  программа также должна была опустить значение параметра <I>с.</I> Вы не можете 
+  указать значение для <I>а</I> и <I>с,</I> опуская значение <I>Ь.</I></FONT></P>
+<DIR> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><FONT SIZE="3"><B>Задание 
+    значений по умолчанию</B></FONT></I></FONT></P>
+  <FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Когда вы определяете 
+  функцию, C++ позволяет вам указать значения по умолчанию для одного или нескольких 
+  параметров. Если программа</FONT> <FONT SIZE="3">в дальнейших вызовах этой функции 
+  опускает один или несколько параметров, то функция будет использовать для них 
+  значения по умолчанию. Чтобы присвоить параметру значение по умолчанию, просто 
+  используйте оператор присваивания внутри определения функции.</FONT> <FONT SIZE="3"><BR>
+  Например, следующая функция</FONT> <FONT SIZE="3">payroll указывает значения 
+  по умолчанию для параметров</FONT> <FONT SIZE="3">hours и</FONT> <FONT SIZE="3">rate:</FONT></B></I> 
+  </FONT> 
+  <BLOCKQUOTE> 
+    <P><FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">float payroll(int 
+      employ_id, float hours = 40, float rate = 5.50)</FONT></B></I></FONT></P>
+    <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>{</B></I> </FONT> 
+    </P>
+    <P><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>&nbsp;&nbsp;&nbsp;// 
+      операторы</B></I><BR>
+      </FONT><FONT FACE="Times New Roman, Times, serif" SIZE="3"><I><B>}</B></I></FONT><FONT FACE="Times New Roman"> 
+      </FONT></P>
+  </BLOCKQUOTE>
+  <FONT FACE="Times New Roman"> 
+  <P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif"><I><B><FONT SIZE="3">Когда 
+    программа опускает один параметр, она должна опускать все последующие параметры.</FONT></B></I></FONT></P>
+  </FONT></DIR>
+<H2 ALIGN="CENTER"><FONT FACE="Arial, Helvetica, sans-serif">ЧТО ВАМ НЕОБХОДИМО 
+  ЗНАТЬ</FONT></H2>
+<P ALIGN="JUSTIFY"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Из данного 
+  урока вы узнали, что C++ позволяет вам указывать значения по умолчанию для параметров 
+  функции. Если программа опускает один или несколько параметров, функция использует 
+  значения по умолчанию. В следующих уроках, когда ваши программы начнут использовать 
+  объектно-ориентированное программирование на C++, вы будете применять параметры 
+  по умолчанию для инициализации различных переменных класса. Как вы уже знаете, 
+  переменная позволяет вам хранить значение определенного типа (<I>int, float 
+  и.</I> т. д). В уроке 16 вы освоите, как хранить несколько значений одного и 
+  того же типа внутри <I>массива.</I> Например, ваша программа может хранить тестовые 
+  очки для 100 студентов или стоимость 50 акций. С помощью массивов хранить и 
+  использовать такие значения очень легко. До изучения урока 16 убедитесь, что 
+  вы освоили следующие основные концепции:</FONT></P>
+<OL>
+  <OL>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Чтобы 
+      присвоить значения по умолчанию параметрам функции, используйте оператор 
+      присваивания C++ непосредственно в определении функции.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      программа опускает значения параметров при вызове функции, функция использует 
+      значения по умолчанию.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Если 
+      программа опускает значение одного параметра, она должна опустить значения 
+      для всех последующих параметров; программа не может опускать средний параметр.</FONT></FONT></LI>
+    <LI><FONT FACE="Times New Roman"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Указывая 
+      параметры по умолчанию, вы тем самым облегчаете использование ваших функций, 
+      в том числе и для других программ.</FONT></FONT></LI>
+  </OL>
+</OL> 
+<CENTER>
+  <A HREF="Урок 14.html"><FONT FACE="Times New Roman, Times, serif" SIZE="3">Предыдущий 
+  урок </FONT></A><FONT FACE="Times New Roman, Times, serif" SIZE="3">| <A HREF="Урок 16.html">Следующий 
+  урок</A> </FONT> 
+</CENTER>
+</BODY>
+</HTML>
