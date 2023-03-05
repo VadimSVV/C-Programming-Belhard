@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+</head><body>
+<h2 hasbox="2">Русский язык в консольных   программах, созданных в 
+Dev-C++</h2>
+<p hasbox="2">В консольных приложениях    русские буквы выводятся к 
+кодировке CP-866, а в оболочке <em hasbox="2">Dev-C++</em> они 
+набираются в кодировке CP-1251. Это значит, что   вместо русских букв вы
+ увидите «кракозябры». Чтобы этого не случилось, кодировку   нужно 
+исправить с помощью простой дополнительной программы. Сделайте 
+следующее: </p>
+<ol hasbox="2">
+  <li hasbox="2"><a 
+href="http://kaf401.rloc.ru/Informatics/devcpprus.zip" hasbox="2">Скачайте
+ архив</a>,   содержащий программы gccrus.exe и g++rus.exe 
+(193&nbsp;Кб). </li>
+  <li hasbox="2">Скопируйте программы gccrus.exe и g++rus.exe в папку 
+C:\Dev-Cpp\bin (если при   установке оболочки вы указали другой каталог 
+вместо стандартного   C:\Dev-Cpp, скопируйте программы в его подкаталог 
+bin). </li>
+  <li hasbox="2">Запустите оболочку <em hasbox="2">Dev-C++</em> и 
+войдите в меню <em hasbox="2">Сервис-Параметры компилятора</em>. </li>
+  <li hasbox="2">Перейдите на вкладку <em hasbox="2">Программа</em> и 
+исправьте   названия двух первых программ так, как показано на рисунке.
+    <p hasbox="2" align="center"><img alt="Русский язык в Dev-C++" 
+src="%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21_files/dcrus.gif"
+ hasbox="2" height="226" hspace="5" width="457"> </p>
+  </li>
+  <li hasbox="2">Теперь при выводе на экран можно смело использовать 
+русские   буквы, они будут «на лету» перекодироваться. </li>
+</ol>
+<h2 hasbox="2">Написание простых графических программ</h2>
+<p hasbox="2">Для того, чтобы подключить модуль для работы с графикой,  
+ сделайте следуюшее:</p>
+<ol hasbox="2">
+  <li hasbox="2"><a 
+href="http://kaf401.rloc.ru/Informatics/devcppgr.zip">Скачайте архив</a>,
+ содержащий   файлы graphics.h (заголовочный файл) и libbgi.a   
+(библиотека). Размер архива 53&nbsp;Кб. </li>
+  <li hasbox="2">Скопируйте файл graphics.h в папку C:\Dev-Cpp\include. </li>
+  <li hasbox="2">Скопируйте файл libbgi.h в папку C:\Dev-Cpp\lib. </li>
+  <li hasbox="2">Запустите оболочку <em hasbox="2">Dev-C++</em> и 
+войдите в меню <em hasbox="2">Сервис-Параметры компилятора</em>. </li>
+  <li hasbox="2">Перейдите на вкладку <em hasbox="2">Компилятор</em>, 
+включите   флажок <em hasbox="2">Добавить эти команды к командной строке
+ компоновщика</em> и   добавьте в окно под этим флажком строчку
+    <p hasbox="2">-lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32   -lole32 </p>
+    как на рисунке:
+    <p hasbox="2" align="center"><img alt="Графика в Dev-C++" 
+src="%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21_files/dcbgi.gif"
+ hasbox="2" height="275" hspace="5" width="457"> </p>
+  </li>
+</ol>
+<p hasbox="2">После выполнения этих действий вы можете использовать   
+команды для рисования графических примитивов (отрезков, прямоугольников,
+   окружностей и т.д.), так же, как раньше в <em>Turbo&nbsp;C</em> и <em>Borland&nbsp;C++</em>.
+   Полное описание команд (на английском языке) можно найти на <a 
+href="http://www.cs.colorado.edu/%7Emain/cs1300/doc/bgi/">странице 
+Михаэля   Майна</a>. </p>
+<p hasbox="2">Вот так выглядит простейшая программа, которая выводит на 
+  экран отрезок из точки (0,0) (это левый верхний угол окна) в точку 
+(50,50) и   ждет нажатия на любую клавишу: </p>
+<pre><div style="font-size: 100%; color: rgb(15, 67, 117); font-family: Courier New,monospace; font-weight: normal; background: none repeat scroll 0% 0% rgb(215, 225, 236); margin: 10px 20px 0pt; padding: 2px 2px 2px 20px;">
+#include &lt;graphics.h&gt;
+int main()
+{
+initwindow(400,300); <span style="font-style: italic;">// открыть окно для графики</span>
+                     <span style="font-style: italic;">// размером 400 на 300 пикселей</span>
+moveto(0,0);         <span style="font-style: italic;">// курсор в точку (0,0)</span>
+lineto(50,50);       <span style="font-style: italic;">// отрезок в точку (50,50)</span>
+getch();             <span style="font-style: italic;">// ждать нажатия на любую клавишу</span>
+closegraph();        <span style="font-style: italic;">// закрыть окно с графикой</span>
+return 0;
+}
+</div></pre>
+<table hasbox="2">
+  <tbody hasbox="2">
+    <tr hasbox="2">
+      <td valign="top">&nbsp;</td>
+      <td hasbox="2">В программах, которые не работают с графикой, 
+флажок <em hasbox="2">Добавить эти команды к командной строке 
+компоновщика</em> нужно   отключать, иначе при завершении программы 
+будет появляться сообщение об ошибке. </td>
+    </tr>
+  </tbody>
+</table>
+<p>Материал с сайта <a 
+href="http://kpolyakov.narod.ru/school/c/devcpp.htm">kpolyakov.narod.ru</a></p>
+</body></html>
