@@ -1,0 +1,5639 @@
+<html><head><script language="JavaScript">
+cnsd=document;cnsd.cookie='b=b';cnsc=cnsd.cookie?1:0;
+cnst=escape(cnsd.title);cnst=cnst.replace(/\+/g,'%2B');
+cnsa=navigator.appName;
+cnsn=(cnsa.substring(0,2)=='Mi')?0:1;cnss=screen;cnspx=(cnsn==0)?cnss.colorDepth:cnss.pixelDepth;
+document.write('<img src="http://www.mirknig.com/cnstats/cntc.php?i=1954239&amp;c='+cnsc+'&amp;e='+cnss.width+'.'+cnss.height+'&amp;d='+cnspx+'&amp;r='+escape(cnsd.referrer)+'&amp;p='+escape(cnsd.location)+'&amp;t='+cnst+'" width="1" height="1" border="0">');
+</script><title>Буч Г. Объектно-ориентированный анализ и проектирование
+с примерами приложений на С++ » MirKnig.Com - книги, скачать книги,
+электронные книги, бесплатно книги, книги бесплатно скачать.</title><meta http-equiv="content-type" content="text/html; charset=windows-1251"><meta http-equiv="expires" content="0"><meta name="resource-type" content="document"><meta name="distribution" content="global"><meta name="author" content="MirKnig.Com - книги, скачать книги, электронные книги, бесплатно книги, книги бесплатно скачать."><meta name="keywords" content=", MirKnig.Com - книги, скачать книги, электронные книги, бесплатно книги, книги бесплатно скачать, программирование, web-разработки, человек, психология, детская литература, библиотека справочников, литература по базам данных, философия, сказки, детская литература, электронная библиотека, библиотека, книга, книги, скачать книгу, download, чтиво, читать."><meta name="description" content="Библиотека  Мир книг. В библиотеке более 100 авторов и около 2000 книг. Открыты разделы: программирование, базы данных, человек, эзотерика, web-разработки и многое другое. Библиотека регулярно обновляется."><meta name="robots" content="index, follow"><meta name="revisit-after" content="1 days"><style type="text/css"><!--
+
+
+
+A:link			{color: #0D377C; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica;text-decoration:none}
+
+
+
+A:active			{color: #0D377C; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica;text-decoration:none}
+
+
+
+A:visited		{color: #0D377C; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica;text-decoration:none}
+
+
+A:hover			{color: #000000; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica;text-decoration:none}
+
+
+.text				{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica}
+
+
+.title				{BACKGROUND: none; COLOR: #37590C; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+.bodyline		{background-color: #FFFFFF; border: 1px #095B9A solid;}
+
+
+
+.boxtitle			{FONT-FAMILY: Verdana, Helvetica; FONT-SIZE: 11px; COLOR:#FF5500; FONT-WEIGHT: bold;}
+
+
+.content			{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica}
+
+
+
+.block-title		{BACKGROUND: none; COLOR: #FFFFFF; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica}
+
+
+
+.storytitle		{BACKGROUND: none; COLOR: #FFFFFF; FONT-SIZE: 11px; FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+.storycat		{BACKGROUND: none; COLOR: #FF5500; FONT-SIZE: 11px; FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+
+.boxcontent	{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica}
+
+
+
+.option 			{BACKGROUND: none; COLOR: #FF5500; FONT-SIZE: 11px; FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+
+.tiny				{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 11px; FONT-WEIGHT: normal; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+
+.small			{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: normal; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+
+.footmsg		{BACKGROUND: none; COLOR: #000000; FONT-SIZE: 11px; FONT-WEIGHT: normal; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none}
+
+
+
+.leftblock		{vertical-align: top; WIDTH: 100%}
+
+
+
+.rightblock		{vertical-align: top; WIDTH: 165px}
+
+
+
+legend			{FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 11px; COLOR:#FF5500; FONT-WEIGHT: bold;}
+
+
+
+fieldset			{border: solid #64AE03 1px;}
+
+
+
+td					{COLOR: #000000; FONT-SIZE: 11px; FONT-FAMILY: Verdana, Helvetica}
+
+
+
+th					{COLOR: #2666B9; FONT-SIZE: 11px; FONT-WEIGHT: bold; FONT-FAMILY: Verdana, Helvetica; TEXT-DECORATION: none; BACKGROUND-COLOR: #FFFFFF; BACKGROUND-IMAGE: url(../images/cellpic1.gif);}
+
+
+
+hr					{height: 0px; border: solid #bbbbbb 0px; border-top-width: 1px;}
+
+
+
+input, textarea, select {
+
+
+
+	background: #FFFFFF;
+
+	color: #000000;
+
+	text-indent: 2px;
+
+	border-top-width : 1px; 
+
+	border-right-width : 1px; 
+
+	border-bottom-width : 1px; 
+
+	border-left-width : 1px;
+
+	border-color: #DEDEDE;
+
+	font-size: 11px; font-family: Verdana, Helvetica; text-decoration: none
+
+}
+
+
+
+/* 
+
+ * ========================================
+
+ * Цитата и скрытый текст
+
+ * ========================================
+
+ */
+
+
+
+ .quote {
+
+	color: #000000;
+
+	FONT: 10pt Verdana; 
+
+	text-align:justify;
+
+	background-color: lightyellow; 
+
+	border-width:1; 
+
+	border-color:rgb(190,190,190); 
+
+	border-style:dotted;
+
+	padding: 5px;
+
+	}
+
+
+
+/* 
+
+ * ========================================
+
+ * BB коды
+
+ * ========================================
+
+ */ 
+
+
+
+.bbcodes {
+
+	background: #FFF;
+
+	border: 1px solid #E0E0E0;
+
+	color: #666666;
+
+	font-family: Verdana, Tahoma, helvetica, sans-serif;
+
+	padding: 2px;
+
+	vertical-align: middle;
+
+	font-size: 10px; 
+
+	vertical-align: middle;
+
+	margin:2px;
+
+	height: 21px;
+
+}
+
+
+
+/* 
+
+ * ========================================
+
+ * Результаты поиска
+
+ * ========================================
+
+ */
+
+
+
+.sresult  {
+
+	text-align: justify;
+
+	font-family:verdana;
+
+        FONT-WEIGHT: normal;
+
+        LINE-HEIGHT: 16px;
+
+	font-size:12px;
+
+	color:#606D77;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rating {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	background: #FFF;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	border: 1px solid #E0E0E0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	color: #666666;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	font-family: Tahoma, helvetica, sans-serif;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	vertical-align: middle;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	font-size: 11px; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	vertical-align: middle;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+height:18px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--></style><style type="text/css">.ML { list-style: none; display: block; margin: 0; padding: 0; text-align: center; }
+.MLI { display: inline; margin: 0 0 0 10px; padding: 0; }
+.MLIf { margin: 0; padding: 0; }</style></head><body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0"><img src="Info_files/cntc.gif" border="0" height="1" width="1">
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="Info_files/dle_ajax.js"></script>
+<div id="loading-layer" style="border: 1px solid rgb(0, 0, 0); padding: 10px; background: rgb(255, 255, 255) none repeat scroll 0%; display: none; font-family: Verdana; font-size: 11px; width: 200px; height: 50px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-align: center;"><div style="font-weight: bold;" id="loading-layer-text">Загрузка. Пожалуйста, подождите...</div><br><img src="Info_files/loading.gif" border="0"></div>
+<script language="javascript" type="text/javascript">
+<!--
+function ShowBild(sPicURL) {
+window.open('http://www.mirknig.com/engine/modules/imagepreview.php?image='+sPicURL, '', 'resizable=1,HEIGHT=200,WIDTH=200, scrollbars=yes');
+}
+
+var news_cache        = new Array();
+var comments_cache    = new Array();
+var comm_id;
+var comm_edit_id;
+var store_id;
+var edit_id;
+function doFavorites( fav_id, event )
+{
+	var ajax = new dle_ajax();
+	ajax.onShow ('');
+	var varsString = "fav_id=" + fav_id;
+	ajax.setVar("action", event);
+	ajax.requestFile = "http://www.mirknig.com/engine/ajax/favorites.php";
+	ajax.method = 'GET';
+	ajax.element = 'fav-id-'+fav_id;
+	ajax.runAJAX(varsString);
+
+	return false;
+}
+//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--begin of Rambler's Top100 code -->
+<a href="http://top100.rambler.ru/top100/">
+<img src="Info_files/top100.gif" alt="" border="0" height="1" width="1"></a>
+<!--end of Top100 code-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><tbody><tr><td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr></tr></tbody></table><table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td colspan="2"></td><td><img alt="" src="Info_files/logo.gif" border="0"></td><td><a href="javascript:" onclick="javascript:this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.mirknig.com')" title="Сделать стартовой"><img src="Info_files/home.png" border="0">Сделать стартовой</a><br><a href="javascript:window.external.AddFavorite('http://www.mirknig.com')" target="_parent" title="Добавить в избранное"><img src="Info_files/favorites.png" border="0">Добавить в избранное</a><br></td><td><a href="http://www.mirknig.com/forum" target="_blank"><img alt="" src="Info_files/forum.gif" style="vertical-align: middle;" border="0">&nbsp;Наш форум</a><br><a href="http://www.mirknig.com/static/rapidshare_download.html"><img alt="" src="Info_files/online.gif" style="vertical-align: middle;" border="0">&nbsp;<font color="red">Как скачивать файлы</font></a><br></td><!--Форма поиска по сайту-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><div class="searchform" align="right"><form action="/" method="post"><input name="do" value="search" type="hidden">Поиск по сайту:&nbsp;<input name="story" style="width: 111px; height: 18px; font-family: tahoma; font-size: 11px; margin-left: 3px; margin-right: 3px;" type="text">&nbsp;<input style="border: 1px solid rgb(224, 224, 224); background: rgb(255, 255, 255) none repeat scroll 0%; height: 20px; font-family: tahoma; font-size: 11px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" title="Найти" value="Найти" class="btn" type="submit"></form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Begin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var months=new Array(13);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[1]="января";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[2]="февраля";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[3]="марта";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[4]="апреля";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[5]="мая";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[6]="июня";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[7]="июля";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[8]="августа";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[9]="сентября";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[10]="октября";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[11]="ноября";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+months[12]="декабря";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var time=new Date();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var lmonth=months[time.getMonth() + 1];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var date=time.getDate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var year=time.getYear();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var hours=time.getHours();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var minutes=time.getMinutes();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (eval(hours) <10) {hours="0"+hours}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (eval(minutes) < 10) {minutes="0"+minutes}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (year < 2000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+year = year + 1900;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.write("Сейчас: " + date + " ");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.write(lmonth + " " + year + ", " + hours + ":" + minutes + " ");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>Сейчас: 10 декабря 2006, 04:25 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></td></tr></tbody></table></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/spacer.gif" border="0" height="20" width="14"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"></table></td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr><td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Вывод блоков-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Блок навигации по сайту-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr valign="top"><td width="150"><table cellpadding="0" cellspacing="0" width="200"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><img alt="" src="Info_files/navigation.gif" style="vertical-align: middle;" border="0">&nbsp;&nbsp;<b class="addnews">Навигация по сайту</b></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><div style="padding-top: 5px; padding-left: 21px;"><table border="0" cellpadding="0" cellspacing="0" width="165"><tbody><tr><td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/">ГЛАВНАЯ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/business/">БИЗНЕС</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/apparatura/">АППАРАТУРА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/guman_nauki/">ГУМАНИТАРНЫЕ НАУКИ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/belletristika/">БЕЛЛЕТРИСТИКА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/kultura/">КУЛЬТУРА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/nauka_ucheba/">НАУКА И УЧЕБА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/nauchno_popularnoe/">НАУЧНО-ПОПУЛЯРНОЕ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/programming/">ПРОГРАММИРОВАНИЕ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/professii/">ПРОФЕССИИ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/os_bd/">ОС И БД</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/seti/">СЕТЕВЫЕ ТЕХНОЛОГИИ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/hobby/">ХОББИ И РАЗВЛЕЧЕНИЯ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/hobby_remesla/">ХОББИ И РЕМЕСЛА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/foto_video/">ФОТО И ВИДЕО</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/technika/">ТЕХНИКА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/web/">WEB-РАЗРАБОТКИ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/ezoterika/">ЭЗОТЕРИКА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/estesstv_nauki/">ЕСТЕСТВЕННЫЕ НАУКИ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/risovanie/">ЖИВОПИСЬ И РИСОВАНИЕ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/design/">ДИЗАЙН</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/design_grafika/">ДИЗАЙН И ГРАФИКА</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/dom_semya/">ДОМ И СЕМЬЯ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/chelovek/">ЧЕЛОВЕК</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <img src="Info_files/punkt.gif" border="0"> <a href="http://www.mirknig.com/category/raznoe/">РАЗНОЕ</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          » <a href="http://www.mirknig.com/forum">Наш форум</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          » <a href="http://www.mirknig.com/index.php?do=feedback">Написать нам</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          » <a href="http://www.mirknig.com/engine/rss.php">RSS</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td></tr></tbody></table></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Блок входа на сайт-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="200"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><img alt="" src="Info_files/bxod.gif" style="vertical-align: middle;" border="0">&nbsp;&nbsp;<b class="addnews">Вход на сайт</b></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><div style="padding-top: 5px; padding-left: 21px;"><table border="0" cellpadding="0" cellspacing="0" width="165"><tbody><tr><td><div style="padding-top: 2px;" class="style1">Привет, <b>Mim</b>!</div>
+<div style="padding-top: 5px; padding-bottom: 5px;">
+<table cellpadding="0" cellspacing="3" width="100%">    <tbody><tr>
+        <td><a class="style2" href="http://www.mirknig.com/user/Mim/">Мой профиль</a></td>
+    </tr>
+	    <tr>
+        <td><a class="style2" href="http://www.mirknig.com/index.php?do=pm">Cообщения (0 | 0)</a></td>
+	    </tr><tr>
+        <td><a class="style2" href="http://www.mirknig.com/favorites/">Мои закладки</a></td>
+
+	    </tr><tr>
+        <td><a class="style2" href="http://www.mirknig.com/stats/">Статистика</a></td>
+	    </tr><tr>
+        <td><a class="style2" href="http://www.mirknig.com/addnews/">Добавить новость</a></td>
+		</tr><tr>
+        <td><a class="style2" href="http://www.mirknig.com/newposts/">Обзор непрочитанного</a></td>
+    </tr>
+</tbody></table>
+				</div>
+<div style="padding-top: 2px; padding-bottom: 5px;" align="right"><a class="style2" href="http://www.mirknig.com/index.php?action=logout"><b>Завершить сеанс!</b></a></div></td></tr></tbody></table></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Блок Календарь-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="200"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><img alt="" src="Info_files/online.gif" style="vertical-align: middle;" border="0">&nbsp;&nbsp;<b class="addnews">Календарь</b></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><div style="padding-top: 5px; padding-left: 21px;"><table border="0" cellpadding="0" cellspacing="0" width="165"><tbody><tr><td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+function doCalendar(month, year){
+	var ajax = new dle_ajax();
+	ajax.onShow ('');
+	var varsString = "";
+	ajax.setVar("year", year);
+	ajax.setVar("month", month);
+	ajax.requestFile = "http://www.mirknig.com/engine/ajax/calendar.php";
+	ajax.method = 'GET';
+	ajax.element = 'calendar-layer';
+	ajax.runAJAX(varsString);
+}
+</script><div id="calendar-layer"><table id="calendar" class="calendar" cellpadding="3"><thead><th colspan="7"><center><b><a class="monthlink" onclick="doCalendar('01','2006'); return false;" href="http://www.mirknig.com/2006/01/" title="Предыдущий месяц">«</a>&nbsp;&nbsp;&nbsp;&nbsp;Февраль 2006&nbsp;&nbsp;&nbsp;&nbsp;<a class="monthlink" onclick="doCalendar('03','2006'); return false;" href="http://www.mirknig.com/2006/03/" title="Следующий месяц">»</a></b></center></th></thead><thead><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th class="weekday" style="color: rgb(128, 64, 64);">Сб</th><th class="weekday" style="color: rgb(128, 64, 64);">Вс</th></thead><tbody><tr><td colspan="2">&nbsp;</td><td class="day"><center>1</center></td><td class="day"><center>2</center></td><td class="day"><center>3</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>4</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>5</center></td></tr><tr><td class="day"><center>6</center></td><td class="day"><center>7</center></td><td class="day"><center>8</center></td><td class="day"><center>9</center></td><td class="day"><center>10</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>11</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>12</center></td></tr><tr><td class="day"><center>13</center></td><td class="day"><center>14</center></td><td class="day"><center>15</center></td><td class="day"><center>16</center></td><td class="day"><center>17</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>18</center></td><td class="weekday-active"><a class="weekday-active" href="http://www.mirknig.com/2006/02/19/" title="Все посты за 19 февраля 2006"><center><b>19</b></center></a></td></tr><tr><td class="day"><center>20</center></td><td class="day"><center>21</center></td><td class="day"><center>22</center></td><td class="day"><center>23</center></td><td class="day"><center>24</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>25</center></td><td class="day" style="color: rgb(128, 64, 64);"><center>26</center></td></tr><tr><td class="day"><center>27</center></td><td class="day"><center>28</center></td><td colspan="5">&nbsp;</td></tr></tbody></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td></tr></tbody></table></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Блок популярных статей-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="200"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><img alt="" src="Info_files/popular.png" style="vertical-align: middle;" border="0">&nbsp;&nbsp;<b class="addnews">Популярное</b></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><div style="padding-top: 5px; padding-left: 21px;"><table border="0" cellpadding="0" cellspacing="0" width="165"><tbody><tr><td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://www.mirknig.com/2006/02/19/postolit_a_v_Visual_Studio_NET_razrabotka_prilozhenijj_baz_dannykh.html">Постолит А. В. Visual Studio . ...</a></li><li><a href="http://www.mirknig.com/2006/02/19/200_izbrannykh_skhem_jelektroniki.html">200 ИЗБРАННЫХ СХЕМ ЭЛЕКТРОНИКИ</a></li><li><a href="http://www.mirknig.com/2006/02/19/atlas_kulturizma.html">Атлас культуризма</a></li><li><a href="http://www.mirknig.com/2006/02/19/olifer__kompjuternye_seti_principy_tekhnologii_protokoly.html">Олифер | Компьютерные сети. Пр ...</a></li><li><a href="http://www.mirknig.com/2006/02/19/vv_ershov_razdumja_ezdovogo_psa.html">В.В. Ершов "Раздумья ездового  ...</a></li><li><a href="http://www.mirknig.com/2006/02/19/samouchitel_igry_na_6strunnojj_gitare_agnikolaev.html">Самоучитель игры на 6-струнной ...</a></li><li><a href="http://www.mirknig.com/2006/07/11/samouchitel_khakera.html">Самоучитель хакера</a></li><li><a href="http://www.mirknig.com/2006/02/19/meskon_m_albert_m_khedouri_f_osnovy_menedzhmenta.html">Мескон М., Альберт М., Хедоури ...</a></li><li><a href="http://www.mirknig.com/2006/02/19/molot_vedm.html">Молот ведьм</a></li><li><a href="http://www.mirknig.com/2006/02/19/3_samouchitelja_igry_na_gitare.html">3 Самоучителя игры на гитаре</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td></tr></tbody></table></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="200"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3_1.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><img alt="" src="Info_files/popular.png" style="vertical-align: middle;" border="0">&nbsp;&nbsp;<b class="addnews">Помощь проекту</b></div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><div style="padding-top: 5px; padding-left: 21px;"><table border="0" cellpadding="0" cellspacing="0" width="165"><tbody><tr>
+  <td><p class="style2" align="center"><strong>WebMoney</strong></p>
+    <p align="center">R249154313412<br>
+Z139244693039</p>
+    <hr size="1">
+    <div class="style2" align="center"><strong>SMS-копилка
+    </strong></div>
+    <p align="center"><a href="http://smskopilka.ru/?info&amp;id=17548" title="Вы можете помочь развитию этого проекта!" target="_blank"><img src="Info_files/smskopilka2.gif" alt="sms.КоПиЛКа&nbsp; mirknig" border="0"></a><br><font face="red">Указывайте в комментариях ваш ник, Тем кто помогают сайту, мы поможем в востановлении битых ссылок!</font></p></td></tr>
+</tbody></table>
+</div></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_1.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+<center>
+
+</center>
+
+
+<br><br>
+<center>
+<script>// <!--
+document.write('<script language=JavaScript src="http://d.clx.ru/show.php?af=63232&sx=100&sy=100&c='+Math.round(Math.random() * 100000)+'"><'+'/script>'); 
+// --> </script><script language="JavaScript" src="Info_files/show.htm"></script><a href="http://in.clx.ru/in?ti=1165716798&amp;m=8800e2&amp;z=5275253&amp;b=31245&amp;cx=9c9871&amp;ef=http%3A%2F%2Fwww.mirknig.com%2F2006%2F02%2F19%2Fbuch_g_obektnoorientirovannyjj_analiz_i_proektirovanie_s_primerami_prilozhenijj_na_s.html" target="_top"><img src="Info_files/31245.gif" border="0" height="100" width="100"></a>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Вывод основной части сайта-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td>
+
+
+
+
+
+<!-- -->
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="center" valign="top" width="14"><img alt="" src="Info_files/1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><b class="addnews"></b></div></td>
+
+<td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td>
+
+</tr>
+
+<tr>
+
+<td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td>
+
+<td>
+<div style="padding-top: 5px; padding-left: 21px;">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td align="center">
+
+
+<center>
+<script language="JavaScript"> var loc = ''; </script>
+<script language="JavaScript1.4">try{ var loc = escape(top.location.href); }catch(e){;}</script>
+<script language="JavaScript">document.write("<sc"+"ript language='JavaScript' src='http://ad3.bannerbank.ru/bb.cgi?cmd=ad&hreftarget=_blank&pubid=121808417&pg=1&r=js&ssi=nofillers&vbn=453&num=1&w=120&h=60&&ref="+escape(document.referrer)+"&loc="+loc+"&nocache="+Math.round(Math.random()*999111)+"'>\n</sc"+"ript>");</script><script language="JavaScript" src="Info_files/bb_003.js">
+</script><a target="_blank" href="http://ad3.bannerbank.ru/bb.cgi?cmd=go&amp;r=r_ssi&amp;vbn=453&amp;pac=121808417&amp;pnm=1&amp;bac=119870464&amp;bnm=3&amp;ref=http%3A%2F%2Fwww%2Emirknig%2Ecom%2Fcategory%2Fprogramming%2Fpage%2F7%2F&amp;loc=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml&amp;htr=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml"><img src="Info_files/119870464_3.gif" alt="JBE.ru - 120х60" title="JBE.ru - 120х60" border="0" height="60" width="120"></a>
+
+
+
+&nbsp;
+
+
+<script>//<!--
+document.write('<script language=JavaScript src="http://s.clx.ru/rot.php?num=17490&c='+Math.round(Math.random() * 100000)+'"'+'><'+'/script>');
+// --></script><script language="JavaScript" src="Info_files/rot.htm"></script><a href="http://in.clx.ru/in?ti=1165714132&amp;m=c9b27c&amp;z=5275319&amp;rot=17490&amp;b=85454&amp;cx=10f21d&amp;ef=http%3A%2F%2Fwww.mirknig.com%2F2006%2F02%2F19%2Fbuch_g_obektnoorientirovannyjj_analiz_i_proektirovanie_s_primerami_prilozhenijj_na_s.html" target="_blank"><img src="Info_files/85454.gif" border="0" height="60" width="468"></a>
+
+&nbsp;
+
+<script language="JavaScript"> var loc = ''; </script>
+<script language="JavaScript1.4">try{ var loc = escape(top.location.href); }catch(e){;}</script>
+<script language="JavaScript">document.write("<sc"+"ript language='JavaScript' src='http://ad3.bannerbank.ru/bb.cgi?cmd=ad&hreftarget=_blank&pubid=121808417&pg=1&r=js&ssi=nofillers&vbn=453&num=2&w=120&h=60&&ref="+escape(document.referrer)+"&loc="+loc+"&nocache="+Math.round(Math.random()*999111)+"'>\n</sc"+"ript>");</script><script language="JavaScript" src="Info_files/bb.js">
+</script><a target="_blank" href="http://ad3.bannerbank.ru/bb.cgi?cmd=go&amp;r=r_ssi&amp;vbn=453&amp;pac=121808417&amp;pnm=1&amp;bac=6691246&amp;bnm=1826&amp;ref=http%3A%2F%2Fwww%2Emirknig%2Ecom%2Fcategory%2Fprogramming%2Fpage%2F7%2F&amp;loc=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml&amp;htr=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml"><img src="Info_files/6691246_1826.gif" alt="JBE.ru - 120х60" title="JBE.ru - 120х60" border="0" height="60" width="120"></a>
+
+</center>
+<a href="http://www.mirknig.com/2006/11/06/premium_akkaunty_na_server_rapidsharede.html">
+<font color="red"><b>Премиум аккаунты на сервер rapidshare.de</b></font>
+</a>
+
+</td>
+</tr>
+</tbody></table>
+</div>
+
+</td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr>
+
+<tr><td valign="top" width="14"><img alt="" src="Info_files/8_002.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_002.gif" border="0" height="12" width="14"></td></tr>
+</tbody></table>
+<!-- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td class="menu1"><b><img alt="" src="Info_files/newpage.gif"> Буч Г. Объектно-ориентированный анализ и проектирование с примерами приложений на С++</b></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="747">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tbody><tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td class="newsbody" bgcolor="#fdfdfd" width="100%"><div id="news-id-488"><img src="Info_files/1143355158_10696.gif" style="border: medium none ;" align="left"><br><b><span style="color: blue;">Буч Г. Объектно-ориентированный анализ и проектирование с примерами приложений на С++</span></b><br><br><b>Издательство:</b> Бином<br><b>Год издания:</b> 2001<br><b>Формат:</b> chm<br><b>Размер:</b> 2,93 Mb<br><br><b>От издательства:</b><br><br>Книга
+Гради Буча, признанного эксперта в области объектно-ориентированной
+методологии разработки программного обеспечения, содержит классическое
+изложение вопросов анализа и проектирования сложных систем. В первой
+части книги автор исследует суть фундаментальных понятий ООП (таких как
+"класс", "объект", "наследование), анализирует концепции, лежащие в
+основе объектно-ориентированных языков и методик разработки. Вторая
+часть содержит подробное описание обозначений (известных как "нотация
+Буча"), давно уже ставших "родными" для тысяч разработчиков во всем
+мире. Здесь же автор делится своим богатым опытом организации процесса
+разработки программ, дает рекомендации по подбору команды и
+планированию промежуточных релизов. В третьей части изложенные ранее
+методы применяются для анализа и проектирования нескольких приложений.
+На глазах у читателя создается каркас соответствующих систем,
+принимаются принципиальные проектные решения.<br>Книга будет полезна
+аналитикам и разработчикам программного обеспечения, преподавателям и
+студентам вузов. По сравнению с первым изданием книга несколько
+дополнена (что отразилось и в названии), все примеры приведены на языка
+С++.<br><br><br><a href="http://rapidshare.de/files/16439844/Buch_ob_or_an_proekt.rar" target="_blank">Скачать</a><br></div></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td align="left" bgcolor="#fdfdfd"><br><br><a id="fav-id-488" href="http://www.mirknig.com/index.php?do=favorites&amp;doaction=add&amp;id=488"><img src="Info_files/plus_fav.gif" onclick="doFavorites('488', 'plus'); return false;" title="Добавить новость в закладки" align="absmiddle" border="0"></a> Разместил: <a href="http://www.mirknig.com/user/admin/">admin</a> 19 февраля 2006 | Просмотров: 432 | Коментарии: 0 | <a href="http://www.mirknig.com/2006/02/19/print:page,1,buch_g_obektnoorientirovannyjj_analiz_i_proektirovanie_s_primerami_prilozhenijj_na_s.html"> Напечатать </a><hr><div id="ratig-layer"><form name="rating" id="rating" method="post">
+<script type="text/javascript">
+function doRate(){
+	var ajax = new dle_ajax();
+	var form = document.getElementById('rating');
+	ajax.onShow ('');
+	var varsString = "go_rate=" + form.go_rate.value;
+	ajax.setVar("news_id", form.news_id.value);
+	ajax.requestFile = "http://www.mirknig.com/engine/ajax/rating.php";
+	ajax.method = 'GET';
+	ajax.element = 'ratig-layer';
+	ajax.runAJAX(varsString);
+}
+</script><b>Рейтинг:</b> <img src="Info_files/rate5.gif" alt="Рейтинг статьи: Отлично" align="absmiddle" border="0">
+ (голосов: 1)<br><div style="margin-top: 5px;"><b>Ваша оценка: </b><select class="rating" name="go_rate" id="go_rate">
+<option value="5">Отлично</option>
+<option value="4">Хорошо</option>
+<option value="3">Средне</option>
+<option value="2">Приемлемо</option>
+<option value="1">Плохо</option>
+</select>
+<input name="doaction" value="rate" type="hidden">
+<input name="news_id" id="news_id" value="488" type="hidden">
+<input class="rating" onclick="doRate(); return false;" value="Оценить" type="submit"></div>
+</form></div>
+</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody></table></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td valign="top" width="14"><img alt="" src="Info_files/8_002.gif" border="0" height="12" width="14"></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td valign="top" width="14"><img alt="" src="Info_files/9_002.gif" border="0" height="12" width="14"></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody></table><form method="post" name="comment" id="comment" action=""><table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td valign="top" width="14"><img alt="" src="Info_files/1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td class="menu1"><b>Добавление комментария</b></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"><img alt="" src="Info_files/8.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);"></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"><img alt="" src="Info_files/9.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td><td><br>
+<script type="text/javascript">
+	//<![CDATA[
+	function insertext(text){
+	doInsert(' ' + text + ' ', '', false);
+	}
+	//]]></script>
+	<noscript>Ваш броузер не поддерживает Javascript. Мы рекомендуем включить Вам эту поддержку.
+	</noscript><a href="javascript:insertext(':smile:','short')"><img style="border: medium none ;" alt="smile" src="Info_files/smile.gif"></a>&nbsp;<a href="javascript:insertext(':wink:','short')"><img style="border: medium none ;" alt="wink" src="Info_files/wink.gif"></a>&nbsp;<a href="javascript:insertext(':wassat:','short')"><img style="border: medium none ;" alt="wassat" src="Info_files/wassat.gif"></a>&nbsp;<a href="javascript:insertext(':tongue:','short')"><img style="border: medium none ;" alt="tongue" src="Info_files/tongue.gif"></a>&nbsp;<a href="javascript:insertext(':laughing:','short')"><img style="border: medium none ;" alt="laughing" src="Info_files/laughing.gif"></a>&nbsp;<a href="javascript:insertext(':sad:','short')"><img style="border: medium none ;" alt="sad" src="Info_files/sad.gif"></a>&nbsp;<a href="javascript:insertext(':angry:','short')"><img style="border: medium none ;" alt="angry" src="Info_files/angry.gif"></a>&nbsp;<a href="javascript:insertext(':crying:','short')"><img style="border: medium none ;" alt="crying" src="Info_files/crying.gif"></a>&nbsp;<br><script type="text/javascript">
+<!--
+//==========================================
+// Set up
+//==========================================
+
+// Sniffer based on http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
+
+var uagent    = navigator.userAgent.toLowerCase();
+var is_safari = ( (uagent.indexOf('safari') != -1) || (navigator.vendor == "Apple Computer, Inc.") );
+var is_ie     = ( (uagent.indexOf('msie') != -1) && (!is_opera) && (!is_safari) && (!is_webtv) );
+var is_ie4    = ( (is_ie) && (uagent.indexOf("msie 4.") != -1) );
+var is_moz    = (navigator.product == 'Gecko');
+var is_ns     = ( (uagent.indexOf('compatible') == -1) && (uagent.indexOf('mozilla') != -1) && (!is_opera) && (!is_webtv) && (!is_safari) );
+var is_ns4    = ( (is_ns) && (parseInt(navigator.appVersion) == 4) );
+var is_opera  = (uagent.indexOf('opera') != -1);
+var is_kon    = (uagent.indexOf('konqueror') != -1);
+var is_webtv  = (uagent.indexOf('webtv') != -1);
+
+var is_win    =  ( (uagent.indexOf("win") != -1) || (uagent.indexOf("16bit") !=- 1) );
+var is_mac    = ( (uagent.indexOf("mac") != -1) || (navigator.vendor == "Apple Computer, Inc.") );
+var ua_vers   = parseInt(navigator.appVersion);
+	
+// IBC Code stuff
+var text_enter_url       = "Введите полный URL ссылки";
+var text_enter_page      = "Введите номер страницы";
+var text_enter_url_name  = "Введите название сайта";
+var text_enter_page_name = "Введите описание ссылки";
+var text_enter_image    = "Введите полный URL изображения";
+var text_enter_email    = "Введите e-mail адрес";
+var text_code           = "Использование: [CODE] Здесь Ваш код.. [/CODE]";
+var text_quote          = "Использование: [QUOTE] Здесь Ваша Цитата.. [/QUOTE]";
+var error_no_url        = "Вы должны ввести URL";
+var error_no_title      = "Вы должны ввести название";
+var error_no_email      = "Вы должны ввести e-mail адрес";
+var prompt_start        = "Введите текст для форматирования";
+var img_title   		= "Введите по какому краю выравнивать картинку (left, center, right)";
+var email_title  	    = "Введите описание ссылки (необязательно)";
+//--------------------------------------------
+// Set up our simple tag open values
+//--------------------------------------------
+
+var B_open = 0;
+var I_open = 0;
+var U_open = 0;
+var QUOTE_open = 0;
+var CODE_open = 0;
+var SQL_open = 0;
+var HTML_open = 0;
+var CENTER_open = 0;
+var HIDE_open = 0;
+var S_open = 0;
+
+var selField  = "comments";
+
+var bbtags   = new Array();
+
+var fombj    = document.comment;
+
+//==========================================
+// Array: Get stack size
+//==========================================
+
+function stacksize(thearray)
+{
+	for (i = 0 ; i < thearray.length; i++ )
+	{
+		if ( (thearray[i] == "") || (thearray[i] == null) || (thearray == 'undefined') )
+		{
+			return i;
+		}
+	}
+	
+	return thearray.length;
+}
+//==========================================
+// Array: Push stack
+//==========================================
+
+function pushstack(thearray, newval)
+{
+	arraysize = stacksize(thearray);
+	thearray[arraysize] = newval;
+}
+//==========================================
+// Array: Pop stack
+//==========================================
+
+function popstack(thearray)
+{
+	arraysize = stacksize(thearray);
+	theval = thearray[arraysize - 1];
+	delete thearray[arraysize - 1];
+	return theval;
+}
+
+function setFieldName(which)
+{
+            if (which != selField)
+            {
+				allcleartags();
+                selField = which;
+
+            }
+}
+
+
+//==========================================
+// Set the number of tags open box
+//==========================================
+
+function cstat()
+{
+	var c = stacksize(bbtags);
+	
+	if ( (c < 1) || (c == null) ) {
+		c = 0;
+	}
+	
+	if ( ! bbtags[0] ) {
+		c = 0;
+	}
+	
+
+}
+
+
+//==========================================
+// Close all tags
+//==========================================
+
+function closeall()
+{
+	if (bbtags[0])
+	{
+		while (bbtags[0])
+		{
+			tagRemove = popstack(bbtags)
+			var closetags = "[/" + tagRemove + "]";
+
+			eval ("fombj." +selField+ ".value += closetags");
+			
+			//--------------------------------------------
+			// Change the button status
+			// Ensure we're not looking for FONT, SIZE or COLOR as these
+			// buttons don't exist, they are select lists instead.
+			//--------------------------------------------
+			
+			if ( (tagRemove != 'FONT') && (tagRemove != 'SIZE') && (tagRemove != 'COLOR') )
+			{
+if (tagRemove == 'CENTER') tagnewvalue = 'По центру'; 
+else if (tagRemove == 'QUOTE') tagnewvalue = ' Цитата ';
+else if (tagRemove == 'LEFT') tagnewvalue = 'Слева';
+else if (tagRemove == 'RIGHT') tagnewvalue = 'Справа';
+else tagnewvalue = ' '+tagRemove+' ';
+
+				eval("fombj." + tagRemove + ".value = '" + tagnewvalue + "'");
+				eval(tagRemove + "_open = 0");
+			}
+		}
+	}
+
+	//--------------------------------------------
+	// Ensure we got them all
+	//--------------------------------------------
+	
+	bbtags = new Array();
+
+}
+//==========================================
+// Clear all tags
+//==========================================
+
+function allcleartags()
+{
+	if (bbtags[0])
+	{
+		while (bbtags[0])
+		{
+			tagRemove = popstack(bbtags)
+			
+			//--------------------------------------------
+			// Change the button status
+			// Ensure we're not looking for FONT, SIZE or COLOR as these
+			// buttons don't exist, they are select lists instead.
+			//--------------------------------------------
+			
+			if ( (tagRemove != 'COLOR') )
+			{
+				eval("fombj." + tagRemove + ".value = ' " + tagRemove + " '");
+				eval(tagRemove + "_open = 0");
+			}
+		}
+	}
+
+	//--------------------------------------------
+	// Ensure we got them all
+	//--------------------------------------------
+	
+	bbtags = new Array();
+
+}
+
+//==========================================
+// EMOTICONS
+//==========================================
+
+function emoticon(theSmilie)
+{
+	doInsert(" " + theSmilie + " ", "", false);
+}
+
+function pagebreak()
+{
+	doInsert("{PAGEBREAK}", "", false);
+}
+//==========================================
+// ADD CODE
+//==========================================
+
+function add_code(NewCode)
+{
+    fombj.selField.value += NewCode;
+    fombj.selField.focus();
+}
+
+//==========================================
+// ALTER FONT
+//==========================================
+
+function alterfont(theval, thetag)
+{
+    if (theval == 0)
+    	return;
+	
+	if(doInsert("[" + thetag + "=" + theval + "]", "[/" + thetag + "]", true))
+		pushstack(bbtags, thetag);
+	
+
+    fombj.fcolor.selectedIndex = 0;
+    
+    cstat();
+	
+}
+
+
+//==========================================
+// SIMPLE TAGS (such as B, I U, etc)
+//==========================================
+
+function simpletag(thetag)
+{
+	var tagOpen = eval(thetag + "_open");
+	
+
+		if (tagOpen == 0)
+		{
+			if(doInsert("[" + thetag + "]", "[/" + thetag + "]", true))
+			{
+				eval(thetag + "_open = 1");
+				
+				//--------------------------------------------
+				// Change the button status
+				//--------------------------------------------
+				
+				eval("fombj." + thetag + ".value += '*'");
+		
+				pushstack(bbtags, thetag);
+				cstat();
+
+			}
+		}
+		else
+		{
+			//--------------------------------------------
+			// Find the last occurance of the opened tag
+			//--------------------------------------------
+			lastindex = 0;
+			
+			for (i = 0 ; i < bbtags.length; i++ )
+			{
+				if ( bbtags[i] == thetag )
+				{
+					lastindex = i;
+				}
+			}
+			
+			//--------------------------------------------
+			// Close all tags opened up to that tag was opened
+			//--------------------------------------------
+			
+			while (bbtags[lastindex])
+			{
+				tagRemove = popstack(bbtags);
+				doInsert("[/" + tagRemove + "]", "", false)
+
+var tagnewvalue = false;
+			
+				//--------------------------------------------
+				// Change the button status
+				//--------------------------------------------
+				
+				if ( (tagRemove != 'FONT') && (tagRemove != 'SIZE') && (tagRemove != 'COLOR') )
+				{
+if (tagRemove == 'CENTER') tagnewvalue = 'По центру'; 
+else if (tagRemove == 'QUOTE') tagnewvalue = ' Цитата ';
+else if (tagRemove == 'LEFT') tagnewvalue = 'Слева';
+else if (tagRemove == 'RIGHT') tagnewvalue = 'Справа';
+else tagnewvalue = ' '+tagRemove+' ';
+
+
+					eval("fombj." + tagRemove + ".value = '" + tagnewvalue + "'");
+					eval(tagRemove + "_open = 0");
+				}
+			}
+			
+			cstat();
+		}
+
+}
+
+//==========================================
+// PAGE tag
+//==========================================
+
+function pagelink()
+{
+    var FoundErrors = '';
+	var thesel ='';
+	if ( (ua_vers >= 4) && is_ie && is_win)
+	{
+	thesel = document.selection.createRange().text;
+	} else thesel ='Страница';
+
+    if (!thesel) {
+        thesel ='Страница';
+    }
+
+    var enterURL   = prompt(text_enter_page, "1");
+    var enterTITLE = prompt(text_enter_page_name, thesel);
+
+    if (!enterURL) {
+        FoundErrors += " " + error_no_url;
+    }
+    if (!enterTITLE) {
+        FoundErrors += " " + error_no_title;
+    }
+
+    if (FoundErrors) {
+        alert("Error!"+FoundErrors);
+        return;
+    }
+
+	doInsert("[PAGE="+enterURL+"]"+enterTITLE+"[/PAGE]", "", false);
+}
+
+//==========================================
+// URL tag
+//==========================================
+
+function tag_url()
+{
+    var FoundErrors = '';
+	var thesel ='';
+	if ( (ua_vers >= 4) && is_ie && is_win)
+	{
+	thesel = document.selection.createRange().text;
+	} else thesel ='My Webpage';
+
+    if (!thesel) {
+        thesel ='My Webpage';
+    }
+
+    var enterURL   = prompt(text_enter_url, "http://");
+    var enterTITLE = prompt(text_enter_url_name, thesel);
+
+    if (!enterURL) {
+        FoundErrors += " " + error_no_url;
+    }
+    if (!enterTITLE) {
+        FoundErrors += " " + error_no_title;
+    }
+
+    if (FoundErrors) {
+        alert("Error!"+FoundErrors);
+        return;
+    }
+
+	doInsert("[URL="+enterURL+"]"+enterTITLE+"[/URL]", "", false);
+}
+
+//==========================================
+// Insert attachment tag
+//==========================================
+
+function insert_attach_to_textarea(aid)
+{
+	doInsert( "[attachmentid="+aid+"]" );
+}
+
+//==========================================
+// Image tag
+//==========================================
+
+function tag_image()
+{
+    var FoundErrors = '';
+    var enterURL   = prompt(text_enter_image, "http://");
+
+    var Title = prompt(img_title, "left");
+
+    if (!enterURL) {
+        FoundErrors += " " + error_no_url;
+    }
+
+    if (FoundErrors) {
+        alert("Error!"+FoundErrors);
+        return;
+    }
+
+if (Title == "")
+           {
+	doInsert("[IMG]"+enterURL+"[/IMG]", "", false);
+           }
+else {
+if (Title == "center") {
+	doInsert("[CENTER][IMG]"+enterURL+"[/IMG][/CENTER]", "", false);
+}
+else {
+	doInsert("[IMG="+Title+"]"+enterURL+"[/IMG]", "", false);
+	}
+ }
+}
+
+function tag_email()
+{
+    var emailAddress = prompt(text_enter_email, "");
+
+    if (!emailAddress) { 
+		alert(error_no_email); 
+		return; 
+	}
+
+	var thesel ='';
+	if ( (ua_vers >= 4) && is_ie && is_win)
+	{
+	thesel = document.selection.createRange().text;
+	} else thesel ='';
+
+    if (!thesel) {
+        thesel ='';
+    }
+
+	var Title = prompt(email_title, thesel);
+
+if (!Title) Title = emailAddress;
+
+	doInsert("[EMAIL="+emailAddress+"]"+Title+"[/EMAIL]", "", false);
+}
+function image_upload()
+{
+
+window.open('http://www.mirknig.com/engine/images.php?area=' + selField, '_Addimage', 'HEIGHT=500,resizable=yes,scrollbars=yes,WIDTH=550');    
+
+}
+//--------------------------------------------
+// GENERAL INSERT FUNCTION
+//--------------------------------------------
+// ibTag: opening tag
+// ibClsTag: closing tag, used if we have selected text
+// isSingle: true if we do not close the tag right now
+// return value: true if the tag needs to be closed later
+
+//
+
+function doInsert(ibTag, ibClsTag, isSingle)
+{
+	var isClose = false;
+	var obj_ta = eval('fombj.'+ selField);
+
+	//----------------------------------------
+	// It's IE!
+	//----------------------------------------
+	if ( (ua_vers >= 4) && is_ie && is_win)
+	{
+		if (obj_ta.isTextEdit)
+		{
+			obj_ta.focus();
+			var sel = document.selection;
+			var rng = sel.createRange();
+			rng.colapse;
+			if((sel.type == "Text" || sel.type == "None") && rng != null)
+			{
+				if(ibClsTag != "" && rng.text.length > 0)
+					ibTag += rng.text + ibClsTag;
+				else if(isSingle)
+					isClose = true;
+	
+				rng.text = ibTag;
+			}
+		}
+		else
+		{
+			if(isSingle)
+			{
+				isClose = true;
+			}
+			
+			obj_ta.value += ibTag;
+		}
+	}
+	//----------------------------------------
+	// It's MOZZY!
+	//----------------------------------------
+	
+	else if ( obj_ta.selectionEnd )
+	{ 
+		var ss = obj_ta.selectionStart;
+		var st = obj_ta.scrollTop;
+		var es = obj_ta.selectionEnd;
+		
+		if (es <= 2)
+		{
+			es = obj_ta.textLength;
+		}
+		
+		var start  = (obj_ta.value).substring(0, ss);
+		var middle = (obj_ta.value).substring(ss, es);
+		var end    = (obj_ta.value).substring(es, obj_ta.textLength);
+		
+		//-----------------------------------
+		// text range?
+		//-----------------------------------
+		
+		if (obj_ta.selectionEnd - obj_ta.selectionStart > 0)
+		{
+			middle = ibTag + middle + ibClsTag;
+		}
+		else
+		{
+			middle = ibTag + middle;
+			
+			if (isSingle)
+			{
+				isClose = true;
+			}
+		}
+		
+		obj_ta.value = start + middle + end;
+		
+		var cpos = ss + (middle.length);
+		
+		obj_ta.selectionStart = cpos;
+		obj_ta.selectionEnd   = cpos;
+		obj_ta.scrollTop      = st;
+
+
+	}
+	//----------------------------------------
+	// It's CRAPPY!
+	//----------------------------------------
+	else
+	{
+		if (isSingle)
+		{
+			isClose = true;
+		}
+		
+		obj_ta.value += ibTag;
+	}
+	
+	obj_ta.focus();
+
+	return isClose;
+}		
+-->
+</script>
+
+<input class="bbcodes" title="Полужирный" style="width: 30px; font-weight: bold;" accesskey="b" onclick="simpletag('B')" value=" B " name="B" type="button">
+<input class="bbcodes" title="Наклонный текст" style="width: 30px; font-style: italic;" accesskey="i" onclick="simpletag('I')" value=" I " name="I" type="button">
+<input class="bbcodes" title="Подчеркнутый текст" style="width: 30px; text-decoration: underline;" accesskey="u" onclick="simpletag('U')" value=" U " name="U" type="button">            
+<input class="bbcodes" title="Зачеркнутый текст" style="width: 30px;" accesskey="s" onclick="simpletag('S')" value=" S " name="S" type="button">
+<input class="bbcodes" title="По центру" style="width: 80px;" accesskey="c" onclick="simpletag('CENTER')" value="По центру" name="CENTER" type="button">
+
+<select class="bbcodes" onchange="alterfont(this.options[this.selectedIndex].value, 'COLOR')" name="fcolor">
+    <option class="bbcodes" value="0" selected="selected">ЦВЕТ</option>
+    <option class="bbcodes" style="color: blue;" value="blue">Синий</option>
+    <option class="bbcodes" style="color: red;" value="red">Красный</option>
+    <option class="bbcodes" style="color: purple;" value="purple">Фиолетовый</option>
+    <option class="bbcodes" style="color: orange;" value="orange">Оранжевый</option>
+    <option class="bbcodes" style="color: yellow;" value="yellow">Жёлтый</option>
+    <option class="bbcodes" style="color: gray;" value="gray">Серый</option>
+    <option class="bbcodes" style="color: green;" value="green">Зелёный</option>
+</select>&nbsp;<a class="main" title="Закрыть все открытые теги" href="javascript:closeall();">Закрыть всё</a><br>
+<input class="bbcodes" title="Вставка ссылки" style="width: 80px;" accesskey="h" onclick="tag_url()" value="Ссылка" name="url" type="button">
+<input class="bbcodes" title="Скрытый текст" style="width: 80px;" accesskey="h" onclick="simpletag('HIDE')" value="HIDE" name="HIDE" type="button">
+<input class="bbcodes" title="Вставка email" style="width: 80px;" accesskey="e" onclick="tag_email()" value="E-Mail" name="email" type="button">
+<input class="bbcodes" title="Вставка цитаты" style="width: 75px;" accesskey="q" onclick="simpletag('QUOTE')" value=" Цитата " name="QUOTE" type="button">
+<input class="bbcodes" title="Вставка разрыва между страницами" style="width: 75px;" accesskey="p" onclick="pagebreak()" value="Разрыв" name="CODE" type="button"><textarea name="comments" style="border: 1px solid rgb(224, 224, 224); width: 425px; height: 160px; font-family: verdana; font-size: 11px;"></textarea><br><input name="submit" src="Info_files/send.png" type="image"><table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td class="newsbody" bgcolor="#fdfdfd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td><td class="newsbody" bgcolor="#fdfdfd"><div class="nav" align="right"></div></td></tr></tbody></table></td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr><tr><td valign="top" width="14"><img alt="" src="Info_files/8_002.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_002.gif" border="0" height="12" width="14"></td></tr></tbody></table><br>
+	<input name="subaction" value="addcomment" type="hidden">
+	<input name="post_id" value="488" type="hidden"></form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" width="100%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tbody><tr><td align="center" valign="top" width="14"><img alt="" src="Info_files/1.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/2.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/3.gif" border="0" height="12" width="14"></td></tr><tr><td style="background-image: url(/templates/Lite/images/4.gif);" width="14"></td><td><div align="center"><b class="addnews"></b></div></td>
+
+<td style="background-image: url(/templates/Lite/images/6.gif);" width="14"></td>
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+
+<td style="background-image: url(/templates/Lite/images/4.gif);" height="49" width="14"></td>
+
+<td>
+<div style="padding-top: 5px; padding-left: 21px;">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td align="center"><center>
+
+<script language="JavaScript"> var loc = ''; </script>
+<script language="JavaScript1.4">try{ var loc = escape(top.location.href); }catch(e){;}</script>
+<script language="JavaScript">document.write("<sc"+"ript language='JavaScript' src='http://ad3.bannerbank.ru/bb.cgi?cmd=ad&hreftarget=_blank&pubid=121217723&pg=1&r=js&ssi=nofillers&vbn=452&num=1&w=468&h=60&&ref="+escape(document.referrer)+"&loc="+loc+"&nocache="+Math.round(Math.random()*999111)+"'>\n</sc"+"ript>");</script><script language="JavaScript" src="Info_files/bb_002.js">
+</script><a target="_blank" href="http://ad3.bannerbank.ru/bb.cgi?cmd=go&amp;r=r_ssi&amp;vbn=452&amp;pac=121217723&amp;pnm=1&amp;bac=125395303&amp;bnm=1&amp;ref=http%3A%2F%2Fwww%2Emirknig%2Ecom%2Fcategory%2Fprogramming%2Fpage%2F7%2F&amp;loc=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml&amp;htr=http%3A%2F%2Fwww%2Emirknig%2Ecom%2F2006%2F02%2F19%2Fbuch%5Fg%5Fobektnoorientirovannyjj%5Fanaliz%5Fi%5Fproektirovanie%5Fs%5Fprimerami%5Fprilozhenijj%5Fna%5Fs%2Ehtml"><img src="Info_files/125395303_1.gif" alt="JBE.RU 468 - реклама в интернет" title="JBE.RU 468 - реклама в интернет" border="0" height="60" width="468"></a>
+
+
+<center><font size="1"><a href="http://www.jbe.ru/" target="_top">JBE.ru - баннерная сеть</a></font></center>
+
+</center>
+</td>
+</tr>
+</tbody></table>
+</div>
+
+
+</td><td style="background-image: url(/templates/Lite/images/6.gif);" width="10"></td></tr>
+
+<tr><td valign="top" width="14"><img alt="" src="Info_files/8_002.gif" border="0" height="12" width="14"></td><td style="background-image: url(/templates/Lite/images/10.gif);" valign="top" width="100%"></td><td valign="top" width="14"><img alt="" src="Info_files/9_002.gif" border="0" height="12" width="14"></td></tr></tbody></table>
+
+</td>
+
+
+
+
+
+
+
+<!--Низ сайта-->
+
+
+
+</tr></tbody></table><table style="background-image: url(/templates/Lite/images/bg2.gif); height: 50px;" align="center" border="0" cellpadding="0" cellspacing="0" width="997"><tbody><tr><td align="center" width="260"><font color="#000000" face="Verdana, Arial, Helvetica, sans-serif" size="1">&nbsp; ©mirknig.com 2005-2006 <br>&nbsp; Powered by <a href="http://pc-soft.ru/" target="_blank">DataLife</a></font></td><td height="23" width="500">
+
+
+<!--Счетчики--> 
+
+
+
+
+
+<!-- Яндекс -->
+<a href="http://www.yandex.ru/cy?base=0&amp;host=www.mirknig.com" target="_blank"><img src="Info_files/cycounter.gif" alt="Яндекс цитирования" border="0" height="31" width="88"></a>
+<!-- /Яндекс -->
+
+
+
+<!-- HotLog -->
+
+<script type="text/javascript" language="javascript">
+hotlog_js="1.0";
+hotlog_r=""+Math.random()+"&s=385012&im=33&r="+escape(document.referrer)+"&pg="+
+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+</script>
+<script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")
+</script>
+<script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2";
+hotlog_r+="&wh="+screen.width+'x'+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?
+screen.colorDepth:screen.pixelDepth)</script>
+<script type="text/javascript" language="javascript1.3">hotlog_js="1.3"</script>
+<script type="text/javascript" language="javascript">hotlog_r+="&js="+hotlog_js;
+document.write("<a href='http://click.hotlog.ru/?385012' target='_top'><img "+
+" src='http://hit19.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&' border=0 width=88 height=31 alt=HotLog><\/a>")
+</script><a href="http://click.hotlog.ru/?385012" target="_top"><img src="Info_files/count.gif" alt="HotLog" border="0" height="31" width="88"></a>
+<noscript>
+<a href="http://click.hotlog.ru/?385012" target="_top"><img
+src="http://hit19.hotlog.ru/cgi-bin/hotlog/count?s=385012&amp;im=33"
+border=0 width=88 height=31 alt="HotLog"></a>
+</noscript>
+
+<!-- /HotLog -->
+
+
+
+
+<!--LiveInternet counter-->
+
+<script type="text/javascript"><!--
+document.write('<a href="http://www.liveinternet.ru/click" '+
+'target=_blank><img src="http://counter.yadro.ru/hit?t58.3;r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';'+Math.random()+
+'" alt="" title="LiveInternet" '+
+'border=0 width=88 height=31><\/a>')//--></script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="Info_files/hit.gif" alt="" title="LiveInternet" border="0" height="31" width="88"></a>
+
+<!--/LiveInternet-->
+
+
+
+
+<!--Rating@Mail.ru COUNTEr-->
+
+<script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script><script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=1103645"'+
+' target=_top><img src="http://d7.cd.b0.a1.top.list.ru/counter'+
+'?id=1103645;t=230;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=31 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=1103645" target="_top"><img src="Info_files/counter.gif" alt="Рейтинг@Mail.ru" border="0" height="31" width="88"></a><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=1103645"><img
+src="http://d7.cd.b0.a1.top.list.ru/counter?js=na;id=1103645;t=230"
+border=0 height=31 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//-->
+
+<!--/COUNTER-->
+
+
+
+<!--begin of Top100 logo-->
+<a href="http://top100.rambler.ru/top100/">
+<img src="Info_files/banner-88x31-rambler-gray2.gif" alt="Rambler's Top100" border="0" height="31" width="88"></a>
+<!--end of Top100 logo -->
+
+
+
+
+
+
+</td></tr><tr><td style="background-image: url(/templates/Lite/images/line.gif);" colspan="2" height="20"></td></tr></tbody></table>
+
+
+
+
+
+
+
+</td></tr></tbody></table><center><a href="http://www.spbpresent.ru/" target="_blank">корпоративные мероприятия</a><a href="http://www.restate.ru/" target="_blank">новости недвижимость Санкт-Петербурга</a> <a href="http://www.restate.ru/monitoring_results.html?id=14" target="_blank">СПб КАД Кольцевая автодорога Санкт-Петербурга</a>, <a href="http://www.restate.ru/currency.html" target="_blank">Курсы обмена валют ЦБ курс доллара евро архив информер</a><a href="http://www.spbpresent.ru/" target="_blank">корпоративные вечеринки</a></center><br>
+<ul class="ML"></ul>
+
+<!-- DataLife Engine v.3.3 SoftNews Media Group (http://pc-soft.ru) -->
+</body></html>
