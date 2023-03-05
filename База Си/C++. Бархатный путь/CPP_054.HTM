@@ -1,0 +1,137 @@
+<html><head>
+<title>Директива препроцессора define</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Директива препроцессора define</h4>
+<p align=justify>Директива define позволяет связать идентификатор (мы будем называть этот идентификатор замещаемой частью) с лексемой (возможно, что пустой!) или последовательностью лексем (строка символов является лексемой, заключённой в двойные кавычки), которую называют строкой замещения или замещающей частью директивы define.
+<p align=justify>Например,
+<pre>#define PI 3.14159</pre>
+<p align=justify>Идентификаторы, которые используют для представления констант, называют объявленными или символическими константами. Например, последовательность символов, располагаемая после объявленной константы PI, объявляет константу 3.14159. Препроцессор заменит в оставшейся части программы все отдельно стоящие вхождения идентификатора PI на лексему, которую транслятор будет воспринимать как плавающий литерал 3.14159.
+<p align=justify>Препроцессор выполняет грубую предварительную работу по замене замещаемых идентификаторов замещающими строками. В этот момент ещё ничего не известно об именах, поскольку транслятор фактически ещё не начинал своей работы. А потому следует следить за тем, чтобы замещаемые идентификаторы входили в состав объявлений лишь как элементы инициализаторов.
+<p align=justify>Рассмотрим несколько примеров. Директива препроцессора
+<pre>#define PI 3.14159</pre>
+<p align=justify>Превращает корректное объявление
+<pre>float PI;</pre>
+<p align=justify>в синтаксически некорректную конструкцию
+<pre>float 3.14159;</pre>
+<p align=justify>А следующее определение правильное.
+<pre>float pi = PI;</pre>
+<p align=justify>После препроцессирования оно принимает такой вид:
+<pre>float pi = 3.14159;</pre>
+<p align=justify>Сначала препроцессор замещает, затем транслятор транслирует. И потому здесь будет зафиксирована ошибка:
+<pre>#define PI 3.14 0.00159
+float pi = PI;</pre>
+<p align=justify>После препроцессирования объявление принимает такой вид:
+<pre>float pi = 3.14 0.00159;</pre>
+<p align=justify>А здесь - всё корректно:
+<pre>#define PI 3.14 + 0.00159
+float pi = PI;</pre>
+<p align=justify>После препроцессирования получается правильное объявление с инициализацией:
+<pre>float pi = 3.14 + 0.00159;</pre>
+<p align=justify>Строка замещения может оказаться пустой.
+<pre>#define ZZZ</pre>
+<p align=justify>В этом случае оператор-выражение
+<pre>ZZZ;</pre>
+<p align=justify>и ещё более странные конструкции
+<pre>ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ ZZZ;</pre>
+<p align=justify>превращаются препроцессором в пустой оператор. Это лишь побочный эффект работы препроцессора. У макроопределений с пустой строкой замещения имеется собственная область пременения.
+<p align=justify>Строка замещения может располагаться на нескольких строках. При этом символ '\' уведомляет препроцессор о необходимости включения в состав строки замещения текста, располагаемого на следующей стоке. Признаком завершения многострочного определения является символ конца строки:
+<pre>#define TEXT "1234567890-=\
+йцукенгшщзхъ\"</pre>
+<p align=justify>В ходе препроцессорной обработки вхождения идентификатора TEXT заменяются на строку замещения:
+<pre>1234567890-= йцукенгшщзхъ\</pre>
+<p align=justify>Макроопределения define могут быть вложенными:
+<pre>#include &lt;iostream.h&gt;
+#define WHISKEY "ВИСКИ с содовой."
+#define MARTINI "МАРТИНИ со льдом и " WHISKEY
+void main() {cout &lt;&lt; MARTINI;}</pre>
+<p align=justify>В результате выполнения последнего оператора выводится строка
+<pre>МАРТИНИ со льдом и ВИСКИ с содовой.</pre>
+<p align=justify>После каждого расширения препроцессор возвращается к началу файла, переходит к очередному макроопределению и повторяет процесс преобразования макроопределений. Препроцессорные замены не выполняются внутри строк, символьных констант и комментариев. При этом в замещающей части не должно быть вхождений замещаемой части макроопределения.
+<p align=justify>Так что макроопределение
+<pre>#define WHISKEY "стаканчик ВИСКИ " WHISKEY</pre>
+<p align=justify>обречено на неудачу.
+<p align=justify>В макроопределениях может встречаться несколько макроопределений с одной и той же замещаемой частью. При этом следует использовать в тексте программы директиву препроцессора
+<pre>#undef <u>ИмяЗамещаемойЧасти</u></pre>
+<p align=justify>Эта инструкция прекращает действие препроцессора по замене соответствующего идентификатора.
+<pre>#define PI 3.14 + 0.00159
+float pi1 = PI;
+#undef PI
+#define PI 3.14159
+float pi2 = PI;</pre>
+<center>
+<p><font size="-1"><a href="CPP_053.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_055.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

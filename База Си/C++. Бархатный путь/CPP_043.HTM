@@ -1,0 +1,91 @@
+<html><head>
+<title>Константные выражения</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Константные выражения</h4>
+<pre><u>КонстантноеВыражение</u> ::= <u>УсловноеВыражение</u></pre>
+<p align=justify>В ряде случаев C++ требует, чтобы вычисляемое значение выражения было целочисленной константой. Это относится к границам массивов, размерам битовых полей, значениям инициализаторов элементов перечисления. Константные выражения представляют собой неизменяемые целочисленные значения. Они строятся на основе литералов, элементов перечисления (о них речь впереди), проинициализированных целочисленных констант, выражений, построенных на основе операции sizeof.
+<p align=justify>Константное выражение не меняет своего значения. Поэтому константное выражение не может быть именем переменной или выражением, которое включает имя переменной.
+<p align=justify>Константные выражения вычисляются на стадии трансляции, а потому в константном выражении не могут использоваться функции, объекты классов, указатели, ссылки, операция запятая и операция присваивания.
+<p align=justify>Константное выражение может состоять из литералов, имён констант, элементов перечисления (о них позже), может содержать символы арифметических операций, которые связывают константные выражения.
+<p align=justify>Основное назначение константного выражения в C++ - фиксация значений ограниченного множества значений, предназначенных для организации управленния процессом выполнения программы, задание предопределённых характеристик объектов (например, размер массива). Управление выполнением и характеристика размерности не требует особой точности. Органы управленния должны быть максимально простыми, количество элементов и длина в байтах задаются целочисленными значениями. Здесь нет проблем, связанных с точностью вычисления, здесь достаточно значений интегрального типа.
+<p align=justify>Значение константного выражения определяется уже на стадии трансляции, поскольку размерность массива и метка помеченного оператора в операторе выбора должны быть известны до начала выполнения программы. А это ещё один аргумент в пользу запрещения включения в константное выражение вызовов функций (на стадии трансляции нет возвращаемых значений).
+<p align=justify>По этой же причине константное выражение не может быть указателем или ссылкой (о ссылках - позже), поскольку всё, что связано с адресами, определяется лишь на этапе выполнения программы.
+<p align=justify>Константное выражение не может содержать операцию присваивания, операции инкрементации и декрементации.
+<p align=justify>А вот операции сравнения, арифметические операции, операция sizeof и, как ни странно, операция запятая не вызывают возражений транслятора (транслятор и считать умеет, и сравнивать, он и размеры определяет, а также понимает, какое значение следует присвоить выражению, содержащему символ операции запятая).
+<center>
+<p><font size="-1"><a href="CPP_042.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_044.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

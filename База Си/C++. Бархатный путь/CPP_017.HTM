@@ -1,0 +1,180 @@
+<html><head>
+<title>Основные типы C++</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Основные типы C++</h4>
+<p align=justify>Основные типы в C++ подразделяются на две группы: целочисленные типы и типы с плавающей точкой (для краткости их будем называть плавающими типами). Это арифметические типы.
+<p align=justify>В C++ нет жёсткого стандарта на диапазоны значений арифметических типов (в стандарте языка оговариваются лишь минимально допустимые значения). В принципе, эти диапазоны определяются конкретной реализацией. Обычно выбор этих характеристик диктуется эффективностью использования вычислительных возможностей компьютера. Зависимость языка от реализации создаёт определённые проблемы переносимости. C++ остаётся машинно-зависимым языком.
+<p align=justify>К целочисленным типам относятся типы, представленные следующими именами основных типов:
+<pre>
+char
+short
+int
+long
+</pre>
+<p align=justify>Имена целочисленных типов могут использоваться в сочетании с парой модификаторов типа:
+<pre>
+signed
+unsigned
+</pre>
+<p align=justify>Эти модификаторы изменяют формат представления данных, но не влияют на размеры выделяемых областей памяти.
+<p align=justify>Модификатор типа signed указывает, что переменная может принимать как положительные, так и отрицательные значения. Возможно, что при этом самый левый бит области памяти, выделяемой для хранения значения, используется для представления знака. Если этот бит установлен в 0, то значение переменной считается положительным. Если бит установлен в 1, то значение переменной считается отрицательным.
+<p align=justify>Модификатор типа unsigned указывает, что переменная принимает неотрицательные значения. При этом самый левый бит области памяти, выделяемой для хранения значения, используется так же, как и все остальные биты области памяти - для представления значения.
+<p align=justify>В ряде случаев модификаторы типа можно рассматривать как имена основных типов.
+<p align=justify>Здесь также многое определяется конкретной реализацией. В версиях Borland C++ данные типов, обозначаемых как signed, short и int в памяти занимают одно и то же количество байтов.
+<p align=justify>Особое место среди множества основных целочисленных типов занимают перечисления, которые обозначаются ключевым словом enum. Перечисления представляют собой упорядоченные наборы целых значений. Они имеют своеобразный синтаксис и достаточно специфическую область использования. Их изучению будет посвящён специальный раздел.
+<p align=justify>Здесь также многое зависит от реализации. По крайней мере, для Borland C++ 4.5, основные характеристики целочисленных типов выглядят следующим образом:
+<p>
+<center>
+<table cellpadding=5 cellspacing=0 border=1>
+<tr><td>Тип данных</td>	<td>Байты</td>	<td>Биты</td>	<td>Min</td>	<td>Max</td></tr>
+<tr><td>signed char</td>	<td>1</td>	<td>8</td>	<td>- 128</td>	<td>127</td></tr>
+<tr><td>unsigned char</td>	<td>1</td>	<td>8</td>	<td>0</td>	<td>255</td></tr>
+<tr><td>signed short</td>	<td>2</td>	<td>16</td>	<td>-32768</td>	<td>32767</td></tr>
+<tr><td>enum</td>	<td>2</td>	<td>16</td>	<td>-32768</td>	<td>32767</td></tr>
+<tr><td>unsigned short</td>	<td>2</td>	<td>16</td>	<td>0</td>	<td>65535</td></tr>
+<tr><td>signed int</td>	<td>2</td>	<td>16</td>	<td>-32768</td>	<td>32767</td></tr>
+<tr><td>unsigned int</td>	<td>2</td>	<td>16</td>	<td>0</td>	<td>65535</td></tr>
+<td>signed long</td>	<td>4</td>	<td>32</td>	<td>-2147483648</td>	<td>2147483647</td>
+<tr><td>unsigned long</td>	<td>4</td>	<td>32</td>	<td>0</td>	<td>4294967295</td></tr>
+</table>
+</center>
+<p align=justify>К плавающим типам относятся три типа, представленные следующими именами типов, модификаторов и их сочетаний:
+<pre>
+float
+double
+long double
+</pre>
+<p align=justify>Как и ранее, модификатор типа входит в число имён основных типов.
+<p align=justify>Плавающие типы используются для работы с вещественными числами, которые представляются в форме записи с десятичной точкой, так и в "научной нотации". Разница между нотациями становится очевидной из простого примера, который демонстрирует запись одного и того же вещественного числа в различных нотациях.
+<pre>
+297.7
+2.977*10**2
+2.977E2
+</pre>
+<p align=justify>и ещё один пример…
+<pre>
+0.002355
+2.355*10**-3
+2.355E-3
+</pre>
+<p align=justify>В научной нотации слева от символа E записывается мантисса, справа - значение экспоненты, которая всегда равняется показателю степени 10.
+<p align=justify>Для хранения значений плавающих типов в памяти используется специальный формат представления вещественных чисел. Этот формат называется IEEE форматом.
+<p align=justify>Ниже представлены основные характеристики типов данных с плавающей точкой (опять же для Borland C++ 4.5):
+<p>
+<center>
+<table cellpadding=5 cellspacing=0 border=1>
+<tr><td>Тип данных</td>	<td>Байты</td>	<td>Биты</td>	<td>Min</td>	<td>Max</td></tr>
+<tr><td>float</td>	<td>4</td>	<td>32</td>	<td>3.4E-38</td>	<td>3.4E+38</td></tr>
+<tr><td>double</td>	<td>8</td>	<td>64</td>	<td>1.7E-308</td>	<td>1.7E+308</td></tr>
+<tr><td>long double</td>	<td>10</td>	<td>80</td>	<td>3.4E-4932</td>	<td>3.4E+4932</td></tr>
+</table>
+</center>
+<p>Подведём итог.
+<p align=justify>Имена типов данных и их сочетания с модификаторами типов используются для представления данных различных размеров в знаковом и беззнаковом представлении:
+<pre>
+char
+signed char
+unsigned char
+short
+signed short
+unsigned short
+signed
+unsigned
+short int
+signed short int
+unsigned short int
+int
+signed int
+unsigned int
+long
+signed long
+unsigned long
+long int
+signed long int
+unsigned long int
+</pre>
+<p align=justify>Все эти типы образуют множество целочисленных типов. К этому множеству также относятся перечисления.
+<p align=justify>А вот сочетания имён типов и модификаторов для представления чисел с плавающей точкой:
+<pre>
+float
+double
+long double
+</pre>
+<p align=justify>Вот и всё об основных типах. Помимо основных типов в C++ существуют специальные языковые средства, которые позволяют из элементов основных типов создавать новые, так называемые производные типы.
+<center>
+<p><font size="-1"><a href="CPP_016.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_018.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

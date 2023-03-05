@@ -1,0 +1,246 @@
+<html><head>
+<title>Тип функции</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Тип функции</h4>
+<p align=justify>Основными характеристиками функции является тип возвращаемого значения и список типов формальных параметров. Подобно тому, как имена переменных никаким образом не влияют на их тип, имена функций не является частью их типа. Тип функции определяется типом возвращаемого значения и списком типов её формальных параметров. Например, пара функций
+<pre>char MyF1 (int, int, int*, float);
+char MyNew (int MyP1, int MyP2, int* MyP3, float MyP3);</pre>
+<p align=justify>имеют один и тот же тип:
+<pre>char (int, int, int*, float)</pre>
+<p align=justify>Подобную конструкцию мы назовём описанием типа функции.
+<p align=justify>А вот как выглядит описание типа функции, которая возвращает указатель на объект типа char:
+<pre>char * (int, int, int*, float)</pre>
+<p align=justify>Описанию этого типа соответствует, например, функция 
+<pre>char *MyFp (int MyP1, int MyP2, int* MyP3, float MyP3);</pre>
+<p align=justify>Комбинируя знак ptr-операции * с именем функции мы получаем новую языковую конструкцию:
+<pre>char (*MyPt1) (int MyP1, int MyP2, int* MyP3, float MyP3);</pre>
+<p align=justify>Это уже не объявление функции. Это определение указателя на функцию! Это объект со следующими характеристиками:
+	<ul>
+	<li>его имя MyPt1,
+	<li>это указатель на функцию,
+	<li>эта функция должна возвращать значения типа char,
+	<li>список её формальных параметров имеет вид (int,int,int*, float).
+	</ul>
+<p align=justify>Так что это должны быть функции со строго определёнными характеристиками. В нашем случае - это функции типа
+<pre>char (int, int, int*, float)</pre>
+<p align=justify>Описание типа указателя на функцию, возвращающую указатель на объект типа char с параметрами (int, int, int*, float) 
+<pre>char * (int, int, int*, float)</pre>
+<p align=justify>отличается от описания типа этой функции дополнительным элементом (*):
+<pre>char * (*) (int, int, int*, float).</pre>
+<p align=justify>Пример определения подобного указателя:
+<pre>char* (*MyPt2) (int MyP1, int MyP2, int* MyP3, float MyP3);</pre>
+<p align=justify>И опять новый объект:
+	<ul>
+	<li>его имя MyPt2,
+	<li>это указатель на функцию,
+	<li>эта функция должна возвращать указатель на объекты типа char,
+	<li>список её формальных параметров имеет вид (int,int,int*, float).
+	</ul>
+<p align=justify>Также можно определить функцию, которая будет возвращать указатель на объект типа void (то есть просто указатель). Это совсем просто:
+<pre>void * (int)</pre>
+<p align=justify>Описанию этого типа соответствует, например, функция 
+<pre>void *malloc (int size);</pre>
+<p align=justify>Эта функция пытается выделить блок памяти размера size и в случае, если это удалось сделать, возвращает указатель на выделенную область памяти. В противном случае возвращается специальное значение NULL. Как распорядиться выделенной памятью - личное дело программиста. Единственное ограничение заключается в том, что при этом необходимо использовать явное преобразование типа:
+<pre>#include &lt;stdlib.h&gt;
+char *p = NULL;
+void NewMemory ()
+{
+ p = malloc(sizeof(char)*1024);// Этот оператор не пройдёт!
+ p = (char*) malloc(sizeof(char)*1024);
+// Требуется явное преобразование типа.
+}</pre>
+<p align=justify>Имя массива, если к нему не применяется операция индексации, оказывается указателем на первый элемент массива. Аналогично, имя функции, если к нему не применяется операция вызова, является указателем на функцию. В нашем случае ранее объявленная функция под именем MyFp приводится к безымянному указателю типа
+<pre>char * (*) (int, int, int*, float) </pre>
+<p align=justify>К имени функции может быть применена операция взятия адреса. Её применение также порождает указатель на эту функцию. Таким образом, MyFp и &amp;MyFp имеют один и тот же тип. А вот как инициируется указатель на функцию: 
+<pre>char* (*MyPt2) (int, int, int*, float) = MyFp;</pre>
+<p align=justify>Очевидно, что функция MyFp() должна быть к этому моменту не только объявлена, но и определена.
+<p align=justify>Новому указателю на функцию
+<pre>char* (*MyPt3) (int, int, int*, float);</pre>
+<p align=justify>можно также присвоить новое значение.
+<p align=justify>Для этого достаточно использовать ранее определённый и проинициализированный указатель:
+<pre>MyPt3 = MyPt2;</pre>
+<p align=justify>Или адрес ранее определённой функции:
+<pre>MyPt3 = MyFp;</pre>
+<p align=justify>При этом инициализация и присваивание оказываются корректными лишь при условии, что имеет место точное сопоставление списков формальных параметров и списков формальных значений в объявлениях указателей и функций.
+<p align=justify>Для вызова функции с помощью указателя использование операции разыменования не обязательно. Полная форма вызова
+<pre>char* MyPointChar = (*MyPT3)(7,7,NULL,7.7);</pre>
+<p align=justify>имеет краткую эквивалентную форму 
+<pre>char* MyPointChar = MyPT3(7,7,NULL,7.7);</pre>
+<p align=justify>Значением выражения MyPT3 является адрес функции.
+<p align=justify>А вот каким образом описывается массив указателей на функцию:
+<pre>char* (*MyPtArray[3]) (int, int, int*, float);
+Здесь описан массив указателей из 3 элементов. Инициализация массива указателей возможна лишь после объявления трёх однотипных функций:
+extern char* MyFF1 (int, int, int*, float);
+extern char* MyFF2 (int, int, int*, float);
+extern char* MyFF3 (int, int, int*, float);
+char* (*MyPtArray[3]) (int, int, int*, float) = 
+{
+MyFF1,
+MyFF2,
+MyFF3
+}; // Инициализация массива указателей.</pre>
+<p align=justify>Вызов функции (например, MyFF3()) с помощью элемента массива указателей можно осуществить следующим образом:
+<pre>char* MyPointChar = MyPtArray[2](7,7,NULL,7.7);</pre>
+<p align=justify>Указатель на функцию может быть описан как параметр функции:
+<pre>void MonitorF(int,int,int*,float,char*(*)(int,int,int*,float));
+// Торжество абстрактного описателя!</pre>
+<p align=justify>И этому параметру можно присвоить значение (значение по умолчанию):
+<pre>void MonitorF(int,int,int*,float,char*(*)(int,int,int*,float)=MyFF1);</pre>
+<p align=justify>Функция, что используемая для инициализации последнего параметра функция должна быть к моменту инициализации, по крайней мере, объявлена.
+<p align=justify>А вот как может выглядеть определение функции MonitorF:
+<pre>#include &lt;assert.h&gt; 
+/*
+Заголовочный файл, содержащий макроопределение assert.
+Это макроопределение преобразуется в условный оператор if.
+Если в ходе проверки значение условного выражения оказывается
+равным нулю, то происходит прерывание выполнения программы.
+*/
+void MonitorF (
+               int val1,
+               int val2,
+               int* pVal,
+               float fVal,
+               char*(*pParF)(int,int,int*,float)
+              )
+{
+char* pChar;
+assert(pVal != NULL);
+assert(pParF != NULL);
+//Это всего лишь проверка того, не являются ли указатели пустыми...
+pChar = pParF(val1, val2, pVal, fVal);
+}</pre>
+<p align=justify>Возможные варианты вызова этой функции:
+<pre>int MMM;
+int* pIval = &amp;MMM;
+/*
+Указатель pIval используется для инициализации третьего параметра.
+*/
+MMM = 100;
+/*
+ А значение объекту, на который настроен указатель pIval, может быть
+ изменено в любой момент. 
+*/
+MonitorF(9,9,pIval,9.9);
+/*
+При вызове используем значение указателя на функцию, присвоенное последнему
+параметру по умолчанию.
+*/
+MonitorF(11,11,pIval,11.11,MyFF3);
+/* А теперь передаём адрес новой функции.*/</pre>
+<p align=justify>Указатель на функцию может также быть типом возвращаемого значения. Объявление подобной функции требует определённого навыка. Начнём с той части объявления, которая содержит имя функции и список её формальных параметров.
+<pre>ReturnerF(int, int)</pre>
+<p align=justify>Определим теперь тип указателя на функцию, который будет возвращаться функцией ReturnerF(int, int).
+<pre>char* (*)(int,int,int*,float)</pre>
+<p align=justify>Теперь остаётся правильно соединить обе части объявления.
+<pre>char* (*ReturnerF(int, int))(int,int,int*,float);</pre>
+<p align=justify>Получилась такая вот матрёшка. Функция о двух целочисленных параметрах, возвращающая указатель на функцию, которая возвращает указатель на объект типа char и имеет собственный список формальных параметров вида: (int,int,int*,float). Нет предела совершенству!
+<p align=justify>Самое сложное - это объявить прототип подобной функции. Всё остальное очень просто. При определении функции нужно помнить, что она (всего лишь) возвращает указатель на функцию, то есть просто имя функции. Разумеется, эта функция должна быть предварительно объявлена и определена, а её описание должно соответствовать характеристикам функции ReturnerF.
+<p align=justify>Есть такие функции! Здесь их целых три: MyFF1, MyFF2, MyFF3.
+<p align=justify>Приступаем к реализации и параллельно обыгрываем параметры.
+<pre>char* (*ReturnerF(int param1, int param2))(int,int,int*,float)
+{
+char* (*PointF) (int,int,int*,float);
+/*
+Это всего лишь указатель на функцию. Мы можем себе позволить этот пустяк.
+*/
+ if (!param1) return NULL;
+ switch param2
+{
+ case 1:  PointF = MyFF1;  break;
+ case 2:  PointF = MyFF2;  break;
+ case 3:  PointF = MyFF3;  break;
+ default: PointF = NULL;   break;
+}
+ return PointF;
+}</pre>
+<p align=justify>Теперь только вызов! Наша функция возвращает адрес функции. И поэтому самое простое - это вызов функции непосредственно из точки возврата функции ReturnerF:
+<pre>int val1, val2;
+:::::
+MyPointChar = (ReturnerF(val1,val2))(7,7,NULL,7.7);
+Всё было бы хорошо, если бы только не существовала вероятность возвращения пустого указателя. Так что придётся воспользоваться ранее объявленным указателем на функцию, проверять возвращаемое значение и только потом вызывать функцию по означенному указателю. Это не намного сложнее:
+MyPtArray[3] = ReturnerF(val1,val2);
+if (MyPtArray[3])
+                 {MyPointChar = (MyPtArray[3])(7,7,NULL,7.7);}
+                 /* Вот и элемент массива указателей пригодился.*/</pre>
+<p align=justify>Настало время вспомнить о typedef-спецификаторе. С его помощью запись указателя на функцию можно сделать компактнее:
+<pre>typedef char* (*PPFF) (int,int,int*,float);</pre>
+<p align=justify>Здесь надо представлять всё ту же матрёшку. Замещающий идентификатор PPFF располагается внутри определяемого выражения. И вот новое объявление старой функции.
+<pre>PPFF ReturnerF(int, int);</pre>
+<p align=justify>В процессе трансляции будет восстановлен исходный вид объявления.
+<center>
+<p><font size="-1"><a href="CPP_062.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_064.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

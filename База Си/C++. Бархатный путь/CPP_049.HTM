@@ -1,0 +1,128 @@
+<html><head>
+<title>Массивы. Синтаксис объявления</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Массивы. Синтаксис объявления</h4>
+<p align=justify>Рассмотрим новые формы Бэкуса-Наура, которые дополняют уже известные понятия описателя и инициализатора.
+<pre>
+<u>Объявление</u> ::= [<u>СписокСпецификаторовОбъявления</u>] [<u>СписокОписателей</u>];
+<u>Описатель</u> ::= <u>Описатель</u> [<u>Инициализатор</u>]
+<u>Описатель</u> ::= <u>Описатель</u>[[<u>КонстантноеВыражение</u>]]
+          ::= *****
+<u>Инициализатор</u> ::= = {<u>СписокИнициализаторов</u> [,]}
+<u>СписокИнициализаторов</u> ::= <u>Выражение</u>
+                      ::= <u>СписокИнициализаторов</u>, <u>Выражение</u>
+                      ::= {<u>СписокИнициализаторов</u> [,]}
+</pre>
+<p align=justify>Теперь мы располагаем набором синтаксических средств для объявления массивов. Массивы представляют собой производные типы (указатели также относятся к производным типам).
+<p align=justify>Объект типа "массив элементов заданного типа" представляет последовательность объектов этого самого типа, объединённых одним общим именем. Количество элементов массива является важной характеристикой самого массива, но не самого типа. Эта характеристика называется размерностью массива.
+<p align=justify>Приведём примеры объявления и определения массивов.
+<pre>extern int intArray_1[];</pre>
+<p align=justify>Объявлен (именно объявлен - об этом говорит спецификатор extern) массив типа int, имя массива - intArray_1, разделители [] указывают на то, что перед нами объявление массива.
+<pre>int intArray_2[10];</pre>
+<p align=justify>А это уже определение массива. Всё тот же тип int, имя массива - intArray, между разделителями [ и ] находится константное выражение, значение которого определяет размерность массива.
+<p align=justify>Требование синтаксиса по поводу константного выражения между разделителями в определении массива может быть объяснено лишь тем, что информация о количестве элементов массива требуется до момента начала выполнения программы.
+<pre>int intArray_3[] = {1,2,3}; // Это также определение массива.</pre>
+<p align=justify>Количество элементов массива становится известным транслятору при анализе инициализатора. Элементам массива присваиваются соответствующие значения из списка инициализаторов.
+<p align=justify>Ещё одна форма определения массива:
+<pre>int intArray_4[3] = {1,2,3};</pre>
+<p align=justify>В этом определении массива важно, чтобы количество элементов в инициализаторе массива не превышало значение константного выражения в описателе массива.
+<p align=justify>В результате выполнения этого оператора в памяти выделяется область, достаточная для размещения трёх объектов-представителей типа int. Участку присваивается имя intArray_4. Элементы инициализируются значениями, входящими в состав инициализатора.
+<p align=justify>Возможна частичная инициализация массива. При этом значения получают первые элементы массива:
+<pre>int intArray_5[3] = {1,2};</pre>
+<p align=justify>В этом определении массива означены лишь первые два элемента массива. Значение последнего элемента массива в общем случае не определено.
+<p align=justify>Здесь нужно отметить одну интересную особенность синтаксиса инициализатора массива. Речь идёт о необязательной запятой в конце списка инициализаторов. По-видимому, её назначение заключается в том, чтобы указывать на факт частичной инициализации массива.
+<p align=justify>Действительно, последний вариант (частично) инициализирующего оператора определения массива выглядит нагляднее:
+<pre>int intArray_5[3] = {1,2,};</pre>
+<p align=justify>Последняя запятая предупреждает о факте частичной инициализации массива. Затраты на связывание запятой в конце списка инициализаторов со строго определённым контекстом частичной инициализации оказываются столь значительными, что последняя запятая традиционно (по крайней мере со времени выхода "Справочного руководства по языку программирования C++") оказывается всего лишь необязательным элементом любой (в том числе и полной) инициализации.
+<pre>
+int intArray_6[3] = {1,2,3};
+int intArray_6[3] = {1,2,3,};// Полная инициализация с запятой…
+int intArray_6[] = {1,2,3};
+int intArray_6[] = {1,2,3,};
+</pre>
+<p align=justify>Между этими операторами не существует никакой разницы.
+<p align=justify>А вот в таком контексте
+<pre>
+int intArray_6[3] = {1,2,};
+                // Частичная инициализация массива из трёх элементов…
+</pre>
+<p align=justify>Последняя запятая в фигурных скобках - не более как полезное украшение. Что-то недосказанное таится в таком операторе присвоения…
+<pre>int intArray_7[];</pre>
+<p align=justify>А вот это некорректное объявление. Без спецификатора extern транслятор воспринимает это как ошибку. В скором времени мы обсудим причину этого явления.
+<center>
+<p><font size="-1"><a href="CPP_048.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_050.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

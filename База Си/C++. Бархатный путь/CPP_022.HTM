@@ -1,0 +1,107 @@
+<html><head>
+<title>Класс памяти</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Класс памяти</h4>
+<p align=justify>Класс памяти определяет порядок размещения объекта в памяти. Различают автоматический и статический классы памяти. C++ располагает четырьмя спецификаторами класса памяти:
+<pre>
+auto
+register
+static
+extern
+</pre>
+<p align=justify>по два для обозначения принадлежности к автоматическому и статическому классам памяти.
+<p align=justify>В свою очередь, статический класс памяти может быть локальным (внутренним) или глобальным (внешним).
+<p align=justify>Следующая таблица иллюстрирует иерархию классов памяти.
+<p>
+<center>
+<table cellpadding=5 cellspacing=0 border=1>
+<tr><td colspan=2>Динамический класс памяти</td>	<td colspan=2>Статический класс памяти</td></tr>
+<tr><td>Автоматический</td>	<td>Регистровый</td>	<td>Локальный</td>	<td>Глобальный</td></tr>
+<tr><td>auto</td>	<td>register</td>	<td>static</td>	<td>Extern</td></tr>
+</table>
+</center>
+<p align=justify>Спецификаторы позволяют определить класс памяти определяемого объекта:
+	<ul>
+	<li><tt>auto.</tt> Этот спецификатор автоматического класса памяти указывает на то, что объект располагается в локальной (или автоматически распределяемой) памяти. Он используется в операторах объявления в теле функций, а также внутри блоков операторов. Объекты, имена которых объявляются со спецификатором auto, размещаются в локальной памяти непосредственно перед началом выполнения функции или блока операторов. При выходе из блока или при возвращении из функции (о механизмах вызова функций и возвращения из них речь ещё впереди), соответствующая область локальной памяти освобождается и все ранее размещённые в ней объекты уничтожаются. Таким образом спецификатор влияет на время жизни объекта (это время локально). Спецификатор auto используется редко, поскольку все объекты, определяемые непосредственно в теле функции или в блоке операторов и так по умолчанию располагаются в локальной памяти. Вне блоков и функций этот спецификатор не используется.
+	<li><tt>register.</tt> Ещё один спецификатор автоматического класса памяти. Применяется к объектам, по умолчанию располагаемым в локальной памяти. Представляет из себя "ненавязчивую просьбу" к транслятору (если это возможно) о размещении значений объектов, объявленных со спецификатором register в одном из доступных регистров, а не в локальной памяти. Если по какой-либо причине в момент начала выполнения кода в данном блоке операторов регистры оказываются занятыми, транслятор обеспечивает с этими объектами обращение, как с объектами класса auto. Очевидно, что в этом случае объект располагается в локальной области памяти.
+	<li><tt>static.</tt> Спецификатор внутреннего статического класса памяти. Применяется только(!) к именам объектов и функций. В C++ этот спецификатор имеет два значения. Первое означает, что определяемый объект располагается по фиксированному адресу. Тем самым обеспечивается существование объекта с момента его определения до конца выполнения программы. Второе значение означает локальность. Объявленный со спецификатором static локален в одном программном модуле (то есть, недоступен из других модулей многомодульной программы) или в классе (о классах - позже). Может использоваться в объявлениях вне блоков и функций. Также используется в объявлениях, расположенных в теле функций и в блоках операторов.
+	<li><tt>extern.</tt> Спецификатор внешнего статического класса памяти. Обеспечивает существование объекта с момента его определения до конца выполнения программы. Объект, объявленный со спецификатором extern доступен во всех модулях программы, то есть глобален.
+	</ul>
+<p align=justify>Выбор класса памяти, помимо явных спецификаторов, зависит от размещения определения или объявления в тексте программы. Модуль, функция, блок могут включать соответствующие операторы объявления или определения, причём всякий раз определяемый объект будет размещаться в строго определённых областях памяти.
+<center>
+<p><font size="-1"><a href="CPP_021.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_023.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

@@ -1,0 +1,246 @@
+<html><head>
+<title>Функции operator new() и operator delete()</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Функции operator new() и operator delete()</h4>
+<p align=justify>Время жизни объекта определяется областью действия его имени. В зависимости от расположения оператора определения объекта, он может располагаться в глобальном или локальном сегменте памяти. При определении глобального объекта соответствующие конструкторы объявляются со спецификатором public, поскольку они должны быть доступны фактически до начала выполнения программы. Глобальные объекты существуют в течение всего времени выполнения программы.
+<p align=justify>Локальные объекты создаются в соответствующих сегментах памяти в ходе выполнения операторов определения, после передачи управления в функцию или вложенный блок операторов. По возвращении из вложенного блока или функции, имя объекта оказывается вне области действия имени. Сам же объект уничтожается в момент освобождения соответствующего сегмента памяти. Важная роль при этом отводится деструкторам.
+<p align=justify>Можно избежать преждевременной гибели объекта, расположив его в динамической памяти. В этом случае память для объекта выделяется с помощью выражения размещения. Значением этого выражения является адрес области памяти, выделенной для размещения объекта в результате выполнения выражения. Очевидно, что это значение можно присвоить переменной типа указатель на объект данного класса.
+<p align=justify>Динамическая память не опустошается автоматически. "Гибель" локального указателя, настроенного на выделенную область динамической памяти означает всего лишь потерю доступа к этой области памяти. В этом случае уничтожается указатель, но освобождения памяти не происходит.
+<p align=justify>Для освобождения памяти используется операция (операторная функция) delete. Подобно операторной функции new, delete также является статическим членом класса.
+<p align=justify>В контексте выражений размещения и удаления могут быть использованы стандартные операции C++ new и delete, а может быть обеспечен вызов операторных функций operator new и operator delete.
+<p align=justify>Согласно грамматике C++, основным операндом для символа операции new в выражении размещения является заключённое в круглые скобки <u>ИмяТипа</u>, либо <u>ИмяТипаNew</u> (без скобок), которое разворачивается в конструкцию, содержащую информацию о размерах размещаемого массива (константные выражения в квадратных скобках):
+<pre>
+<u>ВыражениеРазмещения</u>
+              ::= [::] new [<u>Размещение</u>] <u>ИмяТипаNew</u> [<u>ИнициализаторNew</u>]
+              ::= [::] new [<u>Размещение</u>] (<u>ИмяТипа</u>) [<u>ИнициализаторNew</u>]
+<u>ИмяТипаNew</u> ::= <u>СписокСпецификаторовТипа</u> [<u>ОписательNew</u>]
+<u>ОписательNew</u> ::= [<u>СписокCVОписателей</u>] [<u>ОписательNew</u>]
+             ::= [<u>ОписательNew</u>] [<u>Выражение</u>]
+             ::= *****
+</pre>
+<p align=justify>При этом можно определить несколько различных вариантов операторной функции operator new. Перегруженные операторные функции будут различаться списками параметров. В C++ предусмотрены специальные средства передачи значений параметров подобным перегруженным операторным функциям. С этой целью используется так называемое <u>Размещение</u>, которое является необязательным составным элементом выражения размещения. Заключённый в круглые скобки список выражений располагается в выражении размещения непосредственно перед именем операторной функции new.
+<p align=justify>Мы объявляем простой класс, содержащий определения операторных функций распределения динамической памяти. И размещаем это объявление в заголовочном файле с именем TypeX.h.
+<pre>
+// TypeX.h
+#ifndef TYPEX
+#define TYPEX
+/*
+Инструкции препроцессора используются для предотвращения многократного
+объявления класса в программном модуле.
+Даже если в исходном файле появится несколько инструкций препроцессора,
+обеспечивающих включение заголовочного файла TypeX.h, в исходном файле
+окажется всего лишь одно объявление класса TypeX.
+*/
+// Объявление класса TypeX.
+class TypeX
+{
+ public:
+/* Встроенный конструктор */
+ TypeX() { cout &lt;&lt; "Это TypeX()" &lt;&lt; endl; }
+/* Встроенный конструктор с параметром */
+ TypeX(int x) { cout &lt;&lt; "Это TypeX(" &lt;&lt; x &lt;&lt; ")" &lt;&lt; endl; }
+/* Встроенный деструктор */
+ ~TypeX() { cout &lt;&lt; "Это ~TypeX()" &lt;&lt; endl; }
+/* Встроенная операторная функция operator new() */
+ void *operator new(size_t size)
+ {
+ cout &lt;&lt; "Это void *operator new(" &lt;&lt; size &lt;&lt; ")" &lt;&lt; endl;
+ return new char(size);
+ }
+/* Операторная функция operator new() с дополнительным параметром */
+ void *operator new(size_t size, int xPar)
+ {
+ cout &lt;&lt; "void *operator new(" &lt;&lt; size &lt;&lt; "," &lt;&lt; xPar &lt;&lt; ")" &lt;&lt; endl;
+ return new char(size);
+ }
+/* Встроенная операторная функция operator delete() */
+ void operator delete(void *cPoint, size_t size)
+ {
+  cout &lt;&lt; "Это void operator delete("  &lt;&lt; size &lt;&lt; ")" &lt;&lt; endl;
+  if (cPoint) delete cPoint;
+ };
+};
+#endif
+</pre>
+<p align=justify>Сложная семантика выражений C++ проявляется на простых примерах. Небольшие программы позволят выявить принципиальные моменты алгоритмов трансляции, свойства операций динамического распределения памяти, особенности операторных функций operator new() и operator delete(). В программе следует обратить внимание на второе выражение размещения, которое позволяет активизировать конструктор с параметрами.
+<pre>
+#include &lt;iostream.h&gt;
+#include "TypeX.h"
+void main()
+{
+ TypeX *xPoint = NULL, *xPointP = NULL, *xxPointP = NULL;
+ xPoint  = new TypeX;
+ xPointP = new TypeX(25);
+// Выражение размещения может содержать параметры.
+// Так осуществляется управление конструктором.
+ xxPointP = new (125+25) TypeX(50);
+// Выражение размещения может включать размещение.
+// Этот одноэлементный список выражений обеспечивает передачу
+// значений параметров операторной функции operator new.
+// Альтернативные формы вызова операторных функций:
+// ИмяТипа в круглых скобках.
+// xPoint  = new (TypeX);
+// xPointP = new (TypeX)(25);
+// xxPointP = new (125+25) (TypeX)(50);
+ delete  xPoint;
+ delete  xPointP;
+ delete xxPointP;
+ cout &lt;&lt; "OK" &lt;&lt; endl;
+}
+</pre>
+<p align=justify>В ходе трансляции распознаются выражения размещения и освобождения, и делается всё необходимое для своевременного вызова конструкторов и деструктора. Если к тому же, в объявлении класса обнаружены объявления соответствующих операторных функций, эти выражения преобразуются транслятором в вызовы операторных функций.
+<p align=justify>Так что транслируем, запускаем и наблюдаем результаты:
+<pre>
+Это void *operator new(1)
+Это TypeX()
+Это void *operator new(1)
+Это TypeX(25)
+Это void *operator new(1, 150)
+Это TypeX(50)
+Это ~TypeX()
+Это void operator delete(1)
+Это ~TypeX()
+Это void operator delete(1)
+Это ~TypeX()
+Это void operator delete(1)
+OK
+</pre>
+<p align=justify>В ходе выполнения этой программы на дисплей выводится сообщение о работе операторной функции operator new(), которая вызывается в результате определения значения выражения размещения.
+<p align=justify>После этого, появляется сообщение о работе конструкторов, запуск которых обеспечивается транслятором в результате выполнения выражений размещения.
+<p align=justify>Затем, непосредственно перед выполнением выражения освобождения, выполняется деструктор, о запуске которого также заботится транслятор.
+<p align=justify>Наконец, управление передаётся операторной функции operator delete(). Жизненный цикл безымянных объектов, размещённых в динамической памяти в результате выполнения выражений размещения и адресуемых посредством указателей xPoint и xPointP, завершён.
+<p align=justify>Недоступный и скрытый от программиста механизм запуска конструктора, достаточно сложен. В этом можно убедиться, изменив операторную функцию operator new() в классе TypeX следующим образом:
+<pre>
+/* Встроенная операторная функция operator new() */
+ void *operator new(size_t size)
+ {
+ cout &lt;&lt; "Это void *operator new(" &lt;&lt; size &lt;&lt; ")" &lt;&lt; endl;
+ return NULL;
+ }
+</pre>
+<p align=justify>Новая операторная функция даже не пытается использовать операцию выделения памяти. Она возвращает пустое значение указателя. При этом значением выражения размещения в операторе
+<pre>xPoint = new TypeX;</pre>
+<p align=justify>оказывается нулевой адрес. И в результате запуск конструктора отменяется:
+<pre>
+Это void *operator new(1)
+OK
+</pre>
+<p align=justify>Аналогичным образом работает программный код, который обеспечивает вызов деструктора: непосредственно перед запуском деструктора производится проверка значения указателя.
+<p align=justify>Мы возвращаем операторную функцию к исходному состоянию, после чего подвергнем исходную программу небольшой модификации. Расположим непосредственно перед символами операций new и delete (символ операции не обязательно представляет операцию!) разделители :: (именно разделители, поскольку они служат для модификации операции, а не используются в сочетании с операндами).
+<pre>
+#include &lt;iostream.h&gt;
+#include "TypeX.h"
+void main()
+{
+ TypeX *xPoint = NULL;
+ xPoint = ::new TypeX;
+ ::delete xPoint;
+ cout &lt;&lt; "OK" &lt;&lt; endl;
+}
+</pre>
+<p align=justify>В результате выполнения новой версии нашей программы мы получаем следующий результат:
+<pre>
+Это TypeX()
+Это ~TypeX()
+OK
+</pre>
+<p align=justify>Операторные функции не вызываются, однако память выделяется и производится запуск конструктора, а затем и деструктора.
+<p align=justify>Это означает, что помеченные разделителем :: выражения размещения и освобождения исправно работают, выделяя и освобождая необходимую память. Символы операций ::new и ::delete воспринимаются транслятором как символы собственных "глобальных" операций выделения и освобождения памяти языка C++.
+<p align=justify>К аналогичному результату мы приходим, исключив из объявления класса TypeX объявления операторных функций operator new() и operator delete(). В этом случае перед символами операций new и delete даже не требуется располагать разделители. В этом случае транслятор их однозначно воспринимает как символы операций.
+<p align=justify>Мы снова восстанавливаем файл с объявлением класса TypeX и очередной раз модифицируем нашу программу. На этот раз мы заменим выражения размещения и освобождения выражениями явного вызова операторных функций.
+<pre>
+#include &lt;iostream.h&gt;
+#include "TypeX.h"
+void main()
+{
+ TypeX *xPoint = NULL;
+ xPoint = (TypeX *) TypeX::operator new (sizeof(TypeX));
+ TypeX::operator delete(xPoint, sizeof(TypeX));
+// delete xPoint;
+ cout &lt;&lt; "OK" &lt;&lt; endl;
+}
+</pre>
+<p align=justify>В результате выполнения этой версии программы на дисплей будут выведены следующие сообщения:
+<pre>
+Это void *operator new(1)
+Это void operator delete(1)
+OK
+</pre>
+<p align=justify>Операторные функции работают успешно, память выделяется и освобождается, однако управление конструктору и деструктору не передаётся. Выражение вызова операторных функций operator new() и operator delete() не обеспечивают вызова конструктора и деструктора. Мы уже знаем, что в C++, за исключением весьма странного выражения явного вызова, вызов конструктора и деструктора обеспечивается транслятором в контексте ограниченного множества выражений. Нет соответствующего выражения, - нет и вызова конструктора.
+<center>
+<p><font size="-1"><a href="CPP_086.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_088.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>
