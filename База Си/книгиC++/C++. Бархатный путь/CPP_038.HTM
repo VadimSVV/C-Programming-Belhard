@@ -1,0 +1,97 @@
+<html><head>
+<title>Унарное выражение</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Унарное выражение</h4>
+<pre>
+<u>УнарноеВыражение</u> ::= <u>ПостфиксноеВыражение</u>
+                 ::= ++ <u>УнарноеВыражение</u>
+                 ::= -- <u>УнарноеВыражение</u>
+                 ::= <u>УнарнаяОперация ВыражениеПриведения</u>
+                 ::= sizeof <u>УнарноеВыражение</u>
+                 ::= sizeof (<u>ИмяТипа</u>)
+                 ::= <u>ВыражениеРазмещения</u>
+                 ::= <u>ВыражениеОсвобождения</u>
+<u>УнарнаяОперация</u> ::= * | &amp; | + | - | ! | ~
+</pre>
+<p align=justify>Унарные выражения группируются справа налево.
+<p align=justify>Вторая и третья БНФ являются основой для построения префиксных выражений увеличения и уменьшения (инкремента и декремента). Символ операции в выражении инкремента и декремента вовсе не означает, что в ходе вычисления значения выражения к операндам будут применяться операции уменьшения и увеличения. В сочетании с операндами производных типов определение значений этих выражений сопровождается вызовами специальных (операторных) функций.
+<p align=justify>В выражениях, представленных четвёртой БНФ, унарная операция * является операцией разыменования. Типом выражения приведения является указатель на объект типа X, а это указывает на то, что описываемое значение является l-выражением. Значением выражения является значение размещённого в памяти объекта. Если типом операнда является тип указатель на объект типа X, то типом выражения является непосредственно тип X.
+<p align=justify>Результатом операции &amp; является адрес объекта, представленного операндом. При этом операнд операции может оказаться либо l-выражением, либо квалифицированным именем. Но об этом позже.
+<p align=justify>Далее приводится множество БНФ, определяющих синтаксис выражений размещения и освобождения. У этих выражений достаточно сложная семантика. Детально разобрать их в данный момент мы пока просто не сможем. На этом этапе придётся ограничиться лишь самыми необходимыми сведениями.
+<center>
+<p><font size="-1"><a href="CPP_034.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_039.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

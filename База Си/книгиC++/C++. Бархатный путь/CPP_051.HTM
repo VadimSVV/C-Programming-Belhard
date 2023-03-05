@@ -1,0 +1,133 @@
+<html><head>
+<title>Массив и константный указатель</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Массив и константный указатель</h4>
+<p align=justify>Несмотря на некоторое сходство с константным указателем, массив является особым типом данных. В этом разделе мы рассмотрим основные отличия массива и константного указателя.
+<p align=justify>Прежде всего, рассмотрим варианты инициализации указателя:
+<pre>
+char * const pcchVal_1 = chArray_2;
+char * const pcchVal_2 = new char[5];
+char * const pcchVal_3 = (char *) malloc(5*sizeof(char));
+</pre>
+<p align=justify>Для инициализации последнего константного указателя был использован вызов функции malloc().
+<p align=justify>Каждый из этих операторов демонстрирует один из трёх возможных способов инициализации константного указателя: непосредственное присвоение значения, использование операции new, вызов функции. Операция new и функции распределения памяти, выделяют соответствующие участки памяти и возвращают начальный адрес выделенной области памяти. Ни один из этих способов не подходит для инициализации массива.
+<p align=justify>В свою очередь, при определении константных указателей не используются уже известные инициализаторы массивов с явным указанием размерности и списком инициализаторов.
+<p align=justify>Определим массив и константный указатель на область памяти:
+<pre>
+int intArray[5]= {11,22,33,44,55};
+int * const pciVal = new int[5];
+</pre>
+<p align=justify>К константным указателям и массивам применимы одни и те же методы навигации, связанные с использованием операции индексации:
+<pre>
+intArray[-25] = 10;
+*(intArray + 25) = 10;
+pciVal[2] = 100;
+*(pciVal + 5) = 100;
+</pre>
+<p align=justify>А теперь применим операцию sizeof по отношению к проинициализированным указателям:
+<pre>cout &lt;&lt; "pciVal:"&lt;&lt; sizeof(pciVal)&lt;&lt;
+                                  " intArray:"&lt;&lt; sizeof(intArray);</pre>
+<p align=justify>Для Borland C++ 4.5, операция sizeof покажет размер области памяти, занимаемой указателем (4 байта) и размер массива (размер элемента * размерность массива)==(10 байт). Операция sizeof различает указатели и имена массивов.
+<p align=justify>Кроме того, следующий тест также даёт различные результаты.
+<pre>
+if (intArray == &amp;intArray)
+cout &lt;&lt; "Yes, массив." &lt;&lt; endl;
+else
+cout &lt;&lt; "No, массив." &lt;&lt; endl;
+if (pciVal == &amp;pciVal)
+cout &lt;&lt; "Yes, указатель. " &lt;&lt; endl;
+else
+cout &lt;&lt; "No, указатель." &lt;&lt; endl;
+</pre>
+<p align=justify>Результат выполнения:
+<pre>
+Yes, массив.
+No, указатель.
+</pre>
+<p align=justify>Значение указателя, представляющего массив, совпадает с адресом первого элемента массива.
+<p align=justify>Значением указателя, проинициализированного с помощью выражения размещения, является адрес начала этой области. Сам указатель как объект обладает своим собственным адресом.
+<p align=justify>Интересно, что сравнение значения указателя с результатом выполнения операции взятия адреса не является абсолютно корректным с точки зрения соответствия типов. Операция взятия адреса возвращает лишь определённое значение адреса. И при этом после выполнения этой операции как бы ничего не известно о типе операнда, чей адрес определяли с помощью этой самой операции взятия адреса. Транслятор отслеживает это нарушение принципа соответствия типов и выдаёт предупреждение "Nonportable pointer comparison".
+<p align=justify>Поскольку это всего лишь предупреждение, выполнение процесса трансляции не прерывается и загрузочный модуль, построенный на основе этого программного кода, корректно выполняется. "Успокоить" транслятор можно с помощью операции явного преобразования типа, которая отключает контроль над типами:
+<pre>
+if (intArray == (int *)&amp;intArray)
+cout &lt;&lt; "Yes";
+else
+cout &lt;&lt; "No";
+</pre>
+<center>
+<p><font size="-1"><a href="CPP_050.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_052.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

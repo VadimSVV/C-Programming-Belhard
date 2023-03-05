@@ -1,0 +1,97 @@
+<html><head>
+<title>Предварительная инициализация параметров функции</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Предварительная инициализация параметров функции</h4>
+<p align=justify>Список параметров в определении и прототипе функции, кроме согласования типов параметров, имеет ещё одно назначение.
+<p align=justify>Объявление параметра может содержать инициализатор, то есть выражение, которое должно обеспечить параметру присвоение начального значения. Инициализатор параметра не является константным выражением. Начальная инициализация параметров происходит не на стадии компиляции (как, например, выделение памяти под массивы), а непосредственно в ходе выполнения программы.
+<p align=justify>Следующие строки демонстрируют пример объявления функции с инициализацией параметров. Для инициализации параметра ww используется функция XX.
+<pre>int BigVal;
+int XX(int);
+int ZZ(int tt, int ww = XX(BigVal));</pre>
+<p align=justify>Второй параметр можно проинициализировать и таким способом, вовсе не указывая его имени. Синтаксис объявления позволяет сделать и такое!
+<pre>int ZZ(int tt, int = XX(BigVal));</pre>
+<p align=justify>Единственное условие подобной инициализации - соответствие типа параметра и типа выражения, значение которого используется при начальной инициализации.
+<p align=justify>Прототипы функции могут располагаться в различных областях видимости. Его можно даже разместить в теле определяемой функции. Каждое объявление функции может содержать собственные варианты объявления и инициализации параметров. Но во множестве объявлений одной и той же функции в пределах одной области видимости не допускается повторная инициализация параметров. Всему должен быть положен разумный предел.
+<p align=justify>Кроме того, в C++ действует ещё одно ограничение, связанное с порядком инициализации параметров в пределах области видимости. Инициализация проводится непременно с самого последнего (самого правого) параметра в списке объявлений параметров. Инициализация параметров не допускает пропусков: инициализированные параметры не могут чередоваться с параметрами неинициализированными.
+<pre>int MyF1 (int par1, int par2, int par3, int par4 = 10);
+int MyF1 (int par1, int par2 = 20, int par3 = 20, int par4);
+int MyF1 (int par1 = 100, int, int, int);</pre>
+<p align=justify>Список параметров в определении функции строится по аналогичным правилам. В списке параметров определения функции также допускаются инициализаторы, в ряде случаев также могут быть опущены имена параметров. Разумеется, включение в заголовок определения функции безымянного параметра затрудняет возможность использования этого параметра в определяемой функции. К безымянному параметру невозможно обращаться по имени.
+<p align=justify>И всё же отказ от использования параметра может быть оправдан. Такие параметры, вернее их спецификаторы, позволяют сократить затраты на модификацию сложных многомодульных программ, когда в результате изменения функции меняется число параметров этой функции. Ненужные параметры могут быть отключены без изменения многочисленных вызовов этой функции. В этом случае имеет смысл сохранить общее количество параметров функции, а имя ненужного параметра из списка параметров удалить.
+<center>
+<p><font size="-1"><a href="CPP_056.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_058.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

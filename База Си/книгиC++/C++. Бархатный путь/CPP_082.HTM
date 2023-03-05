@@ -1,0 +1,220 @@
+<html><head>
+<title>Указатели на компоненты класса. Доступ по указателю</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Указатели на компоненты класса. Доступ по указателю</h4>
+<p align=justify>Прежде всего, рассмотрим объявление класса XXX.
+<pre>
+class XXX
+{
+public:
+ long x1;
+ int x2;
+/*Данные-члены класса.*/
+ long getVal1() {return x1;}
+ long getVal2() {return x2*x1;}
+/*Функции-члены класса без параметров.*/
+ int   getVal3(int param)  {return x2*param;}
+ char* getVal4(char *str) {return str;}
+/*Функции-члены класса с параметрами.*/
+ static int f1() {return 100;}
+ static int f2() {return 10;}
+ static int f3(int param) {return param;}
+/* Определение различных статических функций*/
+ XXX(long val1, int val2){x1 = val1; x2 = val2;}
+/*Конструктор.*/
+};
+</pre>
+<p align=justify>Поскольку нестатические функции-члены формально, а нестатические данные-члены фактически не существуют без объекта-представителя класса, определение указателя на компонент класса (член класса или функцию-член) отличается от определения указателя на объект или обычную функцию.
+<p align=justify>Для объявления указателя на нестатическую функцию используется специальная синтаксическая конструкция, состоящая из спецификатора объявления и заключённого в скобки квалифицированного имени указателя, состоящего из имени класса, операции доступа к члену класса ::, разделителя * , собственно имени указателя, закрывающей скобки и списка параметров:
+<pre>int (XXX::*fp_3) (int);</pre>
+<p align=justify>Подобный указатель может быть проинициализирован инициализатором, состоящим из операции присвоения, операции взятия адреса и квалифицированного имени соответствующей функции-члена:
+<pre>int (XXX::*fp_3) (int) = &amp;XXX::getVal1;</pre>
+<p align=justify>Вот и нашлась достойная область применения квалифицированным именам.
+<p align=justify>Как известно, значение унарного выражения, состоящего из операции взятия и операнда, который является именем функции и первичного выражения, состоящего из имени функции эквивалентны. Это адрес данной функции. Поэтому поэтому в качестве инициализирующего выражения для указателя на функцию-член класса также может быть использовано первичное выражение, представляющее собой квалифицированное имя функции-члена:
+<pre>Fp_3 = XXX::getVal2</pre>
+<p align=justify>Класс - это не объект! И не совсем понятно, какое значение имеет адрес нестатичесного члена класса. Значение проинициализированного указателя на нестатическую компоненту остаётся неопределённым.
+<p align=justify>Оно определяется лишь в результате выполнения операций обращения к членам класса .* и -&gt;* .
+<p align=justify>При этом функция-член класса вызывается по указателю на компоненту относительно конкретного объекта или указателя на объект-представитель класса. Первым операндом операций обращения к членам класса является l-выражение, ссылающееся на объект (возможно, что имя объекта) или указатель на объект, вторым операндом является ссылка на указатель на компоненту класса:
+<pre>
+int val = (q.*fp)(6);
+char val = (pq-&gt;*fp4)("new string");
+</pre>
+<p align=justify>Аналогичным образом осуществляется объявление и инициализация указателей на данные-члены класса. При этом структура объявления указателя на член класса проще (нет спецификации возвращаемого значения, не нужно указывать список параметров). Это не функция, здесь дело обходится спецификацией объявления и квалифицированными именами указателей:
+<pre>
+long (XXX::*px1) = &amp;XXX::x1;
+// Определение и инициализация указателя на член класса XXX типа long
+q.*px11 = 10; // p - объект-представитель класса XXX.
+pq-&gt;*px11 = 10;
+// pq - указатель на объект-представитель класса XXX.
+</pre>
+<p align=justify>Основные приёмы работы с указателями на функции-члены демонстрируются на следующих примерах:
+<pre>
+class XXX
+{
+public:
+ long x1;
+ int x2;
+/*Данные-члены класса.*/
+ long getVal1() {return x1;}
+ long getVal2() {return x2*x1;}
+/*Функции-члены класса без параметров.*/
+ int   getVal3(int param)  {return x2*param;}
+ char* getVal4(char *str) {return str;}
+/*Функции-члены класса с параметрами.*/
+ static int f1() {return 100;}
+ static int f2() {return 10;}
+ static int f3(int param) {return param;}
+/* Определение различных статических функций*/
+ XXX(long val1, int val2){x1 = val1; x2 = val2;}
+/*Конструктор.*/
+};
+void main()
+{
+ XXX  q(1,2);/* Определение объекта.*/
+ XXX* pq = new (XXX);
+ pq-&gt;x1 = 100;
+ pq-&gt;x2 = 100;
+/*Определение и инициализация объекта по указателю.*/
+ long (XXX::*fp_0) ();
+/*Указатель на функцию-член класса.*/
+ long (XXX::*fp_1) () = &amp;XXX::getVal1;
+/*
+Проинициализированный указатель на функцию-член класса. Его
+значение является относительной величиной и равняется значению
+смещения функции-члена относительно первого члена класса.
+*/
+ fp_0 = XXX::getVal1;
+/*
+Инициализация первого указателя. Один и тот же указатель можно
+настраивать на различные функции-члены класса. Главное, чтобы у
+всех этих функций-членов совпадали списки параметров и возвращаемые
+значения функций.
+*/
+ long val_1 = (q.*fp1)(); 
+/*Вызов функции-члена класса по указателю из объекта.*/
+ 
+ long val_2 = (pq-&gt;*fp0)();
+/*
+Вызов функции-члена класса по указателю с помощью указателя на объект.
+*/
+ int (XXX::*fp_3) (int) = &amp;XXX::getVal3;
+/*
+Проинициализированный указатель на функцию-член класса. С параметрами
+типа int.
+*/
+ int val_3 = (q.*fp_3)(6);
+/*
+Вызов функции-члена класса по указателю из объекта с передачей параметров.
+*/
+char* (XXX::*fp_4) (char) = &amp;XXX::getVal3;
+/*
+Проинициализированный указатель на функцию-член класса с параметрами типа int.
+*/
+char val_4 = (pq-&gt;*fp4)("new string");
+/*
+Вызов функции-члена класса по указателю с помощью указателя на объект.
+*/
+int (*fp_5) () = &amp;XXX::f1;
+/*
+Указатель на статическую функцию объявляется без спецификации класса.
+Явная спецификация класса необходима лишь при инициализации указателя.
+*/
+int retval = (*fp_5)();
+/*Вызов статической функции по указателю.*/
+fp_5 = XXX::f2;
+/*
+Перенастройка статического указателя. Главное требование - совпадение
+списков параметров и типа возвращаемого значения.
+*/
+int (*fp_6) (int) = &amp;XXX::f3;
+/*Указатель на статическую функцию с параметрами.*/
+int retval = (*fp_6)(255);
+/*Вызов статической функции с параметрами по указателю.*/
+long (XXX::*px1) = &amp;XXX::x1;
+/*Определили и проинициализировали указатель на член класса long*/
+q.*px11 = 10;
+/*Используя указатель на компоненту класса, изменили значение переменной
+x1 объекта q, представляющего класс XXX. */
+pq-&gt;*px11 = 10;
+/*Используя указатель на компоненту класса, изменили значение переменной
+x1 объекта, представляющего класс XXX и расположенного по адресу pq. */
+}
+</pre>
+<p align=justify>Вызов статических функций-членов класса не требует никаких объектов и указателей на объекты. От обычных функций их отличает лишь специфическая область видимости.
+<center>
+<p><font size="-1"><a href="CPP_081.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_083.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

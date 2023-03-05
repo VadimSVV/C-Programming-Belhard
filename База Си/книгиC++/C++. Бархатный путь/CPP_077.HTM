@@ -1,0 +1,189 @@
+<html><head>
+<title>Друзья класса</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Друзья класса</h4>
+<p align=justify>Три спецификатора доступа обеспечивают в C++ управление доступом. Эти спецификаторы являются основанием принципа инкапсуляции - одного из трёх основных принципов объектно-ориентированного программирования. Соблюдение правил доступа повышает надёжность программного обеспечения.
+<p align=justify>Спецификаторы доступа способны обеспечить многоуровневую защиту функций и данных в наследуемых классах. Порождаемые на основе "инкапсулированных" классов объекты способны поддерживать жёсткий интерфейс. Они подобны "чёрным" ящикам с чётко обозначенными входами и выходами. Вместе с тем, следует признать, что система управления доступом, реализованная на основе трёх спецификаторов, не является гибкой. С её помощью может быть реализована защита по принципу "допускать ВСЕХ (члены класса, объявленные в секции public) или не допускать НИКОГО (члены класса, объявленные в секциях protected и private)". В C++ существует возможность организации более гибкой защиты. Здесь можно также объявлять функции, отдельные функции-члены классов и даже классы (в этом случае речь идёт о полном множестве функций-членов класса), которые получают доступ к защищённым и приватным членам данного класса. Что означает реализацию системы управления доступом принципу "не допускать НИКОГО, КРОМЕ". Такие функции и классы называют дружественными функциями и классами. Объявление дружественных классов и функций включается в объявление данного класса вместе со спецификатором объявления friend. Здесь нам потребуется всего одна форма Бэкуса-Наура для того, чтобы дополнить синтаксис объявления.
+<pre>
+<u>СпецификаторОбъявления</u> ::= friend
+                       ::= *****
+</pre>
+<p align=justify>Рассмотрим небольшой пример использования дружественных функций и классов, а затем сформулируем основные правила работы с друзьями классов. В программе объявлены два класса, один из которых является другом другого класса и всеобщая дружественная функция.
+<pre>
+#include &lt;iostream.h&gt;
+class XXX; 
+/*
+Неполное объявление класса. Оно необходимо для объявления типа
+параметра функции-члена для следующего класса.
+*/
+class MMM
+{
+ private:
+  int m1;
+ public:
+  MMM(int val);
+  void TypeVal(char *ObjectName, XXX&amp; ClassParam);
+};
+MMM::MMM(int val)
+{
+ m1 = val;
+}
+/*
+Определение функции-члена TypeVal располагается после объявления
+класса XXX. Только тогда транслятор узнаёт о структуре класса, к
+которому должна получить доступ функция MMM::TypeVal.
+*/
+class XXX
+{
+ friend class YYY;
+ friend void MMM::TypeVal(char *ObjectName, XXX&amp; ClassParam);
+ friend void TypeVal(XXX&amp; ClassParamX, YYY&amp; ClassParamY);
+/*
+В классе объявляются три друга данного класса: класс YYY, функция-член
+класса MMM, простая функция TypeVal. В класс XXX включаются лишь
+объявления дружественных функций и классов. Все определения
+располагаются в других местах - там, где им и положено быть - в своих
+собственных областях видимости.
+*/
+ private:
+  int x1;
+ public:
+  XXX(int val);
+};
+XXX::XXX(int val)
+{
+ x1 = val;
+}
+void MMM::TypeVal(char *ObjectName, XXX&amp; ClassParam)
+{
+ cout &lt;&lt; "Значение " &lt;&lt; ObjectName &lt;&lt; ": " &lt;&lt; ClassParam.x1 &lt;&lt; endl;
+}
+/*
+Отложенное определение функции-члена MMM::TypeVal.
+*/
+class YYY
+{
+ friend void TypeVal(XXX&amp; ClassParamX, YYY&amp; ClassParamY);
+ private:
+  int y1;
+ public:
+  YYY(int val);
+  void TypeVal(char *ObjectName, XXX&amp; ClassParam);
+};
+YYY::YYY(int val)
+{
+ y1 = val;
+}
+void YYY::TypeVal(char *ObjectName, XXX&amp; ClassParam)
+{
+ cout &lt;&lt; "Значение " &lt;&lt; ObjectName &lt;&lt; ": " &lt;&lt; ClassParam.x1 &lt;&lt; endl;
+}
+void TypeVal(XXX&amp; ClassParamX, YYY&amp; ClassParamY);
+void main()
+{
+ XXX mem1(1);
+ XXX mem2(2);
+ XXX mem3(3);
+ YYY disp1(1);
+ YYY disp2(2);
+ MMM special(0);
+ disp1.TypeVal("mem1", mem1);
+ disp2.TypeVal("mem2", mem2);
+ disp2.TypeVal("mem3", mem3);
+ special.TypeVal("\n mem2 from special spy:", mem2);
+ TypeVal(mem1, disp2);
+ TypeVal(mem2, disp1);
+}
+void TypeVal(XXX&amp; ClassParamX, YYY&amp; ClassParamY)
+{
+ cout &lt;&lt; endl;
+ cout &lt;&lt; "???.x1 == " &lt;&lt; ClassParamX.x1 &lt;&lt; endl;
+ cout &lt;&lt; "???.y1 == " &lt;&lt; ClassParamY.y1 &lt;&lt; endl;
+}
+</pre>
+<p align=justify>В этом примере все функции имеют одинаковые имена. Это не страшно. Это даже полезно, поскольку становится очевидным факт существования разных областей действия имён.
+<p align=justify>В заключение раздела перечислим основные правила пользования новыми средствами управления доступа - дружественной системой защиты.
+	<ul>
+	<li>Друзья класса не являются членами класса. Они должны определяться вне класса, для которого они объявляются друзьями, а об особых отношениях между ними и данным классом свидетельствует лишь специальное объявление(!) со спецификатором объявления friend. Объявления дружественного класса означает, что в дружественном классе доступны все компоненты объявляемого класса.
+	<li>Дружественные данному классу функции не являются членами этого класса. Поэтому они не могут быть вызваны из объекта-представителя класса, для которого была объявлена другом данная функция, при помощи операции доступа к члену класса.
+	<li>Дружественная функция может быть функцией-членом другого ранее объявленного класса. Правда, при этом само определение дружественной функции приходится располагать после объявления класса, другом которого была объявлена данная функция. Это не очень удобно и красиво, но зато работает.
+	<li>Дружественная функция не имеет this указателя для работы с классом, содержащим её объявление в качестве дружественной функции. Дружба - это всего лишь дополнение принципа инкапсуляции и ничего более.
+	<li>Дружественные отношения не наследуются. Дружественные функции не имеют доступа к членам производного класса, чьи базовые классы содержали объявления этих функций. Дети не отвечают за отношения своих родителей.
+	</ul>
+<center>
+<p><font size="-1"><a href="CPP_076.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_078.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>

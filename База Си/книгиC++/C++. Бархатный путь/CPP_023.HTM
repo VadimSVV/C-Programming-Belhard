@@ -1,0 +1,93 @@
+<html><head>
+<title>Пространство имён</title>
+		    <style type="text/css">
+TH.arial { font-family: Arial, Serif;}
+P.topic { font-family: sans-serif;}
+A.plain { text-decoration: none;}
+A.topic01 { color: #006890;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic02 { color: #099771;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic03 { color: #719709;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic04 { color: #98650A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic05 { color: #98340A;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic06 { color: #099607;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic07 { color: #9E1215;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic08 { color: #970941;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic09 { color: #950995;
+font-family: sans-serif;
+text-decoration: none;}
+A.topic010 { color: #390A98;
+font-family: sans-serif;
+text-decoration: none;}
+H1 { font-family: sans-serif;}
+H2 { font-family: sans-serif;}
+H3 { font-family: sans-serif;}
+H4 { font-family: sans-serif;}
+H5 { font-family: sans-serif;}
+H6 { font-family: sans-serif;}
+</style>
+</head>
+<body bgcolor="#FFFFFF" link="#006890" vlink="#003860" alink="#800000" text="#000000">
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/HEADER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<img src="../../PICTURES/MENU/LOGO.GIF" width=157 height=53 border=0 alt="Server for Information Technologies">
+</td><td align="right">
+<font size="-2">Сервер поддерживается<br><a class="plain" href="http://www.citmgu.ru">Центром Информационных Технологий</a><br>(095) 932-9212, 932-9213, 939-0783<br>E-mail: <a class=noneline href="mailto:info@citmgu.ru?Subject='From page topic CIT FORUM local copy'">info@citforum.ru</a></font>
+</td></tr>
+</table>
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="left">
+<font size="-1">Сервер содержит море(!) аналитической информации</font>
+</td><td align="right">
+<font size="-1">CIT Forum CD-ROM</font>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<h4>Пространство имён</h4>
+<p align=justify>С понятием области действия имени связано понятие пространства имени.
+<p align=justify>Пространством имени называется область программы, в пределах которой это имя должно быть уникальным. Различные категории имён имеют различные пространства имён. К их числу относятся:
+	<ul>
+	<li>Пространство имён глобальных объектов. Это пространство образуется множеством образующих программу программных модулей. Имена глобальных объектов должны быть уникальны среди множества имён глобальных объектов во всех модулях, образующих программу.
+	<li>Пространство имен поименованных операторов (или операторов с меткой) - функция. Имя оператора должно быть уникально в теле функции, в которой метка была введена в программу.
+	<li>Пространство имён структур, классов, объединений и перечислимых типов зависит от контекста, в котором были объявлены структуры, классы, объединения. Если они были объявлены в блоке - это пространство будет составлять блок, если они были объявлены в модуле, таковой областью является программа. C++ помещает эти имена в общее пространство имён.
+	<li>Имена элементов структур, классов, объединений и перечислимых данных должны быть уникальны в пределах определения структуры, класса, объединения и перечислимых данных. При этом в разных структурах, классах, объединениях и перечислимых данных допустимы элементы с одинаковыми именами. Пространством имён для элементов структур, классов, объединений и перечислимых данных элементов являются сами структуры, классы, объединения и перечисления.
+	<li>Имена переменных и функций, имена пользовательских типов (типов, определённых пользователем - о них также немного позже) должны быть уникальны в области определения: глобальные объекты должны иметь уникальное имя среди всех глобальных объектов и т.д.
+	</ul>
+<p align=justify>По крайней мере в реализациях C++, для процессоров использующих сегментированную модель памяти, существует определённая связь между пространством имени и расположением поименованного объекта в конкретном сегменте памяти. В пределах определённого сегмента может находиться лишь один объект с уникальным именем. В противном случае возникли бы проблемы с организацией ссылок на располагаемые в сегменте памяти объекты.
+<p align=justify>Вместе с тем, одни и те же имена могут использоваться при организации ссылок на объекты, располагаемые в разных сегментах памяти. Например, в теле функции можно обращаться как к глобальному объекту, так и к одноимённому локальному объекту, определённому в теле функции.
+<p align=justify>Правда, обращение к одноимённым объектам, расположенным в различных пространствах имён, ограничено специальными правилами. В связи с необходимостью организации специального протокола обращения к одноимённым объектам, располагаемым в различных сегментах памяти, в C++ возникло понятие области видимости.
+<center>
+<p><font size="-1"><a href="CPP_022.HTM">Назад</a> |
+ <a href=INDEX.HTM>Содержание</a> |
+ <a href="CPP_024.HTM">Вперед</a>
+</font></center>
+<p>&nbsp;
+<table cellspacing=0 cellpadding=0 border=0 background="../../PICTURES/MENU/FOOTER0.JPG" width="100%">
+<tr><td align="center">
+<table cellspacing=0 cellpadding=4 border=0 width="100%" background="">
+<tr><td align="right" valign="top" width="33%">
+<font size="-2">Comments: <a class="plain" href="mailto:info@citmgu.ru?Subject='From bottom of CIT FORUM local copy'">info@citmgu.ru</a><br>
+Designed by <a class="plain" href="mailto:andrey@novikov.com">Andrey Novikov</a><br>
+Copyright &copy; <a class="plain" href="http://www.citmgu.ru/">CIT</a></font>
+</td></tr>
+</table>
+</td></tr>
+</table></body></html>
