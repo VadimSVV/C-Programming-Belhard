@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<conio.h>
+
+
+void main()
+{
+	const int n=10;
+	int x[n],k;
+	for (int i=0;i<n;i++)
+		{
+			printf("x[%d]=",i);
+			scanf("%d",&x[i]);	
+			if(i>0)
+				for(int j=0;j<i;j++)
+					if(x[i]==x[j])
+						{
+
+							i--;
+							break;
+						}
+		}
+	printf("\n\n\n");
+	for (int i=0;i<n;i++)
+		printf("%5d",x[i]);
+	
+	
+
+	
+	
+	
+	getch();
+}
+
+_______________________________________________
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<time.h>
+
+
+void main()
+{
+	srand(time(NULL));
+	const int n=10;
+	int x[n],a,b,k=0;
+	printf("Vvedite a");
+	scanf("%d",&a);	
+	printf("Vvedite b");
+	scanf("%d",&b);
+	for (int i=0;i<n;i++)
+		{
+			x[i]=a+rand()%(b-a+1);
+			k++;
+
+/*			for (int t=0;t<=i;t++)
+				printf("%5d",x[t]);
+			printf("\n\n");
+*/
+			if(i>0)
+				for(int j=0;j<i;j++)
+					if(x[i]==x[j])
+						{
+
+							i--;
+							break;
+						}
+		}
+	printf("\n\n\n");
+	for (int i=0;i<n;i++)
+		printf("%5d",x[i]);
+	printf("\n\n\n");
+	printf("Kolichestvo generation - %d\n",k);
+		
+	getch();
+}
+
+
+

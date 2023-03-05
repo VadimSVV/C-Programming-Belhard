@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<windows.h>
+#include<math.h>
+
+int menu(void)
+{
+	printf("\nVvedite:\n");
+	printf("1 - zadacha 1\n");
+	puts("2 - zadacha 2");
+	puts("3 - zadacha 3");
+	puts("4 - zadacha 4");
+	puts("5 - zadacha 5");
+	puts("6 - zadacha 6");
+	puts("7 - zadacha 7");
+	puts("8 - zadacha 8");
+	puts("9 - zadacha 9");
+	puts("0 - Vyhod");
+	int z;
+	printf(">>>");
+	scanf("%d", &z);
+	printf("\n");
+	return z;
+}
+void main()
+{
+	while(int z = menu())
+	{
+		switch(z)
+		{
+		case 1:
+			{
+				printf("vipolniaetsia zadacha 1\n");
+				break;
+			}
+		case 2:
+			{
+				printf("vipolniaetsia zadacha 2\n");
+				break;
+			}
+		case 3:
+			{
+				printf("vipolniaetsia zadacha 3\n");
+				break;
+			}
+		case 4:
+			{
+				printf("vipolniaetsia zadacha 4\n");
+				break;
+			}
+		case 5:
+			{
+				
+				printf("vipolniaetsia zadacha 5\n");
+				break;
+			}
+		case 6:
+			{
+				printf("vipolniaetsia zadacha 6\n");
+				break;
+			}
+		case 7:
+			{
+				printf("vipolniaetsia zadacha 7\n");
+				break;
+			}
+		case 8:
+			{
+				printf("vipolniaetsia zadacha 8\n");
+				break;
+			}
+		case 9:
+			{
+				printf("vipolniaetsia zadacha 9\n");
+				break;
+			}
+		default:
+			{
+				printf("nepravilniy vvod\a\a\a!!!\n");
+				break;
+			}
+		}
+		printf("Press any key to continue!!!\n");
+		getch();
+		system("cls");											//очистка консольного приложения
+	}
+	printf("The end!!!\n");
+	getch();
+}

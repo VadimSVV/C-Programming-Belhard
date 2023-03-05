@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<windows.h>
+int main()
+{
+	const int q=400;
+	int x[q][q];
+	int n,m;
+	printf("enter razmer: ");
+	scanf("%d%d",&n,&m);
+	system("cls");
+	
+	for(int i=0;i<n;i++)
+	  for(int j=0;j<m;j++) 
+		  x[i][j]=(i+1)*(j+1);
+
+	printf("     ");
+	for(int i=1;i<=m;i++)
+		printf("%-4d ",i);
+	printf("\n");
+	printf("    -");
+	for(int i=1;i<=m;i++)
+		printf("-----");
+	printf("\n");
+	for(int i=0;i<n;i++)
+		{
+			//printf("    ");
+			printf("%-4d|",i+1);
+			for(int j=0;j<m;j++)
+				printf("%-4d|",x[i][j]);
+			printf("\n");
+			printf("    -");
+			for(int i=1;i<=m;i++)
+				printf("-----");
+			printf("\n");
+		}
+	 
+	 getch();
+	 return 0;
+}

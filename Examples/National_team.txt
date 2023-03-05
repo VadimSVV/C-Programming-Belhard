@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<time.h>
+void main()
+{
+	const int n0=99;
+	int x[n0],n;
+	printf("vvedite razmer massiva\n");
+	scanf("%d",&n);
+	srand(time(NULL));
+
+	for (int i=0;i<n;i++)
+		{
+			x[i]=1+rand()%(n-1+1);
+									//printf("x[%d]=",i);
+									//scanf("%d",&x[i]);
+		}
+	
+	printf("Ishodni massiv\n");
+	for (int i=0;i<n;i++)
+		printf("%3d",x[i]);
+	printf("\n\n");
+	int t=1,k;
+	do
+	{
+		k=0;
+		for (int i=0;i<n;i++)
+			{
+				if(x[i]==t)
+					{
+						t++;
+						k++;
+									//printf("t=%d\n",t);
+						break;
+					}
+			}
+	}while(k);
+									//printf("t=%d\n",t);
+	for(int i=0;i<n-1;i++)
+		for(int j=i+1;j<n;j++)
+			if(x[i]==x[j])
+				x[j]=0;
+	
+									//for (int i=0;i<n;i++)
+									//	printf("%3d",x[i]);
+									//printf("\n\n");
+	
+	for(int i=0;i<n;i++)
+		{
+			if(x[i]==0)
+				{
+					x[i]=t;
+					t++;
+					do
+					{
+						k=0;
+						for (int i=0;i<n;i++)
+							{
+								if(x[i]==t)
+									{
+										t++;
+										k++;
+										break;
+									}
+							}
+					}while(k);
+													//for (int i=0;i<n;i++)
+													//	printf("%3d",x[i]);
+													//printf("\n\n");
+				}
+		}
+	
+	printf("Konechni massiv\n");
+	for (int i=0;i<n;i++)
+		printf("%3d",x[i]);
+	printf("\n\n");
+
+	getch();
+  }
