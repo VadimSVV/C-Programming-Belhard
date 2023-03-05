@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct elem
+{
+	int data;
+	elem *next;
+	elem *prev;
+};
+
+elem *first;
+elem *last;
+void push( int );
+int pop();
+int count();
+int main()
+{
+	int i;
+	for( i = 0; i < 5; i++ )
+		push( i );
+	for( i = 0; i < 5; i++ )
+	{
+		printf( "count = %d, elem - %d\n", count(), pop() );
+	}
+	getch();
+	return 0;
+}
+
+void push( int a )
+{
+	if( first == 0 )
+	{
+		first = (elem*)malloc(sizeof(elem));
+		first->next = 0;
+		first->prev = 0;
+		last = first;
+	}
+	else
+	{
+		elem *ins = (elem*)malloc(sizeof(elem));
+		ins->data = a;
+		ins->next = first;
+		first->prev = ins;
+		first = ins;
+	}
+	first->data = a;
+}
+
+int pop()
+{
+	if( first == 0 )
+		return 0;
+	int val;
+	if( first == last )
+	{
+		val = first->data;
+		free( first );
+		first = last = 0;
+	}
+	else
+	{
+		val = last->data;
+		last = last->prev;
+		free( last->next );
+		last->next = 0;
+	}
+	return val;
+}
+
+int count()
+{
+	int i = 0;
+	elem *ptr = first;
+	while( ptr )
+	{
+		ptr = ptr->next;
+		i++;
+	}
+	return i;
+}

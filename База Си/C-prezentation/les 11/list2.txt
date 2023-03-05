@@ -1,0 +1,156 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct date
+{
+	int day;
+	int month;
+	int yere;
+};
+
+struct elem
+{
+	date data;
+	elem *next;
+};
+
+elem *first = 0;
+void AddElement( date &d );
+void PrintList();
+date Get( int n );
+void Remove( int n );
+void RemoveAll();
+int main()
+{
+	date d;
+	d.day = 13;
+	d.month = 11;
+	d.yere = 1988;
+	AddElement( d );
+	d.day = 2;
+	d.month = 4;
+	d.yere = 1994;	
+	AddElement( d );
+	d.day = 25;
+	d.month = 9;
+	d.yere = 2005;
+	AddElement( d );
+	PrintList();
+	d = Get( 3 );
+	printf( "Get data : %2d %2d %4d\n",d.day,d.month,d.yere );
+	printf( "After removing :\n" );
+	Remove( 1 );
+	PrintList();
+	RemoveAll();
+	printf( "After removing all :\n" );
+	PrintList();
+	getch();
+	return 0;
+}
+
+void AddElement( date &d )
+{
+	elem * last;
+	if( first == 0 )
+	{
+		first = ( elem* )malloc( sizeof( elem ) );
+		last = first;
+		first->next = first;
+	}
+	else
+	{
+		last = first->next;
+		while( last->next != first )
+			last = last->next;
+		last->next = ( elem* )malloc( sizeof( elem ) );
+		last = last->next;
+		last->next = first;
+	}
+	last->data = d;
+}
+
+void PrintList()
+{
+	if( first == 0 )
+		return;
+	elem * last;
+	last = first;
+	do
+	{
+		printf( "%2d %2d %4d\n",last->data.day,last->data.month,last->data.yere );
+		last = last->next;
+	}
+	while( last != first );
+}
+
+date Get( int n )
+{
+	int i = 0;
+	elem * last;
+	date d;
+	d.day = 0;
+	d.month = 0;
+	d.yere = 0;
+	if( first == 0 )
+		return d;
+	last = first;
+	while( i < n )
+	{
+		last = last->next;
+		i++;
+	}
+	return last->data;
+}
+
+void Remove( int n )
+{
+	if( first == 0 )
+		return;
+	elem * rem;
+	elem * last = first;
+	int i = 1;
+	while( i < n )
+	{
+		last = last->next;
+		i++;
+	}
+	if( last->next == first )
+	{
+		if( last->next == last )
+		{
+			first = 0;
+			free( last );
+		}
+		else
+		{
+			rem = last->next;
+			last->next = rem->next;
+			first = last->next;
+			free( rem );
+		}
+	}
+	else
+	{
+		rem = last->next;
+		last->next = rem->next;
+		free( rem );		
+	}
+}
+
+void RemoveAll()
+{
+	if( first == 0 )
+		return;
+	elem * rem;
+	elem * last;
+	last = first;
+	do
+	{
+		rem = last;
+		last = last->next;
+		free( rem );
+	}
+	while( last != first );
+	first = 0;
+}

@@ -1,0 +1,146 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct date
+{
+	int day;
+	int month;
+	int yere;
+};
+
+struct elem
+{
+	date data;
+	elem *next;
+};
+
+elem *first = 0;
+void AddElement( date &d );
+void PrintList();
+date Get( int n );
+void Remove( int n );
+void RemoveAll();
+int main()
+{
+	date d;
+	d.day = 13;
+	d.month = 11;
+	d.yere = 1988;
+	AddElement( d );
+	d.day = 2;
+	d.month = 4;
+	d.yere = 1994;	
+	AddElement( d );
+	d.day = 25;
+	d.month = 9;
+	d.yere = 2005;
+	AddElement( d );
+	PrintList();
+	d = Get( 2 );
+	printf( "Get data : %2d %2d %4d\n",d.day,d.month,d.yere );
+	printf( "After removing :\n" );
+	Remove( 2 );
+	PrintList();
+	RemoveAll();
+	printf( "After removing all :\n" );
+	PrintList();
+	getch();
+	return 0;
+}
+
+void AddElement( date &d )
+{
+	elem * last;
+	if( first == 0 )
+	{
+		first = ( elem* )malloc( sizeof( elem ) );
+		last = first;
+	}
+	else
+	{
+		last = first;
+		while( last->next != 0 )
+			last = last->next;
+		last->next = ( elem* )malloc( sizeof( elem ) );
+		last = last->next;
+	}
+	last->data = d;
+	last->next = 0;
+}
+
+void PrintList()
+{
+	if( first == 0 )
+		return;
+	elem * last;
+	last = first;
+	while( last != 0 )
+	{
+		printf( "%2d %2d %4d\n",last->data.day,last->data.month,last->data.yere );
+		last = last->next;
+	}
+}
+
+date Get( int n )
+{
+	int i = 0;
+	elem * last;
+	date d;
+	d.day = 0;
+	d.month = 0;
+	d.yere = 0;
+	last = first;
+	while( i < n )
+	{
+		if( last == 0 )
+			return d;
+		last = last->next;
+		i++;
+	}
+	return last->data;
+}
+
+void Remove( int n )
+{
+	elem * rem;
+	elem * last;
+	if( n == 0 )
+	{
+		rem = first;
+		first = first->next;
+		free( rem );
+	}
+	else
+	{
+		int i = 1;
+		last = first;
+		do
+		{
+			last = last->next;
+			if( last->next == 0 )
+				return;
+			i++;
+		}
+		while( i < n );
+		rem = last->next;
+		last->next = rem->next;
+		free( rem );		
+	}
+}
+
+void RemoveAll()
+{
+	if( first == 0 )
+		return;
+	elem * rem;
+	elem * last;
+	last = first;
+	while( last != 0 )
+	{
+		rem = last;
+		last = last->next;
+		free( rem );
+	}
+	first = 0;
+}
