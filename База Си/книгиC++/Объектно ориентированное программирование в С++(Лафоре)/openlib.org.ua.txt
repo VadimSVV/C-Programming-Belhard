@@ -1,0 +1,25 @@
+ http://openlib.org.ua - Компьютерная электронная библиотека.
+Здесь можно бесплатно скачать электронные книги на компьютерную тематику:
+
+- Языки программирования
+Assembler, C, C#, C++, Visual C++, C++ Builder, Delphi, Python, Java, J++, Kylix, Lisp, Fortan, Visual Basic, Pascal, Turbo Pascal
+
+- Базы данных
+SQL, MySQL, Oracle, Sybase, InterBase, Informix
+
+- Операционные системы
+Linux, FreeBSD, Solaris, UNIX, MacOS, QNX, NetWare, OS/2
+
+- Сетевые технологии
+Компьютерным сетям, Сетевым cтандартам и протоколам, IP-телефонии, Cisco, Apache, Безопасности, Криптографии, Хакерству
+
+- WEB-дизайн
+WEB-дизайну, HTML, DHTML, CSS, XML, XSLT, WML, PHP, Perl, JavaScript, SSI
+
+- Графика, дизайн, мультимедиа
+Adobe Photoshop, Adobe Premiere, Corel Draw, OpenGL, DirectX, Macromedia Dreamweaver, Flash
+
+- Системы проектирования (CAD/CAM)
+AutoCAD, MathCAD, Matlab, Maple, ArchiCAD, P-CAD, ACCEL EDA, OrCAD, 3D MAX, Maya
+
+.... и многое другое. Сайт постоянно обновляется новыми книгами!
