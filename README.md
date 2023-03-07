@@ -1,5 +1,5 @@
 Материалы по курсу программирования на языках C, C++
 
-Проект "Рулетка Казино": C-Programming-Belhard/База Си/Ruletka/Debug
+Проект <a href="https://disk.yandex.ru/d/hucjrO07jNdX1Q" target="_blank">Рулетка Казино</a>
 
 Запускается на Windows
