@@ -2,4 +2,4 @@
 
 Проект "Рулетка Казино": C-Programming-Belhard/База Си/Ruletka/Debug
 
-Работает на Windows без дополнительного софта
+Запускается на Windows
